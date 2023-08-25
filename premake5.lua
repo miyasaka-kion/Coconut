@@ -92,12 +92,14 @@ project "CoconutEngine"
 
 	includedirs {
 		-- SDL2
-		"%{prj.name}/vendor/SDL2/include",
-		"%{prj.name}/vendor/SDL2",
+		"%{prj.name}/vendor/SDL2/include".
 
 		-- SDL2_image
 		"%{prj.name}/vendor/SDL2_image/include",
-		"%{prj.name}/vendor/SDL2_image",
+
+		-- spdlog
+		-- "%{prj.name}/vendor/spdlog/include",
+
 		-- others
 		"%{prj.name}/src"
 	}
@@ -110,6 +112,8 @@ project "CoconutEngine"
 		"%{prj.name}/vendor/SDL2_image/lib/x64",
 		"%{prj.name}/vendor/SDL2_image/lib/x64/optional"
 
+		-- spdlog
+		-- 
 	}
 
 	links {
