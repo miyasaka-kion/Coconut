@@ -32,7 +32,10 @@ project "SDL_test"
 		"%{prj.name}/vendor/SDL2_image/include",
 		"%{prj.name}/vendor/SDL2_image",
 		-- others
-		"%{prj.name}/src"
+		"%{prj.name}/src",
+
+		-- Coconut Engine
+		"CoconutEngine/src"
 	}
 
 	libdirs {
@@ -52,6 +55,9 @@ project "SDL_test"
 
 		--SDL2_image
 		"SDL2_image",
+
+		-- CoconutEngine
+		"CoconutEngine"
 	}
 	
 	filter "system:windows"
@@ -92,7 +98,7 @@ project "CoconutEngine"
 
 	includedirs {
 		-- SDL2
-		"%{prj.name}/vendor/SDL2/include".
+		"%{prj.name}/vendor/SDL2/include",
 
 		-- SDL2_image
 		"%{prj.name}/vendor/SDL2_image/include",

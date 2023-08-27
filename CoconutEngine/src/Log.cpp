@@ -8,7 +8,11 @@ Coconut::Log::~Log() {}
 
 //unsave
 void Coconut::Log::dump(std::string msg) {
+    //Todo: some time info 
     
+    m_TimeInfo curTime = m_getCurrentTime();
+    Coconut::Log::tmp_getTimeAppend(curTime);
+
     std::cout << msg << std::endl;
 }
 
@@ -30,4 +34,9 @@ Coconut::Log::m_TimeInfo Coconut::Log::m_getCurrentTime() {
 
     return timeInfo;
 
+}
+
+void Coconut::Log::tmp_getTimeAppend(m_TimeInfo timeInfo)
+{
+    std::cout << timeInfo.hour << timeInfo.minute << timeInfo.second << std::endl;
 }
