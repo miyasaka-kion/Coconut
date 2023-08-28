@@ -1,44 +1,25 @@
-#include <Log.h>
-#include <chrono>
+#include "Log.h"
 
 
-Coconut::Log::Log() {}
+namespace Coconut {
+	Log::Log() {
+	}
 
-Coconut::Log::~Log() {}
+	Log::~Log() {
+		
+	}
 
-std::shared_ptr<Coconut::Log> m_Logger = std::make_shared<Coconut::Log>();
-
-//unsave
-void Coconut::Log::dump(std::string msg) {
-    //Todo: some time info 
-    
-    m_TimeInfo curTime = m_getCurrentTime();
-    Coconut::Log::tmp_getTimeAppend(curTime);
-
-    std::cout << msg << std::endl;
-}
+	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
+	std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
 
 
-Coconut::Log::m_TimeInfo Coconut::Log::m_getCurrentTime() {
-    using TimeInfo = Coconut::Log::m_TimeInfo;
+	void Log::init() {
+		spdlog::set_pattern(" [%l] [%T] %v ");
+		s_CoreLogger = spdlog::stdout_color_mt("Coconut");
+		s_CoreLogger->set_level(spdlog::level::level_enum::trace);
 
-    auto currentTime = std::chrono::system_clock::now();
-    std::time_t currentTimeT = std::chrono::system_clock::to_time_t(currentTime);
-    std::tm localTime = *std::localtime(&currentTimeT);
+		s_ClientLogger = spdlog::stdout_color_mt("APP");
+		s_ClientLogger->set_level(spdlog::level::level_enum::trace);
 
-    TimeInfo timeInfo;
-    timeInfo.year = localTime.tm_year + 1900;
-    timeInfo.month = localTime.tm_mon + 1;
-    timeInfo.day = localTime.tm_mday;
-    timeInfo.hour = localTime.tm_hour;
-    timeInfo.minute = localTime.tm_min;
-    timeInfo.second = localTime.tm_sec;
-
-    return timeInfo;
-
-}
-
-void Coconut::Log::tmp_getTimeAppend(m_TimeInfo timeInfo)
-{
-    std::cout << timeInfo.hour << timeInfo.minute << timeInfo.second << std::endl;
+	}
 }

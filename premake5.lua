@@ -24,28 +24,22 @@ project "SDL_test"
 	}
 
 	includedirs {
-		-- SDL2
-		"%{prj.name}/vendor/SDL2/include",
-		"%{prj.name}/vendor/SDL2",
-
-		-- SDL2_image
-		"%{prj.name}/vendor/SDL2_image/include",
-		"%{prj.name}/vendor/SDL2_image",
 		-- others
 		"%{prj.name}/src",
 
 		-- Coconut Engine
-		"CoconutEngine/src"
-	}
+		"CoconutEngine/src",
 
-	libdirs {
+
 		-- SDL2
-		"%{prj.name}/vendor/SDL2/lib/x64",
+		"CoconutEngine/vendor/SDL2/include",
 
 		-- SDL2_image
-		"%{prj.name}/vendor/SDL2_image/lib/x64",
-		"%{prj.name}/vendor/SDL2_image/lib/x64/optional"
+		"CoconutEngine/vendor/SDL2_image/include",
 
+		-- spdlog
+		"CoconutEngine/vendor/spdlog/include"
+		
 	}
 
 	links {
@@ -97,7 +91,7 @@ project "CoconutEngine"
 		"%{prj.name}/vendor/SDL2_image/include",
 
 		-- spdlog
-		-- "%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/vendor/spdlog/include",
 
 		-- others
 		"%{prj.name}/src"

@@ -1,48 +1,44 @@
 #pragma once
 
-#include <string>
-#include <iostream>
 #include <memory>
-#include <bitset>
+
+#include "Core.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
 
 namespace Coconut {
-	class Log {
-	public:
+	class CC_API Log {
 		Log();
 		~Log();
-		
-		void dump(std::string msg);
-
-	private:
-		//time info
-		struct m_TimeInfo {
-			int year;
-			int month;
-			int day;
-			int hour;
-			int minute;
-			int second;
-		};
-
-		Coconut::Log::m_TimeInfo m_getCurrentTime();
-		static void tmp_getTimeAppend(m_TimeInfo timeInfo);
-
-	private:
-		// Todo: maybe some log info stuff..
-
 	public:
-		inline static  				std::shared_ptr<Coconut::Log> getLogger() {
-			return m_Logger;
+		static void init();
+		
+		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() {
+			return s_CoreLogger;
 		}
 
+		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() {
+			return s_ClientLogger;
+		}
+		
 	private:
-		static std::shared_ptr<Coconut::Log> m_Logger;
-
+		static std::shared_ptr<spdlog::logger> s_CoreLogger;
+		static std::shared_ptr<spdlog::logger> s_ClientLogger;
+		
 	};
-
 }
 
-#define CC_LOG(...) ::Coconut::Log::getLogger()->dump(__VA_ARGS__)
+//Core log macros
+#define CC_CORE_CRITICAL(...)	::Coconut::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#define CC_CORE_ERROR(...)		::Coconut::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define CC_CORE_WARN(...)		::Coconut::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define CC_CORE_INFO(...)		::Coconut::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define CC_CORE_TRACE(...)		::Coconut::Log::GetCoreLogger()->trace(__VA_ARGS__)
 
-//template<typename T>
-//constexpr auto CC_LOG(T ...) { return ::Coconut::Log::getLogger()->dump(__VA_ARGS__); }
+
+//Clinet log macros					
+#define CC_CRITICAL(...)		::Coconut::Log::GetClientLogger()->critical(__VA_ARGS__)
+#define CC_ERROR(...)			::Coconut::Log::GetClientLogger()->error(__VA_ARGS__)
+#define CC_WARN(...)			::Coconut::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define CC_INFO(...)			::Coconut::Log::GetClientLogger()->info(__VA_ARGS__)
+#define CC_TRACE(...)			::Coconut::Log::GetClientLogger()->trace(__VA_ARGS__)

@@ -44,11 +44,19 @@
 //	std::cout << "Program exited." << std::endl;
 //}
 
-std::shared_ptr<Coconut::Game> game = nullptr;
+//std::shared_ptr<Coconut::Game> game = nullptr;
 
 
 int main(int argc, char* argv[]) {
-	game = std::make_shared<Coconut::Game>();
+	//game = std::make_shared<Coconut::Game>();
+
+	Coconut::Log::init();
+	CC_CORE_WARN("Core logger initialized!");
+
+
+	std::shared_ptr<Coconut::Game> game = std::make_shared<Coconut::Game>();
+
+	game->gameInit("CoconutEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
 
 	while (game->running()) {
 		game->handleEvents();
