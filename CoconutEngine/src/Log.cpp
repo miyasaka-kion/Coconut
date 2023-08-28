@@ -6,6 +6,8 @@ Coconut::Log::Log() {}
 
 Coconut::Log::~Log() {}
 
+std::shared_ptr<Coconut::Log> m_Logger = std::make_shared<Coconut::Log>();
+
 //unsave
 void Coconut::Log::dump(std::string msg) {
     //Todo: some time info 

@@ -49,13 +49,6 @@ project "SDL_test"
 	}
 
 	links {
-		-- SDL2
-		"SDL2",
-		"SDL2main",
-
-		--SDL2_image
-		"SDL2_image",
-
 		-- CoconutEngine
 		"CoconutEngine"
 	}
@@ -85,7 +78,7 @@ project "SDL_test"
 
 project "CoconutEngine"
 	location "CoconutEngine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 
 	targetdir ("bin/" .. outputDirName .."/%{prj.name}")
