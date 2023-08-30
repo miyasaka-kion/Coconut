@@ -30,6 +30,8 @@ namespace Coconut {
 	private:
 		bool m_isRunning;
 
+		int m_gameCounter;
+
 		SDL_Window* m_window;
 		//std::shared_ptr<SDL_Window> m_window;
 		

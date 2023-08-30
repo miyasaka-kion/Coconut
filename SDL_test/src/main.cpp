@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
 
 	std::shared_ptr<Coconut::Game> game = std::make_shared<Coconut::Game>();
 
-	game->gameInit("CoconutEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->gameInit("CoconutEngine Test Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
 
 	while (game->running()) {
 		game->handleEvents();
@@ -66,7 +66,6 @@ int main(int argc, char* argv[]) {
 
 	game->clean();
 	
-
-	std::cout << "Hellow World" << std::endl;
+	CC_CORE_CRITICAL("Programme end, Hellow world!");
 	return 0;
 }
