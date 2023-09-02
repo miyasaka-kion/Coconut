@@ -26,20 +26,13 @@ project "SDL_test"
 	includedirs {
 		-- others
 		"%{prj.name}/src",
-
 		-- Coconut Engine
 		"CoconutEngine/src",
-
-
-		-- SDL2
 		"CoconutEngine/vendor/SDL2/include",
-
 		-- SDL2_image
 		"CoconutEngine/vendor/SDL2_image/include",
-
 		-- spdlog
 		"CoconutEngine/vendor/spdlog/include"
-		
 	}
 
 	links {
@@ -53,7 +46,7 @@ project "SDL_test"
 		systemversion "latest"
 
 		defines {
-			"SDL_PLATFORM_WINDOWS"
+			"CC_PLATFORM_WINDOWS"
 		}
 		
 	filter "configurations:Debug"
@@ -86,13 +79,10 @@ project "CoconutEngine"
 	includedirs {
 		-- SDL2
 		"%{prj.name}/vendor/SDL2/include",
-
 		-- SDL2_image
 		"%{prj.name}/vendor/SDL2_image/include",
-
 		-- spdlog
 		"%{prj.name}/vendor/spdlog/include",
-
 		-- others
 		"%{prj.name}/src"
 	}
@@ -100,11 +90,9 @@ project "CoconutEngine"
 	libdirs {
 		-- SDL2
 		"%{prj.name}/vendor/SDL2/lib/x64",
-
 		-- SDL2_image
 		"%{prj.name}/vendor/SDL2_image/lib/x64",
 		"%{prj.name}/vendor/SDL2_image/lib/x64/optional"
-
 		-- spdlog
 		-- 
 	}
@@ -113,7 +101,6 @@ project "CoconutEngine"
 		-- SDL2
 		"SDL2",
 		"SDL2main",
-
 		--SDL2_image
 		"SDL2_image",
 	}
@@ -124,7 +111,7 @@ project "CoconutEngine"
 		systemversion "latest"
 
 		defines {
-			"SDL_PLATFORM_WINDOWS"
+			"CC_PLATFORM_WINDOWS"
 		}
 		
 	filter "configurations:Debug"
