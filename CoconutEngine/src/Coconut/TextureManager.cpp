@@ -37,7 +37,7 @@ namespace Coconut {
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
 
 		if (tmpSurface) {
-			CC_CORE_INFO("Image loaded: " + fileFullPath + " successfully loaded.");
+			CC_CORE_INFO("TextureManager: Image loaded: " + fileFullPath + " successfully loaded.");
 		}
 		else {
 			CC_CORE_ERROR("Failed to load image: " + fileFullPath);

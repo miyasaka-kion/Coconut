@@ -1,7 +1,6 @@
 #include "Game.h"
 
-SDL_Texture* playerTexture;
-SDL_Rect srcR, destR;
+std::shared_ptr<Coconut::Object> player;
 
 Coconut::Game::Game() {
 	m_gameCounter = 0;
@@ -46,15 +45,15 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 		m_isRunning = false;
 	}
 
-	//playerTexture = Coconut::TextureManager::LoadTexture_withFullPath("S:\\projects\\SDL_test\\SDL_test\\assets\\frame-1.png", m_renderer);
 	Coconut::TextureManager::showFileInfo();
-	playerTexture = Coconut::TextureManager::LoadTexture("frame-1.png", m_renderer);
+	//playerTexture = Coconut::TextureManager::LoadTexture("frame-1.png", m_renderer);
+	player = std::make_shared<Coconut::Object>("frame-1.png", m_renderer, 0, 0);
 }
 
 void Coconut::Game::handleEvents() {
 	SDL_Event event;
 	SDL_PollEvent(&event);
-	
+
 	switch (event.type) {
 	case SDL_QUIT:
 		m_isRunning = false;
@@ -62,23 +61,21 @@ void Coconut::Game::handleEvents() {
 	default:
 		break;
 	}
-	
+
 }
 
 void Coconut::Game::update() {
 	// call obj's update function from here
 	m_gameCounter++;
 	CC_CORE_INFO("gameCounter is {}", m_gameCounter);
-
-	destR.h = 64;
-	destR.w = 64;
-	destR.x = m_gameCounter;
+	player->objUpdate();
+	
 }
 
 void Coconut::Game::render() {
 	SDL_RenderClear(m_renderer);
 
-	SDL_RenderCopy(m_renderer, playerTexture, NULL, &destR);
+	player->objRender();
 
 	SDL_RenderPresent(m_renderer);
 }

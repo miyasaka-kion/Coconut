@@ -141,12 +141,14 @@
     <ClInclude Include="src\Coconut\EntryPoint.h" />
     <ClInclude Include="src\Coconut\Game.h" />
     <ClInclude Include="src\Coconut\Log.h" />
+    <ClInclude Include="src\Coconut\Object.h" />
     <ClInclude Include="src\Coconut\TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Coconut\Application.cpp" />
     <ClCompile Include="src\Coconut\Game.cpp" />
     <ClCompile Include="src\Coconut\Log.cpp" />
+    <ClCompile Include="src\Coconut\Object.cpp" />
     <ClCompile Include="src\Coconut\TextureManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -23,6 +23,7 @@
       <Filter>Coconut</Filter>
     </ClInclude>
     <ClInclude Include="src\Coconut\TextureManager.h" />
+    <ClInclude Include="src\Coconut\Object.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Coconut\Application.cpp">
@@ -35,5 +36,6 @@
       <Filter>Coconut</Filter>
     </ClCompile>
     <ClCompile Include="src\Coconut\TextureManager.cpp" />
+    <ClCompile Include="src\Coconut\Object.cpp" />
   </ItemGroup>
 </Project>
