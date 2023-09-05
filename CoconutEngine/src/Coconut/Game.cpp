@@ -1,6 +1,8 @@
 #include "Game.h"
 
 std::shared_ptr<Coconut::Object> player;
+std::shared_ptr<Coconut::Object> bird;
+
 
 Coconut::Game::Game() {
 	m_gameCounter = 0;
@@ -48,6 +50,8 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 	Coconut::TextureManager::showFileInfo();
 	//playerTexture = Coconut::TextureManager::LoadTexture("frame-1.png", m_renderer);
 	player = std::make_shared<Coconut::Object>("frame-1.png", m_renderer, 0, 0);
+
+	bird = std::make_shared<Coconut::Object>("bird2.png", m_renderer, 40, 40);
 }
 
 void Coconut::Game::handleEvents() {
@@ -69,6 +73,7 @@ void Coconut::Game::update() {
 	m_gameCounter++;
 	CC_CORE_INFO("gameCounter is {}", m_gameCounter);
 	player->objUpdate();
+	bird->objUpdate();
 	
 }
 
@@ -76,7 +81,8 @@ void Coconut::Game::render() {
 	SDL_RenderClear(m_renderer);
 
 	player->objRender();
-
+	bird->objRender();
+	
 	SDL_RenderPresent(m_renderer);
 }
 
