@@ -1,4 +1,5 @@
 #pragma once
+// This is where the whole program start
 #include <SDL.h>
 
 #ifdef CC_PLATFORM_WINDOWS
