@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Coconut/Game.h"
 #include "Coconut/TextureManager.h"
 #include "Coconut/Log.h"
 #include "Coconut/Object.h"
@@ -26,16 +25,12 @@ namespace Coconut {
 		inline bool running() const {
 			return m_isRunning;
 		}
+		
+	static SDL_Renderer* renderer;
 
 	private:
 		bool m_isRunning;
-
 		int m_gameCounter;
-
 		SDL_Window* m_window;
-		//std::shared_ptr<SDL_Window> m_window;
-		
-		SDL_Renderer* m_renderer;
-		//std::shared_ptr<SDL_Window> m_renderer;
 	};
 }

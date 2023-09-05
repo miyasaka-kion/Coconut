@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Coconut/Log.h"
-
+#include "Coconut/Game.h"
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -14,9 +14,9 @@ namespace Coconut {
 		~TextureManager();
 
 	public:
-		static SDL_Texture* LoadTexture_withFullPath(std::string fileName, SDL_Renderer* renderer);
+		static SDL_Texture* LoadTexture_withFullPath(std::string fileName);
 
-		static SDL_Texture* LoadTexture(std::string fileName, SDL_Renderer* renderer);
+		static SDL_Texture* LoadTexture(std::string fileName);
 
 		static void showFileInfo();
 	private:

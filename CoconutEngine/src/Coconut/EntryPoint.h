@@ -14,6 +14,7 @@ int main(int argc, char* argv[]) {
 	Uint32 frameStart;
 	int frameTime;
 
+
 	Coconut::Log::init();
 	CC_CORE_WARN("Core logger initialized!");
 

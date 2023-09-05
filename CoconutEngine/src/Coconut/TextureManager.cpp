@@ -11,10 +11,10 @@ Coconut::TextureManager::TextureManager() {
 Coconut::TextureManager::~TextureManager() {
 }
 
-SDL_Texture* Coconut::TextureManager::LoadTexture_withFullPath(std::string fileFullPath, SDL_Renderer* renderer) {
+SDL_Texture* Coconut::TextureManager::LoadTexture_withFullPath(std::string fileFullPath) {
 
 	SDL_Surface* tmpSurface = IMG_Load(fileFullPath.c_str());
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(Coconut::Game::renderer, tmpSurface);
 
 	if (tmpSurface) {
 		CC_CORE_INFO("Image loaded: " + fileFullPath + " successfully loaded.");
@@ -28,12 +28,12 @@ SDL_Texture* Coconut::TextureManager::LoadTexture_withFullPath(std::string fileF
 	return texture;
 }
 
-SDL_Texture* Coconut::TextureManager::LoadTexture(std::string fileName, SDL_Renderer* renderer) {
+SDL_Texture* Coconut::TextureManager::LoadTexture(std::string fileName) {
 	std::filesystem::path fullPath = m_assetPath / fileName;
 	std::string fileFullPath = fullPath.string();
 
 	SDL_Surface* tmpSurface = IMG_Load(fileFullPath.c_str());
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(Coconut::Game::renderer, tmpSurface);
 
 	if (tmpSurface) {
 		CC_CORE_INFO("TextureManager: Image loaded: " + fileFullPath + " successfully loaded.");

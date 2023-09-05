@@ -3,6 +3,7 @@
 std::shared_ptr<Coconut::Object> player;
 std::shared_ptr<Coconut::Object> bird;
 
+SDL_Renderer* Coconut::Game::renderer = nullptr;
 
 Coconut::Game::Game() {
 	m_gameCounter = 0;
@@ -31,10 +32,10 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 		}
 
 		//renderer
-		m_renderer = SDL_CreateRenderer(m_window, -1, 0);
+		renderer = SDL_CreateRenderer(m_window, -1, 0);
 
-		if (m_renderer) {
-			SDL_SetRenderDrawColor(m_renderer, 0xff, 0xff, 0xff, 0xff);
+		if (renderer) {
+			SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
 
 			CC_CORE_INFO("Renderer created!");
 		}
@@ -49,9 +50,9 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 
 	Coconut::TextureManager::showFileInfo();
 	//playerTexture = Coconut::TextureManager::LoadTexture("frame-1.png", m_renderer);
-	player = std::make_shared<Coconut::Object>("frame-1.png", m_renderer, 0, 0);
+	player = std::make_shared<Coconut::Object>("frame-1.png", 0, 0);
 
-	bird = std::make_shared<Coconut::Object>("bird2.png", m_renderer, 40, 40);
+	bird = std::make_shared<Coconut::Object>("bird2.png", 40, 40);
 }
 
 void Coconut::Game::handleEvents() {
@@ -78,17 +79,17 @@ void Coconut::Game::update() {
 }
 
 void Coconut::Game::render() {
-	SDL_RenderClear(m_renderer);
+	SDL_RenderClear(renderer);
 
 	player->objRender();
 	bird->objRender();
 	
-	SDL_RenderPresent(m_renderer);
+	SDL_RenderPresent(renderer);
 }
 
 void Coconut::Game::clean() {
 	SDL_DestroyWindow(m_window);
-	SDL_DestroyRenderer(m_renderer);
+	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 	CC_CORE_INFO("Game cleaned!");
 }

@@ -1,15 +1,13 @@
 #include "Object.h"
 
-Coconut::Object::Object(std::string textureSheet, SDL_Renderer* renderer) {
-	m_renderer = renderer;
-	m_objectTexture = Coconut::TextureManager::LoadTexture(textureSheet, m_renderer);
+Coconut::Object::Object(std::string textureSheet) {
+	m_objectTexture = Coconut::TextureManager::LoadTexture(textureSheet);
 }
 
-Coconut::Object::Object(std::string textureSheet, SDL_Renderer* renderer, int ix, int iy) {
+Coconut::Object::Object(std::string textureSheet, int ix, int iy) {
 	m_xpos = ix;
 	m_ypos = iy;
-	m_renderer = renderer;
-	m_objectTexture = Coconut::TextureManager::LoadTexture(textureSheet, m_renderer);
+	m_objectTexture = Coconut::TextureManager::LoadTexture(textureSheet);
 }
 
 Coconut::Object::~Object() {
@@ -32,6 +30,6 @@ void Coconut::Object::objUpdate() {
 }
 
 void Coconut::Object::objRender() {
-	SDL_RenderCopy(m_renderer, m_objectTexture, &m_srcRect, &m_destRect);
+	SDL_RenderCopy(Coconut::Game::renderer, m_objectTexture, &m_srcRect, &m_destRect);
 
 }
