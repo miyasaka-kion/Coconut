@@ -1,5 +1,4 @@
 #include "Application.h"
-#include <iostream>
 
 namespace Coconut {
 	Application::Application() {
