@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Coconut">
+      <UniqueIdentifier>{205D6833-8C3C-E7CE-9554-72A501B34D30}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Coconut.h" />
+    <ClInclude Include="src\Coconut\Application.h">
+      <Filter>Coconut</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\Core.h">
+      <Filter>Coconut</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\EntryPoint.h">
+      <Filter>Coconut</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\Game.h">
+      <Filter>Coconut</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\Log.h">
+      <Filter>Coconut</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\TextureManager.h" />
+    <ClInclude Include="src\Coconut\Object.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Coconut\Application.cpp">
+      <Filter>Coconut</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Coconut\Game.cpp">
+      <Filter>Coconut</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Coconut\Log.cpp">
+      <Filter>Coconut</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Coconut\TextureManager.cpp" />
+    <ClCompile Include="src\Coconut\Object.cpp" />
+  </ItemGroup>
+</Project>
