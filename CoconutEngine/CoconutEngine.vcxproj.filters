@@ -24,6 +24,8 @@
     </ClInclude>
     <ClInclude Include="src\Coconut\TextureManager.h" />
     <ClInclude Include="src\Coconut\Object.h" />
+    <ClInclude Include="src\Coconut\GameMap\Map.h" />
+    <ClInclude Include="src\Coconut\GameMap\MapTweaker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Coconut\Application.cpp">
@@ -37,5 +39,7 @@
     </ClCompile>
     <ClCompile Include="src\Coconut\TextureManager.cpp" />
     <ClCompile Include="src\Coconut\Object.cpp" />
+    <ClCompile Include="src\Coconut\GameMap\Map.cpp" />
+    <ClCompile Include="src\Coconut\GameMap\MapTweaker.cpp" />
   </ItemGroup>
 </Project>

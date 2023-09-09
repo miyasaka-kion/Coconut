@@ -29,6 +29,8 @@ SDL_Texture* Coconut::TextureManager::LoadTexture_withFullPath(std::string fileF
 }
 
 SDL_Texture* Coconut::TextureManager::LoadTexture(std::string fileName) {
+	// Load texture in the asset folder directly
+
 	std::filesystem::path fullPath = m_assetPath / fileName;
 	std::string fileFullPath = fullPath.string();
 
@@ -45,6 +47,10 @@ SDL_Texture* Coconut::TextureManager::LoadTexture(std::string fileName) {
 	SDL_FreeSurface(tmpSurface);
 
 	return texture;
+}
+
+void Coconut::TextureManager::DrawTexture(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest) {
+	SDL_RenderCopy(Coconut::Game::renderer, texture, &src, &dest);
 }
 
 void Coconut::TextureManager::showFileInfo() {

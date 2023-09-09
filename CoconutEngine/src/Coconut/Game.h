@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Coconut/TextureManager.h"
-#include "Coconut/Log.h"
-#include "Coconut/Object.h"
-
 #include <SDL.h>
 #include <SDL_image.h>
 
-
+#include "Coconut/TextureManager.h"
+#include "Coconut/Log.h"
+#include "Coconut/Object.h"
+#include "Coconut/GameMap/MapTweaker.h"
+#include "Coconut/GameMap/Map.h"
 
 namespace Coconut {
 	class Game {

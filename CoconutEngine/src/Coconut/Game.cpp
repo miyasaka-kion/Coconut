@@ -2,6 +2,7 @@
 
 std::shared_ptr<Coconut::Object> player;
 std::shared_ptr<Coconut::Object> bird;
+std::shared_ptr<Coconut::Map> map;
 
 SDL_Renderer* Coconut::Game::renderer = nullptr;
 
@@ -50,9 +51,12 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 
 	Coconut::TextureManager::showFileInfo();
 	//playerTexture = Coconut::TextureManager::LoadTexture("frame-1.png", m_renderer);
-	player = std::make_shared<Coconut::Object>("frame-1.png", 0, 0);
 
+	//Allocate instances
+	player = std::make_shared<Coconut::Object>("bird.png", 0, 0);
 	bird = std::make_shared<Coconut::Object>("bird2.png", 40, 40);
+	map = std::make_shared<Coconut::Map>();
+
 }
 
 void Coconut::Game::handleEvents() {
@@ -81,6 +85,7 @@ void Coconut::Game::update() {
 void Coconut::Game::render() {
 	SDL_RenderClear(renderer);
 
+	map->drawMap();
 	player->objRender();
 	bird->objRender();
 	

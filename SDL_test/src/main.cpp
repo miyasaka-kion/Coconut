@@ -1,5 +1,17 @@
 #include <Coconut.h>
 
-class myApp : Coconut::Application {
-	
+class TestGame : public Coconut::Application {
+public:
+	TestGame() {
+
+	}
+	~TestGame() {
+
+	}
+
+
 };
+
+Coconut::Application* Coconut::CreateApplication() {
+	return new TestGame();
+}

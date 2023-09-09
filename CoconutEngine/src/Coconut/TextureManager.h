@@ -1,11 +1,14 @@
 #pragma once
 
-#include "Coconut/Log.h"
-#include "Coconut/Game.h"
+#include <filesystem>
 
 #include <SDL.h>
 #include <SDL_image.h>
-#include <filesystem>
+
+#include "Coconut/Log.h"
+#include "Coconut/Game.h"
+
+
 
 namespace Coconut {
 	class TextureManager {
@@ -15,8 +18,10 @@ namespace Coconut {
 
 	public:
 		static SDL_Texture* LoadTexture_withFullPath(std::string fileName);
+		// This is a test function, will be remove in release.
 
 		static SDL_Texture* LoadTexture(std::string fileName);
+		static void DrawTexture(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest);
 
 		static void showFileInfo();
 	private:
