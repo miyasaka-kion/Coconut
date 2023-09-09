@@ -20,6 +20,7 @@ namespace Coconut {
 		MapTweaker(int row, int col, FillMapType fillMapType);
 		// fill the map with some predefined methods;
 
+
 		void fillMap(std::vector< std::vector<int> >& map);
 
 

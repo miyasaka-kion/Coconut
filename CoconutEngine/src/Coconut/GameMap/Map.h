@@ -16,7 +16,6 @@ namespace Coconut {
 		//~Map();
 
 		void loadMap();
-		void loadMap(std::vector<std::vector<int>>& map);
 
 		void drawMap();
 	private:

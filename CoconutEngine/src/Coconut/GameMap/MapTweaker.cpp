@@ -20,6 +20,8 @@ Coconut::MapTweaker::MapTweaker(int row, int col, Coconut::MapTweaker::FillMapTy
 
 }
 
+
+
 void Coconut::MapTweaker::fillMap(std::vector<std::vector<int>>& map) {
 	fitSize(map);
 	CC_CORE_INFO("Map size auto fitted, with row = {} and column = {}", m_row, m_column);

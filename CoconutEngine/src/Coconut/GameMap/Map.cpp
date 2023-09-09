@@ -5,7 +5,7 @@ Coconut::Map::Map()
     m_map.resize(m_rows, std::vector<int>(m_columns, 0));
     m_dirt = Coconut::TextureManager::LoadTexture("dirt.jpg");
     m_grass = Coconut::TextureManager::LoadTexture("grass.png");
-    m_water = Coconut::TextureManager::LoadTexture("water.jpg");
+    m_water = Coconut::TextureManager::LoadTexture("water.png");
     m_sky = Coconut::TextureManager::LoadTexture("sky.png");
 
     loadMap();
@@ -18,12 +18,15 @@ Coconut::Map::Map()
     dest.x = dest.y = 0;
 }
 
+
+//The function above is actually in use;
+//This function will be moved in later version.
 Coconut::Map::Map(int rows = 20, int cols = 25)
     : m_rows(rows), m_columns(cols) {
     m_map.resize(m_rows, std::vector<int>(m_columns, 0));
     m_dirt = Coconut::TextureManager::LoadTexture("dirt.jpg");
     m_grass = Coconut::TextureManager::LoadTexture("grass.png");
-    m_water = Coconut::TextureManager::LoadTexture("water.jpg");
+    m_water = Coconut::TextureManager::LoadTexture("water.png");
     m_sky = Coconut::TextureManager::LoadTexture("sky.png");
 
     loadMap();
@@ -43,8 +46,7 @@ void Coconut::Map::loadMap() {
     
 }
 
-void Coconut::Map::loadMap(std::vector<std::vector<int>>& map) {
-}
+
 
 void Coconut::Map::drawMap() {
     if (m_map.size() == 0) {
@@ -56,8 +58,9 @@ void Coconut::Map::drawMap() {
             //use enum?
             int curType = m_map[i][j];
             
-            dest.x = m_columns * 32;
-            dest.y = m_rows * 32;
+            dest.x = i * 32;
+            dest.y = j * 32;
+            if (i || j) break;
             switch (curType) {
             case 0:
                 Coconut::TextureManager::DrawTexture(m_water, src, dest);
