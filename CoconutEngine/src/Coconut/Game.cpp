@@ -11,8 +11,8 @@
 #include "Coconut/GameMap/Map.h"
 
 
-#include "Coconut/ECS.h"
-#include "Coconut/Compoent.h"
+#include "Coconut/ECS/ECS.h"
+#include "Coconut/ECS/Compoent.h"
 
 std::shared_ptr<Coconut::Object> player;
 std::shared_ptr<Coconut::Object> bird;

@@ -49,6 +49,6 @@ void Coconut::MapTweaker::fillZeros(std::vector<std::vector<int>>& map) {
 
 void Coconut::MapTweaker::fitSize(std::vector<std::vector<int>>& map) {
 	m_row = static_cast<int> (map.size());
-	m_column = (m_row > 0) ? map[0].size() : 0;
+	m_column = static_cast<int> ( (m_row > 0) ? map[0].size() : 0  );
 }
 

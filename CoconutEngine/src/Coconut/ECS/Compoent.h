@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Coconut/ECS.h>
+#include <Coconut/ECS/ECS.h>
 
 namespace Coconut {
 
