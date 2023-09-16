@@ -1,6 +1,12 @@
 #pragma once
 
-#include "Core.h"
+#include <memory>
+
+#include <SDL.h>
+
+#include "Coconut/Core.h"
+#include "Coconut/Log.h"
+#include "Coconut/Game.h"
 
 namespace Coconut {
 
