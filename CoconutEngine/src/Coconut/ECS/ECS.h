@@ -31,6 +31,8 @@ namespace Coconut {
 	using ComponentBitset = std::bitset<maxComponents>;
 	using ComponentArray = std::array<Component*, maxComponents>;
 
+
+	// Component
 	class Component {
 	public:
 		Entity* entity;
@@ -45,10 +47,9 @@ namespace Coconut {
 
 
 
-
+	// Entity
 	class Entity {
 	private:
-		// ? when is this initiated?
 		bool active = true;
 		std::vector<std::unique_ptr<Component> > components;
 

@@ -6,7 +6,6 @@
 #include "Game.h"
 #include "Coconut/TextureManager.h"
 #include "Coconut/Log.h"
-#include "Coconut/Object.h"
 #include "Coconut/GameMap/MapTweaker.h"
 #include "Coconut/GameMap/Map.h"
 
@@ -14,14 +13,12 @@
 #include "Coconut/ECS/ECS.h"
 #include "Coconut/ECS/Compoent.h"
 
-std::shared_ptr<Coconut::Object> player;
-std::shared_ptr<Coconut::Object> bird;
-std::shared_ptr<Coconut::Map> map;
 
+std::unique_ptr<Coconut::Map> map;
 SDL_Renderer* Coconut::Game::renderer = nullptr;
 
 Coconut::Manager manager;
-Coconut::Entity& newPlayter(manager.addEntity());
+Coconut::Entity& player(manager.addEntity());
 
 
 
@@ -74,14 +71,13 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 	}
 
 	Coconut::TextureManager::showFileInfo();
-	//playerTexture = Coconut::TextureManager::LoadTexture("frame-1.png", m_renderer);
+	map = std::make_unique<Coconut::Map>();
+
 
 	//Allocate instances
-	player = std::make_shared<Coconut::Object>("bird.png", 0, 0);
-	bird = std::make_shared<Coconut::Object>("bird2.png", 40, 40);
-	map = std::make_shared<Coconut::Map>();
 
-	newPlayter.addComponent<Coconut::PositionComponent>();
+	player.addComponent<Coconut::PositionComponent>();
+	player.addComponent<Coconut::SpriteComponent>("bird.png");
 }
 
 void Coconut::Game::handleEvents() {
@@ -100,22 +96,22 @@ void Coconut::Game::handleEvents() {
 
 void Coconut::Game::update() {
 	// call obj's update function from here
-	m_gameCounter++;
-	CC_CORE_INFO("gameCounter is {}", m_gameCounter);
-	player->objUpdate();
-	bird->objUpdate();
+	// 
+	//m_gameCounter++;
+	//CC_CORE_INFO("gameCounter is {}", m_gameCounter);
+
+	manager.refersh();
 	manager.update();
 
-	CC_CORE_INFO("player position: ({}, {})", newPlayter.getComponent<Coconut::PositionComponent>().x(),
-		newPlayter.getComponent<Coconut::PositionComponent>().y());
+	//CC_CORE_INFO("player position: ({}, {})", newPlayter.getComponent<Coconut::PositionComponent>().getXpos(),
+	//	newPlayter.getComponent<Coconut::PositionComponent>().getYpos());
 }
 
 void Coconut::Game::render() {
 	SDL_RenderClear(renderer);
 
 	map->drawMap();
-	player->objRender();
-	bird->objRender();
+	manager.draw();
 	
 	SDL_RenderPresent(renderer);
 }
