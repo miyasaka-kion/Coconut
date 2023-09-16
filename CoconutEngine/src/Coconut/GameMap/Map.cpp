@@ -60,7 +60,7 @@ void Coconut::Map::drawMap() {
             
             dest.x = i * 32;
             dest.y = j * 32;
-            if (i || j) break;
+
             switch (curType) {
             case 0:
                 Coconut::TextureManager::DrawTexture(m_water, src, dest);
