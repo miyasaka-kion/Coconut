@@ -27,6 +27,7 @@
     <ClInclude Include="src\Coconut\GameMap\Map.h" />
     <ClInclude Include="src\Coconut\GameMap\MapTweaker.h" />
     <ClInclude Include="src\Coconut\ECS.h" />
+    <ClInclude Include="src\Coconut\Compoent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Coconut\Application.cpp">

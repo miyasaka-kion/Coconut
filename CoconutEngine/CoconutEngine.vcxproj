@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="src\Coconut.h" />
     <ClInclude Include="src\Coconut\Application.h" />
+    <ClInclude Include="src\Coconut\Compoent.h" />
     <ClInclude Include="src\Coconut\Core.h" />
     <ClInclude Include="src\Coconut\ECS.h" />
     <ClInclude Include="src\Coconut\EntryPoint.h" />
