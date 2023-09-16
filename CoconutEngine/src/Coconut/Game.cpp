@@ -4,7 +4,6 @@
 
 
 #include "Game.h"
-
 #include "Coconut/TextureManager.h"
 #include "Coconut/Log.h"
 #include "Coconut/Object.h"

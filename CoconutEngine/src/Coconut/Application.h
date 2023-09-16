@@ -2,7 +2,9 @@
 
 #include <memory>
 
+#pragma warning(push, 0)
 #include <SDL.h>
+#pragma warning(pop)
 
 #include "Coconut/Core.h"
 #include "Coconut/Log.h"

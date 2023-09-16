@@ -1,8 +1,10 @@
 #pragma once
 #include <vector>
 
+#pragma warning(push, 0)
 #include <SDL.h>
 #include <SDL_image.h>
+#pragma push(pop)
 
 #include "Coconut/TextureManager.h"
 #include "Coconut/GameMap/MapTweaker.h"

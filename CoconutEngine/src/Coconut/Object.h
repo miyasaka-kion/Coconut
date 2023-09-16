@@ -2,8 +2,10 @@
 #include "Coconut/Game.h"
 #include "Coconut/TextureManager.h"
 
+#pragma warning(push, 0)
 #include <SDL.h>
 #include <SDL_image.h>
+#pragma warning(pop)
 
 namespace Coconut {
 	class Object {

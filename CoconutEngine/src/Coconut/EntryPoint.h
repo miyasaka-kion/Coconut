@@ -1,9 +1,13 @@
 #pragma once
 // This is where the whole program start
 
+
 #include <memory>
 
+// This ignores all warnings raised inside External headers
+#pragma warning(push, 0)
 #include <SDL.h>
+#pragma warning()
 
 #include "Coconut/Application.h"
 
