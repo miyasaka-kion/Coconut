@@ -1,10 +1,30 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
+
+
 #include "Game.h"
+
+#include "Coconut/TextureManager.h"
+#include "Coconut/Log.h"
+#include "Coconut/Object.h"
+#include "Coconut/GameMap/MapTweaker.h"
+#include "Coconut/GameMap/Map.h"
+
+
+#include "Coconut/ECS.h"
+#include "Coconut/Compoent.h"
 
 std::shared_ptr<Coconut::Object> player;
 std::shared_ptr<Coconut::Object> bird;
 std::shared_ptr<Coconut::Map> map;
 
 SDL_Renderer* Coconut::Game::renderer = nullptr;
+
+Coconut::Manager manager;
+Coconut::Entity& newPlayter(manager.addEntity());
+
+
 
 Coconut::Game::Game() {
 	m_gameCounter = 0;
@@ -57,6 +77,7 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 	bird = std::make_shared<Coconut::Object>("bird2.png", 40, 40);
 	map = std::make_shared<Coconut::Map>();
 
+	newPlayter.addComponent<Coconut::PositionComponent>();
 }
 
 void Coconut::Game::handleEvents() {
@@ -79,7 +100,10 @@ void Coconut::Game::update() {
 	CC_CORE_INFO("gameCounter is {}", m_gameCounter);
 	player->objUpdate();
 	bird->objUpdate();
-	
+	manager.update();
+
+	CC_CORE_INFO("player position: ({}, {})", newPlayter.getComponent<Coconut::PositionComponent>().x(),
+		newPlayter.getComponent<Coconut::PositionComponent>().y());
 }
 
 void Coconut::Game::render() {

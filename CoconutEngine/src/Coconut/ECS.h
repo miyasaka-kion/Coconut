@@ -35,11 +35,11 @@ namespace Coconut {
 	public:
 		Entity* entity;
 		
-		virtual void init();
-		virtual void update();
-		virtual void draw();
+		virtual void init() {}
+		virtual void update() {}
+		virtual void draw() {}
 		
-		virtual ~Component();
+		virtual ~Component() {}
 
 	};
 
@@ -78,7 +78,7 @@ namespace Coconut {
 			components.emplace_back(std::move(uPtr));
 
 			componentArray[getComponentTypeID<T>()] = c;
-			componentBitset[getComponentTypeID < T < ()] = true;
+			componentBitset[getComponentTypeID <T> ()] = true;
 
 			c->init();
 			return *c;
