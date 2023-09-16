@@ -28,6 +28,11 @@ Coconut::Entity& newPlayter(manager.addEntity());
 
 Coconut::Game::Game() {
 	m_gameCounter = 0;
+
+	// This is set in gameInit();
+	m_isRunning = false;
+	// This is set in gameInit();
+	m_window = nullptr;
 }
 
 Coconut::Game::~Game() {}

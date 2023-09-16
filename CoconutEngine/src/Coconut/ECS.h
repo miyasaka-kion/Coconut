@@ -119,13 +119,13 @@ namespace Coconut {
 			);
 		}
 
+		// may be some uncleared stuff here...
 		Entity& addEntity() {
-			Entity* e = new Entity();
-			std::unique_ptr<Entity> uPtr{ e };
-			// modified version:
-			//std::unique_ptr<Entity> uPtr = std::make_unique<Entity>();
+			std::unique_ptr<Entity> uPtr = std::make_unique<Entity>();
+			Entity& e = *uPtr;
 			entities.emplace_back(std::move(uPtr));
-			return *e;
+			return e;
 		}
+
 	};
 }
