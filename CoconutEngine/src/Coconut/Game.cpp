@@ -82,10 +82,9 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 }
 
 void Coconut::Game::handleEvents() {
-	//SDL_Event event;
-	SDL_PollEvent(&event);
+	SDL_PollEvent(&Coconut::Game::event);
 
-	switch (event.type) {
+	switch (Coconut::Game::event.type) {
 	case SDL_QUIT:
 		m_isRunning = false;
 		break;

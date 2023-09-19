@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "Coconut/Vector2D.h"
 #include "Coconut/Log.h"
 
@@ -16,6 +18,11 @@ void Coconut::Vector2D::setX(float x) {
 
 void Coconut::Vector2D::setY(float y) {
 	this->y = y;
+}
+
+float Coconut::Vector2D::norm()
+{
+	return std::sqrt(this->x * this->x + this->y * this->y);
 }
 
 bool Coconut::Vector2D::operator==(const Vector2D& vec) const
@@ -103,6 +110,8 @@ Coconut::Vector2D Coconut::Vector2D::operator*(const float& x) const
 }
 
 
+
+
 // += -= *= /=
 Coconut::Vector2D& Coconut::Vector2D::operator+=(const Vector2D& vec)
 {
@@ -125,6 +134,11 @@ Coconut::Vector2D& Coconut::Vector2D::operator*=(const Vector2D& vec)
 Coconut::Vector2D& Coconut::Vector2D::operator/=(const Vector2D& vec)
 {
 	this->div(vec);
+	return *this;
+}
+
+Coconut::Vector2D& Coconut::Vector2D::operator/=(float scalar) {
+	this->div(Vector2D(scalar, scalar));
 	return *this;
 }
 

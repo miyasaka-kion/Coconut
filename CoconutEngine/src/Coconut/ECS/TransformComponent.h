@@ -29,10 +29,15 @@ namespace Coconut {
 
 		void init() override {
 			velocity = Vector2D();
+
 			CC_CORE_INFO("TransformComponent initialized!");
 		}
 
 		void update() override {
+			//if (velocity.norm() > speed) {
+			//	velocity /= velocity.norm();
+			//	// this does not work! 
+			//}
 			position += velocity * speed;
 		}
 
