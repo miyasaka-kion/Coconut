@@ -51,14 +51,47 @@ Coconut::Vector2D& Coconut::Vector2D::mul(const Vector2D& vec)
 Coconut::Vector2D& Coconut::Vector2D::div(const Vector2D& vec)
 {
 	if (vec.cannotDiv()) {
-		CC_CORE_WARN("Division by zero!");
-		this->x = 0.0f;
-		this->y = 0.0f;
-		return *this;
+		CC_CORE_WARN("Division by zero! Return the illegal divisor");
+		return *vec;
 	}
 	this->x /= vec.x;
 	this->y /= vec.y;
 	return *this;
+}
+
+Coconut::Vector2D Coconut::Vector2D::operator+(const Vector2D& vec) const 
+{
+	return Vector2D(this->x + vec.x, this->y + vec.y);
+}
+
+Coconut::Vector2D Coconut::Vector2D::operator-(const Vector2D& vec) const 
+{
+	return Vector2D(this->x - vec.x, this->y - vec.y);
+}
+
+Coconut::Vector2D Coconut::Vector2D::operator*(const Vector2D& vec) const 
+{
+	return Vector2D(this->x * vec.x, this->y * vec.y);
+}
+
+Coconut::Vector2D Coconut::Vector2D::operator/(const Vector2D& vec) const
+{
+	if (vec.cannotDiv()) {
+		CC_CORE_WARN("Dicision by zero! Return the illegal divisor~");
+		return vec;
+	}
+	return Vector2D(this->x / vec.x, this->y / vec.y);
+}
+
+Coconut::Vector2D Coconut::Vector2D::operator*(const int& x) const
+{
+	float fl = static_cast<float>(x);
+	return *this * Vector2D(x, x);
+}
+
+Coconut::Vector2D Coconut::Vector2D::operator*(const float& x) const
+{
+	return *this * Vector2D(x, x);
 }
 
 
@@ -94,28 +127,8 @@ Coconut::Vector2D& Coconut::Vector2D::operator/=(const Vector2D& vec)
 
 
 
-// + - * /
-Coconut::Vector2D& Coconut::operator+(Vector2D& v1, const Vector2D& v2) {
-	return Vector2D(v1.x + v2.x, v1.y + v2.y);
-}
-
-Coconut::Vector2D& Coconut::operator-(Vector2D& v1, const Vector2D& v2) {
-	return Vector2D(v1.x - v2.x, v1.y - v2.y);
-}
-
-Coconut::Vector2D& Coconut::operator*(Vector2D& v1, const Vector2D& v2) {
-	return Vector2D(v1.x * v2.x, v1.y * v2.y);
-}
-
-Coconut::Vector2D& Coconut::operator/(Vector2D& v1, const Vector2D& v2) {
-	if (v2.cannotDiv()) {
-		CC_CORE_WARN("Division by zero!");
-		return v1;
-	}
-	return Vector2D(v1.x / v2.x, v1.y / v2.y);
-}
-
 
 void Coconut::Vector2D::printValue() const {
 	CC_CORE_INFO("Current Vector2D pos: ({}, {})", x, y);
 }
+

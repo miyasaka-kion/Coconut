@@ -25,16 +25,22 @@ namespace Coconut {
 
 	private:
 		bool cannotDiv() const ;
-		
 		Vector2D& add(const Vector2D& vec);
 		Vector2D& mul(const Vector2D& vec);
 		Vector2D& sub(const Vector2D& vec);
 		Vector2D& div(const Vector2D& vec);
 
-		friend Vector2D& operator+(Vector2D& v1, const Vector2D& v2);
-		friend Vector2D& operator-(Vector2D& v1, const Vector2D& v2);
-		friend Vector2D& operator*(Vector2D& v1, const Vector2D& v2);
-		friend Vector2D& operator/(Vector2D& v1, const Vector2D& v2);
+
+	public:
+		Vector2D operator+(const Vector2D& vec) const;
+		Vector2D operator-(const Vector2D& vec) const;
+		Vector2D operator*(const Vector2D& vec) const;
+		Vector2D operator/(const Vector2D& vec) const;
+
+	// scalar operand
+	public:
+		Vector2D operator*(const int& x) const;
+		Vector2D operator*(const float& x) const;
 
 	public:
 		Vector2D& operator+=(const Vector2D& vec);
@@ -43,8 +49,8 @@ namespace Coconut {
 		Vector2D& operator/=(const Vector2D& vec);
 
 		//std::ostream& operator<<(std::ostream& stream, const Vector2D& vec);
+	
 	public: 
-
 		// debug function
 		void printValue() const;
 

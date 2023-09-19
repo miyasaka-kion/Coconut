@@ -10,6 +10,11 @@ namespace Coconut {
 	class TransformComponent : public Coconut::Component {
 	public:
 		Vector2D position;
+		Vector2D velocity;
+
+		int speed = 3;
+
+
 
 		TransformComponent() : position(Vector2D()) {}
 		TransformComponent(float x, float y) : position(Vector2D(x, y)) {};
@@ -18,14 +23,13 @@ namespace Coconut {
 			return position.getCoordinate();
 		}
 
-		
 
 		void init() override {
-			
+			velocity = Vector2D();
 		}
 
 		void update() override {
-			position += Vector2D(1, 1);
+			position += velocity * speed;
 		}
 
 		void setPosition(float x, float y) {

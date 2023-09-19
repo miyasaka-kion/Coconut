@@ -140,6 +140,7 @@
     <ClInclude Include="src\Coconut\ECS\Compoent.h" />
     <ClInclude Include="src\Coconut\Core.h" />
     <ClInclude Include="src\Coconut\ECS\ECS.h" />
+    <ClInclude Include="src\Coconut\ECS\KeyBoardController.h" />
     <ClInclude Include="src\Coconut\ECS\TransformComponent.h" />
     <ClInclude Include="src\Coconut\ECS\SpriteComponent.h" />
     <ClInclude Include="src\Coconut\EntryPoint.h" />

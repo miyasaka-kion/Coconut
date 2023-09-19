@@ -31,6 +31,7 @@
     <ClInclude Include="src\Coconut\ECS\TransformComponent.h" />
     <ClInclude Include="src\Coconut\ECS\SpriteComponent.h" />
     <ClInclude Include="src\Coconut\Vector2D.h" />
+    <ClInclude Include="src\Coconut\ECS\KeyBoardController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Coconut\Application.cpp">
