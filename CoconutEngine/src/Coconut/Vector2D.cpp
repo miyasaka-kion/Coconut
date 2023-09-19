@@ -51,8 +51,8 @@ Coconut::Vector2D& Coconut::Vector2D::mul(const Vector2D& vec)
 Coconut::Vector2D& Coconut::Vector2D::div(const Vector2D& vec)
 {
 	if (vec.cannotDiv()) {
-		CC_CORE_WARN("Division by zero! Return the illegal divisor");
-		return *vec;
+		CC_CORE_WARN("Division by zero ({}, {})! Return the dividend!", vec.getX(), vec.getY());
+		return *this;
 	}
 	this->x /= vec.x;
 	this->y /= vec.y;
