@@ -2,41 +2,34 @@
 
 #include <Coconut/ECS/ECS.h>
 #include <Coconut/ECS/Compoent.h>
+#include <Coconut/Vector2D.h>
 
 
 namespace Coconut {
 
 	class TransformComponent : public Coconut::Component {
-	private:
-		int xpos;
-		int ypos;
-
-
 	public:
-		TransformComponent() : xpos(0), ypos(0) {
-			
-		};
-		TransformComponent(int x, int y) : xpos(x), ypos(y) {};
-		inline int getXpos() {
-			return xpos;
+		Vector2D position;
+
+		TransformComponent() : position(Vector2D()) {}
+		TransformComponent(float x, float y) : position(Vector2D(x, y)) {};
+		
+		std::tuple<float, float> getCoordinate() {
+			return position.getCoordinate();
 		}
-		inline int getYpos() {
-			return ypos;
-		}
+
+		
 
 		void init() override {
-			xpos = 0;
-			ypos = 0;
+			
 		}
 
 		void update() override {
-			xpos++;
-			ypos++;
+			position += Vector2D(1, 1);
 		}
 
-		void setPosition(int x, int y) {
-			xpos = x;
-			ypos = y;
+		void setPosition(float x, float y) {
+			position = Vector2D(x, y);
 		}
 	};
 

@@ -6,13 +6,18 @@
 
 namespace Coconut {
 	class Vector2D {
-	private:
+	public:
 		float x;
 		float y;
 
 	public:
 		Vector2D();
 		Vector2D(float x, float y);
+
+		inline float getX() const { return x; };
+		inline float getY() const { return y; };
+		std::tuple<float, float> getCoordinate();
+
 
 	public:
 		bool operator==(const Vector2D& vec) const;
@@ -31,6 +36,7 @@ namespace Coconut {
 		friend Vector2D& operator*(Vector2D& v1, const Vector2D& v2);
 		friend Vector2D& operator/(Vector2D& v1, const Vector2D& v2);
 
+	public:
 		Vector2D& operator+=(const Vector2D& vec);
 		Vector2D& operator-=(const Vector2D& vec);
 		Vector2D& operator*=(const Vector2D& vec);
@@ -38,6 +44,8 @@ namespace Coconut {
 
 		//std::ostream& operator<<(std::ostream& stream, const Vector2D& vec);
 	public: 
+
+		// debug function
 		void printValue() const;
 
 	};

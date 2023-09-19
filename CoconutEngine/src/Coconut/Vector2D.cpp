@@ -5,6 +5,11 @@ Coconut::Vector2D::Vector2D() : x(0.0f), y(0.0f) {}
 
 Coconut::Vector2D::Vector2D(float x, float y) : x(x), y(y) {}
 
+std::tuple<float, float> Coconut::Vector2D::getCoordinate()
+{
+	return std::make_tuple(x, y);
+}
+
 bool Coconut::Vector2D::operator==(const Vector2D& vec) const
 {
 	return (this->x == vec.x && this->y == vec.y);

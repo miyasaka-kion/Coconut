@@ -39,9 +39,7 @@ namespace Coconut {
 		}
 
 		void update() override {
-			destRect.x = position->getXpos();
-			destRect.y = position->getYpos();
-
+			std::tie(destRect.x, destRect.y) = position->getCoordinate();
 		}
 		
 		void draw() override {

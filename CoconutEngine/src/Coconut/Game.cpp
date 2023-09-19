@@ -12,14 +12,13 @@
 #include "Coconut/ECS/ECS.h"
 #include "Coconut/ECS/SpriteComponent.h"
 #include "Coconut/ECS/TransformComponent.h"
-
+#include "Coconut/Vector2D.h"
 
 std::unique_ptr<Coconut::Map> map;
 SDL_Renderer* Coconut::Game::renderer = nullptr;
 
 Coconut::Manager manager;
 Coconut::Entity& player(manager.addEntity());
-
 
 
 Coconut::Game::Game() {
@@ -32,7 +31,6 @@ Coconut::Game::Game() {
 }
 
 Coconut::Game::~Game() {}
-
 
 void Coconut::Game::gameInit(std::string title, int x, int y, int width, int height, bool fullscreen) {
 	int flag = NULL;
@@ -99,6 +97,8 @@ void Coconut::Game::update() {
 
 	manager.refresh();
 	manager.update(); 
+
+	player.getComponent<TransformComponent>().position += Coconut::Vector2D(4, 0);
 
 	//CC_CORE_INFO("player position: ({}, {})", newPlayter.getComponent<Coconut::PositionComponent>().getXpos(),
 	//	newPlayter.getComponent<Coconut::PositionComponent>().getYpos());
