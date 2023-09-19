@@ -6,12 +6,12 @@
 #include "Game.h"
 #include "Coconut/TextureManager.h"
 #include "Coconut/Log.h"
-#include "Coconut/GameMap/MapTweaker.h"
 #include "Coconut/GameMap/Map.h"
 
 
 #include "Coconut/ECS/ECS.h"
-#include "Coconut/ECS/Compoent.h"
+#include "Coconut/ECS/SpriteComponent.h"
+#include "Coconut/ECS/TransformComponent.h"
 
 
 std::unique_ptr<Coconut::Map> map;
@@ -76,7 +76,7 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 
 	//Allocate instances
 
-	player.addComponent<Coconut::PositionComponent>();
+	player.addComponent<Coconut::TransformComponent>();
 	player.addComponent<Coconut::SpriteComponent>("bird.png");
 }
 
@@ -96,12 +96,9 @@ void Coconut::Game::handleEvents() {
 
 void Coconut::Game::update() {
 	// call obj's update function from here
-	// 
-	//m_gameCounter++;
-	//CC_CORE_INFO("gameCounter is {}", m_gameCounter);
 
 	manager.refresh();
-	manager.update();
+	manager.update(); 
 
 	//CC_CORE_INFO("player position: ({}, {})", newPlayter.getComponent<Coconut::PositionComponent>().getXpos(),
 	//	newPlayter.getComponent<Coconut::PositionComponent>().getYpos());

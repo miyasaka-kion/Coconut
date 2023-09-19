@@ -6,17 +6,17 @@
 
 namespace Coconut {
 
-	class PositionComponent : public Coconut::Component {
+	class TransformComponent : public Coconut::Component {
 	private:
 		int xpos;
 		int ypos;
 
 
 	public:
-		PositionComponent() : xpos(0), ypos(0) {
+		TransformComponent() : xpos(0), ypos(0) {
 			
 		};
-		PositionComponent(int x, int y) : xpos(x), ypos(y) {};
+		TransformComponent(int x, int y) : xpos(x), ypos(y) {};
 		inline int getXpos() {
 			return xpos;
 		}

@@ -28,8 +28,9 @@
     <ClInclude Include="src\Coconut\GameMap\MapTweaker.h" />
     <ClInclude Include="src\Coconut\ECS\ECS.h" />
     <ClInclude Include="src\Coconut\ECS\Compoent.h" />
-    <ClInclude Include="src\Coconut\ECS\PositionComponent.h" />
+    <ClInclude Include="src\Coconut\ECS\TransformComponent.h" />
     <ClInclude Include="src\Coconut\ECS\SpriteComponent.h" />
+    <ClInclude Include="src\Coconut\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Coconut\Application.cpp">
@@ -45,5 +46,6 @@
     <ClCompile Include="src\Coconut\Object.cpp" />
     <ClCompile Include="src\Coconut\GameMap\Map.cpp" />
     <ClCompile Include="src\Coconut\GameMap\MapTweaker.cpp" />
+    <ClCompile Include="src\Coconut\Vector2D.cpp" />
   </ItemGroup>
 </Project>
