@@ -108,7 +108,7 @@ namespace Coconut {
 			for (auto& e : entities) e->draw();
 		}
 
-		void refersh() {
+		void refresh() {
 			entities.erase(
 				std::remove_if(
 					std::begin(entities),

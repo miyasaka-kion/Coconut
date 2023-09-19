@@ -100,7 +100,7 @@ void Coconut::Game::update() {
 	//m_gameCounter++;
 	//CC_CORE_INFO("gameCounter is {}", m_gameCounter);
 
-	manager.refersh();
+	manager.refresh();
 	manager.update();
 
 	//CC_CORE_INFO("player position: ({}, {})", newPlayter.getComponent<Coconut::PositionComponent>().getXpos(),
