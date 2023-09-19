@@ -19,7 +19,7 @@ namespace Coconut {
 	}
 	
 	// get component ID for a specific type
-	// each type has it's own, seperate type counter
+	// each type has it's own, separate type counter
 	template <typename T> 
 	inline ComponentID getComponentTypeID() noexcept {
 		static ComponentID typeID = getComponentTypeID();
