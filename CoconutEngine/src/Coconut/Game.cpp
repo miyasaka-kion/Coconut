@@ -2,21 +2,23 @@
 
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
 
-
 #include "Game.h"
+
 #include "Coconut/TextureManager.h"
 #include "Coconut/Log.h"
 #include "Coconut/GameMap/Map.h"
 
 
-#include "Coconut/ECS/ECS.h"
-#include "Coconut/ECS/SpriteComponent.h"
-#include "Coconut/ECS/TransformComponent.h"
+#include "Coconut/ECS/Compoent.h"
 #include "Coconut/Vector2D.h"
 
 std::unique_ptr<Coconut::Map> map;
-SDL_Renderer* Coconut::Game::renderer = nullptr;
 
+// static value initialize
+SDL_Renderer* Coconut::Game::renderer = nullptr;
+SDL_Event Coconut::Game::event;
+
+// global variables
 Coconut::Manager manager;
 Coconut::Entity& player(manager.addEntity());
 
@@ -76,10 +78,11 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 
 	player.addComponent<Coconut::TransformComponent>();
 	player.addComponent<Coconut::SpriteComponent>("bird.png");
+	player.addComponent<Coconut::KeyboardController>();
 }
 
 void Coconut::Game::handleEvents() {
-	SDL_Event event;
+	//SDL_Event event;
 	SDL_PollEvent(&event);
 
 	switch (event.type) {
@@ -97,8 +100,6 @@ void Coconut::Game::update() {
 
 	manager.refresh();
 	manager.update(); 
-
-	player.getComponent<TransformComponent>().position += Coconut::Vector2D(4, 0);
 
 	//CC_CORE_INFO("player position: ({}, {})", newPlayter.getComponent<Coconut::PositionComponent>().getXpos(),
 	//	newPlayter.getComponent<Coconut::PositionComponent>().getYpos());

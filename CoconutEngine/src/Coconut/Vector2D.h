@@ -17,7 +17,8 @@ namespace Coconut {
 		inline float getX() const { return x; };
 		inline float getY() const { return y; };
 		std::tuple<float, float> getCoordinate();
-
+		void setX(float x);
+		void setY(float y);
 
 	public:
 		bool operator==(const Vector2D& vec) const;

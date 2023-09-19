@@ -1,8 +1,10 @@
 #pragma once
 
-#include <Coconut/ECS/ECS.h>
-#include <Coconut/ECS/Compoent.h>
-#include <Coconut/Vector2D.h>
+#include <SDL.h>
+
+#include "Coconut/Log.h"
+#include "Coconut/ECS/ECS.h"
+#include "Coconut/Vector2D.h"
 
 
 namespace Coconut {
@@ -23,9 +25,11 @@ namespace Coconut {
 			return position.getCoordinate();
 		}
 
+		
 
 		void init() override {
 			velocity = Vector2D();
+			CC_CORE_INFO("TransformComponent initialized!");
 		}
 
 		void update() override {

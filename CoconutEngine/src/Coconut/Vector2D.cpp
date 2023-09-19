@@ -10,6 +10,14 @@ std::tuple<float, float> Coconut::Vector2D::getCoordinate()
 	return std::make_tuple(x, y);
 }
 
+void Coconut::Vector2D::setX(float x) {
+	this->x = x;
+}
+
+void Coconut::Vector2D::setY(float y) {
+	this->y = y;
+}
+
 bool Coconut::Vector2D::operator==(const Vector2D& vec) const
 {
 	return (this->x == vec.x && this->y == vec.y);
@@ -86,7 +94,7 @@ Coconut::Vector2D Coconut::Vector2D::operator/(const Vector2D& vec) const
 Coconut::Vector2D Coconut::Vector2D::operator*(const int& x) const
 {
 	float fl = static_cast<float>(x);
-	return *this * Vector2D(x, x);
+	return *this * Vector2D(fl, fl);
 }
 
 Coconut::Vector2D Coconut::Vector2D::operator*(const float& x) const

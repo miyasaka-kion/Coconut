@@ -35,6 +35,7 @@ namespace Coconut {
 	// Component
 	class Component {
 	public:
+		// points to the entity it belongs to
 		Entity* entity;
 		
 		virtual void init() {}
@@ -47,7 +48,7 @@ namespace Coconut {
 
 
 
-	// Entity
+	// Entity has many components
 	class Entity {
 	private:
 		bool active = true;
@@ -63,6 +64,7 @@ namespace Coconut {
 		void draw() {
 			for (auto& c : components) c->draw();
 		}
+
 		bool isActive() const { return active;  }
 		void destroy() { active = false;  }
 
@@ -80,7 +82,7 @@ namespace Coconut {
 			components.emplace_back(std::move(uPtr));
 
 			componentArray[getComponentTypeID<T>()] = c;
-			componentBitset[getComponentTypeID <T> ()] = true;
+			componentBitset[getComponentTypeID <T>()] = true;
 
 			c->init();
 			return *c;
@@ -94,7 +96,7 @@ namespace Coconut {
 	};
 
 	
-
+	// Manager manage all entities
 	class Manager {
 	private:
 		std::vector<std::unique_ptr<Entity> > entities;
@@ -109,6 +111,7 @@ namespace Coconut {
 		}
 
 		void refresh() {
+			// remove entity that is not active
 			entities.erase(
 				std::remove_if(
 					std::begin(entities),

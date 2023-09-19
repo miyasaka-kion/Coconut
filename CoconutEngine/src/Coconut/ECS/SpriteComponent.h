@@ -1,7 +1,12 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
+
 #pragma once
 
 #include <string>
 
+#include "Coconut/Log.h"
 #include "Coconut/ECS/ECS.h"
 #include "Coconut/TextureManager.h"
 #include "Coconut/ECS/TransformComponent.h"
@@ -35,7 +40,7 @@ namespace Coconut {
 			
 			destRect.w = destRect.h = 64;
 
-
+			CC_CORE_INFO("SpriteComponent initialized!");
 		}
 
 		void update() override {

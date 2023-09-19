@@ -1,3 +1,7 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
+
 #pragma once
 
 #include <string>
@@ -27,8 +31,8 @@ namespace Coconut {
 			return m_isRunning;
 		}
 		
-	static SDL_Renderer* renderer;
-	static SDL_Event event;
+		static SDL_Renderer* renderer;
+		static SDL_Event event;
 
 	private:
 		bool m_isRunning;
