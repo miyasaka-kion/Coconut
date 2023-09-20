@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		109263B4B27BFFA6A9A311F4 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C8D4823C96F7D5EE1E06287C /* Application.cpp */; };
+		4C163E0440158776C5009C44 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8779C8C1C8B6DBE105CF2CC /* TextureManager.cpp */; };
+		59E804554DE74DC7D2D26295 /* MapTweaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37793D3D7B8D0E6F6F5E937D /* MapTweaker.cpp */; };
+		8363943AC7B239AC09D9727A /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D222FE62F3EEAB9430A3D4A2 /* Object.cpp */; };
+		A2F368609CB524D2D6B426A0 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3C509280C35ED5A50D4BF68 /* Game.cpp */; };
+		E36627D0144A1FC227625610 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DF0C6984416F64AAB1DECD8 /* Log.cpp */; };
+		F704F4CF8992BEC1F26B630F /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F3390017B6A4C1C9F5486657 /* Map.cpp */; };
+		FFF67B1E6D1E89906EB1795E /* Vector2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC1B06ED2F1138634E1146 /* Vector2D.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		033C7576509F6BA8C6BE6BB6 /* EntryPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EntryPoint.h; path = src/Coconut/EntryPoint.h; sourceTree = "<group>"; };
+		06B2C316EAF9CB486EE6F956 /* TextureManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TextureManager.h; path = src/Coconut/TextureManager.h; sourceTree = "<group>"; };
+		1DF0C6984416F64AAB1DECD8 /* Log.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Log.cpp; path = src/Coconut/Log.cpp; sourceTree = "<group>"; };
+		28E773AC715857DEB5F729EC /* Object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Object.h; path = src/Coconut/Object.h; sourceTree = "<group>"; };
+		328351C2D571787464975802 /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Log.h; path = src/Coconut/Log.h; sourceTree = "<group>"; };
+		37793D3D7B8D0E6F6F5E937D /* MapTweaker.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MapTweaker.cpp; path = src/Coconut/GameMap/MapTweaker.cpp; sourceTree = "<group>"; };
+		47DC5C905EEEF7C24F0AF2D0 /* Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Core.h; path = src/Coconut/Core.h; sourceTree = "<group>"; };
+		538F511CEBDC36CE1A23375C /* SpriteComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SpriteComponent.h; path = src/Coconut/ECS/SpriteComponent.h; sourceTree = "<group>"; };
+		5FA04FB25F4332E49997E5F2 /* KeyBoardController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KeyBoardController.h; path = src/Coconut/ECS/KeyBoardController.h; sourceTree = "<group>"; };
+		6A1282F281251E2471411932 /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Game.h; path = src/Coconut/Game.h; sourceTree = "<group>"; };
+		6FFE90C7544598F9D832C707 /* MapTweaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MapTweaker.h; path = src/Coconut/GameMap/MapTweaker.h; sourceTree = "<group>"; };
+		79183020CFA59A92A81EAE60 /* libCoconutEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libCoconutEngine.a; path = libCoconutEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		82F948A6829C2BD8BCF0DEE6 /* TransformComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TransformComponent.h; path = src/Coconut/ECS/TransformComponent.h; sourceTree = "<group>"; };
+		95482810B713D542F3C8FE50 /* Vector2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Vector2D.h; path = src/Coconut/Vector2D.h; sourceTree = "<group>"; };
+		9FCC1B06ED2F1138634E1146 /* Vector2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Vector2D.cpp; path = src/Coconut/Vector2D.cpp; sourceTree = "<group>"; };
+		A5FA2CCA48E8537CD80E330A /* Coconut.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Coconut.h; path = src/Coconut.h; sourceTree = "<group>"; };
+		C3C509280C35ED5A50D4BF68 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = src/Coconut/Game.cpp; sourceTree = "<group>"; };
+		C8D4823C96F7D5EE1E06287C /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = src/Coconut/Application.cpp; sourceTree = "<group>"; };
+		CB5A2581F394DE33DB306BC1 /* Map.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Map.h; path = src/Coconut/GameMap/Map.h; sourceTree = "<group>"; };
+		D12F14E603285F987D079B26 /* Application.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Application.h; path = src/Coconut/Application.h; sourceTree = "<group>"; };
+		D222FE62F3EEAB9430A3D4A2 /* Object.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Object.cpp; path = src/Coconut/Object.cpp; sourceTree = "<group>"; };
+		D8779C8C1C8B6DBE105CF2CC /* TextureManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TextureManager.cpp; path = src/Coconut/TextureManager.cpp; sourceTree = "<group>"; };
+		D979989226DC8EC49CFB8ED2 /* Compoent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Compoent.h; path = src/Coconut/ECS/Compoent.h; sourceTree = "<group>"; };
+		D9F7F01E001E1FD06725165E /* ECS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ECS.h; path = src/Coconut/ECS/ECS.h; sourceTree = "<group>"; };
+		F3390017B6A4C1C9F5486657 /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Map.cpp; path = src/Coconut/GameMap/Map.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		257715901EDD1702127873D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		355E09FC204A2FEE682FF83C /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXGroup section */
+		6DDC2302940252B4FB094942 /* GameMap */ = {
+			isa = PBXGroup;
+			children = (
+				F3390017B6A4C1C9F5486657 /* Map.cpp */,
+				CB5A2581F394DE33DB306BC1 /* Map.h */,
+				37793D3D7B8D0E6F6F5E937D /* MapTweaker.cpp */,
+				6FFE90C7544598F9D832C707 /* MapTweaker.h */,
+			);
+			name = GameMap;
+			sourceTree = "<group>";
+		};
+		915F11F1CA19D86359B11031 /* CoconutEngine */ = {
+			isa = PBXGroup;
+			children = (
+				BC7C781E60CF15D073075E5E /* Coconut */,
+				A5FA2CCA48E8537CD80E330A /* Coconut.h */,
+				A6C936B49B3FADE6EA134CF4 /* Products */,
+			);
+			name = CoconutEngine;
+			sourceTree = "<group>";
+		};
+		A2D627284728C4DA59610D68 /* ECS */ = {
+			isa = PBXGroup;
+			children = (
+				D979989226DC8EC49CFB8ED2 /* Compoent.h */,
+				D9F7F01E001E1FD06725165E /* ECS.h */,
+				5FA04FB25F4332E49997E5F2 /* KeyBoardController.h */,
+				538F511CEBDC36CE1A23375C /* SpriteComponent.h */,
+				82F948A6829C2BD8BCF0DEE6 /* TransformComponent.h */,
+			);
+			name = ECS;
+			sourceTree = "<group>";
+		};
+		A6C936B49B3FADE6EA134CF4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				79183020CFA59A92A81EAE60 /* libCoconutEngine.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC7C781E60CF15D073075E5E /* Coconut */ = {
+			isa = PBXGroup;
+			children = (
+				C8D4823C96F7D5EE1E06287C /* Application.cpp */,
+				D12F14E603285F987D079B26 /* Application.h */,
+				47DC5C905EEEF7C24F0AF2D0 /* Core.h */,
+				A2D627284728C4DA59610D68 /* ECS */,
+				033C7576509F6BA8C6BE6BB6 /* EntryPoint.h */,
+				C3C509280C35ED5A50D4BF68 /* Game.cpp */,
+				6A1282F281251E2471411932 /* Game.h */,
+				6DDC2302940252B4FB094942 /* GameMap */,
+				1DF0C6984416F64AAB1DECD8 /* Log.cpp */,
+				328351C2D571787464975802 /* Log.h */,
+				D222FE62F3EEAB9430A3D4A2 /* Object.cpp */,
+				28E773AC715857DEB5F729EC /* Object.h */,
+				D8779C8C1C8B6DBE105CF2CC /* TextureManager.cpp */,
+				06B2C316EAF9CB486EE6F956 /* TextureManager.h */,
+				9FCC1B06ED2F1138634E1146 /* Vector2D.cpp */,
+				95482810B713D542F3C8FE50 /* Vector2D.h */,
+			);
+			name = Coconut;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0D8A840655FB68389A9A3A46 /* CoconutEngine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13B25DEF0D185F6100B3BC2F /* Build configuration list for PBXNativeTarget "CoconutEngine" */;
+			buildPhases = (
+				955E96308EC497A2825FF470 /* Resources */,
+				FF0BAF87F871B0F9EC0D0DC7 /* Sources */,
+				257715901EDD1702127873D0 /* Frameworks */,
+				355E09FC204A2FEE682FF83C /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoconutEngine;
+			productName = CoconutEngine;
+			productReference = 79183020CFA59A92A81EAE60 /* libCoconutEngine.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "CoconutEngine" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 1;
+			mainGroup = 915F11F1CA19D86359B11031 /* CoconutEngine */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0D8A840655FB68389A9A3A46 /* libCoconutEngine.a */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		955E96308EC497A2825FF470 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF0BAF87F871B0F9EC0D0DC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				109263B4B27BFFA6A9A311F4 /* Application.cpp in Sources */,
+				A2F368609CB524D2D6B426A0 /* Game.cpp in Sources */,
+				F704F4CF8992BEC1F26B630F /* Map.cpp in Sources */,
+				59E804554DE74DC7D2D26295 /* MapTweaker.cpp in Sources */,
+				E36627D0144A1FC227625610 /* Log.cpp in Sources */,
+				8363943AC7B239AC09D9727A /* Object.cpp in Sources */,
+				4C163E0440158776C5009C44 /* TextureManager.cpp in Sources */,
+				FFF67B1E6D1E89906EB1795E /* Vector2D.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		16A3D13510658DA74A648F75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../bin/Debug-macosx-x86_64/CoconutEngine";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = CoconutEngine;
+			};
+			name = Debug;
+		};
+		95A00D6F06C2AE61BC895BAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../bin/Release-macosx-x86_64/CoconutEngine";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = CoconutEngine;
+			};
+			name = Release;
+		};
+		BEF103DAD6039F0CC61F9A1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SDL_RELEASE,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					vendor/SDL2/lib/x64,
+					vendor/SDL2_image/lib/x64,
+					vendor/SDL2_image/lib/x64/optional,
+				);
+				OBJROOT = "../bin-int/Release-macosx-x86_64/CoconutEngine";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lSDL2",
+					"-lSDL2main",
+					"-lSDL2_image",
+				);
+				SYMROOT = "../bin/Release-macosx-x86_64/CoconutEngine";
+				USER_HEADER_SEARCH_PATHS = (
+					vendor/SDL2/include,
+					vendor/SDL2_image/include,
+					vendor/spdlog/include,
+					src,
+				);
+			};
+			name = Release;
+		};
+		C4F241A067E06852F70647E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SDL_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					vendor/SDL2/lib/x64,
+					vendor/SDL2_image/lib/x64,
+					vendor/SDL2_image/lib/x64/optional,
+				);
+				OBJROOT = "../bin-int/Debug-macosx-x86_64/CoconutEngine";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lSDL2",
+					"-lSDL2main",
+					"-lSDL2_image",
+				);
+				SYMROOT = "../bin/Debug-macosx-x86_64/CoconutEngine";
+				USER_HEADER_SEARCH_PATHS = (
+					vendor/SDL2/include,
+					vendor/SDL2_image/include,
+					vendor/spdlog/include,
+					src,
+				);
+			};
+			name = Debug;
+		};
+		D5B204CD473D1D3FF63E430D /* Dist */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SDL_DIST,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					vendor/SDL2/lib/x64,
+					vendor/SDL2_image/lib/x64,
+					vendor/SDL2_image/lib/x64/optional,
+				);
+				OBJROOT = "../bin-int/Dist-macosx-x86_64/CoconutEngine";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lSDL2",
+					"-lSDL2main",
+					"-lSDL2_image",
+				);
+				SYMROOT = "../bin/Dist-macosx-x86_64/CoconutEngine";
+				USER_HEADER_SEARCH_PATHS = (
+					vendor/SDL2/include,
+					vendor/SDL2_image/include,
+					vendor/spdlog/include,
+					src,
+				);
+			};
+			name = Dist;
+		};
+		E09EDFE22E01D614A420D622 /* Dist */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../bin/Dist-macosx-x86_64/CoconutEngine";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = CoconutEngine;
+			};
+			name = Dist;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		13B25DEF0D185F6100B3BC2F /* Build configuration list for PBXNativeTarget "libCoconutEngine.a" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16A3D13510658DA74A648F75 /* Debug */,
+				95A00D6F06C2AE61BC895BAF /* Release */,
+				E09EDFE22E01D614A420D622 /* Dist */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "CoconutEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4F241A067E06852F70647E0 /* Debug */,
+				BEF103DAD6039F0CC61F9A1A /* Release */,
+				D5B204CD473D1D3FF63E430D /* Dist */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+};
+rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
