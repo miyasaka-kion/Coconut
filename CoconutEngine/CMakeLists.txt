@@ -1,8 +1,11 @@
-project(Coconut_Engine)
+project(CoconutEngine)
 
 option(MYGAME_VENDORED "Use vendored libraries" OFF)
 
-
+aux_source_directory(src/Coconut SRC_LIST)
+aux_source_directory(src/Coconut/ECS SRC_LIST)
+aux_source_directory(src/Coconut/GameMap SRC_LIST)
+message("${PROJECT_NAME}: Source List: ${SRC_LIST}")
 
 if(MYGAME_VENDORED)
     add_subdirectory(vendor/sdl EXCLUDE_FROM_ALL)
@@ -18,7 +21,14 @@ endif()
 add_library(
     ${PROJECT_NAME}
     STATIC
-    # ...
+    ${SRC_LIST}
+)
+
+# no need for this maybe?
+target_include_directories(
+    ${PROJECT_NAME} 
+    PRIVATE 
+    src
 )
 
 find_package(spdlog REQUIRED)
