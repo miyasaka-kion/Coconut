@@ -1,5 +1,5 @@
 # CMake build file
-build
+build/
 ## MacOS ignore file
 .DS_Store
 ## Ignore Visual Studio temporary files, build results, and
