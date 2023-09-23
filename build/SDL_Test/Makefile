@@ -48,19 +48,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/homebrew/Cellar/cmake/3.27.4/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.27.5/bin/cmake
 
 # The command to remove a file.
-RM = /opt/homebrew/Cellar/cmake/3.27.4/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.27.5/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/kionmiyasaka/Documents/projects/SDL_Test
+CMAKE_SOURCE_DIR = /Users/kion/projects/SDL_Test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/kionmiyasaka/Documents/projects/SDL_Test/build
+CMAKE_BINARY_DIR = /Users/kion/projects/SDL_Test/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /Users/kionmiyasaka/Documents/projects/SDL_Test/build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
-	/opt/homebrew/Cellar/cmake/3.27.4/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.27.5/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/opt/homebrew/Cellar/cmake/3.27.4/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.27.5/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles /Users/kionmiyasaka/Documents/projects/SDL_Test/build/SDL_Test//CMakeFiles/progress.marks
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_Test/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles 0
+	cd /Users/kion/projects/SDL_Test/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/kion/projects/SDL_Test/build/CMakeFiles /Users/kion/projects/SDL_Test/build/SDL_Test//CMakeFiles/progress.marks
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_Test/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/kion/projects/SDL_Test/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_Test/clean
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_Test/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_Test/preinstall
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_Test/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_Test/preinstall
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_Test/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/kion/projects/SDL_Test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 SDL_Test/CMakeFiles/SDL_test.dir/rule:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_Test/CMakeFiles/SDL_test.dir/rule
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL_Test/CMakeFiles/SDL_test.dir/rule
 .PHONY : SDL_Test/CMakeFiles/SDL_test.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ SDL_test: SDL_Test/CMakeFiles/SDL_test.dir/rule
 
 # fast build rule for target.
 SDL_test/fast:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f SDL_Test/CMakeFiles/SDL_test.dir/build.make SDL_Test/CMakeFiles/SDL_test.dir/build
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f SDL_Test/CMakeFiles/SDL_test.dir/build.make SDL_Test/CMakeFiles/SDL_test.dir/build
 .PHONY : SDL_test/fast
 
 src/main.o: src/main.cpp.o
@@ -135,7 +135,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f SDL_Test/CMakeFiles/SDL_test.dir/build.make SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f SDL_Test/CMakeFiles/SDL_test.dir/build.make SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -143,7 +143,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f SDL_Test/CMakeFiles/SDL_test.dir/build.make SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.i
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f SDL_Test/CMakeFiles/SDL_test.dir/build.make SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -151,7 +151,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f SDL_Test/CMakeFiles/SDL_test.dir/build.make SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.s
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f SDL_Test/CMakeFiles/SDL_test.dir/build.make SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -177,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/kion/projects/SDL_Test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

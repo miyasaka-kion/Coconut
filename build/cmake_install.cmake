@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kionmiyasaka/Documents/projects/SDL_Test
+# Install script for directory: /Users/kion/projects/SDL_Test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,12 +39,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine/cmake_install.cmake")
+  include("/Users/kion/projects/SDL_Test/build/CoconutEngine/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/kionmiyasaka/Documents/projects/SDL_Test/build/SDL_Test/cmake_install.cmake")
+  include("/Users/kion/projects/SDL_Test/build/SDL_Test/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -55,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/kionmiyasaka/Documents/projects/SDL_Test/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/kion/projects/SDL_Test/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

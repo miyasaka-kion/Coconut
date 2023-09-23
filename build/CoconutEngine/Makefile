@@ -48,19 +48,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/homebrew/Cellar/cmake/3.27.4/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.27.5/bin/cmake
 
 # The command to remove a file.
-RM = /opt/homebrew/Cellar/cmake/3.27.4/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.27.5/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/kionmiyasaka/Documents/projects/SDL_Test
+CMAKE_SOURCE_DIR = /Users/kion/projects/SDL_Test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/kionmiyasaka/Documents/projects/SDL_Test/build
+CMAKE_BINARY_DIR = /Users/kion/projects/SDL_Test/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /Users/kionmiyasaka/Documents/projects/SDL_Test/build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
-	/opt/homebrew/Cellar/cmake/3.27.4/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.27.5/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/opt/homebrew/Cellar/cmake/3.27.4/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.27.5/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine//CMakeFiles/progress.marks
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CoconutEngine/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles 0
+	cd /Users/kion/projects/SDL_Test/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/kion/projects/SDL_Test/build/CMakeFiles /Users/kion/projects/SDL_Test/build/CoconutEngine//CMakeFiles/progress.marks
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CoconutEngine/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/kion/projects/SDL_Test/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CoconutEngine/clean
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CoconutEngine/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CoconutEngine/preinstall
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CoconutEngine/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CoconutEngine/preinstall
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CoconutEngine/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/kion/projects/SDL_Test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 CoconutEngine/CMakeFiles/CoconutEngine.dir/rule:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CoconutEngine/CMakeFiles/CoconutEngine.dir/rule
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CoconutEngine/CMakeFiles/CoconutEngine.dir/rule
 .PHONY : CoconutEngine/CMakeFiles/CoconutEngine.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ CoconutEngine: CoconutEngine/CMakeFiles/CoconutEngine.dir/rule
 
 # fast build rule for target.
 CoconutEngine/fast:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/build
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/build
 .PHONY : CoconutEngine/fast
 
 src/Coconut/Application.o: src/Coconut/Application.cpp.o
@@ -135,7 +135,7 @@ src/Coconut/Application.o: src/Coconut/Application.cpp.o
 
 # target to build an object file
 src/Coconut/Application.cpp.o:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o
 .PHONY : src/Coconut/Application.cpp.o
 
 src/Coconut/Application.i: src/Coconut/Application.cpp.i
@@ -143,7 +143,7 @@ src/Coconut/Application.i: src/Coconut/Application.cpp.i
 
 # target to preprocess a source file
 src/Coconut/Application.cpp.i:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.i
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.i
 .PHONY : src/Coconut/Application.cpp.i
 
 src/Coconut/Application.s: src/Coconut/Application.cpp.s
@@ -151,7 +151,7 @@ src/Coconut/Application.s: src/Coconut/Application.cpp.s
 
 # target to generate assembly for a file
 src/Coconut/Application.cpp.s:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.s
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.s
 .PHONY : src/Coconut/Application.cpp.s
 
 src/Coconut/Game.o: src/Coconut/Game.cpp.o
@@ -159,7 +159,7 @@ src/Coconut/Game.o: src/Coconut/Game.cpp.o
 
 # target to build an object file
 src/Coconut/Game.cpp.o:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o
 .PHONY : src/Coconut/Game.cpp.o
 
 src/Coconut/Game.i: src/Coconut/Game.cpp.i
@@ -167,7 +167,7 @@ src/Coconut/Game.i: src/Coconut/Game.cpp.i
 
 # target to preprocess a source file
 src/Coconut/Game.cpp.i:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.i
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.i
 .PHONY : src/Coconut/Game.cpp.i
 
 src/Coconut/Game.s: src/Coconut/Game.cpp.s
@@ -175,7 +175,7 @@ src/Coconut/Game.s: src/Coconut/Game.cpp.s
 
 # target to generate assembly for a file
 src/Coconut/Game.cpp.s:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.s
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.s
 .PHONY : src/Coconut/Game.cpp.s
 
 src/Coconut/GameMap/Map.o: src/Coconut/GameMap/Map.cpp.o
@@ -183,7 +183,7 @@ src/Coconut/GameMap/Map.o: src/Coconut/GameMap/Map.cpp.o
 
 # target to build an object file
 src/Coconut/GameMap/Map.cpp.o:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o
 .PHONY : src/Coconut/GameMap/Map.cpp.o
 
 src/Coconut/GameMap/Map.i: src/Coconut/GameMap/Map.cpp.i
@@ -191,7 +191,7 @@ src/Coconut/GameMap/Map.i: src/Coconut/GameMap/Map.cpp.i
 
 # target to preprocess a source file
 src/Coconut/GameMap/Map.cpp.i:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.i
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.i
 .PHONY : src/Coconut/GameMap/Map.cpp.i
 
 src/Coconut/GameMap/Map.s: src/Coconut/GameMap/Map.cpp.s
@@ -199,7 +199,7 @@ src/Coconut/GameMap/Map.s: src/Coconut/GameMap/Map.cpp.s
 
 # target to generate assembly for a file
 src/Coconut/GameMap/Map.cpp.s:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.s
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.s
 .PHONY : src/Coconut/GameMap/Map.cpp.s
 
 src/Coconut/GameMap/MapTweaker.o: src/Coconut/GameMap/MapTweaker.cpp.o
@@ -207,7 +207,7 @@ src/Coconut/GameMap/MapTweaker.o: src/Coconut/GameMap/MapTweaker.cpp.o
 
 # target to build an object file
 src/Coconut/GameMap/MapTweaker.cpp.o:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o
 .PHONY : src/Coconut/GameMap/MapTweaker.cpp.o
 
 src/Coconut/GameMap/MapTweaker.i: src/Coconut/GameMap/MapTweaker.cpp.i
@@ -215,7 +215,7 @@ src/Coconut/GameMap/MapTweaker.i: src/Coconut/GameMap/MapTweaker.cpp.i
 
 # target to preprocess a source file
 src/Coconut/GameMap/MapTweaker.cpp.i:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.i
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.i
 .PHONY : src/Coconut/GameMap/MapTweaker.cpp.i
 
 src/Coconut/GameMap/MapTweaker.s: src/Coconut/GameMap/MapTweaker.cpp.s
@@ -223,7 +223,7 @@ src/Coconut/GameMap/MapTweaker.s: src/Coconut/GameMap/MapTweaker.cpp.s
 
 # target to generate assembly for a file
 src/Coconut/GameMap/MapTweaker.cpp.s:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.s
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.s
 .PHONY : src/Coconut/GameMap/MapTweaker.cpp.s
 
 src/Coconut/Log.o: src/Coconut/Log.cpp.o
@@ -231,7 +231,7 @@ src/Coconut/Log.o: src/Coconut/Log.cpp.o
 
 # target to build an object file
 src/Coconut/Log.cpp.o:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o
 .PHONY : src/Coconut/Log.cpp.o
 
 src/Coconut/Log.i: src/Coconut/Log.cpp.i
@@ -239,7 +239,7 @@ src/Coconut/Log.i: src/Coconut/Log.cpp.i
 
 # target to preprocess a source file
 src/Coconut/Log.cpp.i:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.i
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.i
 .PHONY : src/Coconut/Log.cpp.i
 
 src/Coconut/Log.s: src/Coconut/Log.cpp.s
@@ -247,7 +247,7 @@ src/Coconut/Log.s: src/Coconut/Log.cpp.s
 
 # target to generate assembly for a file
 src/Coconut/Log.cpp.s:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.s
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.s
 .PHONY : src/Coconut/Log.cpp.s
 
 src/Coconut/Object.o: src/Coconut/Object.cpp.o
@@ -255,7 +255,7 @@ src/Coconut/Object.o: src/Coconut/Object.cpp.o
 
 # target to build an object file
 src/Coconut/Object.cpp.o:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o
 .PHONY : src/Coconut/Object.cpp.o
 
 src/Coconut/Object.i: src/Coconut/Object.cpp.i
@@ -263,7 +263,7 @@ src/Coconut/Object.i: src/Coconut/Object.cpp.i
 
 # target to preprocess a source file
 src/Coconut/Object.cpp.i:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.i
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.i
 .PHONY : src/Coconut/Object.cpp.i
 
 src/Coconut/Object.s: src/Coconut/Object.cpp.s
@@ -271,7 +271,7 @@ src/Coconut/Object.s: src/Coconut/Object.cpp.s
 
 # target to generate assembly for a file
 src/Coconut/Object.cpp.s:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.s
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.s
 .PHONY : src/Coconut/Object.cpp.s
 
 src/Coconut/TextureManager.o: src/Coconut/TextureManager.cpp.o
@@ -279,7 +279,7 @@ src/Coconut/TextureManager.o: src/Coconut/TextureManager.cpp.o
 
 # target to build an object file
 src/Coconut/TextureManager.cpp.o:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o
 .PHONY : src/Coconut/TextureManager.cpp.o
 
 src/Coconut/TextureManager.i: src/Coconut/TextureManager.cpp.i
@@ -287,7 +287,7 @@ src/Coconut/TextureManager.i: src/Coconut/TextureManager.cpp.i
 
 # target to preprocess a source file
 src/Coconut/TextureManager.cpp.i:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.i
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.i
 .PHONY : src/Coconut/TextureManager.cpp.i
 
 src/Coconut/TextureManager.s: src/Coconut/TextureManager.cpp.s
@@ -295,7 +295,7 @@ src/Coconut/TextureManager.s: src/Coconut/TextureManager.cpp.s
 
 # target to generate assembly for a file
 src/Coconut/TextureManager.cpp.s:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.s
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.s
 .PHONY : src/Coconut/TextureManager.cpp.s
 
 src/Coconut/Vector2D.o: src/Coconut/Vector2D.cpp.o
@@ -303,7 +303,7 @@ src/Coconut/Vector2D.o: src/Coconut/Vector2D.cpp.o
 
 # target to build an object file
 src/Coconut/Vector2D.cpp.o:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o
 .PHONY : src/Coconut/Vector2D.cpp.o
 
 src/Coconut/Vector2D.i: src/Coconut/Vector2D.cpp.i
@@ -311,7 +311,7 @@ src/Coconut/Vector2D.i: src/Coconut/Vector2D.cpp.i
 
 # target to preprocess a source file
 src/Coconut/Vector2D.cpp.i:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.i
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.i
 .PHONY : src/Coconut/Vector2D.cpp.i
 
 src/Coconut/Vector2D.s: src/Coconut/Vector2D.cpp.s
@@ -319,7 +319,7 @@ src/Coconut/Vector2D.s: src/Coconut/Vector2D.cpp.s
 
 # target to generate assembly for a file
 src/Coconut/Vector2D.cpp.s:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.s
+	cd /Users/kion/projects/SDL_Test/build && $(MAKE) $(MAKESILENT) -f CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.s
 .PHONY : src/Coconut/Vector2D.cpp.s
 
 # Help Target
@@ -366,6 +366,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/kion/projects/SDL_Test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

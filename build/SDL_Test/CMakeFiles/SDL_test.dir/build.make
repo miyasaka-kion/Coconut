@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/homebrew/Cellar/cmake/3.27.4/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.27.5/bin/cmake
 
 # The command to remove a file.
-RM = /opt/homebrew/Cellar/cmake/3.27.4/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.27.5/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/kionmiyasaka/Documents/projects/SDL_Test
+CMAKE_SOURCE_DIR = /Users/kion/projects/SDL_Test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/kionmiyasaka/Documents/projects/SDL_Test/build
+CMAKE_BINARY_DIR = /Users/kion/projects/SDL_Test/build
 
 # Include any dependencies generated for this target.
 include SDL_Test/CMakeFiles/SDL_test.dir/depend.make
@@ -70,18 +70,18 @@ include SDL_Test/CMakeFiles/SDL_test.dir/progress.make
 include SDL_Test/CMakeFiles/SDL_test.dir/flags.make
 
 SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o: SDL_Test/CMakeFiles/SDL_test.dir/flags.make
-SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o: /Users/kionmiyasaka/Documents/projects/SDL_Test/SDL_Test/src/main.cpp
+SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o: /Users/kion/projects/SDL_Test/SDL_Test/src/main.cpp
 SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o: SDL_Test/CMakeFiles/SDL_test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/SDL_Test && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o -MF CMakeFiles/SDL_test.dir/src/main.cpp.o.d -o CMakeFiles/SDL_test.dir/src/main.cpp.o -c /Users/kionmiyasaka/Documents/projects/SDL_Test/SDL_Test/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o"
+	cd /Users/kion/projects/SDL_Test/build/SDL_Test && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o -MF CMakeFiles/SDL_test.dir/src/main.cpp.o.d -o CMakeFiles/SDL_test.dir/src/main.cpp.o -c /Users/kion/projects/SDL_Test/SDL_Test/src/main.cpp
 
 SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SDL_test.dir/src/main.cpp.i"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/SDL_Test && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kionmiyasaka/Documents/projects/SDL_Test/SDL_Test/src/main.cpp > CMakeFiles/SDL_test.dir/src/main.cpp.i
+	cd /Users/kion/projects/SDL_Test/build/SDL_Test && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kion/projects/SDL_Test/SDL_Test/src/main.cpp > CMakeFiles/SDL_test.dir/src/main.cpp.i
 
 SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SDL_test.dir/src/main.cpp.s"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/SDL_Test && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kionmiyasaka/Documents/projects/SDL_Test/SDL_Test/src/main.cpp -o CMakeFiles/SDL_test.dir/src/main.cpp.s
+	cd /Users/kion/projects/SDL_Test/build/SDL_Test && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kion/projects/SDL_Test/SDL_Test/src/main.cpp -o CMakeFiles/SDL_test.dir/src/main.cpp.s
 
 # Object files for target SDL_test
 SDL_test_OBJECTS = \
@@ -92,19 +92,24 @@ SDL_test_EXTERNAL_OBJECTS =
 
 SDL_Test/SDL_test: SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o
 SDL_Test/SDL_test: SDL_Test/CMakeFiles/SDL_test.dir/build.make
+SDL_Test/SDL_test: CoconutEngine/libCoconutEngine.a
+SDL_Test/SDL_test: /usr/local/Cellar/sdl2/2.28.3/lib/libSDL2main.a
+SDL_Test/SDL_test: /usr/local/Cellar/sdl2/2.28.3/lib/libSDL2.dylib
+SDL_Test/SDL_test: /usr/local/lib/libfmt.10.1.0.dylib
+SDL_Test/SDL_test: /usr/local/Cellar/sdl2_image/2.6.3_2/lib/libSDL2_image.dylib
 SDL_Test/SDL_test: SDL_Test/CMakeFiles/SDL_test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable SDL_test"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/SDL_Test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SDL_test.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable SDL_test"
+	cd /Users/kion/projects/SDL_Test/build/SDL_Test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SDL_test.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 SDL_Test/CMakeFiles/SDL_test.dir/build: SDL_Test/SDL_test
 .PHONY : SDL_Test/CMakeFiles/SDL_test.dir/build
 
 SDL_Test/CMakeFiles/SDL_test.dir/clean:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/SDL_Test && $(CMAKE_COMMAND) -P CMakeFiles/SDL_test.dir/cmake_clean.cmake
+	cd /Users/kion/projects/SDL_Test/build/SDL_Test && $(CMAKE_COMMAND) -P CMakeFiles/SDL_test.dir/cmake_clean.cmake
 .PHONY : SDL_Test/CMakeFiles/SDL_test.dir/clean
 
 SDL_Test/CMakeFiles/SDL_test.dir/depend:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/kionmiyasaka/Documents/projects/SDL_Test /Users/kionmiyasaka/Documents/projects/SDL_Test/SDL_Test /Users/kionmiyasaka/Documents/projects/SDL_Test/build /Users/kionmiyasaka/Documents/projects/SDL_Test/build/SDL_Test /Users/kionmiyasaka/Documents/projects/SDL_Test/build/SDL_Test/CMakeFiles/SDL_test.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/kion/projects/SDL_Test/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/kion/projects/SDL_Test /Users/kion/projects/SDL_Test/SDL_Test /Users/kion/projects/SDL_Test/build /Users/kion/projects/SDL_Test/build/SDL_Test /Users/kion/projects/SDL_Test/build/SDL_Test/CMakeFiles/SDL_test.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : SDL_Test/CMakeFiles/SDL_test.dir/depend
 

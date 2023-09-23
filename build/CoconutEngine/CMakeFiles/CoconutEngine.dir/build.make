@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/homebrew/Cellar/cmake/3.27.4/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.27.5/bin/cmake
 
 # The command to remove a file.
-RM = /opt/homebrew/Cellar/cmake/3.27.4/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.27.5/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/kionmiyasaka/Documents/projects/SDL_Test
+CMAKE_SOURCE_DIR = /Users/kion/projects/SDL_Test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/kionmiyasaka/Documents/projects/SDL_Test/build
+CMAKE_BINARY_DIR = /Users/kion/projects/SDL_Test/build
 
 # Include any dependencies generated for this target.
 include CoconutEngine/CMakeFiles/CoconutEngine.dir/depend.make
@@ -70,116 +70,116 @@ include CoconutEngine/CMakeFiles/CoconutEngine.dir/progress.make
 include CoconutEngine/CMakeFiles/CoconutEngine.dir/flags.make
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/flags.make
-CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o: /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Application.cpp
+CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o: /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Application.cpp
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o -c /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Application.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o"
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o -c /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Application.cpp
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.i"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Application.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.i
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Application.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.i
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.s"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Application.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.s
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Application.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.s
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/flags.make
-CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o: /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Game.cpp
+CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o: /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Game.cpp
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o -c /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o"
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o -c /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Game.cpp
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.i"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Game.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.i
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Game.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.i
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.s"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Game.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.s
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Game.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.s
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/flags.make
-CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o: /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Log.cpp
+CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o: /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Log.cpp
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o -c /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Log.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o"
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.o -c /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Log.cpp
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.i"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Log.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.i
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Log.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.i
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.s"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Log.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.s
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Log.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/Log.cpp.s
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/flags.make
-CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o: /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Object.cpp
+CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o: /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Object.cpp
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o -c /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Object.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o"
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o -c /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Object.cpp
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.i"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Object.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.i
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Object.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.i
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.s"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Object.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.s
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Object.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.s
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/flags.make
-CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o: /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.cpp
+CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o: /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.cpp
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o -c /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o"
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o -c /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.cpp
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.i"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.i
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.i
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.s"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.s
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.s
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/flags.make
-CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.cpp
+CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.cpp
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o -c /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o"
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o -c /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.cpp
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.i"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.i
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.i
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.s"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.s
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.s
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/flags.make
-CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o: /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/Map.cpp
+CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o: /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/Map.cpp
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o -c /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/Map.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o"
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.o -c /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/Map.cpp
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.i"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/Map.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.i
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/Map.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.i
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.s"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/Map.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.s
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/Map.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/Map.cpp.s
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/flags.make
-CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o: /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/MapTweaker.cpp
+CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o: /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/MapTweaker.cpp
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o: CoconutEngine/CMakeFiles/CoconutEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o -c /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/MapTweaker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o"
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o -MF CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o.d -o CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o -c /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/MapTweaker.cpp
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.i"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/MapTweaker.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.i
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/MapTweaker.cpp > CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.i
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.s"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/MapTweaker.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.s
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/MapTweaker.cpp -o CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.s
 
 # Object files for target CoconutEngine
 CoconutEngine_OBJECTS = \
@@ -205,19 +205,19 @@ CoconutEngine/libCoconutEngine.a: CoconutEngine/CMakeFiles/CoconutEngine.dir/src
 CoconutEngine/libCoconutEngine.a: CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/GameMap/MapTweaker.cpp.o
 CoconutEngine/libCoconutEngine.a: CoconutEngine/CMakeFiles/CoconutEngine.dir/build.make
 CoconutEngine/libCoconutEngine.a: CoconutEngine/CMakeFiles/CoconutEngine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/kionmiyasaka/Documents/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX static library libCoconutEngine.a"
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && $(CMAKE_COMMAND) -P CMakeFiles/CoconutEngine.dir/cmake_clean_target.cmake
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CoconutEngine.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/kion/projects/SDL_Test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX static library libCoconutEngine.a"
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && $(CMAKE_COMMAND) -P CMakeFiles/CoconutEngine.dir/cmake_clean_target.cmake
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CoconutEngine.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 CoconutEngine/CMakeFiles/CoconutEngine.dir/build: CoconutEngine/libCoconutEngine.a
 .PHONY : CoconutEngine/CMakeFiles/CoconutEngine.dir/build
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/clean:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine && $(CMAKE_COMMAND) -P CMakeFiles/CoconutEngine.dir/cmake_clean.cmake
+	cd /Users/kion/projects/SDL_Test/build/CoconutEngine && $(CMAKE_COMMAND) -P CMakeFiles/CoconutEngine.dir/cmake_clean.cmake
 .PHONY : CoconutEngine/CMakeFiles/CoconutEngine.dir/clean
 
 CoconutEngine/CMakeFiles/CoconutEngine.dir/depend:
-	cd /Users/kionmiyasaka/Documents/projects/SDL_Test/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/kionmiyasaka/Documents/projects/SDL_Test /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine /Users/kionmiyasaka/Documents/projects/SDL_Test/build /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine /Users/kionmiyasaka/Documents/projects/SDL_Test/build/CoconutEngine/CMakeFiles/CoconutEngine.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/kion/projects/SDL_Test/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/kion/projects/SDL_Test /Users/kion/projects/SDL_Test/CoconutEngine /Users/kion/projects/SDL_Test/build /Users/kion/projects/SDL_Test/build/CoconutEngine /Users/kion/projects/SDL_Test/build/CoconutEngine/CMakeFiles/CoconutEngine.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CoconutEngine/CMakeFiles/CoconutEngine.dir/depend
 

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/kionmiyasaka/Documents/projects/SDL_Test/SDL_Test/src/main.cpp" "SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o" "gcc" "SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o.d"
+  "/Users/kion/projects/SDL_Test/SDL_Test/src/main.cpp" "SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o" "gcc" "SDL_Test/CMakeFiles/SDL_test.dir/src/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

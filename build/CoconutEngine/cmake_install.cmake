@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine
+# Install script for directory: /Users/kion/projects/SDL_Test/CoconutEngine
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

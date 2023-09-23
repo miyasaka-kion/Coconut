@@ -4,9 +4,7 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 CXX_DEFINES = -DFMT_SHARED -DSPDLOG_FMT_EXTERNAL
 
-CXX_INCLUDES = -I/Users/kionmiyasaka/Documents/projects/SDL_Test/CoconutEngine/src -isystem /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2 -isystem /opt/homebrew/include -isystem /opt/homebrew/include/SDL2
+CXX_INCLUDES = -I/Users/kion/projects/SDL_Test/CoconutEngine/src -isystem /usr/local/Cellar/sdl2/2.28.3/include/SDL2 -isystem /usr/local/include -isystem /usr/local/include/SDL2
 
-CXX_FLAGSarm64 = -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -mmacosx-version-min=13.5
-
-CXX_FLAGS = -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -mmacosx-version-min=13.5
+CXX_FLAGS = -std=gnu++2a -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
 
