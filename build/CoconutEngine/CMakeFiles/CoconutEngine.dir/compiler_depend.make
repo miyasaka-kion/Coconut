@@ -311,59 +311,55 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Application.cpp.o: /Users
   /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Core.h \
   /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Game.h \
   /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Log.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_audio.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_blendmode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_clipboard.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_config.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_cpuinfo.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_endian.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_error.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_events.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_filesystem.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gamecontroller.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gesture.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_guid.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_haptic.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hidapi.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hints.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_joystick.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_keyboard.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_keycode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_loadso.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_locale.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_log.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_main.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_messagebox.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_metal.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_misc.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_mouse.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_mutex.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_pixels.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_platform.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_power.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_quit.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rect.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_render.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rwops.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_scancode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_sensor.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_shape.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_stdinc.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_surface.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_system.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_thread.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_timer.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_touch.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_version.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_video.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/begin_code.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/close_code.h \
   /usr/local/include/SDL2/SDL.h \
+  /usr/local/include/SDL2/SDL_assert.h \
+  /usr/local/include/SDL2/SDL_atomic.h \
+  /usr/local/include/SDL2/SDL_audio.h \
+  /usr/local/include/SDL2/SDL_blendmode.h \
+  /usr/local/include/SDL2/SDL_clipboard.h \
+  /usr/local/include/SDL2/SDL_config.h \
+  /usr/local/include/SDL2/SDL_cpuinfo.h \
+  /usr/local/include/SDL2/SDL_endian.h \
+  /usr/local/include/SDL2/SDL_error.h \
+  /usr/local/include/SDL2/SDL_events.h \
+  /usr/local/include/SDL2/SDL_filesystem.h \
+  /usr/local/include/SDL2/SDL_gamecontroller.h \
+  /usr/local/include/SDL2/SDL_gesture.h \
+  /usr/local/include/SDL2/SDL_guid.h \
+  /usr/local/include/SDL2/SDL_haptic.h \
+  /usr/local/include/SDL2/SDL_hidapi.h \
+  /usr/local/include/SDL2/SDL_hints.h \
   /usr/local/include/SDL2/SDL_image.h \
+  /usr/local/include/SDL2/SDL_joystick.h \
+  /usr/local/include/SDL2/SDL_keyboard.h \
+  /usr/local/include/SDL2/SDL_keycode.h \
+  /usr/local/include/SDL2/SDL_loadso.h \
+  /usr/local/include/SDL2/SDL_locale.h \
+  /usr/local/include/SDL2/SDL_log.h \
+  /usr/local/include/SDL2/SDL_main.h \
+  /usr/local/include/SDL2/SDL_messagebox.h \
+  /usr/local/include/SDL2/SDL_metal.h \
+  /usr/local/include/SDL2/SDL_misc.h \
+  /usr/local/include/SDL2/SDL_mouse.h \
+  /usr/local/include/SDL2/SDL_mutex.h \
+  /usr/local/include/SDL2/SDL_pixels.h \
+  /usr/local/include/SDL2/SDL_platform.h \
+  /usr/local/include/SDL2/SDL_power.h \
+  /usr/local/include/SDL2/SDL_quit.h \
+  /usr/local/include/SDL2/SDL_rect.h \
+  /usr/local/include/SDL2/SDL_render.h \
+  /usr/local/include/SDL2/SDL_rwops.h \
+  /usr/local/include/SDL2/SDL_scancode.h \
+  /usr/local/include/SDL2/SDL_sensor.h \
+  /usr/local/include/SDL2/SDL_shape.h \
+  /usr/local/include/SDL2/SDL_stdinc.h \
+  /usr/local/include/SDL2/SDL_surface.h \
+  /usr/local/include/SDL2/SDL_system.h \
+  /usr/local/include/SDL2/SDL_thread.h \
+  /usr/local/include/SDL2/SDL_timer.h \
+  /usr/local/include/SDL2/SDL_touch.h \
   /usr/local/include/SDL2/SDL_version.h \
+  /usr/local/include/SDL2/SDL_video.h \
   /usr/local/include/SDL2/begin_code.h \
   /usr/local/include/SDL2/close_code.h \
   /usr/local/include/fmt/core.h \
@@ -752,58 +748,55 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Game.cpp.o: /Users/kion/p
   /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.h \
   /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.h \
   /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_audio.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_blendmode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_clipboard.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_config.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_cpuinfo.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_endian.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_error.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_events.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_filesystem.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gamecontroller.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gesture.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_guid.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_haptic.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hidapi.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hints.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_joystick.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_keyboard.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_keycode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_loadso.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_locale.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_log.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_main.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_messagebox.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_metal.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_misc.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_mouse.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_mutex.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_pixels.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_platform.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_power.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_quit.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rect.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_render.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rwops.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_scancode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_sensor.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_shape.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_stdinc.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_surface.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_system.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_thread.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_timer.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_touch.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_version.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_video.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/begin_code.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/close_code.h \
   /usr/local/include/SDL2/SDL.h \
+  /usr/local/include/SDL2/SDL_assert.h \
+  /usr/local/include/SDL2/SDL_atomic.h \
+  /usr/local/include/SDL2/SDL_audio.h \
+  /usr/local/include/SDL2/SDL_blendmode.h \
+  /usr/local/include/SDL2/SDL_clipboard.h \
+  /usr/local/include/SDL2/SDL_config.h \
+  /usr/local/include/SDL2/SDL_cpuinfo.h \
+  /usr/local/include/SDL2/SDL_endian.h \
+  /usr/local/include/SDL2/SDL_error.h \
+  /usr/local/include/SDL2/SDL_events.h \
+  /usr/local/include/SDL2/SDL_filesystem.h \
+  /usr/local/include/SDL2/SDL_gamecontroller.h \
+  /usr/local/include/SDL2/SDL_gesture.h \
+  /usr/local/include/SDL2/SDL_guid.h \
+  /usr/local/include/SDL2/SDL_haptic.h \
+  /usr/local/include/SDL2/SDL_hidapi.h \
+  /usr/local/include/SDL2/SDL_hints.h \
   /usr/local/include/SDL2/SDL_image.h \
+  /usr/local/include/SDL2/SDL_joystick.h \
+  /usr/local/include/SDL2/SDL_keyboard.h \
+  /usr/local/include/SDL2/SDL_keycode.h \
+  /usr/local/include/SDL2/SDL_loadso.h \
+  /usr/local/include/SDL2/SDL_locale.h \
+  /usr/local/include/SDL2/SDL_log.h \
+  /usr/local/include/SDL2/SDL_main.h \
+  /usr/local/include/SDL2/SDL_messagebox.h \
+  /usr/local/include/SDL2/SDL_metal.h \
+  /usr/local/include/SDL2/SDL_misc.h \
+  /usr/local/include/SDL2/SDL_mouse.h \
+  /usr/local/include/SDL2/SDL_mutex.h \
+  /usr/local/include/SDL2/SDL_pixels.h \
+  /usr/local/include/SDL2/SDL_platform.h \
+  /usr/local/include/SDL2/SDL_power.h \
+  /usr/local/include/SDL2/SDL_quit.h \
+  /usr/local/include/SDL2/SDL_rect.h \
+  /usr/local/include/SDL2/SDL_render.h \
+  /usr/local/include/SDL2/SDL_rwops.h \
+  /usr/local/include/SDL2/SDL_scancode.h \
+  /usr/local/include/SDL2/SDL_sensor.h \
+  /usr/local/include/SDL2/SDL_shape.h \
+  /usr/local/include/SDL2/SDL_stdinc.h \
+  /usr/local/include/SDL2/SDL_surface.h \
+  /usr/local/include/SDL2/SDL_system.h \
+  /usr/local/include/SDL2/SDL_thread.h \
+  /usr/local/include/SDL2/SDL_timer.h \
+  /usr/local/include/SDL2/SDL_touch.h \
   /usr/local/include/SDL2/SDL_version.h \
+  /usr/local/include/SDL2/SDL_video.h \
   /usr/local/include/SDL2/begin_code.h \
   /usr/local/include/SDL2/close_code.h \
   /usr/local/include/fmt/core.h \
@@ -2152,58 +2145,55 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Object.cpp.o: /Users/kion
   /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Object.h \
   /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.h \
   /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_audio.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_blendmode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_clipboard.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_config.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_cpuinfo.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_endian.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_error.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_events.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_filesystem.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gamecontroller.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gesture.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_guid.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_haptic.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hidapi.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hints.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_joystick.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_keyboard.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_keycode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_loadso.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_locale.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_log.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_main.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_messagebox.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_metal.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_misc.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_mouse.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_mutex.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_pixels.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_platform.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_power.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_quit.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rect.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_render.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rwops.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_scancode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_sensor.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_shape.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_stdinc.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_surface.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_system.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_thread.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_timer.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_touch.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_version.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_video.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/begin_code.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/close_code.h \
   /usr/local/include/SDL2/SDL.h \
+  /usr/local/include/SDL2/SDL_assert.h \
+  /usr/local/include/SDL2/SDL_atomic.h \
+  /usr/local/include/SDL2/SDL_audio.h \
+  /usr/local/include/SDL2/SDL_blendmode.h \
+  /usr/local/include/SDL2/SDL_clipboard.h \
+  /usr/local/include/SDL2/SDL_config.h \
+  /usr/local/include/SDL2/SDL_cpuinfo.h \
+  /usr/local/include/SDL2/SDL_endian.h \
+  /usr/local/include/SDL2/SDL_error.h \
+  /usr/local/include/SDL2/SDL_events.h \
+  /usr/local/include/SDL2/SDL_filesystem.h \
+  /usr/local/include/SDL2/SDL_gamecontroller.h \
+  /usr/local/include/SDL2/SDL_gesture.h \
+  /usr/local/include/SDL2/SDL_guid.h \
+  /usr/local/include/SDL2/SDL_haptic.h \
+  /usr/local/include/SDL2/SDL_hidapi.h \
+  /usr/local/include/SDL2/SDL_hints.h \
   /usr/local/include/SDL2/SDL_image.h \
+  /usr/local/include/SDL2/SDL_joystick.h \
+  /usr/local/include/SDL2/SDL_keyboard.h \
+  /usr/local/include/SDL2/SDL_keycode.h \
+  /usr/local/include/SDL2/SDL_loadso.h \
+  /usr/local/include/SDL2/SDL_locale.h \
+  /usr/local/include/SDL2/SDL_log.h \
+  /usr/local/include/SDL2/SDL_main.h \
+  /usr/local/include/SDL2/SDL_messagebox.h \
+  /usr/local/include/SDL2/SDL_metal.h \
+  /usr/local/include/SDL2/SDL_misc.h \
+  /usr/local/include/SDL2/SDL_mouse.h \
+  /usr/local/include/SDL2/SDL_mutex.h \
+  /usr/local/include/SDL2/SDL_pixels.h \
+  /usr/local/include/SDL2/SDL_platform.h \
+  /usr/local/include/SDL2/SDL_power.h \
+  /usr/local/include/SDL2/SDL_quit.h \
+  /usr/local/include/SDL2/SDL_rect.h \
+  /usr/local/include/SDL2/SDL_render.h \
+  /usr/local/include/SDL2/SDL_rwops.h \
+  /usr/local/include/SDL2/SDL_scancode.h \
+  /usr/local/include/SDL2/SDL_sensor.h \
+  /usr/local/include/SDL2/SDL_shape.h \
+  /usr/local/include/SDL2/SDL_stdinc.h \
+  /usr/local/include/SDL2/SDL_surface.h \
+  /usr/local/include/SDL2/SDL_system.h \
+  /usr/local/include/SDL2/SDL_thread.h \
+  /usr/local/include/SDL2/SDL_timer.h \
+  /usr/local/include/SDL2/SDL_touch.h \
   /usr/local/include/SDL2/SDL_version.h \
+  /usr/local/include/SDL2/SDL_video.h \
   /usr/local/include/SDL2/begin_code.h \
   /usr/local/include/SDL2/close_code.h \
   /usr/local/include/fmt/core.h \
@@ -2582,59 +2572,55 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/TextureManager.cpp.o: /Us
   /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Game.h \
   /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Log.h \
   /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/TextureManager.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_audio.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_blendmode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_clipboard.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_config.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_cpuinfo.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_endian.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_error.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_events.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_filesystem.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gamecontroller.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gesture.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_guid.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_haptic.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hidapi.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hints.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_joystick.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_keyboard.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_keycode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_loadso.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_locale.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_log.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_main.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_messagebox.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_metal.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_misc.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_mouse.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_mutex.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_pixels.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_platform.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_power.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_quit.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rect.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_render.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rwops.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_scancode.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_sensor.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_shape.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_stdinc.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_surface.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_system.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_thread.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_timer.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_touch.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_version.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_video.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/begin_code.h \
-  /usr/local/Cellar/sdl2/2.28.3/include/SDL2/close_code.h \
   /usr/local/include/SDL2/SDL.h \
+  /usr/local/include/SDL2/SDL_assert.h \
+  /usr/local/include/SDL2/SDL_atomic.h \
+  /usr/local/include/SDL2/SDL_audio.h \
+  /usr/local/include/SDL2/SDL_blendmode.h \
+  /usr/local/include/SDL2/SDL_clipboard.h \
+  /usr/local/include/SDL2/SDL_config.h \
+  /usr/local/include/SDL2/SDL_cpuinfo.h \
+  /usr/local/include/SDL2/SDL_endian.h \
+  /usr/local/include/SDL2/SDL_error.h \
+  /usr/local/include/SDL2/SDL_events.h \
+  /usr/local/include/SDL2/SDL_filesystem.h \
+  /usr/local/include/SDL2/SDL_gamecontroller.h \
+  /usr/local/include/SDL2/SDL_gesture.h \
+  /usr/local/include/SDL2/SDL_guid.h \
+  /usr/local/include/SDL2/SDL_haptic.h \
+  /usr/local/include/SDL2/SDL_hidapi.h \
+  /usr/local/include/SDL2/SDL_hints.h \
   /usr/local/include/SDL2/SDL_image.h \
+  /usr/local/include/SDL2/SDL_joystick.h \
+  /usr/local/include/SDL2/SDL_keyboard.h \
+  /usr/local/include/SDL2/SDL_keycode.h \
+  /usr/local/include/SDL2/SDL_loadso.h \
+  /usr/local/include/SDL2/SDL_locale.h \
+  /usr/local/include/SDL2/SDL_log.h \
+  /usr/local/include/SDL2/SDL_main.h \
+  /usr/local/include/SDL2/SDL_messagebox.h \
+  /usr/local/include/SDL2/SDL_metal.h \
+  /usr/local/include/SDL2/SDL_misc.h \
+  /usr/local/include/SDL2/SDL_mouse.h \
+  /usr/local/include/SDL2/SDL_mutex.h \
+  /usr/local/include/SDL2/SDL_pixels.h \
+  /usr/local/include/SDL2/SDL_platform.h \
+  /usr/local/include/SDL2/SDL_power.h \
+  /usr/local/include/SDL2/SDL_quit.h \
+  /usr/local/include/SDL2/SDL_rect.h \
+  /usr/local/include/SDL2/SDL_render.h \
+  /usr/local/include/SDL2/SDL_rwops.h \
+  /usr/local/include/SDL2/SDL_scancode.h \
+  /usr/local/include/SDL2/SDL_sensor.h \
+  /usr/local/include/SDL2/SDL_shape.h \
+  /usr/local/include/SDL2/SDL_stdinc.h \
+  /usr/local/include/SDL2/SDL_surface.h \
+  /usr/local/include/SDL2/SDL_system.h \
+  /usr/local/include/SDL2/SDL_thread.h \
+  /usr/local/include/SDL2/SDL_timer.h \
+  /usr/local/include/SDL2/SDL_touch.h \
   /usr/local/include/SDL2/SDL_version.h \
+  /usr/local/include/SDL2/SDL_video.h \
   /usr/local/include/SDL2/begin_code.h \
   /usr/local/include/SDL2/close_code.h \
   /usr/local/include/fmt/core.h \
@@ -2974,13 +2960,67 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/MapTweaker.cpp:
 
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/close_code.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/begin_code.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_video.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_timer.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_surface.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rwops.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_quit.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_power.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_platform.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_mouse.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_misc.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_metal.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_main.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_log.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_loadso.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_joystick.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hints.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_haptic.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_guid.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gamecontroller.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_filesystem.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_events.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_error.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_cpuinfo.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_clipboard.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_audio.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL.h:
+
 /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.h:
 
 /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/ECS/ECS.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/ostream:
-
-/Library/Developer/CommandLineTools/usr/include/c++/v1/locale.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/locale:
 
@@ -2991,6 +3031,10 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 /Library/Developer/CommandLineTools/usr/include/c++/v1/iomanip:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/bitset:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rect.h:
+
+/Library/Developer/CommandLineTools/usr/include/c++/v1/__bsd_locale_defaults.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/xlocale/_wchar.h:
 
@@ -3012,11 +3056,11 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/_locale.h:
 
-/usr/local/include/spdlog/tweakme.h:
-
 /usr/local/include/spdlog/spdlog.h:
 
 /usr/local/include/spdlog/spdlog-inl.h:
+
+/usr/local/include/spdlog/sinks/ansicolor_sink-inl.h:
 
 /usr/local/include/spdlog/pattern_formatter.h:
 
@@ -3034,9 +3078,13 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /usr/local/include/spdlog/details/registry.h:
 
+/usr/local/include/spdlog/details/periodic_worker.h:
+
 /usr/local/include/spdlog/details/periodic_worker-inl.h:
 
-/usr/local/include/spdlog/details/log_msg_buffer.h:
+/usr/local/include/spdlog/details/os.h:
+
+/usr/local/include/spdlog/details/os-inl.h:
 
 /usr/local/include/spdlog/details/log_msg_buffer-inl.h:
 
@@ -3060,75 +3108,91 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /usr/local/include/SDL2/close_code.h:
 
-/usr/local/include/SDL2/SDL.h:
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hidapi.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/close_code.h:
+/usr/local/include/spdlog/details/registry-inl.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/begin_code.h:
+/usr/local/include/SDL2/SDL_video.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_video.h:
+/usr/local/include/SDL2/SDL_timer.h:
 
-/Library/Developer/CommandLineTools/usr/include/c++/v1/exception:
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_fd_zero.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_version.h:
+/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512vldqintrin.h:
 
-/usr/local/include/spdlog/details/periodic_worker.h:
+/usr/local/include/SDL2/SDL_shape.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_sensor.h:
+/usr/local/include/SDL2/SDL_sensor.h:
 
-/usr/local/include/spdlog/sinks/ansicolor_sink-inl.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/i386/_limits.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rwops.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_mode_t.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_quit.h:
+/usr/local/include/SDL2/SDL_render.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_power.h:
+/usr/local/include/SDL2/SDL_quit.h:
 
-/usr/local/include/spdlog/details/os-inl.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_pthread/_pthread_rwlock_t.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_platform.h:
+/Library/Developer/CommandLineTools/usr/include/c++/v1/stdint.h:
 
-/Library/Developer/CommandLineTools/usr/include/c++/v1/ios:
+/usr/local/include/SDL2/SDL_platform.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_u_int32_t.h:
+/usr/local/include/SDL2/SDL_pixels.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_pixels.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_mouse.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_misc.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_main.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_log.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_u_char.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_locale.h:
-
-/usr/local/include/spdlog/details/os.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_loadso.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hints.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_haptic.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_guid.h:
+/usr/local/include/SDL2/SDL_system.h:
 
 /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gesture.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_gamecontroller.h:
+/usr/local/include/SDL2/SDL_mutex.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_error.h:
+/usr/local/include/SDL2/SDL_misc.h:
 
-/usr/local/include/spdlog/common.h:
+/usr/local/include/spdlog/sinks/stdout_color_sinks-inl.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_config.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_nlink_t.h:
 
-/Library/Developer/CommandLineTools/usr/include/c++/v1/ctype.h:
+/usr/local/include/SDL2/SDL_metal.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h:
+/usr/local/include/SDL2/SDL_main.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_timeval.h:
+
+/usr/local/include/SDL2/SDL_keycode.h:
+
+/usr/local/include/SDL2/SDL_joystick.h:
+
+/usr/local/include/SDL2/SDL_hidapi.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_sensor.h:
+
+/usr/local/include/SDL2/SDL_haptic.h:
+
+/usr/local/include/SDL2/SDL_audio.h:
+
+/usr/local/include/SDL2/SDL_gesture.h:
+
+/usr/local/include/SDL2/SDL_filesystem.h:
+
+/usr/local/include/spdlog/details/log_msg_buffer.h:
+
+/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512vnniintrin.h:
+
+/usr/local/include/SDL2/SDL_endian.h:
+
+/Library/Developer/CommandLineTools/usr/include/c++/v1/__debug:
+
+/usr/local/include/SDL2/SDL_blendmode.h:
+
+/usr/local/include/SDL2/SDL_atomic.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_ucontext.h:
+
+/usr/local/include/SDL2/SDL_messagebox.h:
+
+/usr/local/include/SDL2/SDL_assert.h:
+
+/usr/local/include/SDL2/SDL.h:
 
 /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Log.h:
 
@@ -3172,15 +3236,9 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/ptwriteintrin.h:
 
-/Library/Developer/CommandLineTools/usr/include/c++/v1/array:
+/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/bmi2intrin.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_render.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_s_ifmt.h:
-
-/usr/local/include/spdlog/common-inl.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_keycode.h:
+/usr/local/include/SDL2/SDL_config.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/__mutex_base:
 
@@ -3216,9 +3274,9 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/clwbintrin.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/_types/_uint32_t.h:
-
 /usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_system.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/_types/_uint32_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_intptr_t.h:
 
@@ -3226,13 +3284,9 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/clflushoptintrin.h:
 
+/usr/local/include/spdlog/tweakme.h:
+
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/cldemoteintrin.h:
-
-/usr/local/include/spdlog/details/registry-inl.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_hidapi.h:
-
-/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/bmi2intrin.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512vpopcntdqvlintrin.h:
 
@@ -3246,21 +3300,19 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512vp2intersectintrin.h:
 
-/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512vnniintrin.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_pthread/_pthread_attr_t.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512vlvp2intersectintrin.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/wbnoinvdintrin.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_fd_zero.h:
-
-/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512vldqintrin.h:
-
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512vlbwintrin.h:
 
 /usr/local/include/spdlog/details/synchronous_factory.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_size_t.h:
+
+/usr/local/include/SDL2/SDL_gamecontroller.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512vlvbmi2intrin.h:
 
@@ -3274,15 +3326,23 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512pfintrin.h:
 
+/usr/local/include/SDL2/SDL_power.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/xlocale/_inttypes.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/new:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512erintrin.h:
 
+/usr/local/include/SDL2/SDL_hints.h:
+
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512dqintrin.h:
 
 /usr/local/include/SDL2/begin_code.h:
+
+/Library/Developer/CommandLineTools/usr/include/c++/v1/locale.h:
+
+/usr/local/include/SDL2/SDL_cpuinfo.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/AvailabilityInternal.h:
 
@@ -3310,17 +3370,23 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/stdlib.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_pthread/_pthread_rwlock_t.h:
-
-/Library/Developer/CommandLineTools/usr/include/c++/v1/stdint.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_gid_t.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/stdexcept:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL.h:
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_version.h:
+
+/Library/Developer/CommandLineTools/usr/include/c++/v1/exception:
+
+/usr/local/include/SDL2/SDL_events.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/xmmintrin.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_o_sync.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_fd_setsize.h:
+
+/usr/local/include/SDL2/SDL_mouse.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/mutex:
 
@@ -3331,8 +3397,6 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512fintrin.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/iosfwd:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_joystick.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx512vbmivlintrin.h:
 
@@ -3347,6 +3411,10 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 /Library/Developer/CommandLineTools/usr/include/c++/v1/cstdint:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/cwchar:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h:
+
+/Library/Developer/CommandLineTools/usr/include/c++/v1/ctype.h:
 
 /usr/local/include/spdlog/logger.h:
 
@@ -3368,6 +3436,8 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/algorithm:
 
+/usr/local/include/SDL2/SDL_error.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/stdint.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/_stdio.h:
@@ -3378,13 +3448,15 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/__nullptr:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_int64_t.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_endian.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/machine/types.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/__node_handle:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_keycode.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_s_ifmt.h:
+
+/usr/local/include/spdlog/common-inl.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/float.h:
 
@@ -3397,12 +3469,6 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 /Library/Developer/CommandLineTools/usr/include/c++/v1/__hash_table:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/__functional_base:
-
-/Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/ECS/SpriteComponent.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/i386/_types.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_thread.h:
 
 /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Log.cpp:
 
@@ -3427,10 +3493,6 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/unistd.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/syslimits.h:
-
-/Library/Developer/CommandLineTools/usr/include/c++/v1/__bsd_locale_defaults.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_rect.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_pthread/_pthread_types.h:
 
@@ -3462,6 +3524,12 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/_types/_uint16_t.h:
 
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_thread.h:
+
+/Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/ECS/SpriteComponent.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/i386/_types.h:
+
 /Library/Developer/CommandLineTools/usr/include/c++/v1/atomic:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/assert.h:
@@ -3470,11 +3538,19 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_u_int64_t.h:
 
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_pixels.h:
+
+/Library/Developer/CommandLineTools/usr/include/c++/v1/ios:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_u_int32_t.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/machine/endian.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/__split_buffer:
 
 /usr/local/include/spdlog/details/log_msg.h:
+
+/usr/local/include/SDL2/SDL_loadso.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_u_int.h:
 
@@ -3482,13 +3558,11 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /usr/local/include/spdlog/sinks/ansicolor_sink.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/string.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_int32_t.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_messagebox.h:
-
 /Library/Developer/CommandLineTools/usr/include/c++/v1/wchar.h:
+
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_locale.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_u_char.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/pconfigintrin.h:
 
@@ -3508,13 +3582,11 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_symbol_aliasing.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_timeval.h:
-
 /Library/Developer/CommandLineTools/usr/include/c++/v1/optional:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_timespec.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_events.h:
+/usr/local/include/SDL2/SDL_guid.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/wait.h:
 
@@ -3524,6 +3596,12 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/machine/_types.h:
 
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_messagebox.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/string.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_int32_t.h:
+
 /Library/Developer/CommandLineTools/usr/include/c++/v1/deque:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_time_t.h:
@@ -3532,15 +3610,11 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_suseconds_t.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_audio.h:
-
-/usr/local/include/spdlog/sinks/stdout_color_sinks-inl.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_nlink_t.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_ssize_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_size_t.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_pthread/_pthread_cond_t.h:
+
+/usr/local/include/SDL2/SDL_clipboard.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/machine/_mcontext.h:
 
@@ -3564,10 +3638,6 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_wint_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/i386/_limits.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_mode_t.h:
-
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/avx2intrin.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/stdarg.h:
@@ -3590,8 +3660,6 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_ino_t.h:
 
-/Library/Developer/CommandLineTools/usr/include/c++/v1/__debug:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_ino64_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types.h:
@@ -3606,10 +3674,6 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/float.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_o_sync.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_fd_setsize.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/malloc/_malloc.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/tmmintrin.h:
@@ -3622,8 +3686,6 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/TargetConditionals.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_ucontext.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_pthread/_pthread_key_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_fd_isset.h:
@@ -3634,7 +3696,11 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_filesec_t.h:
 
+/usr/local/include/SDL2/SDL_stdinc.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_clock_t.h:
+
+/usr/local/include/SDL2/SDL_rect.h:
 
 /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Vector2D.cpp:
 
@@ -3652,6 +3718,8 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_blkcnt_t.h:
 
+/usr/local/include/SDL2/SDL_touch.h:
+
 /Library/Developer/CommandLineTools/usr/include/c++/v1/__tuple:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_select.h:
@@ -3659,6 +3727,8 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 /Library/Developer/CommandLineTools/usr/include/c++/v1/cwctype:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_pthread/_pthread_t.h:
+
+/usr/local/include/SDL2/SDL_scancode.h:
 
 /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/GameMap/MapTweaker.h:
 
@@ -3676,13 +3746,15 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_caddr_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_pthread/_pthread_cond_t.h:
-
-/Library/Developer/CommandLineTools/usr/include/c++/v1/float.h:
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_shape.h:
 
 /usr/local/include/spdlog/sinks/stdout_color_sinks.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_shape.h:
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_config.h:
+
+/usr/local/include/spdlog/common.h:
+
+/Library/Developer/CommandLineTools/usr/include/c++/v1/float.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/stdio.h:
 
@@ -3700,15 +3772,13 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/errno.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sched.h:
+
+/usr/local/include/SDL2/SDL_rwops.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/qos.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_pthread/_pthread_once_t.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_timer.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/adxintrin.h:
 
@@ -3756,6 +3826,8 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h:
 
+/usr/local/include/SDL2/SDL_log.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/machine/limits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/Availability.h:
@@ -3771,8 +3843,6 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 /Library/Developer/CommandLineTools/usr/include/c++/v1/__bit_reference:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/cstddef:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_clipboard.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include/pmmintrin.h:
 
@@ -3802,6 +3872,10 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/wctype.h:
 
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_endian.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_int64_t.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/i386/limits.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/inttypes.h:
@@ -3814,7 +3888,13 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_uuid_t.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/mach/machine/_structs.h:
+
+/usr/local/include/SDL2/SDL_locale.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/types.h:
+
+/usr/local/include/SDL2/SDL_keyboard.h:
 
 /usr/local/include/SDL2/SDL_version.h:
 
@@ -3826,17 +3906,19 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Users/kion/projects/SDL_Test/CoconutEngine/src/Coconut/Game.h:
 
+/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_render.h:
+
+/Library/Developer/CommandLineTools/usr/include/c++/v1/array:
+
+/usr/local/include/SDL2/SDL_thread.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/_types/_wctype_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_int8_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_null.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_cpuinfo.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/_types/_uint64_t.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/mach/machine/_structs.h:
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/__cxx_version:
 
@@ -3846,8 +3928,6 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /usr/local/include/spdlog/sinks/sink.h:
 
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_filesystem.h:
-
 /Library/Developer/CommandLineTools/usr/include/c++/v1/ratio:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/fcntl.h:
@@ -3856,10 +3936,8 @@ CoconutEngine/CMakeFiles/CoconutEngine.dir/src/Coconut/Vector2D.cpp.o: /Users/ki
 
 /Library/Developer/CommandLineTools/usr/include/c++/v1/vector:
 
+/usr/local/include/SDL2/SDL_surface.h:
+
 /Library/Developer/CommandLineTools/usr/include/c++/v1/climits:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_surface.h:
-
-/usr/local/Cellar/sdl2/2.28.3/include/SDL2/SDL_metal.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/libkern/i386/_OSByteOrder.h:

@@ -24,10 +24,11 @@ add_library(
     ${SRC_LIST}
 )
 
-# no need for this maybe?
+# ToDo: make an ALIAS
+
 target_include_directories(
     ${PROJECT_NAME} 
-    PRIVATE 
+    PUBLIC 
     src
 )
 

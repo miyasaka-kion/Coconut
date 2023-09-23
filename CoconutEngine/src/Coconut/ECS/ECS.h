@@ -11,8 +11,11 @@
 namespace Coconut {
 	class Component;
 	class Entity;
-
 	using ComponentID = std::size_t;
+
+	// this function shouldn't be called externally,
+	// this should be called for getComponentTypeID<blah>() only!
+	// maybeencapsulate needed in later version
 	inline ComponentID getComponentTypeID() {
 		static ComponentID lastID = 0;
 		return lastID++;
@@ -20,6 +23,7 @@ namespace Coconut {
 	
 	// get component ID for a specific type
 	// each type has it's own, separate type counter
+	// should only call this function
 	template <typename T> 
 	inline ComponentID getComponentTypeID() noexcept {
 		static ComponentID typeID = getComponentTypeID();
@@ -71,7 +75,7 @@ namespace Coconut {
 
 		template <typename T>
 		bool hasComponent() const {
-			return ComponentBitset[getComponentID<T>()];
+			return componentBitset[getComponentTypeID<T>()];
 		}
 
 		template <typename T, typename... TArgs>
