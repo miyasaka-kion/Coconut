@@ -10,6 +10,5 @@
 
 
 //Entry point begin
-#include "Coconut/EntryPoint.h"
 
 //Entry point end

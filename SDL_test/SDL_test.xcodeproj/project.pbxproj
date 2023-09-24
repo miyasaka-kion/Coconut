@@ -1,0 +1,333 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		717557CB6A40177DF4B47E0B /* libCoconutEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A429A138DC1D985A5BBB853 /* libCoconutEngine.a */; };
+		B68AC1CC0D182C3EE591400C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F5234E590246666FCC874 /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A1E9B793D2CDAF85E5E5E5D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AFDBB2D6CB4FB1FE222E96D /* ../CoconutEngine/CoconutEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 79183020CFA59A92A81EAE60;
+			remoteInfo = libCoconutEngine.a;
+		};
+		F4242A2C2508221E3820586C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AFDBB2D6CB4FB1FE222E96D /* ../CoconutEngine/CoconutEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D8A840655FB68389A9A3A46;
+			remoteInfo = libCoconutEngine.a;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		574EF56B85F5495DDF36A3AB /* SDL_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = SDL_test; path = SDL_test; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AFDBB2D6CB4FB1FE222E96D /* libCoconutEngine.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CoconutEngine.xcodeproj"; path = ../CoconutEngine/CoconutEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B287737855D2FCAA70A3C9B8 /* defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = defs.h; path = src/defs.h; sourceTree = "<group>"; };
+		E21F5234E590246666FCC874 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8640ED5BD8C7184DAB0B7B9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				717557CB6A40177DF4B47E0B /* libCoconutEngine.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EFFD0087FCB9AFF971A41EC7 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A8A45220F00BC545DD45B62 /* SDL_test */ = {
+			isa = PBXGroup;
+			children = (
+				B287737855D2FCAA70A3C9B8 /* defs.h */,
+				E21F5234E590246666FCC874 /* main.cpp */,
+				A6C936B49B3FADE6EA134CF4 /* Products */,
+				9D968EAA920D05DCE0E0A4EA /* Projects */,
+			);
+			name = SDL_test;
+			sourceTree = "<group>";
+		};
+		5F871E7322F2E025619684B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A429A138DC1D985A5BBB853 /* libCoconutEngine.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9D968EAA920D05DCE0E0A4EA /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				5AFDBB2D6CB4FB1FE222E96D /* CoconutEngine.xcodeproj */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+		A6C936B49B3FADE6EA134CF4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				574EF56B85F5495DDF36A3AB /* SDL_test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1C084BF1C05AE9A3D2933231 /* SDL_test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 747C35BAC70260AC9946C3FA /* Build configuration list for PBXNativeTarget "SDL_test" */;
+			buildPhases = (
+				F6286DFB48AE98ED1AF2FC3B /* Resources */,
+				5FD58752B25BB24484A01592 /* Sources */,
+				8640ED5BD8C7184DAB0B7B9B /* Frameworks */,
+				EFFD0087FCB9AFF971A41EC7 /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D3F5B7C10AB1D2E4F4EC1BC /* PBXTargetDependency */,
+			);
+			name = SDL_test;
+			productInstallPath = "$(HOME)/bin";
+			productName = SDL_test;
+			productReference = 574EF56B85F5495DDF36A3AB /* SDL_test */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "SDL_test" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 1;
+			mainGroup = 1A8A45220F00BC545DD45B62 /* SDL_test */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5F871E7322F2E025619684B3 /* Products */;
+					ProjectRef = 5AFDBB2D6CB4FB1FE222E96D /* CoconutEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1C084BF1C05AE9A3D2933231 /* SDL_test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5A429A138DC1D985A5BBB853 /* libCoconutEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCoconutEngine.a;
+			remoteRef = A1E9B793D2CDAF85E5E5E5D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F6286DFB48AE98ED1AF2FC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5FD58752B25BB24484A01592 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B68AC1CC0D182C3EE591400C /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4D3F5B7C10AB1D2E4F4EC1BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libCoconutEngine.a;
+			targetProxy = F4242A2C2508221E3820586C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		316B366B60118A5DB952E4AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SDL_RELEASE,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OBJROOT = "../bin-int/Release-macosx-x86_64/SDL_test";
+				ONLY_ACTIVE_ARCH = YES;
+				SYMROOT = "../bin/Release-macosx-x86_64/SDL_test";
+				USER_HEADER_SEARCH_PATHS = (
+					src,
+					../CoconutEngine/src,
+					../CoconutEngine/vendor/SDL2/include,
+					../CoconutEngine/vendor/SDL2_image/include,
+					../CoconutEngine/vendor/spdlog/include,
+				);
+			};
+			name = Release;
+		};
+		7031D8FE137D62302E4E2F3E /* Dist */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SDL_DIST,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OBJROOT = "../bin-int/Dist-macosx-x86_64/SDL_test";
+				ONLY_ACTIVE_ARCH = YES;
+				SYMROOT = "../bin/Dist-macosx-x86_64/SDL_test";
+				USER_HEADER_SEARCH_PATHS = (
+					src,
+					../CoconutEngine/src,
+					../CoconutEngine/vendor/SDL2/include,
+					../CoconutEngine/vendor/SDL2_image/include,
+					../CoconutEngine/vendor/spdlog/include,
+				);
+			};
+			name = Dist;
+		};
+		98FA2C7AEF8796ECC800AABA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../bin/Release-macosx-x86_64/SDL_test";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = SDL_test;
+			};
+			name = Release;
+		};
+		AE44B1809930D772E1169FC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../bin/Debug-macosx-x86_64/SDL_test";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = SDL_test;
+			};
+			name = Debug;
+		};
+		AF6C9BF1BC294B633113BA31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SDL_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OBJROOT = "../bin-int/Debug-macosx-x86_64/SDL_test";
+				ONLY_ACTIVE_ARCH = YES;
+				SYMROOT = "../bin/Debug-macosx-x86_64/SDL_test";
+				USER_HEADER_SEARCH_PATHS = (
+					src,
+					../CoconutEngine/src,
+					../CoconutEngine/vendor/SDL2/include,
+					../CoconutEngine/vendor/SDL2_image/include,
+					../CoconutEngine/vendor/spdlog/include,
+				);
+			};
+			name = Debug;
+		};
+		C62F62CDEC55927F535C890D /* Dist */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../bin/Dist-macosx-x86_64/SDL_test";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = SDL_test;
+			};
+			name = Dist;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "SDL_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF6C9BF1BC294B633113BA31 /* Debug */,
+				316B366B60118A5DB952E4AB /* Release */,
+				7031D8FE137D62302E4E2F3E /* Dist */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		747C35BAC70260AC9946C3FA /* Build configuration list for PBXNativeTarget "SDL_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE44B1809930D772E1169FC0 /* Debug */,
+				98FA2C7AEF8796ECC800AABA /* Release */,
+				C62F62CDEC55927F535C890D /* Dist */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+};
+rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
