@@ -80,16 +80,18 @@ namespace Coconut {
 
 		template <typename T, typename... TArgs>
 		T& addComponent(TArgs&&... mArgs) {
-			T* c(new T(std::forward<TArgs>(mArgs)...));
-			c->entity = this;
-			std::unique_ptr<Component> uPtr{ c };
+			std::unique_ptr<T> uPtr = std::make_unique<T>(std::forward<TArgs>(mArgs)...);
+			uPtr->entity = this;
+
+			T* rawPtr = uPtr.get();
+
 			m_components.emplace_back(std::move(uPtr));
 
-			m_componentArray[getComponentTypeID<T>()] = c;
-			m_componentBitset[getComponentTypeID <T>()] = true;
+			m_componentArray[getComponentTypeID<T>()] = rawPtr;
+			m_componentBitset[getComponentTypeID<T>()] = true;
 
-			c->init();
-			return *c;
+			rawPtr->init();
+			return *rawPtr;
 		}
 
 		template<typename T>
