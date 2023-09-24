@@ -2,9 +2,12 @@
 
 #include <memory>
 
-#pragma warning(push, 0)
+#ifdef CC_PLATFORM_WINDOWS
+#include <SDL.h>
+#else
 #include <SDL2/SDL.h>
-#pragma warning(pop)
+#endif
+
 
 #include "Coconut/Core.h"
 #include "Coconut/Log.h"

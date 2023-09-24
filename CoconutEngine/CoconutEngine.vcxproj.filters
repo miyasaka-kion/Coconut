@@ -4,6 +4,12 @@
     <Filter Include="Coconut">
       <UniqueIdentifier>{205D6833-8C3C-E7CE-9554-72A501B34D30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Coconut\ECS">
+      <UniqueIdentifier>{6AE1AC3C-D696-2532-5F8B-1F09CB3F1C36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Coconut\GameMap">
+      <UniqueIdentifier>{A7F6B183-1382-1F48-1C93-A23C889D7B48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Coconut.h" />
@@ -13,25 +19,42 @@
     <ClInclude Include="src\Coconut\Core.h">
       <Filter>Coconut</Filter>
     </ClInclude>
-    <ClInclude Include="src\Coconut\EntryPoint.h">
-      <Filter>Coconut</Filter>
+    <ClInclude Include="src\Coconut\ECS\Compoent.h">
+      <Filter>Coconut\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\ECS\ECS.h">
+      <Filter>Coconut\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\ECS\KeyBoardController.h">
+      <Filter>Coconut\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\ECS\SpriteComponent.h">
+      <Filter>Coconut\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\ECS\TransformComponent.h">
+      <Filter>Coconut\ECS</Filter>
     </ClInclude>
     <ClInclude Include="src\Coconut\Game.h">
       <Filter>Coconut</Filter>
     </ClInclude>
+    <ClInclude Include="src\Coconut\GameMap\Map.h">
+      <Filter>Coconut\GameMap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\GameMap\MapTweaker.h">
+      <Filter>Coconut\GameMap</Filter>
+    </ClInclude>
     <ClInclude Include="src\Coconut\Log.h">
       <Filter>Coconut</Filter>
     </ClInclude>
-    <ClInclude Include="src\Coconut\TextureManager.h" />
-    <ClInclude Include="src\Coconut\Object.h" />
-    <ClInclude Include="src\Coconut\GameMap\Map.h" />
-    <ClInclude Include="src\Coconut\GameMap\MapTweaker.h" />
-    <ClInclude Include="src\Coconut\ECS\ECS.h" />
-    <ClInclude Include="src\Coconut\ECS\Compoent.h" />
-    <ClInclude Include="src\Coconut\ECS\TransformComponent.h" />
-    <ClInclude Include="src\Coconut\ECS\SpriteComponent.h" />
-    <ClInclude Include="src\Coconut\Vector2D.h" />
-    <ClInclude Include="src\Coconut\ECS\KeyBoardController.h" />
+    <ClInclude Include="src\Coconut\Object.h">
+      <Filter>Coconut</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\TextureManager.h">
+      <Filter>Coconut</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coconut\Vector2D.h">
+      <Filter>Coconut</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Coconut\Application.cpp">
@@ -40,13 +63,23 @@
     <ClCompile Include="src\Coconut\Game.cpp">
       <Filter>Coconut</Filter>
     </ClCompile>
+    <ClCompile Include="src\Coconut\GameMap\Map.cpp">
+      <Filter>Coconut\GameMap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Coconut\GameMap\MapTweaker.cpp">
+      <Filter>Coconut\GameMap</Filter>
+    </ClCompile>
     <ClCompile Include="src\Coconut\Log.cpp">
       <Filter>Coconut</Filter>
     </ClCompile>
-    <ClCompile Include="src\Coconut\TextureManager.cpp" />
-    <ClCompile Include="src\Coconut\Object.cpp" />
-    <ClCompile Include="src\Coconut\GameMap\Map.cpp" />
-    <ClCompile Include="src\Coconut\GameMap\MapTweaker.cpp" />
-    <ClCompile Include="src\Coconut\Vector2D.cpp" />
+    <ClCompile Include="src\Coconut\Object.cpp">
+      <Filter>Coconut</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Coconut\TextureManager.cpp">
+      <Filter>Coconut</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Coconut\Vector2D.cpp">
+      <Filter>Coconut</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

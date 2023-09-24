@@ -2,8 +2,13 @@
 
 #include <filesystem>
 
+#ifdef CC_PLATFORM_WINDOWS
+#include <SDL.h>
+#include <SDL_image.h>
+#else
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#endif
 
 #include "Coconut/Log.h"
 #include "Coconut/Game.h"

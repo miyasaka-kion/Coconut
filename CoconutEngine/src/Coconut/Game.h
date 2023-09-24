@@ -1,16 +1,15 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
-
-// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
-
 #pragma once
 
 #include <string>
 
 // This ignores all warnings raised inside External headers
-#pragma warning(push, 0)
+#ifdef CC_PLATFORM_WINDOWS
+#include <SDL.h>
+#include <SDL_image.h>
+#else
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#pragma warning(pop)
+#endif
 
 
 

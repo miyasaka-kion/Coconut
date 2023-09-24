@@ -5,9 +5,11 @@
 #include <memory>
 
 // This ignores all warnings raised inside External headers
-#pragma warning(push, 0)
+#ifdef CC_PLATFORM_WINDOWS
+#include <SDL.h>
+#else 
 #include <SDL2/SDL.h>
-#pragma warning()
+#endif
 
 #include "Coconut/Application.h"
 
