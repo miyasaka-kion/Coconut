@@ -12,17 +12,22 @@
 #include "Coconut/Application.h"
 
 
-// this line is for OS X debug only!
-// should be removed in later version!
-#define CC_PLATFORM_WINDOWS
 
-#ifdef CC_PLATFORM_WINDOWS
+// >>> this should be move to CMake process in the future!
+#define CC_PLATFORM_MACOS
+#define BUILD_WITH_CMAKE
+// <<< this should be move to CMake process in the future!
+
+
+#ifdef CC_PLATFORM_MACOS
+	#define CC_PLATFORM_OSX
+#endif
+
+#if defined CC_PLATFORM_WINDOWS || defined CC_PLATFORM_MACOS
 
 int main(int argc, char* argv[]) {
 	std::unique_ptr<Coconut::Application> gameApp = std::make_unique<Coconut::Application>();
 	gameApp->run();
-
-
 	return 0;
 }
 

@@ -1,7 +1,9 @@
 #include "TextureManager.h"
 
 std::filesystem::path Coconut::TextureManager::m_binPath = std::filesystem::current_path();
+
 std::filesystem::path Coconut::TextureManager::m_projectPath = m_binPath.parent_path();
+
 std::filesystem::path Coconut::TextureManager::m_assetPath = m_binPath / "assets";
 
 Coconut::TextureManager::TextureManager() {
