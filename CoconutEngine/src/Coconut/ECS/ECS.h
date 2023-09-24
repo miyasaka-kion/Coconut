@@ -11,13 +11,13 @@
 namespace Coconut {
 	class Component;
 	class Entity;
-	using ComponentID = std::size_t;
+	using ComponentID_t = std::size_t;
 
 	// this function shouldn't be called externally,
 	// this should be called for getComponentTypeID<blah>() only!
 	// maybeencapsulate needed in later version
-	inline ComponentID getComponentTypeID() {
-		static ComponentID lastID = 0;
+	inline ComponentID_t getComponentTypeID() {
+		static ComponentID_t lastID = 0;
 		return lastID++;
 	}
 	
@@ -25,8 +25,8 @@ namespace Coconut {
 	// each type has it's own, separate type counter
 	// should only call this function
 	template <typename T> 
-	inline ComponentID getComponentTypeID() noexcept {
-		static ComponentID typeID = getComponentTypeID();
+	inline ComponentID_t getComponentTypeID() noexcept {
+		static ComponentID_t typeID = getComponentTypeID();
 		return typeID;
 	}
 	
@@ -55,27 +55,27 @@ namespace Coconut {
 	// Entity has many components
 	class Entity {
 	private:
-		bool active = true;
-		std::vector<std::unique_ptr<Component> > components;
+		bool m_active = true;
+		std::vector<std::unique_ptr<Component> > m_components;
 
-		ComponentArray componentArray;
-		ComponentBitset componentBitset;
+		ComponentArray m_componentArray;
+		ComponentBitset m_componentBitset;
 		
 	public:
 		void update() {
-			for (auto& c : components) c->update();
+			for (auto& c : m_components) c->update();
 		}
 		void draw() {
-			for (auto& c : components) c->draw();
+			for (auto& c : m_components) c->draw();
 		}
 
-		bool isActive() const { return active;  }
-		void destroy() { active = false;  }
+		bool isActive() const { return m_active;  }
+		void destroy() { m_active = false;  }
 
 
 		template <typename T>
 		bool hasComponent() const {
-			return componentBitset[getComponentTypeID<T>()];
+			return m_componentBitset[getComponentTypeID<T>()];
 		}
 
 		template <typename T, typename... TArgs>
@@ -83,10 +83,10 @@ namespace Coconut {
 			T* c(new T(std::forward<TArgs>(mArgs)...));
 			c->entity = this;
 			std::unique_ptr<Component> uPtr{ c };
-			components.emplace_back(std::move(uPtr));
+			m_components.emplace_back(std::move(uPtr));
 
-			componentArray[getComponentTypeID<T>()] = c;
-			componentBitset[getComponentTypeID <T>()] = true;
+			m_componentArray[getComponentTypeID<T>()] = c;
+			m_componentBitset[getComponentTypeID <T>()] = true;
 
 			c->init();
 			return *c;
@@ -94,7 +94,7 @@ namespace Coconut {
 
 		template<typename T>
 		T& getComponent() const {
-			auto ptr(componentArray[getComponentTypeID<T>()]);
+			auto ptr(m_componentArray[getComponentTypeID<T>()]);
 			return *static_cast<T*> (ptr);
 		}
 	};
@@ -103,28 +103,28 @@ namespace Coconut {
 	// Manager manage all entities
 	class Manager {
 	private:
-		std::vector<std::unique_ptr<Entity> > entities;
+		std::vector<std::unique_ptr<Entity> > m_entities;
 
 	public:
 		void update() {
-			for (auto& e : entities) e->update();
+			for (auto& e : m_entities) e->update();
 		}
 
 		void draw() {
-			for (auto& e : entities) e->draw();
+			for (auto& e : m_entities) e->draw();
 		}
 
 		void refresh() {
 			// remove entity that is not active
-			entities.erase(
+			m_entities.erase(
 				std::remove_if(
-					std::begin(entities),
-					std::end(entities),
+					std::begin(m_entities),
+					std::end(m_entities),
 					[](const std::unique_ptr<Entity>& mEntity) {
 						return !mEntity->isActive();
 					}
 				),
-				std::end(entities)
+				std::end(m_entities)
 			);
 		}
 
@@ -132,7 +132,7 @@ namespace Coconut {
 		Entity& addEntity() {
 			std::unique_ptr<Entity> uPtr = std::make_unique<Entity>();
 			Entity& e = *uPtr;
-			entities.emplace_back(std::move(uPtr));
+			m_entities.emplace_back(std::move(uPtr));
 			return e;
 		}
 
