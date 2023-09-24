@@ -24,8 +24,6 @@ namespace Coconut {
 		void run();
 	};
 	
-	// This will be defined in the client
-	Application* CreateApplication();
 }
 
 

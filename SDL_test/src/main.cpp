@@ -12,7 +12,3 @@ public:
 
 
 };
-
-Coconut::Application* Coconut::CreateApplication() {
-	return new TestGame();
-}
