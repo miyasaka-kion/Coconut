@@ -18,26 +18,14 @@ Coconut::Map::Map()
     dest.x = dest.y = 0;
 }
 
+Coconut::Map::~Map() {
+    SDL_DestroyTexture(m_dirt);
+    SDL_DestroyTexture(m_sky);
+    SDL_DestroyTexture(m_water);
+    SDL_DestroyTexture(m_grass);
+}
 
-//The function above is actually in use;
-//This function will be moved in later version.
-// Coconut::Map::Map(int rows = 20, int cols = 25)
-//     : m_rows(rows), m_columns(cols) {
-//     m_map.resize(m_rows, std::vector<int>(m_columns, 0));
-//     m_dirt = Coconut::TextureManager::LoadTexture("dirt.jpg");
-//     m_grass = Coconut::TextureManager::LoadTexture("grass.png");
-//     m_water = Coconut::TextureManager::LoadTexture("water.png");
-//     m_sky = Coconut::TextureManager::LoadTexture("sky.png");
 
-//     loadMap();
-//     src.x = src.y = 0;
-//     // This should be change with respect to a certain size of a texture file
-//     // Not changed yet!
-//     // ToDo: make some automatic method to determin the size of a texture file 
-//     src.w = dest.w = src.h = dest.h = 32;
-
-//     dest.x = dest.y = 0;
-// }
 
 
 void Coconut::Map::loadMap() {

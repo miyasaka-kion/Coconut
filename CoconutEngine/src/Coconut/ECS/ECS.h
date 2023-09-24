@@ -32,8 +32,8 @@ namespace Coconut {
 	
 	constexpr std::size_t maxComponents = 32;
 	
-	using ComponentBitset = std::bitset<maxComponents>;
-	using ComponentArray = std::array<Component*, maxComponents>;
+	using ComponentBitset_t = std::bitset<maxComponents>;
+	using ComponentArray_t = std::array<Component*, maxComponents>;
 
 
 	// Component
@@ -58,8 +58,8 @@ namespace Coconut {
 		bool m_active = true;
 		std::vector<std::unique_ptr<Component> > m_components;
 
-		ComponentArray m_componentArray;
-		ComponentBitset m_componentBitset;
+		ComponentArray_t m_componentArray;
+		ComponentBitset_t m_componentBitset;
 		
 	public:
 		void update() {

@@ -137,7 +137,10 @@
   <ItemGroup>
     <ClInclude Include="src\Coconut.h" />
     <ClInclude Include="src\Coconut\Application.h" />
+    <ClInclude Include="src\Coconut\Collision.h" />
+    <ClInclude Include="src\Coconut\ConstantSpec.h" />
     <ClInclude Include="src\Coconut\Core.h" />
+    <ClInclude Include="src\Coconut\ECS\ColliderComponent.h" />
     <ClInclude Include="src\Coconut\ECS\Compoent.h" />
     <ClInclude Include="src\Coconut\ECS\ECS.h" />
     <ClInclude Include="src\Coconut\ECS\KeyBoardController.h" />
@@ -153,6 +156,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Coconut\Application.cpp" />
+    <ClCompile Include="src\Coconut\Collision.cpp" />
+    <ClCompile Include="src\Coconut\ECS\ColliderComponent.cpp" />
     <ClCompile Include="src\Coconut\Game.cpp" />
     <ClCompile Include="src\Coconut\GameMap\Map.cpp" />
     <ClCompile Include="src\Coconut\GameMap\MapTweaker.cpp" />

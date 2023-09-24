@@ -5,7 +5,7 @@
 #include "Coconut/Log.h"
 #include "Coconut/ECS/ECS.h"
 #include "Coconut/Vector2D.h"
-
+#include "Coconut/ConstantSpec.h"
 
 namespace Coconut {
 
@@ -16,16 +16,34 @@ namespace Coconut {
 
 		int speed = 3;
 
+		int hight = Coconut::Constants::BIRD_HIGHT;
+		int width = Coconut::Constants::BIRD_WIDTH;
+		float scale = 1.0f;
 
 
 		TransformComponent() : position(Vector2D()) {}
 		TransformComponent(float x, float y) : position(Vector2D(x, y)) {};
 		
+		// Get the position of the entity
 		std::tuple<float, float> getCoordinate() {
 			return position.getCoordinate();
 		}
+	
+		// Get the original size of the enity
+		// @return (hight, width)
+		std::tuple<int, int> getSize() {
+			return std::tie(hight, width);
+		}
 
-		
+
+		// ? casting warning ?s
+		// Get the scaled size of the entity
+		// @return (scaledHeight, scaledWidth)
+		std::tuple<float, float> getScaledSize() {
+			float scaledHeight = hight * scale;
+			float scaledWidth = width * scale;
+			return std::tie(scaledHeight, scaledWidth);
+		}
 
 		void init() override {
 			velocity = Vector2D();

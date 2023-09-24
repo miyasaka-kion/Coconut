@@ -20,6 +20,7 @@ void Coconut::Vector2D::setY(float y) {
 	this->y = y;
 }
 
+
 float Coconut::Vector2D::norm()
 {
 	return std::sqrt(this->x * this->x + this->y * this->y);
@@ -154,3 +155,10 @@ void Coconut::Vector2D::printValue() const {
 	CC_CORE_INFO("Current Vector2D pos: ({}, {})", x, y);
 }
 
+
+Coconut::Vector2D::RelativePosition_t Coconut::Vector2D::getRelativePisition(const Vector2D other) {
+	if (other.x < x && other.y < y) return RelativePosition_t::lu;
+	if (other.x > x && other.y < y) return RelativePosition_t::ld;
+	if (other.x < x && other.y > y) return RelativePosition_t::ru;
+	if (other.x > x && other.y > y) return RelativePosition_t::rd;
+}

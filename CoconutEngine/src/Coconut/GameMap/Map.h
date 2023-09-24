@@ -15,7 +15,7 @@ namespace Coconut {
 		//enum class 
 		Map();
 		Map(int rows, int cols);
-		//~Map();
+		~Map();
 
 		void loadMap();
 

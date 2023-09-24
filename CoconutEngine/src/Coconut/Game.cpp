@@ -40,6 +40,7 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 		flag = SDL_WINDOW_FULLSCREEN;
 	}
 
+	// SDL Successfully initialized
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 		CC_CORE_INFO("SDL Successfully initialized!");
 
@@ -65,6 +66,7 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 
 		m_isRunning = true;
 	}
+	// SDL failed to initialize
 	else {
 		CC_CORE_ERROR("SDL failed to initialized.");
 		m_isRunning = false;

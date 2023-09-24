@@ -16,9 +16,25 @@ namespace Coconut {
 
 		inline float getX() const { return x; };
 		inline float getY() const { return y; };
-		std::tuple<float, float> getCoordinate();
+		
 		void setX(float x);
 		void setY(float y);
+
+		std::tuple<float, float> getCoordinate();
+
+		enum class RelativePosition_t {
+			same = 0,
+			// left up
+			lu,
+			// left down
+			ld,
+			// right up
+			ru,
+			// right down
+			rd
+		};
+
+		RelativePosition_t getRelativePisition(const Vector2D other);
 
 	public:
 		float norm();

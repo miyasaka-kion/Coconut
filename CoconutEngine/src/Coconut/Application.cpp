@@ -1,5 +1,7 @@
 #include "Application.h"
 
+#include "Coconut/ConstantSpec.h"
+
 namespace Coconut {
 	Application::Application() {
 
@@ -22,7 +24,7 @@ namespace Coconut {
 
 		std::shared_ptr<Coconut::Game> game = std::make_shared<Coconut::Game>();
 
-		game->gameInit("CoconutEngine Test Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+		game->gameInit("CoconutEngine Test Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Coconut::Constants::WINDOW_WIDTH, Coconut::Constants::WINDOW_HEIGHT, false);
 
 		while (game->running()) {
 			frameStart = SDL_GetTicks();
