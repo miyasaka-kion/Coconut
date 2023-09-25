@@ -1,10 +1,10 @@
-# This project is not Named yet
+# This project is not named yet
 
 ## build
 
 ### Windows
 
-Run `premake5.lua`.
+Click `GenerateProject.bat`.
 
 ### MacOS
 
