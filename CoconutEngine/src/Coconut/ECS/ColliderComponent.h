@@ -15,7 +15,6 @@ namespace Coconut {
 	class ColliderComponent : public Coconut::Component {
 	public:
 		SDL_Rect collider;
-	
 		std::string tag;
 
 		enum class Shape_t {
@@ -26,6 +25,10 @@ namespace Coconut {
 
 		// use transform to determin the collider 
 		Coconut::TransformComponent* transform;
+
+	public:
+		ColliderComponent(std::string&& str) : tag(std::move(str)) {}
+		ColliderComponent(const std::string& str) : tag(str) {}
 
 		// @return central, radius
 		// where radius is the minimum of w and h

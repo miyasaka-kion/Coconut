@@ -21,10 +21,22 @@ namespace Coconut {
 		SDL_Texture* m_texture;
 		SDL_Rect m_srcRect, m_destRect;
 
+		int width;
+		int height;
 	public:
 
 		SpriteComponent() = default;
 		SpriteComponent(std::string path) {
+			// Some weird things happed here
+			// emmm
+			// 
+			//if (entity->hasComponent<TransformComponent>() == false) {
+			//	CC_CORE_INFO("Coconut Engine dectect that the entity has SpriteComponent, but do not have an TransformComponent.");
+			//	CC_CORE_INFO("Coconut add an TransformComponent for that entity.");
+			//	entity->addComponent<TransformComponent>();
+			//}
+			//m_transform = &entity->getComponent<Coconut::TransformComponent>();
+
 			setTexture(path);
 		}
 
@@ -33,22 +45,26 @@ namespace Coconut {
 		}
 
 		void setTexture(std::string path) {
-			m_texture = Coconut::TextureManager::LoadTexture(path);
+			// Attention: transform->width and transfrom->height is actually initialized here!!!
+			std::tie(m_texture, width, height) = Coconut::TextureManager::LoadTexture_tuple(path);
 		}
 
 		void init() override {
-			m_transform = &entity->getComponent<TransformComponent>();
+			m_transform = &entity->getComponent<Coconut::TransformComponent>();
+			// this should be optimized!
+			m_transform->width = width;
+			m_transform->height = height;
+			// <<<<
 			m_srcRect.x = m_srcRect.y = 0;
 			m_srcRect.w = m_transform->width;
-			m_srcRect.h = m_transform->hight;
+			m_srcRect.h = m_transform->height;
 			
-			m_destRect.w = m_transform->width * m_transform->scale;
-			m_destRect.w = m_destRect.h = Coconut::Constants::DEST_RECT_HEIGHT;
-
+			std::tie(m_destRect.w, m_destRect.h) = m_transform->getScaledSize();
 			CC_CORE_INFO("SpriteComponent initialized!");
 		}
 
 		void update() override {
+			std::tie(m_destRect.w, m_destRect.h) = m_transform->getScaledSize();
 			std::tie(m_destRect.x, m_destRect.y) = m_transform->getCoordinate();
 		}
 		

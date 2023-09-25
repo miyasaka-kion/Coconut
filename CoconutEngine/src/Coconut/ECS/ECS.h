@@ -75,6 +75,7 @@ namespace Coconut {
 
 		template <typename T>
 		bool hasComponent() const {
+			//CC_CORE_INFO("getComponentTypeID<T>() = {}", getComponentTypeID<T>());
 			return m_componentBitset[getComponentTypeID<T>()];
 		}
 

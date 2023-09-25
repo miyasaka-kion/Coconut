@@ -1,4 +1,10 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
+
+
 #include "TextureManager.h"
+#include "Coconut/Vector2D.h"
 
 std::filesystem::path Coconut::TextureManager::m_binPath = std::filesystem::current_path();
 
@@ -6,12 +12,6 @@ std::filesystem::path Coconut::TextureManager::m_projectPath = m_binPath.parent_
 
 std::filesystem::path Coconut::TextureManager::m_assetPath = m_binPath / "assets";
 
-Coconut::TextureManager::TextureManager() {
-
-}
-
-Coconut::TextureManager::~TextureManager() {
-}
 
 SDL_Texture* Coconut::TextureManager::LoadTexture_withFullPath(std::string fileFullPath) {
 
@@ -30,17 +30,23 @@ SDL_Texture* Coconut::TextureManager::LoadTexture_withFullPath(std::string fileF
 	return texture;
 }
 
-SDL_Texture* Coconut::TextureManager::LoadTexture(std::string fileName) {
+std::tuple<SDL_Texture*,int ,int> Coconut::TextureManager::LoadTexture_tuple(const std::string& fileName) {
 	// Load texture in the asset folder directly
 
 	std::filesystem::path fullPath = m_assetPath / fileName;
 	std::string fileFullPath = fullPath.string();
 
 	SDL_Surface* tmpSurface = IMG_Load(fileFullPath.c_str());
+
+	int imgWidth, imgHeight;
+	imgWidth = tmpSurface->w;
+	imgHeight = tmpSurface->h;
+
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(Coconut::Game::renderer, tmpSurface);
 
 	if (tmpSurface) {
 		CC_CORE_INFO("TextureManager: Image loaded: " + fileFullPath + " successfully loaded.");
+		CC_CORE_INFO("Image size = ({}, {}).", imgWidth, imgHeight);
 	}
 	else {
 		CC_CORE_ERROR("Failed to load image: " + fileFullPath);
@@ -48,7 +54,20 @@ SDL_Texture* Coconut::TextureManager::LoadTexture(std::string fileName) {
 
 	SDL_FreeSurface(tmpSurface);
 
+	return std::tie(texture, imgWidth, imgHeight);
+}
+
+SDL_Texture* Coconut::TextureManager::LoadTexture(const std::string& fileName)
+{
+	SDL_Texture* texture;
+	std::tie(texture, std::ignore, std::ignore) = Coconut::TextureManager::LoadTexture_tuple(fileName);
 	return texture;
+}
+
+Coconut::ImageObject Coconut::TextureManager::LoadTextureImageObject(const std::string& fileName)
+{
+	// ToDo...
+	return Coconut::ImageObject();
 }
 
 void Coconut::TextureManager::DrawTexture(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest) {

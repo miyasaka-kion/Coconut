@@ -13,7 +13,9 @@ namespace Coconut {
 	public:
 		Vector2D();
 		Vector2D(float x, float y);
+		Vector2D(std::tuple<float, float> tp);
 
+		// may be remove in the funture
 		inline float getX() const { return x; };
 		inline float getY() const { return y; };
 		
@@ -34,7 +36,7 @@ namespace Coconut {
 			rd
 		};
 
-		RelativePosition_t getRelativePisition(const Vector2D other);
+		RelativePosition_t getRelativePosition(const Vector2D other);
 
 		// 2 norm of the vector
 		float norm_2();
@@ -75,8 +77,9 @@ namespace Coconut {
 		// ToDo: the choose of pass by value or pass by reference should be unified in this class
 		Vector2D& operator/=(float scalar);
 
-		//std::ostream& operator<<(std::ostream& stream, const Vector2D& vec);
-	
+		bool operator< (const Vector2D& vec);
+		bool operator> (const Vector2D& vec);
+
 	public: 
 		// debug function
 		void printValue() const;

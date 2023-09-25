@@ -11,6 +11,8 @@
 
 #include "Coconut/ECS/Compoent.h"
 #include "Coconut/Vector2D.h"
+#include "Coconut/Collision.h"
+#include "Coconut/ECS/ColliderComponent.h"
 
 std::unique_ptr<Coconut::Map> map;
 
@@ -21,7 +23,7 @@ SDL_Event Coconut::Game::event;
 // global variables
 Coconut::Manager manager;
 Coconut::Entity& player(manager.addEntity());
-
+//Coconut::Entity& wall(manager.addEntity());
 
 Coconut::Game::Game() {
 	m_gameCounter = 0;
@@ -81,6 +83,8 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 	player.addComponent<Coconut::TransformComponent>();
 	player.addComponent<Coconut::SpriteComponent>("bird.png");
 	player.addComponent<Coconut::KeyboardController>();
+	player.addComponent<Coconut::ColliderComponent>("player");
+
 }
 
 void Coconut::Game::handleEvents() {
@@ -101,6 +105,10 @@ void Coconut::Game::update() {
 
 	manager.refresh();
 	manager.update(); 
+
+	//if (Coconut::Collision::circle(player.getComponent<Coconut::ColliderComponent>(), wall.getComponent<Coconut::ColliderComponent>())) {
+	//	CC_CORE_INFO("Collision!");
+	//}
 
 	//CC_CORE_INFO("player position: ({}, {})", newPlayter.getComponent<Coconut::PositionComponent>().getXpos(),
 	//	newPlayter.getComponent<Coconut::PositionComponent>().getYpos());

@@ -7,6 +7,10 @@ Coconut::Vector2D::Vector2D() : x(0.0f), y(0.0f) {}
 
 Coconut::Vector2D::Vector2D(float x, float y) : x(x), y(y) {}
 
+Coconut::Vector2D::Vector2D(std::tuple<float, float> tp) {
+	std::tie(this->x, this->y) = tp;
+}
+
 std::tuple<float, float> Coconut::Vector2D::getCoordinate()
 {
 	return std::make_tuple(x, y);
@@ -143,20 +147,13 @@ Coconut::Vector2D& Coconut::Vector2D::operator/=(float scalar) {
 	return *this;
 }
 
-//std::ostream& Coconut::Vector2D::operator<<(std::ostream& stream, const Coconut::Vector2D& vec) {
-//	stream << '(' << vec.x << ',' << ' ' << vec.y;
-//	return stream;
-//}
-
-
-
 
 void Coconut::Vector2D::printValue() const {
 	CC_CORE_INFO("Current Vector2D pos: ({}, {})", x, y);
 }
 
 
-Coconut::Vector2D::RelativePosition_t Coconut::Vector2D::getRelativePisition(const Vector2D other) {
+Coconut::Vector2D::RelativePosition_t Coconut::Vector2D::getRelativePosition(const Vector2D other) {
 	if (other.x < x && other.y < y) return RelativePosition_t::lu;
 	if (other.x > x && other.y < y) return RelativePosition_t::ld;
 	if (other.x < x && other.y > y) return RelativePosition_t::ru;
@@ -166,4 +163,12 @@ Coconut::Vector2D::RelativePosition_t Coconut::Vector2D::getRelativePisition(con
 float Coconut::Vector2D::distance(const Coconut::Vector2D vecA, const Coconut::Vector2D vecB) {
 	Coconut::Vector2D tmpvec{vecA - vecB}; 
 	return tmpvec.norm_2();
+}
+
+bool Coconut::Vector2D::operator< (const Coconut::Vector2D& other) {
+	return (this->x < other.x && this->y < other.y);
+}
+
+bool Coconut::Vector2D::operator> (const Coconut::Vector2D& other) {
+	return (this->x > other.x && this->y > other.y);
 }

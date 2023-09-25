@@ -6,15 +6,34 @@
 #include "Coconut/Vector2D.h"
 #include "Coconut/ECS/TransformComponent.h"
 
+
 bool Coconut::Collision::rectangle (const SDL_Rect& a, const SDL_Rect& b) {
     // ToDo
+
     return false;
 }
 
-static bool rectangle(const Coconut::ColliderComponent& collider_a, const Coconut::ColliderComponent& collider_b) {
-    Coconut::TransformComponent* transA = collider_a.transform;
-    Coconut::TransformComponent* transB = collider_b.transform; 
-    // ToDo
+bool Coconut::Collision::rectangle(const Coconut::ColliderComponent& collider_a, const Coconut::ColliderComponent& collider_b)
+{
+    Coconut::TransformComponent transA = *(collider_a.transform);
+    Coconut::TransformComponent transB = *(collider_b.transform);
+    
+    auto relativePos = transA.getRelativePosition(transB);
+    
+
+    // We fix Point A and get the relative position of B subject to A 
+    if (relativePos == TransformComponent::RelativePosition_t::lu) {
+        // Point at the opposite diagonal position
+        Coconut::Vector2D rdB = transB.getPositionVector2D() + transB.getSizeVector2D();
+        if (rdB > transA.getPositionVector2D()) return true;
+        else return false;
+    }
+    //if (relativePos == TransformComponent::RelativePosition_t::ru) {
+    //    Coconut::Vector2D ldB = transB.getPositionVector2D() + Vector2D(0.0f, static_cast<float> (transB.getHight()));
+    //    if (ldB.getX() > 
+    //}
+    // Shit I dont wanna impl this !!!!
+    return false;
 }
 
 bool Coconut::Collision::circle(const SDL_Rect& a, const SDL_Rect& b) {
