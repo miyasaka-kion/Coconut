@@ -35,7 +35,7 @@ Coconut::Game::Game() {
 Coconut::Game::~Game() {}
 
 void Coconut::Game::gameInit(std::string title, int x, int y, int width, int height, bool fullscreen) {
-	int flag = NULL;
+	int flag = 0;
 	if (fullscreen) {
 		flag = SDL_WINDOW_FULLSCREEN;
 	}
