@@ -12,7 +12,13 @@
 namespace Coconut {
 	class Collision {
 	public:
+		// this will be the collide judge for any 2 type of TransformComponent
+		static bool isCollide(const Coconut::ColliderComponent& collider_a, const Coconut::ColliderComponent& collider_b);
+	// this should be set to private?
+	public:
 		static bool rectangle(const SDL_Rect& a, const SDL_Rect& b);
+		static bool rectangle(const Coconut::ColliderComponent& collider_a, const Coconut::ColliderComponent& collider_b);
+
 		static bool circle(const SDL_Rect& a, const SDL_Rect& b);
 		static bool circle(const Coconut::ColliderComponent& collider_a, const Coconut::ColliderComponent& collider_b);
 	};

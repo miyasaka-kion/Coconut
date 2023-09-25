@@ -1,12 +1,20 @@
+#include <iterator>
+
 #include "Coconut/Collision.h"
 #include "Coconut/ConstantSpec.h"
 #include "Coconut/ECS/ColliderComponent.h"
 #include "Coconut/Vector2D.h"
-#include <iterator>
+#include "Coconut/ECS/TransformComponent.h"
 
 bool Coconut::Collision::rectangle (const SDL_Rect& a, const SDL_Rect& b) {
     // ToDo
     return false;
+}
+
+static bool rectangle(const Coconut::ColliderComponent& collider_a, const Coconut::ColliderComponent& collider_b) {
+    Coconut::TransformComponent* transA = collider_a.transform;
+    Coconut::TransformComponent* transB = collider_b.transform; 
+    // ToDo
 }
 
 bool Coconut::Collision::circle(const SDL_Rect& a, const SDL_Rect& b) {
