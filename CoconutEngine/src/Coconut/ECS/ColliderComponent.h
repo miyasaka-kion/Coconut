@@ -24,10 +24,12 @@ namespace Coconut {
 		};
 		Shape_t shape;
 
+		// use transform to determin the collider 
 		Coconut::TransformComponent* transform;
 
 		// @return central, radius
-		std::tuple<Coconut::Vector2D, float> getCircleINfo() {
+		// where radius is the minimum of w and h
+		std::tuple<Coconut::Vector2D, float> getCircleINfo() const {
 			float minRadius = static_cast<float>(std::min(collider.w, collider.y));
 			Coconut::Vector2D central(static_cast<float>(collider.x + minRadius), static_cast<float>(collider.y + minRadius));
 			return std::tie(central, minRadius);

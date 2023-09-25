@@ -36,8 +36,10 @@ namespace Coconut {
 
 		RelativePosition_t getRelativePisition(const Vector2D other);
 
-	public:
-		float norm();
+		// 2 norm of the vector
+		float norm_2();
+		// get the Euclidean distance of two Vector2D
+		static float distance(const Vector2D vecA, const Vector2D vecB);
 
 	public:
 		bool operator==(const Vector2D& vec) const;

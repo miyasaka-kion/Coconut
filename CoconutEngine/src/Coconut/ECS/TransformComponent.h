@@ -1,6 +1,10 @@
 #pragma once
 
+#ifdef CC_PLATFORM_WINDOWS
 #include <SDL.h>
+#else 
+#include <SDL2/SDL.h>
+#endif
 
 #include "Coconut/Log.h"
 #include "Coconut/ECS/ECS.h"
