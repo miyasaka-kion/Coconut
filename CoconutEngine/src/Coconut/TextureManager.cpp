@@ -1,8 +1,12 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
+#ifdef CC_PLATFORM_WINDOWS
+#include <SDL.h>
+#include <SDL_image.h>
+#else
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#endif
 
-// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
-
-#include "TextureManager.h"
+#include "Coconut/TextureManager.h"
 #include "Coconut/Vector2D.h"
 
 std::filesystem::path Coconut::TextureManager::m_binPath = std::filesystem::current_path();

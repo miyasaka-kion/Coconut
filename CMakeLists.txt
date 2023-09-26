@@ -12,4 +12,4 @@ project(SDL_Game)
 add_subdirectory(CoconutEngine)
 add_subdirectory(${APPLICATION_NAME})
 
-file(COPY "${CMAKE_SOURCE_DIR}/${APPLICATION_NAME}/assets" DESTINATION "${CMAKE_BINARY_DIR}/${APPLICATION_NAME}")
+file(COPY "${CMAKE_SOURCE_DIR}/${APPLICATION_NAME}/assets" DESTINATION "${CMAKE_BINARY_DIR}")

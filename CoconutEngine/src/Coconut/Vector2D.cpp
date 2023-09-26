@@ -127,14 +127,11 @@ void Coconut::Vector2D::printValue() const {
 }
 
 Coconut::Vector2D::RelativePosition_t Coconut::Vector2D::getRelativePosition(const Vector2D other) {
-    if(other.x < x && other.y < y)
-        return RelativePosition_t::lu;
-    if(other.x > x && other.y < y)
-        return RelativePosition_t::ld;
-    if(other.x < x && other.y > y)
-        return RelativePosition_t::ru;
-    if(other.x > x && other.y > y)
-        return RelativePosition_t::rd;
+	if (other.x < x && other.y < y) return RelativePosition_t::lu;
+	if (other.x > x && other.y < y) return RelativePosition_t::ld;
+	if (other.x < x && other.y > y) return RelativePosition_t::ru;
+	if (other.x > x && other.y > y) return RelativePosition_t::rd;
+    return RelativePosition_t::same;
 }
 
 float Coconut::Vector2D::distance(const Coconut::Vector2D vecA, const Coconut::Vector2D vecB) {
