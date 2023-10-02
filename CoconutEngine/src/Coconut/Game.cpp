@@ -107,6 +107,8 @@ void Coconut::Game::update() {
     manager.update();
 
     if(Coconut::Collision::circle(player, dirt)) {
+        auto& trans = player.getComponent<Coconut::TransformComponent>();
+        trans.velocity = trans.velocity * -1;
         CC_CORE_INFO("Collision detected!");
     }
 }

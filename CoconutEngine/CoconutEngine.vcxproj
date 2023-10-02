@@ -145,13 +145,14 @@
     <ClInclude Include="src\Coconut\ECS\ECS.h" />
     <ClInclude Include="src\Coconut\ECS\KeyBoardController.h" />
     <ClInclude Include="src\Coconut\ECS\SpriteComponent.h" />
+    <ClInclude Include="src\Coconut\ECS\TileComponent.h" />
     <ClInclude Include="src\Coconut\ECS\TransformComponent.h" />
     <ClInclude Include="src\Coconut\Game.h" />
     <ClInclude Include="src\Coconut\GameMap\Map.h" />
     <ClInclude Include="src\Coconut\GameMap\MapTweaker.h" />
+    <ClInclude Include="src\Coconut\Rect.h" />
     <ClInclude Include="src\Coconut\ImgManager.h" />
     <ClInclude Include="src\Coconut\Log.h" />
-    <ClInclude Include="src\Coconut\Object.h" />
     <ClInclude Include="src\Coconut\TextureManager.h" />
     <ClInclude Include="src\Coconut\Vector2D.h" />
   </ItemGroup>
@@ -161,8 +162,8 @@
     <ClCompile Include="src\Coconut\Game.cpp" />
     <ClCompile Include="src\Coconut\GameMap\Map.cpp" />
     <ClCompile Include="src\Coconut\GameMap\MapTweaker.cpp" />
+    <ClCompile Include="src\Coconut\Rect.cpp" />
     <ClCompile Include="src\Coconut\Log.cpp" />
-    <ClCompile Include="src\Coconut\Object.cpp" />
     <ClCompile Include="src\Coconut\TextureManager.cpp" />
     <ClCompile Include="src\Coconut\Vector2D.cpp" />
   </ItemGroup>

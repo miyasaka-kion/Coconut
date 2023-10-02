@@ -18,5 +18,11 @@ namespace Constants {
     constexpr float defaultScale = 0.1f;
     constexpr float BIRD_SCALE   = defaultScale;
 
+    constexpr int MAP_TILE_WIDTH = 64;
+    constexpr int MAP_TILE_HEIGHT = 64;
+
+    constexpr int MAP_WIDTH = WINDOW_WIDTH / MAP_TILE_WIDTH;
+    constexpr int MAP_HEIGHT = WINDOW_HEIGHT / MAP_TILE_HEIGHT;
+
 }  // namespace Constants
 }  // namespace Coconut

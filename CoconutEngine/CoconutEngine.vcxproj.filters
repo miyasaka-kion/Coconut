@@ -58,15 +58,14 @@
     <ClInclude Include="src\Coconut\Log.h">
       <Filter>Coconut</Filter>
     </ClInclude>
-    <ClInclude Include="src\Coconut\Object.h">
-      <Filter>Coconut</Filter>
-    </ClInclude>
     <ClInclude Include="src\Coconut\TextureManager.h">
       <Filter>Coconut</Filter>
     </ClInclude>
     <ClInclude Include="src\Coconut\Vector2D.h">
       <Filter>Coconut</Filter>
     </ClInclude>
+    <ClInclude Include="src\Coconut\ECS\TileComponent.h" />
+    <ClInclude Include="src\Coconut\Rect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Coconut\Application.cpp">
@@ -87,14 +86,12 @@
     <ClCompile Include="src\Coconut\Log.cpp">
       <Filter>Coconut</Filter>
     </ClCompile>
-    <ClCompile Include="src\Coconut\Object.cpp">
-      <Filter>Coconut</Filter>
-    </ClCompile>
     <ClCompile Include="src\Coconut\TextureManager.cpp">
       <Filter>Coconut</Filter>
     </ClCompile>
     <ClCompile Include="src\Coconut\Vector2D.cpp">
       <Filter>Coconut</Filter>
     </ClCompile>
+    <ClCompile Include="src\Coconut\Rect.cpp" />
   </ItemGroup>
 </Project>

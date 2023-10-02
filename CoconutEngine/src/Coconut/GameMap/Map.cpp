@@ -1,4 +1,5 @@
 #include "Coconut/GameMap/Map.h"
+#include "Coconut/ConstantSpec.h"
 
 Coconut::Map::Map() : m_rows(20), m_columns(25) {
     m_map.resize(m_rows, std::vector<int>(m_columns, 0));
@@ -14,7 +15,8 @@ Coconut::Map::Map() : m_rows(20), m_columns(25) {
     // This should be change with respect to a certain size of a texture file
     // Not changed yet!
     // ToDo: make some automatic method to determin the size of a texture file
-    src.w = dest.w = src.h = dest.h = 32;
+    src.w = dest.w = Coconut::Constants::MAP_TILE_WIDTH;
+    src.h = dest.h = Coconut::Constants::MAP_TILE_HEIGHT;
 
     dest.x = dest.y = 0;
 }
