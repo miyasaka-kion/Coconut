@@ -3,46 +3,38 @@
 #include "Coconut/ConstantSpec.h"
 
 namespace Coconut {
-	Application::Application() {
+Application::Application() {}
+Application::~Application() {}
 
-	}
-	Application::~Application() {
+void Application::run() {
+    const int FPS        = 60;
+    const int frameDelay = 1000 / FPS;
 
-	}
+    Uint32 frameStart;
+    int    frameTime;
 
-	void Application::run() {
-		const int FPS = 60;
-		const int frameDelay = 1000 / FPS;
+    Coconut::Log::init();
+    CC_CORE_WARN("Core logger initialized!");
 
-		Uint32 frameStart;
-		int frameTime;
+    std::shared_ptr<Coconut::Game> game = std::make_shared<Coconut::Game>();
 
+    game->gameInit("CoconutEngine Test Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Coconut::Constants::WINDOW_WIDTH, Coconut::Constants::WINDOW_HEIGHT, false);
 
-		Coconut::Log::init();
-		CC_CORE_WARN("Core logger initialized!");
+    while(game->running()) {
+        frameStart = SDL_GetTicks();
 
+        game->handleEvents();
+        game->update();
+        game->render();
 
-		std::shared_ptr<Coconut::Game> game = std::make_shared<Coconut::Game>();
+        frameTime = SDL_GetTicks() - frameStart;
+        if(frameTime < frameDelay) {
+            SDL_Delay(frameDelay - frameTime);
+        }
+    }
 
-		game->gameInit("CoconutEngine Test Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Coconut::Constants::WINDOW_WIDTH, Coconut::Constants::WINDOW_HEIGHT, false);
+    game->clean();
 
-		while (game->running()) {
-			frameStart = SDL_GetTicks();
-
-
-			game->handleEvents();
-			game->update();
-			game->render();
-
-
-			frameTime = SDL_GetTicks() - frameStart;
-			if (frameTime < frameDelay) {
-				SDL_Delay(frameDelay - frameTime);
-			}
-		}
-
-		game->clean();
-
-		CC_CORE_CRITICAL("Programme end, Hellow world!");
-	}
+    CC_CORE_CRITICAL("Programme end, Hellow world!");
 }
+}  // namespace Coconut

@@ -11,31 +11,29 @@
 #include <SDL2/SDL_image.h>
 #endif
 
-
-
 namespace Coconut {
-	class Game {
-	public:
-		Game();
-		~Game();
-		
-		void gameInit(std::string title, int x, int y, int width, int height, bool fullscreen);
-		
-		void handleEvents();
-		void update();
-		void render();
-		void clean();
-		
-		inline bool running() const {
-			return m_isRunning;
-		}
-		
-		static SDL_Renderer* renderer;
-		static SDL_Event event;
+class Game {
+public:
+    Game();
+    ~Game();
 
-	private:
-		bool m_isRunning;
-		int m_gameCounter;
-		SDL_Window* m_window;
-	};
-}
+    void gameInit(std::string title, int x, int y, int width, int height, bool fullscreen);
+
+    void handleEvents();
+    void update();
+    void render();
+    void clean();
+
+    inline bool running() const {
+        return m_isRunning;
+    }
+
+    static SDL_Renderer* renderer;
+    static SDL_Event     event;
+
+private:
+    bool        m_isRunning;
+    int         m_gameCounter;
+    SDL_Window* m_window;
+};
+}  // namespace Coconut

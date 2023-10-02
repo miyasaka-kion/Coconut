@@ -8,23 +8,18 @@
 #include <SDL2/SDL.h>
 #endif
 
-
 #include "Coconut/Core.h"
-#include "Coconut/Log.h"
 #include "Coconut/Game.h"
+#include "Coconut/Log.h"
 
 namespace Coconut {
 
-	class CC_API Application
-	{
-	public:
-		Application();
-		virtual ~Application();
+class CC_API Application {
+public:
+    Application();
+    virtual ~Application();
 
-		void run();
-	};
-	
-}
+    void run();
+};
 
-
-
+}  // namespace Coconut

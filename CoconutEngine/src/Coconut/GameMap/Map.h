@@ -6,31 +6,30 @@
 #include <SDL_image.h>
 #pragma push(pop)
 
-#include "Coconut/TextureManager.h"
 #include "Coconut/GameMap/MapTweaker.h"
+#include "Coconut/TextureManager.h"
 
 namespace Coconut {
-	class Map {
-	public:
-		//enum class 
-		Map();
-		Map(int rows, int cols);
-		~Map();
+class Map {
+public:
+    // enum class
+    Map();
+    Map(int rows, int cols);
+    ~Map();
 
-		void loadMap();
+    void loadMap();
 
-		void drawMap();
-	private:
-		SDL_Rect src, dest;
-		SDL_Texture* m_dirt;
-		SDL_Texture* m_grass;
-		SDL_Texture* m_water;
-		SDL_Texture* m_sky;
+    void drawMap();
 
-		const int m_rows;
-		const int m_columns;
-		std::vector<std::vector<int>> m_map;
+private:
+    SDL_Rect     src, dest;
+    SDL_Texture* m_dirt;
+    SDL_Texture* m_grass;
+    SDL_Texture* m_water;
+    SDL_Texture* m_sky;
 
-
-	};
-}
+    const int                     m_rows;
+    const int                     m_columns;
+    std::vector<std::vector<int>> m_map;
+};
+}  // namespace Coconut
