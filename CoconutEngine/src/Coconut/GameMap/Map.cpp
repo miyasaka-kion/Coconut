@@ -1,7 +1,7 @@
 #include "Coconut/GameMap/Map.h"
 #include "Coconut/ConstantSpec.h"
 
-Coconut::Map::Map() : m_rows(20), m_columns(25) {
+Coconut::Map::Map() : m_rows(Coconut::Constants::MAP_WIDTH), m_columns(Coconut::Constants::MAP_HEIGHT) {
     m_map.resize(m_rows, std::vector<int>(m_columns, 0));
     CC_CORE_INFO("Begin to load map sprites:");
     m_dirt  = Coconut::TextureManager::LoadTexture("dirt.jpg");
@@ -43,8 +43,8 @@ void Coconut::Map::drawMap() {
             // use enum?
             int curType = m_map[i][j];
 
-            dest.x = i * 32;
-            dest.y = j * 32;
+            dest.x = i * Coconut::Constants::DEST_RECT_WIDTH;
+            dest.y = j * Coconut::Constants::DEST_RECT_HEIGHT;
 
             switch(curType) {
             case 0:

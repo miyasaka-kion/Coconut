@@ -21,8 +21,8 @@ namespace Constants {
     constexpr int MAP_TILE_WIDTH = 64;
     constexpr int MAP_TILE_HEIGHT = 64;
 
-    constexpr int MAP_WIDTH = WINDOW_WIDTH / MAP_TILE_WIDTH;
-    constexpr int MAP_HEIGHT = WINDOW_HEIGHT / MAP_TILE_HEIGHT;
+    constexpr int MAP_WIDTH = WINDOW_WIDTH / MAP_TILE_WIDTH + 1;
+    constexpr int MAP_HEIGHT = WINDOW_HEIGHT / MAP_TILE_HEIGHT + 1;
 
 }  // namespace Constants
 }  // namespace Coconut
