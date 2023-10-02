@@ -21,5 +21,6 @@ namespace Coconut {
 
 		static bool circle(const SDL_Rect& a, const SDL_Rect& b);
 		static bool circle(const Coconut::ColliderComponent& collider_a, const Coconut::ColliderComponent& collider_b);
+		static bool circle(const Coconut::Entity& entity_a, const Coconut::Entity& entity_b);
 	};
 }

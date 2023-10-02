@@ -49,12 +49,20 @@ bool Coconut::Collision::circle(const Coconut::ColliderComponent& collider_a, co
     float radiusA;
     Coconut::Vector2D centralB;
     float radiusB;
-    std::tie<Vector2D, float>(centralA, radiusA) = collider_a.getCircleINfo();
-    std::tie<Vector2D, float>(centralB, radiusB) = collider_b.getCircleINfo();
+    std::tie<Vector2D, float>(centralA, radiusA) = collider_a.getCircleInfo();
+    std::tie<Vector2D, float>(centralB, radiusB) = collider_b.getCircleInfo();
     if(Coconut::Vector2D::distance(centralA, centralB) <= radiusA + radiusB) {
         return true;
     }
     
     return false;
+}
+
+bool Coconut::Collision::circle(const Coconut::Entity& entity_a, const Coconut::Entity& entity_b)
+{
+    auto& collider_a = entity_a.getComponent<ColliderComponent>();
+    auto& collider_b = entity_b.getComponent<ColliderComponent>();
+
+    return circle(collider_a, collider_b);
 }
 

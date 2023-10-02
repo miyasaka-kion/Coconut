@@ -11,6 +11,7 @@
 
 #include "Coconut/ECS/Compoent.h"
 
+// This collider component is based on rectangle type of collision shape
 namespace Coconut {
 	class ColliderComponent : public Coconut::Component {
 	public:
@@ -32,9 +33,19 @@ namespace Coconut {
 
 		// @return central, radius
 		// where radius is the minimum of w and h
-		std::tuple<Coconut::Vector2D, float> getCircleINfo() const {
-			float minRadius = static_cast<float>(std::min(collider.w, collider.y));
-			Coconut::Vector2D central(static_cast<float>(collider.x + minRadius), static_cast<float>(collider.y + minRadius));
+
+		float getCircCleRadius() const {
+			return static_cast<float>(std::min(collider.w, collider.y));
+		}
+
+		Coconut::Vector2D getCircleCentral() const {
+			float minRadius = getCircCleRadius();
+			return Vector2D(static_cast<float>(collider.x + minRadius), static_cast<float>(collider.y + minRadius));
+		}
+
+		std::tuple<Coconut::Vector2D, float> getCircleInfo() const {
+			float minRadius = getCircCleRadius();
+			auto central = getCircleCentral();
 			return std::tie(central, minRadius);
 		}
 
@@ -44,6 +55,13 @@ namespace Coconut {
 				entity->addComponent<Coconut::TransformComponent>();
 			}
 			transform = &entity->getComponent<Coconut::TransformComponent>();
+			
+			// cast exists here, maybe this is not a good manner, will be modifed in the future
+			std::tie(collider.w, collider.h) = static_cast<std::tuple<float, float>> (transform->getScaledSize());
+			std::tie(collider.x, collider.y) = transform->getCoordinate();
+			CC_CORE_INFO("Collide box generated! tag = {}", tag);
+			CC_CORE_INFO("the central of the box is {}, {}, radius is {}.", getCircleCentral().x, getCircleCentral().y, getCircCleRadius());
+
 		}
 
 		void update() override {

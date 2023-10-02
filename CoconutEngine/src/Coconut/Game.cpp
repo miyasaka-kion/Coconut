@@ -111,12 +111,9 @@ void Coconut::Game::update() {
 	manager.refresh();
 	manager.update(); 
 
-	//if (Coconut::Collision::circle(player.getComponent<Coconut::ColliderComponent>(), wall.getComponent<Coconut::ColliderComponent>())) {
-	//	CC_CORE_INFO("Collision!");
-	//}
-
-	//CC_CORE_INFO("player position: ({}, {})", newPlayter.getComponent<Coconut::PositionComponent>().getXpos(),
-	//	newPlayter.getComponent<Coconut::PositionComponent>().getYpos());
+	if (Coconut::Collision::circle(player, dirt)) {
+		CC_CORE_INFO("Collision detected!");
+	}
 }
 
 void Coconut::Game::render() {
