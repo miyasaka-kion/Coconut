@@ -20,7 +20,8 @@ namespace Coconut {
 		Coconut::TransformComponent* m_transform;
 		SDL_Texture* m_texture;
 		SDL_Rect m_srcRect, m_destRect;
-
+		
+		// this is the size info of the sprite picture
 		int width;
 		int height;
 	public:

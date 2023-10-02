@@ -75,9 +75,6 @@
     <ClCompile Include="src\Coconut\Collision.cpp">
       <Filter>Coconut</Filter>
     </ClCompile>
-    <ClCompile Include="src\Coconut\ECS\ColliderComponent.cpp">
-      <Filter>Coconut\ECS</Filter>
-    </ClCompile>
     <ClCompile Include="src\Coconut\Game.cpp">
       <Filter>Coconut</Filter>
     </ClCompile>

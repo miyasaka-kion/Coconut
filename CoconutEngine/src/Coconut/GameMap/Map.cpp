@@ -3,10 +3,12 @@
 Coconut::Map::Map()
     : m_rows(20), m_columns(25) {
     m_map.resize(m_rows, std::vector<int>(m_columns, 0));
+    CC_CORE_INFO("Begin to load map sprites:");
     m_dirt = Coconut::TextureManager::LoadTexture("dirt.jpg");
     m_grass = Coconut::TextureManager::LoadTexture("grass.png");
     m_water = Coconut::TextureManager::LoadTexture("water.png");
     m_sky = Coconut::TextureManager::LoadTexture("sky.png");
+    CC_CORE_INFO("CC load map sprites finished!");
 
     loadMap();
     src.x = src.y = 0;

@@ -20,6 +20,8 @@ namespace Coconut {
 
 	public:
 		int speed = 3;
+
+		// size will be rendered on screen
 		int width = 32;
 		int height = 32;
 		float scale = Coconut::Constants::defaultScale;
@@ -27,12 +29,12 @@ namespace Coconut {
 	public:
 		TransformComponent() : position(Vector2D()) {}
 		TransformComponent(float x, float y) : position(Vector2D(x, y)) {};
-		TransformComponent(float x, float y, int speed_p, int width_p, int height_p, float scale_p) {
+
+		// @param position.x, position.y, speed, render_size.w, render_size.h, scale);
+		TransformComponent(float x, float y, int speed_p, float scale_p) {
 			position = Vector2D(x, y);
 			velocity = Vector2D();
 			speed = speed_p;
-			width = width_p;
-			height = height_p;
 			scale = scale_p;
 		}
 

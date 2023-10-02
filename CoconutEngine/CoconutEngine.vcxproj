@@ -158,7 +158,6 @@
   <ItemGroup>
     <ClCompile Include="src\Coconut\Application.cpp" />
     <ClCompile Include="src\Coconut\Collision.cpp" />
-    <ClCompile Include="src\Coconut\ECS\ColliderComponent.cpp" />
     <ClCompile Include="src\Coconut\Game.cpp" />
     <ClCompile Include="src\Coconut\GameMap\Map.cpp" />
     <ClCompile Include="src\Coconut\GameMap\MapTweaker.cpp" />

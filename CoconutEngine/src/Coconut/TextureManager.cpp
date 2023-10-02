@@ -38,6 +38,11 @@ std::tuple<SDL_Texture*,int ,int> Coconut::TextureManager::LoadTexture_tuple(con
 
 	SDL_Surface* tmpSurface = IMG_Load(fileFullPath.c_str());
 
+	if (tmpSurface == nullptr) {
+		CC_CORE_CRITICAL("tmpSurface is a nullptr! The specified file or path may not correct.");
+		CC_CORE_CRITICAL("ERROR loading {}", fileFullPath);
+		throw std::runtime_error("IMG_Load returns a nullptr!");
+	}
 	int imgWidth, imgHeight;
 	imgWidth = tmpSurface->w;
 	imgHeight = tmpSurface->h;

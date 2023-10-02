@@ -22,8 +22,10 @@ SDL_Event Coconut::Game::event;
 
 // global variables
 Coconut::Manager manager;
-Coconut::Entity& player(manager.addEntity());
+//Coconut::Entity& player(manager.addEntity());
+auto& player = manager.addEntity();
 //Coconut::Entity& wall(manager.addEntity());
+auto& dirt = manager.addEntity();
 
 Coconut::Game::Game() {
 	m_gameCounter = 0;
@@ -84,7 +86,10 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
 	player.addComponent<Coconut::SpriteComponent>("bird.png");
 	player.addComponent<Coconut::KeyboardController>();
 	player.addComponent<Coconut::ColliderComponent>("player");
-
+	
+	dirt.addComponent<Coconut::TransformComponent>(100, 100, 0, 1);
+	dirt.addComponent<Coconut::SpriteComponent>("dirt.jpg");
+	dirt.addComponent<Coconut::ColliderComponent>("dirt");
 }
 
 void Coconut::Game::handleEvents() {
