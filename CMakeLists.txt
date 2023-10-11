@@ -5,15 +5,21 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(box2dtest)
 
-# aux_source_directory(src SRC_LIST)
+set(USE_LEGACY 1)
+if(USE_LEGACY)
 set(SRC_LIST src/main.cpp)
+else()
+# aux_source_directory(src SRC_LIST)
+endif()
 
 find_package(box2d REQUIRED)
 find_package(sdl2 REQUIRED)
 find_package(sdl2_image REQUIRED)
 
-add_executable(${PROJECT_NAME} ${SRC_LIST})
+message("box2d_FOUND = ${box2d_FOUND}")
 
+
+add_executable(${PROJECT_NAME} ${SRC_LIST})
 target_include_directories(${PROJECT_NAME} PRIVATE ${SRC_LIST})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE box2d::box2d)

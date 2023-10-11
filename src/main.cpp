@@ -1,12 +1,11 @@
 #include <Box2D/Box2D.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+
 #include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <memory>
-
-#include "Application.h"
 
 b2World* world;
 
@@ -88,14 +87,17 @@ int main() {
     b2Vec2 verticalDelta {0.0f, 5.0f};
     createBar(-0.0f, -0.0f, endpoint, endpoint - verticalDelta);
     createBar(-0.0f, -0.0f, startpoint, startpoint - verticalDelta);
-
+    print("Bars Created!");
     // mycode end
 
     // >> load the box figure
     SDL_Surface* tmp_sprites;
     tmp_sprites = IMG_Load("assets/box.png");
-    if(!tmp_sprites)
+    if(!tmp_sprites) {
+        print("box.png failed to load");
         return EXIT_FAILURE;
+    }
+     
 
     SDL_Texture* texture_box = SDL_CreateTextureFromSurface(renderer, tmp_sprites);
     SDL_FreeSurface(tmp_sprites);
@@ -170,8 +172,8 @@ int main() {
         }
 
         // question box, update x and y destination
-        box.x = ((SCALED_WIDTH / 2.0f) + pos.x) * MET2PIX - box.w / 2;
-        box.y = ((SCALED_HEIGHT / 2.0f) + pos.y) * MET2PIX - box.h / 2;
+        box.x = ((SCALED_WIDTH / 2.0f) + pos.x) * MET2PIX - box.w / 2.0f;
+        box.y = ((SCALED_HEIGHT / 2.0f) + pos.y) * MET2PIX - box.h / 2.0f;
 
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0);
