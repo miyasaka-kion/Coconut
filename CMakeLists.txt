@@ -5,16 +5,16 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(box2dtest)
 
+# aux_source_directory(src SRC_LIST)
+set(SRC_LIST src/main.cpp)
+
 find_package(box2d REQUIRED)
 find_package(sdl2 REQUIRED)
 find_package(sdl2_image REQUIRED)
 
+add_executable(${PROJECT_NAME} ${SRC_LIST})
 
-message("box2d_FOUND = ${box2d_FOUND}")
-message("sdl2_FOUND = ${sdl2_FOUND}")
-message("sdl2_image_FOUND = ${sdl2_image_FOUND}")
-message("box2d_VERSION = ${box2d_VERSION}")
-add_executable(${PROJECT_NAME} main.cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE ${SRC_LIST})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE box2d::box2d)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
