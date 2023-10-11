@@ -35,6 +35,6 @@ void Application::run() {
 
     game->clean();
 
-    CC_CORE_CRITICAL("Programme end, Hellow world!");
+    CC_CORE_CRITICAL("Programme end, Hello world!");
 }
 }  // namespace Coconut

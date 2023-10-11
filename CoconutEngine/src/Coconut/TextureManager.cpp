@@ -1,8 +1,5 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
+#include "Coconut/TextureManager.h"
 
-// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
-
-#include "TextureManager.h"
 #include "Coconut/Vector2D.h"
 
 std::filesystem::path Coconut::TextureManager::m_binPath = std::filesystem::current_path();
