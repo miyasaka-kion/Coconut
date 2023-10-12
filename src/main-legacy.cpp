@@ -136,7 +136,7 @@ int main() {
     // xxx
     dynamicBox.SetAsBox((w_box / 2.0f) - dynamicBox.m_radius, (h_box / 2.0f) - dynamicBox.m_radius);  // will be 0.5 x 0.5
     // dynamicBox.SetAsBox((w_box / 2.0f) - 0.0f, (h_box / 2.0f) - 0.0f);  // will be 0.5 x 0.5
-    // std::cout << "dynamicBox.SetAsBox" <<(w_box / 2.0f) - dynamicBox.m_radius << ' ' << (h_box / 2.0f) - dynamicBox.m_radius <<std::endl;
+    std::cout << "dynamicBox.SetAsBox" <<(w_box / 2.0f) - dynamicBox.m_radius << ' ' << (h_box / 2.0f) - dynamicBox.m_radius <<std::endl;
     std::cout << "dynamicBox.m_radius = " << dynamicBox.m_radius << std::endl;
 
     b2FixtureDef fixtureDef;
@@ -178,9 +178,12 @@ int main() {
         box.x = ((SCALED_WIDTH / 2.0f) + pos.x) * MET2PIX - box.w / 2.0f;
         box.y = ((SCALED_HEIGHT / 2.0f) - pos.y) * MET2PIX - box.h / 2.0f;
 
+        std::cout<< box.w << ' ' << box.h << std::endl;
+        
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0);
 
+        
         // Draw ground platform
         // SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0);
         SDL_RenderDrawLine(renderer, ((SCALED_WIDTH / 2.0f) + edgeShape.m_vertex1.x) * MET2PIX, ((SCALED_HEIGHT / 2.0f) + edgeShape.m_vertex1.y) * MET2PIX,

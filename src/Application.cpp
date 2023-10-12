@@ -1,6 +1,8 @@
+#include <cstdio>
 #include <iostream>
 
 #include <SDL2/SDL.h>
+#include <memory>
 #include <stdexcept>
 
 #include "Application.h"
@@ -10,6 +12,27 @@
 #include "MetricConverter.h"
 #include "Utils.h"
 
+
+
+Application::Application() {
+    init_sdl_window();
+    init_sdl_renderer();
+
+    world = std::make_unique<b2World>(b2Vec2(0.0f, -10.0f));
+    // this->world = new b2World(b2Vec2(0.0f, -10.0f));  // new b2World(b2Vec2(0.0f, 9.81f)); // we should avoid using new
+
+    // this should be a loop to init all entities
+    box  = std::make_unique<Box> (world.get(), renderer);
+    edge = std::make_unique<Edge> (world.get(), renderer);
+    closeGame = false;
+}
+
+Application::~Application() {
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+}
+
 void Application::init_sdl_renderer() {
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if(renderer == NULL) {
@@ -17,28 +40,6 @@ void Application::init_sdl_renderer() {
         throw std::runtime_error("SDL_Renderer initialized a NULL renderer");
     }
     std::cout << "SDL renderer initialized!" << std::endl;
-}
-
-Application::Application() {
-    init_sdl_window();
-    init_sdl_renderer();
-
-    // auto world = std::make_shared<b2Vec2>(b2Vec2(0.0f, 9.81f));
-    world = new b2World(b2Vec2(0.0f, 9.81f));  // new b2World(b2Vec2(0.0f, 9.81f));
-
-    // this should be a loop to init all entities
-    box  = Box(world, renderer);
-    edge = Edge(world, renderer);
-    closeGame = false;
-}
-
-Application::~Application() {
-    // box2D delete whole world and free memory
-    delete world;
-
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 }
 
 void Application::loadBoundary() {
@@ -86,9 +87,8 @@ void Application::run() {
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0);
 
-        box.render();
-
-        edge.render();
+        edge->render();
+        box->render();
 
         SDL_SetRenderDrawColor(renderer, 32, 70, 49, 0);
         SDL_RenderPresent(renderer);
@@ -124,7 +124,6 @@ void Application::pollEvents() {
             closeGame = true;
             std::cout << "SDL_QUIT Triggered." << std::endl;
         }
-            
 
         else if(event.key.keysym.sym == SDLK_ESCAPE) {
             closeGame = true;
@@ -133,8 +132,8 @@ void Application::pollEvents() {
         }
             
         else if(event.key.keysym.sym == SDLK_r) {
-            box.body->SetTransform(b2Vec2(x_box, y_box), angle_box);
-            box.body->SetLinearVelocity(vel);
+            box->body->SetTransform(b2Vec2(x_box, y_box), angle_box);
+            box->body->SetLinearVelocity(vel);
             std::cout << "r key pressed" << std::endl;
         }
     }

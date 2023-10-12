@@ -5,12 +5,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(box2dtest)
 
-set(USE_LEGACY 1)
+set(USE_LEGACY 0)
 if(USE_LEGACY)
-set(SRC_LIST src/main.cpp)
+set(SRC_LIST src/main-legacy.cpp)
 else()
-# aux_source_directory(src SRC_LIST)
+aux_source_directory(src SRC_LIST)
+list(REMOVE_ITEM SRC_LIST "src/main-legacy.cpp")
+list(REMOVE_ITEM SRC_LIST "src/tmp.cpp")
 endif()
+message("SRC_LIST: ${SRC_LIST}")
 
 find_package(box2d REQUIRED)
 find_package(sdl2 REQUIRED)

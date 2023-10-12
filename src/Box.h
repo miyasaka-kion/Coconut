@@ -6,7 +6,6 @@
 #include <SDL_render.h>
 #include <box2d/box2d.h>
 
-
 // Box is and Entity, should be inherit an Entity class here...
 class Box {
 public:
@@ -21,22 +20,20 @@ public:
     b2Vec2 getPosMeter();
     float getPosMeterX();
     float getPosMeterY();
-    float getAngleRad();
 
     int getPosPixX();
     int getPosPixY();
-    std::tuple<int, int> getPosPix();
     float getAngleDegree();
     
 private:
-    SDL_Texture* texture_box;
+    SDL_Texture* boxTexture;
     void loadTexture();
     void loadBoxToWorld();
 
 public:
-    SDL_Rect box;
+    SDL_Rect box_rect;
     b2Body*  body;
-
+    b2PolygonShape dynamicBox;
 // parent info
 private: 
     SDL_Renderer* m_renderer;

@@ -1,6 +1,8 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include <algorithm>
 #include <box2d/box2d.h>
+#include <memory>
 
 #include "Box.h"
 #include "Edge.h"
@@ -23,11 +25,11 @@ private:
     void createBar(float ground_x, float ground_y, b2Vec2 point1, b2Vec2 point2);
     
 public: 
-    b2World* world;
+    std::unique_ptr<b2World> world;
 
     // should be an Entity list here, I use one Box instead
-    Box box;
-    Edge edge;
+    std::unique_ptr<Box> box;
+    std::unique_ptr<Edge> edge;
     
 private:
     SDL_Window* window;

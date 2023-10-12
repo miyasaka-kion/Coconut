@@ -10,12 +10,12 @@ Edge::Edge(b2World* world, SDL_Renderer* renderer) : m_world(world), m_renderer(
     // start ground point
     b2Vec2 startpoint;
     startpoint.x = -3.0f;
-    startpoint.y = 2.0;
+    startpoint.y = -2.0;
 
     // end ground point
     b2Vec2 endpoint;
     endpoint.x = 3.0;
-    endpoint.y = 2.0;
+    endpoint.y = -2.0;
     // constants end
 
     // LineGround
@@ -26,7 +26,6 @@ Edge::Edge(b2World* world, SDL_Renderer* renderer) : m_world(world), m_renderer(
 
     body = m_world->CreateBody(&myGroundDef);
 
-    b2EdgeShape edgeShape;
     edgeShape.SetTwoSided(startpoint, endpoint);  // length -> coordinate vector from to vector
 
     b2FixtureDef edgeFixtureDef;

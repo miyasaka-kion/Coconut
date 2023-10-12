@@ -1,7 +1,7 @@
 #pragma once
 #include <box2d/box2d.h>
 
-constexpr int MET2PIX = 10;  // 640 / 80 = 8
+constexpr int MET2PIX = 100;  // 640 / 80 = 8
 
 constexpr int WIDTH  = 1000;
 constexpr int HEIGHT = 700;
