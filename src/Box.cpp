@@ -42,18 +42,18 @@ void Box::loadBoxToWorld() {
         (w_box / 2.0f) - dynamicBox.m_radius, 
         (h_box / 2.0f) - dynamicBox.m_radius);  
         // will be 0.5 x 0.5
-    
-    std::cout << "box info: \n hx: " << (w_box / 2.0f) - dynamicBox.m_radius
+        std::cout << "box info: \n hx: " << (w_box / 2.0f) - dynamicBox.m_radius
     << "\n hy: " <<(h_box / 2.0f) - dynamicBox.m_radius << std::endl; 
-
-    // dynamicBox.SetAsBox((w_box / 2.0f) - 0.0f, (h_box / 2.0f) - 0.0f);  // will be 0.5 x 0.5
-    std::cout << "dynamicBox.SetAsBox" << (w_box / 2.0f) - dynamicBox.m_radius << ' ' << (h_box / 2.0f) - dynamicBox.m_radius << std::endl;
+    //     (w_box / 2.0f) , 
+    //     (h_box / 2.0f));
+    //     std::cout << "box info: \n hx: " << (w_box / 2.0f)
+    // << "\n hy: " <<(h_box / 2.0f)  << std::endl; 
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape       = &dynamicBox;
     fixtureDef.density     = 1;
-    fixtureDef.friction    = 0.3f;
-    fixtureDef.restitution = 1.0f;  // modified
+    fixtureDef.friction    = 0.1f;
+    fixtureDef.restitution = 0.5f;  // modified
     body->CreateFixture(&fixtureDef);
 }
 
@@ -77,11 +77,11 @@ void Box::loadTexture() {
 }
 
 int Box::getPosPixX() {
-    return MetricConverter::toPixX(body->GetPosition().x);
+    return MetricConverter::toPixX(body->GetPosition().x) - box_rect.w / 2.0f;
 }
 
 int Box::getPosPixY() {
-    return MetricConverter::toPixY(body->GetPosition().y);
+    return MetricConverter::toPixY(body->GetPosition().y) - box_rect.h / 2.0f;
 }
 
 void Box::updateBoxPixelCoordinate() {

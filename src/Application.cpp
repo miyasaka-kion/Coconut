@@ -42,28 +42,6 @@ void Application::init_sdl_renderer() {
     std::cout << "SDL renderer initialized!" << std::endl;
 }
 
-void Application::loadBoundary() {
-    float ground_x = -0.0f;
-    float ground_y = -0.0f;
-
-    // start ground point
-    b2Vec2 startpoint;
-    startpoint.x = -3.0f;
-    startpoint.y = 2.0;
-
-    // end ground point
-    b2Vec2 endpoint;
-    endpoint.x = 3;
-    endpoint.y = 2.0;
-
-    b2Vec2 delta{ 1, 1 };
-    delta *= 0.5f;
-    startpoint -= delta;
-    endpoint -= delta;
-}
-
-void Application::loadEntity() {}
-
 void Application::createBar(float ground_x, float ground_y, b2Vec2 point1, b2Vec2 point2) {
     b2BodyDef BarDef;
     BarDef.type = b2_staticBody;
@@ -87,9 +65,9 @@ void Application::run() {
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0);
 
-        edge->render();
         box->render();
-
+        edge->render();
+        
         SDL_SetRenderDrawColor(renderer, 32, 70, 49, 0);
         SDL_RenderPresent(renderer);
 

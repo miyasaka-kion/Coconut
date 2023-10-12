@@ -13,15 +13,15 @@ constexpr int SCREEN_HEIGHT_IN_METER = HEIGHT / MET2PIX;
 constexpr float RAD2DEG = 180 / M_PI;
 
 // some default values
-constexpr float angle_box = 45.0f;
+constexpr float angle_box = M_PI / 5;
 
 // cartesian origin box
 constexpr float x_box = -0.0f;
 constexpr float y_box = -0.0f;
 
 // size of box
-constexpr float w_box = 0.3;
-constexpr float h_box = 0.3;
+constexpr float w_box = 0.3f;
+constexpr float h_box = 0.3f;
 
 constexpr float ground_x = -0.0f;
 constexpr float ground_y = -0.0f;
@@ -29,4 +29,4 @@ constexpr float ground_y = -0.0f;
 // extern b2Vec2 vel;
 // this should be removed in the future
 // b2Vec2 vel{ 1.0f, -0.1f };
-const b2Vec2 vel{ 1.0f, -0.1f }; 
+const b2Vec2 vel{ 0.0f, -0.1f }; 

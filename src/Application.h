@@ -14,10 +14,6 @@ public:
     
     void run();
 
-    // load game ground physics and more..
-    void loadBoundary();
-    void loadEntity();
-
 private:
     void init_sdl_window();
     void init_sdl_renderer();

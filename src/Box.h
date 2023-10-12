@@ -34,6 +34,7 @@ public:
     SDL_Rect box_rect;
     b2Body*  body;
     b2PolygonShape dynamicBox;
+
 // parent info
 private: 
     SDL_Renderer* m_renderer;
