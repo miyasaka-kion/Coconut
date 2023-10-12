@@ -33,12 +33,14 @@ public:
         return angleInDegree / DegreePerRad;
     }
 
+    /// @param x position x in meter, change of axis included
     static int toPixX(float x) {
-        return SCREEN_WIDTH_IN_METER / 2.0f + x;
+        return toPix( SCREEN_WIDTH_IN_METER / 2.0f + x);
     }
 
+    /// @param y position y in mete, change of axis includedr
     static int toPixY(float y) {
-        return SCREEN_HEIGHT_IN_METER / 2.0f - y;
+        return toPix(SCREEN_HEIGHT_IN_METER / 2.0f - y);
     }
 
     static std::tuple<int, int> toPixCoordinate(b2Vec2 pos) {

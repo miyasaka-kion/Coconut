@@ -13,9 +13,12 @@ public:
 
 public:
     b2EdgeShape edgeShape;
-    b2Body* groundLineBody;
+    b2Body* body;
     
-    void render(SDL_Renderer* renderer);
+    void render();
+
+    int getPosPixX();
+    int getPosPixY();
 
 // parent info
 private:

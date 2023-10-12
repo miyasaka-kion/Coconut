@@ -12,9 +12,6 @@ public:
     
     void run();
 
-    void init();  
-    void update();
-
     // load game ground physics and more..
     void loadBoundary();
     void loadEntity();
@@ -36,4 +33,5 @@ private:
     SDL_Window* window;
     SDL_Renderer* renderer;
     SDL_Event event;
+    bool closeGame;
 };

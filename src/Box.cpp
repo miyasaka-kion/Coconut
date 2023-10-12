@@ -21,7 +21,6 @@ Box::Box(b2World* world, SDL_Renderer* renderer): m_world(world), m_renderer(ren
 
 Box::~Box() {
     SDL_DestroyTexture(texture_box);
-
 }
 
 void Box::loadBoxToWorld() {
@@ -39,8 +38,11 @@ void Box::loadBoxToWorld() {
     body->SetLinearVelocity(vel);
 
     b2PolygonShape dynamicBox;
-    // xxx
-    dynamicBox.SetAsBox((w_box / 2.0f) - dynamicBox.m_radius, (h_box / 2.0f) - dynamicBox.m_radius);  // will be 0.5 x 0.5
+    dynamicBox.SetAsBox(
+        (w_box / 2.0f) - dynamicBox.m_radius, 
+        (h_box / 2.0f) - dynamicBox.m_radius);  
+        // will be 0.5 x 0.5
+
     // dynamicBox.SetAsBox((w_box / 2.0f) - 0.0f, (h_box / 2.0f) - 0.0f);  // will be 0.5 x 0.5
     std::cout << "dynamicBox.SetAsBox" << (w_box / 2.0f) - dynamicBox.m_radius << ' ' << (h_box / 2.0f) - dynamicBox.m_radius << std::endl;
 
@@ -67,7 +69,8 @@ void Box::loadTexture() {
 }
 
 void Box::updateBoxPixelCoordinate() {
-    std::tie(box.x, box.y) = getPosPix();
+    box.x = getPosPixX();
+    box.y = getPosPixY();
 }
 
 void Box::render() {
@@ -75,24 +78,12 @@ void Box::render() {
     SDL_RenderCopyEx(m_renderer, texture_box, NULL, &box, getAngleDegree(), NULL, SDL_FLIP_NONE);
 }
 
-b2Vec2 Box::getPosMeter() {
-    return body->GetPosition();
-}
-
-float Box::getPosMeterX() {
-    return getPosMeter().x;
-}
-
-float Box::getPosMeterY() {
-    return getPosMeter().y;
-}
-
 int Box::getPosPixX() {
-    return MetricConverter::toPix(getPosMeterX());
+    return MetricConverter::toPix(body->GetPosition().x);
 }
 
 int Box::getPosPixY() {
-    return MetricConverter::toPix(getPosMeterY());
+    return MetricConverter::toPix(body->GetPosition().y);
 }
 
 float Box::getAngleDegree() {

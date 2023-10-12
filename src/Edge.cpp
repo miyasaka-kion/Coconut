@@ -3,6 +3,7 @@
 
 #include "Edge.h"
 #include "Constants.h"
+#include "MetricConverter.h"
 
 Edge::Edge(b2World* world, SDL_Renderer* renderer) : m_world(world), m_renderer(renderer) {
     // some constants
@@ -23,24 +24,29 @@ Edge::Edge(b2World* world, SDL_Renderer* renderer) : m_world(world), m_renderer(
     myGroundDef.position.Set(ground_x, ground_y);  // set the starting position x and y cartesian
     myGroundDef.angle = 0;
 
-    groundLineBody = m_world->CreateBody(&myGroundDef);
+    body = m_world->CreateBody(&myGroundDef);
 
     b2EdgeShape edgeShape;
     edgeShape.SetTwoSided(startpoint, endpoint);  // length -> coordinate vector from to vector
 
     b2FixtureDef edgeFixtureDef;
     edgeFixtureDef.shape = &edgeShape;
-    groundLineBody->CreateFixture(&edgeFixtureDef);
+    body->CreateFixture(&edgeFixtureDef);
 
     edgeShape.SetTwoSided(startpoint, endpoint);  // length -> coordinate vector from to vector
 }
 
 Edge::~Edge() {
-    m_world->DestroyBody(groundLineBody); // seems this is not needed? should check the source code.
+    m_world->DestroyBody(body); // seems this is not needed? should check the source code.
 }
 
-void Edge::render(SDL_Renderer* renderer) {
-    SDL_RenderDrawLine(renderer, ((SCALED_WIDTH / 2.0f) + edgeShape.m_vertex1.x) * MET2PIX, ((SCALED_HEIGHT / 2.0f) + edgeShape.m_vertex1.y) * MET2PIX,
-                           ((SCALED_WIDTH / 2.0f) + edgeShape.m_vertex2.x) * MET2PIX, ((SCALED_HEIGHT / 2.0f) + edgeShape.m_vertex2.y) * MET2PIX);
+void Edge::render() {
+    SDL_RenderDrawLine(m_renderer, 
+    MetricConverter::toPixX(edgeShape.m_vertex1.x),
+    MetricConverter::toPixY(edgeShape.m_vertex1.y),
+    MetricConverter::toPixX(edgeShape.m_vertex2.x), 
+    MetricConverter::toPixY(edgeShape.m_vertex2.y));
 }
+
+
 
