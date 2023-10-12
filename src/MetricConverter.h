@@ -1,4 +1,6 @@
 #pragma once
+#include <tuple>
+
 #include <box2d/box2d.h>
 
 class MetricConverter {
@@ -8,8 +10,8 @@ private:
     static constexpr int WIDTH  = 1000;  // pix, Screen width
     static constexpr int HEIGHT = 700;   // pix, Screen height
 
-    static constexpr int SCALED_WIDTH  = WIDTH / PixelsPerMeter;  // screen width in meter
-    static constexpr int SCALED_HEIGHT = HEIGHT / PixelsPerMeter;
+    static constexpr float SCREEN_WIDTH_IN_METER  = static_cast<float>(WIDTH) / PixelsPerMeter;  // screen width in meter
+    static constexpr float SCREEN_HEIGHT_IN_METER = static_cast<float>(HEIGHT) / PixelsPerMeter;
 
     // 1 rad × 180/π = 57,296°
     static constexpr float DegreePerRad = 180 / M_PI;
@@ -29,6 +31,29 @@ public:
 
     static float toRad(float angleInDegree) {
         return angleInDegree / DegreePerRad;
+    }
+
+    static int toPixX(float x) {
+        return SCREEN_WIDTH_IN_METER / 2.0f + x;
+    }
+
+    static int toPixY(float y) {
+        return SCREEN_HEIGHT_IN_METER / 2.0f - y;
+    }
+
+    static std::tuple<int, int> toPixCoordinate(b2Vec2 pos) {
+        return std::make_tuple(
+            toPixX(pos.x),
+            toPixY(pos.y)
+        );
+    }
+
+    static std::tuple<int, int> toPixCoordinate(float x, float y) {
+        b2Vec2 pos{x, y};
+        return std::make_tuple(
+            toPixX(pos.x),
+            toPixY(pos.y)
+        );
     }
 
 };

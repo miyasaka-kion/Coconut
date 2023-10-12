@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tuple>
+
 #include <SDL2/SDL.h>
 #include <SDL_render.h>
 #include <box2d/box2d.h>
@@ -13,9 +15,19 @@ public:
     // Box(const Box&) = delete; // this is unsure
     ~Box();
 
-
+    void updateBoxPixelCoordinate();
     void render();
 
+    b2Vec2 getPosMeter();
+    float getPosMeterX();
+    float getPosMeterY();
+    float getAngleRad();
+
+    int getPosPixX();
+    int getPosPixY();
+    std::tuple<int, int> getPosPix();
+    float getAngleDegree();
+    
 private:
     SDL_Texture* texture_box;
     void loadTexture();
@@ -23,7 +35,7 @@ private:
 
 public:
     SDL_Rect box;
-    b2Body*  Body;
+    b2Body*  body;
 
 // parent info
 private: 

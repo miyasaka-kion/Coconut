@@ -9,10 +9,14 @@
 #include <stdexcept>
 
 #include "Constants.h"
+#include "MetricConverter.h"
 
 Box::Box(b2World* world, SDL_Renderer* renderer): m_world(world), m_renderer(renderer) {
     loadBoxToWorld();
     loadTexture();
+
+    box.w = MetricConverter::toPix(w_box);
+    box.h = MetricConverter::toPix(h_box);
 }
 
 Box::~Box() {
@@ -31,8 +35,8 @@ void Box::loadBoxToWorld() {
     // velocity vel created in Constants.h
     // b2Vec2 vel{ 1.0f, 0.2f };
 
-    Body = m_world->CreateBody(&boxBodyDef);
-    Body->SetLinearVelocity(vel);
+    body = m_world->CreateBody(&boxBodyDef);
+    body->SetLinearVelocity(vel);
 
     b2PolygonShape dynamicBox;
     // xxx
@@ -45,7 +49,7 @@ void Box::loadBoxToWorld() {
     fixtureDef.density     = 1;
     fixtureDef.friction    = 0.3f;
     fixtureDef.restitution = 1.0f;  // modified
-    Body->CreateFixture(&fixtureDef);
+    body->CreateFixture(&fixtureDef);
 }
 
 void Box::loadTexture() {
@@ -62,6 +66,35 @@ void Box::loadTexture() {
     SDL_FreeSurface(tmp_sprites);
 }
 
+void Box::updateBoxPixelCoordinate() {
+    std::tie(box.x, box.y) = getPosPix();
+}
+
 void Box::render() {
-    SDL_RenderCopyEx(m_renderer, texture_box, NULL, &box, Body->GetAngle() * RAD2DEG, NULL, SDL_FLIP_NONE);
+    updateBoxPixelCoordinate();
+    SDL_RenderCopyEx(m_renderer, texture_box, NULL, &box, getAngleDegree(), NULL, SDL_FLIP_NONE);
+}
+
+b2Vec2 Box::getPosMeter() {
+    return body->GetPosition();
+}
+
+float Box::getPosMeterX() {
+    return getPosMeter().x;
+}
+
+float Box::getPosMeterY() {
+    return getPosMeter().y;
+}
+
+int Box::getPosPixX() {
+    return MetricConverter::toPix(getPosMeterX());
+}
+
+int Box::getPosPixY() {
+    return MetricConverter::toPix(getPosMeterY());
+}
+
+float Box::getAngleDegree() {
+    return MetricConverter::toDegree(body->GetAngle());
 }

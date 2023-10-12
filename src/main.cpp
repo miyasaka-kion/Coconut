@@ -61,7 +61,7 @@ int main() {
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    world = new b2World(b2Vec2(0.0f, 9.81f));  // new b2World(b2Vec2(0.0f, 9.81f));
+    world = new b2World(b2Vec2(0.0f, -9.81f));  // new b2World(b2Vec2(0.0f, 9.81f));
     // auto world = std::make_shared<b2Vec2>(b2Vec2(0.0f, 9.81f));
 
     // >>>>>>>>>>> window and world initialization finished
@@ -72,12 +72,12 @@ int main() {
     // start ground point
     b2Vec2 startpoint;
     startpoint.x = -3.0f;
-    startpoint.y = 2.0;
+    startpoint.y = -2.0;
 
     // end ground point
     b2Vec2 endpoint;
     endpoint.x = 3.0;
-    endpoint.y = 2.0;
+    endpoint.y = -2.0;
 
     b2EdgeShape edgeShape; 
     edgeShape.SetTwoSided(startpoint, endpoint);  // length -> coordinate vector from to vector
@@ -173,7 +173,7 @@ int main() {
 
         // question box, update x and y destination
         box.x = ((SCALED_WIDTH / 2.0f) + pos.x) * MET2PIX - box.w / 2.0f;
-        box.y = ((SCALED_HEIGHT / 2.0f) + pos.y) * MET2PIX - box.h / 2.0f;
+        box.y = ((SCALED_HEIGHT / 2.0f) - pos.y) * MET2PIX - box.h / 2.0f;
 
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0);

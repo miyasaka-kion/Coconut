@@ -93,16 +93,16 @@ void Application::run() {
     this->init();
     bool   close_game = false;
     while(close_game != true) {
-        b2Vec2 pos   = box.Body->GetPosition();  // Body = Body from box
-        float  angle = box.Body->GetAngle();
+        b2Vec2 pos   = box.body->GetPosition();  // Body = Body from box
+        float  angle = box.body->GetAngle();
 
         angle = MetricConverter::toDegree(angle);
 
         pollEvents();
 
         // question box, update x and y destination
-        box.box.x = ((SCALED_WIDTH / 2.0f) + pos.x) * MET2PIX - box.box.w / 2;
-        box.box.y = ((SCALED_HEIGHT / 2.0f) + pos.y) * MET2PIX - box.box.h / 2;
+        box.box.x = ((SCALED_WIDTH / 2.0f) + pos.x) * MET2PIX - box.box.w / 2.0f;
+        box.box.y = ((SCALED_HEIGHT / 2.0f) + pos.y) * MET2PIX - box.box.h / 2.0f;
 
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0);
@@ -114,7 +114,7 @@ void Application::run() {
         
         box.render();
 
-        
+        // edge.render(); 
 
         SDL_SetRenderDrawColor(renderer, 32, 70, 49, 0);
         SDL_RenderPresent(renderer);
@@ -154,8 +154,8 @@ void Application::pollEvents() {
             close_game = true;
 
         else if(event.key.keysym.sym == SDLK_r) {
-            box.Body->SetTransform(b2Vec2(x_box, y_box), angle_box);
-            box.Body->SetLinearVelocity(vel);
+            box.body->SetTransform(b2Vec2(x_box, y_box), angle_box);
+            box.body->SetLinearVelocity(vel);
         }
     }
 }
