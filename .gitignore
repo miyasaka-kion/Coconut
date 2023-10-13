@@ -13,3 +13,6 @@ _deps
 .DS_Store
 .cache/
 build/
+
+.out
+.vs
