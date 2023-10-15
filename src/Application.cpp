@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <memory>
 #include <stdexcept>
+#include <spdlog/spdlog.h>
 
 #include "Application.h"
 #include "Box.h"
@@ -36,10 +37,11 @@ Application::~Application() {
 void Application::init_sdl_renderer() {
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if(renderer == NULL) {
-        std::cout << "SDL renderer initialization failed!" << std::endl;
+        spdlog::error("SDL renderer initialization failed!");
         throw std::runtime_error("SDL_Renderer initialized a NULL renderer");
     }
-    std::cout << "SDL renderer initialized!" << std::endl;
+    spdlog::info("SDL renderer initialized!");
+
 }
 
 void Application::createBar(float ground_x, float ground_y, b2Vec2 point1, b2Vec2 point2) {

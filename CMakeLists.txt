@@ -11,6 +11,7 @@ message("SRC_LIST: ${SRC_LIST}")
 find_package(box2d CONFIG REQUIRED)
 find_package(sdl2 REQUIRED)
 find_package(sdl2_image REQUIRED)
+find_Package(spdlog REQUIRED)
 
 message("box2d_FOUND = ${box2d_FOUND}")
 
@@ -30,3 +31,4 @@ endif()
 target_link_libraries(${PROJECT_NAME} PRIVATE box2d::box2d)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2_image::SDL2_image)
+target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
