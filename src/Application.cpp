@@ -103,8 +103,20 @@ void Application::refresh() {
 }
 
 void Application::loadEntities() {
+    // some constants
+    // start ground point
+    b2Vec2 startpoint;
+    startpoint.x = -3.0f;
+    startpoint.y = -2.0;
+
+    // end ground point
+    b2Vec2 endpoint;
+    endpoint.x = 3.0;
+    endpoint.y = -2.0;
+    // constants end
+
     auto box  = std::make_unique<Box>(world.get(), renderer);
-    auto edge = std::make_unique<Edge>(world.get(), renderer);
+    auto edge = std::make_unique<Edge>(world.get(), renderer, startpoint, endpoint);
 
     entityList.push_back(std::move(box));
     entityList.push_back(std::move(edge));

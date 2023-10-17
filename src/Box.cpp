@@ -1,59 +1,56 @@
 #include "Box.h"
 
-#include <SDL_error.h>
-#include <SDL_render.h>
 #include <iostream>
+#include <stdexcept>
+
 
 #include <box2d/box2d.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <stdexcept>
+#include <SDL_error.h>
+#include <SDL_render.h>
 
 #include "Constants.h"
 #include "MetricConverter.h"
+#include "Log.h"
 
-Box::Box(b2World* world, SDL_Renderer* renderer): m_world(world), m_renderer(renderer) {
-    loadBoxToWorld();
+Box::Box(b2World* world, SDL_Renderer* renderer): Entity(world, renderer) {
+    loadBoxToWorld(b2Vec2(xOriginPosition, yOriginPosition) , vel, originalAngle); // not finished
     loadTexture();
 
-    box_rect.w = MetricConverter::toPix(w_box);
-    std::cout << "box.w = "  <<  box_rect.w << std::endl;
-    box_rect.h = MetricConverter::toPix(h_box);
-    std::cout << "box.h = "  <<  box_rect.h << std::endl;
+    box_rect.w = MetricConverter::toPix(OriginWidth);
+    box_rect.h = MetricConverter::toPix(OriginHeight);
+    CC_CORE_INFO( "box size info: \n box.w = {}, box.h = {}", box_rect.w, box_rect.h);
 }
 
 Box::~Box() {
-    std::cout << "box destroyed" << std::endl;
+    spdlog::info("box destroyed, location at {}, {}", getPosPixX(), getPosPixX());
     SDL_DestroyTexture(boxTexture);
 }
 
-void Box::loadBoxToWorld() {    
-    std::cout << "loadBoxToWorld called." << std::endl;
+void Box::loadBoxToWorld(b2Vec2 originPos, b2Vec2 originVelocity, float originAngle) {    
+    CC_CORE_INFO("Calling loadBoxToWorld");
     b2BodyDef boxBodyDef;
     boxBodyDef.type  = b2_dynamicBody;
-    boxBodyDef.angle = angle_box;  // flips the whole thing -> 180 grad drehung
-    boxBodyDef.position.Set(x_box, y_box);
+    boxBodyDef.angle = originAngle;  // flips the whole thing -> 180 grad drehung
+    boxBodyDef.position = originPos;
 
     body = m_world->CreateBody(&boxBodyDef);
-    body->SetLinearVelocity(vel);
+    body->SetLinearVelocity(originVelocity);
 
     // b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(
-        (w_box / 2.0f) - dynamicBox.m_radius, 
-        (h_box / 2.0f) - dynamicBox.m_radius);  
-        // will be 0.5 x 0.5
-        std::cout << "box info: \n hx: " << (w_box / 2.0f) - dynamicBox.m_radius
-    << "\n hy: " <<(h_box / 2.0f) - dynamicBox.m_radius << std::endl; 
-    //     (w_box / 2.0f) , 
-    //     (h_box / 2.0f));
-    //     std::cout << "box info: \n hx: " << (w_box / 2.0f)
-    // << "\n hy: " <<(h_box / 2.0f)  << std::endl; 
+        (OriginWidth/ 2.0f) - dynamicBox.m_radius, 
+        (OriginHeight / 2.0f) - dynamicBox.m_radius
+    );  
+
+    CC_CORE_INFO("box info: \n hx: {}, \n hy: {}", (OriginWidth / 2.0f) - dynamicBox.m_radius, (OriginHeight / 2.0f) - dynamicBox.m_radius );
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape       = &dynamicBox;
     fixtureDef.density     = 1;
     fixtureDef.friction    = 0.1f;
-    fixtureDef.restitution = 0.5f;  // modified
+    fixtureDef.restitution = 0.5f; 
     body->CreateFixture(&fixtureDef);
 }
 
@@ -62,7 +59,7 @@ void Box::loadTexture() {
     SDL_Surface* tmp_sprites;
     tmp_sprites = IMG_Load("assets/box.png");
     if(!tmp_sprites) {
-        std::cout << "loadTexture(): box.png failed to load!" << std::endl;
+        CC_CORE_INFO("loadTexture(): box.png failed to load!");
         throw std::runtime_error("loadTexture():  tmp_sprites is NULL");
         // throw some error here and somehow return(TODO)
     }
@@ -72,7 +69,7 @@ void Box::loadTexture() {
         std::cout << "texture_box initialization failed, Error message: " << SDL_GetError() << std::endl;
         throw std::runtime_error("texture_box is NULL");
     }
-    std::cout << "loadTexture(): Box texture loaded." << std::endl;
+    CC_CORE_INFO("loadTexture(): Box texture loaded.");
     SDL_FreeSurface(tmp_sprites);
 }
 
@@ -91,10 +88,8 @@ void Box::updateBoxPixelCoordinate() {
 
 void Box::render() {
     updateBoxPixelCoordinate();
-    // std::cout << "Box position: " << box_rect.x << " " << box_rect.y << std::endl;
-    // Returns 0 on success or a negative error code on failure; call SDL_GetError() for more
     if(SDL_RenderCopyEx(m_renderer, boxTexture, NULL, &box_rect, getAngleDegree(), NULL, SDL_FLIP_NONE)){
-        std::cout << "SDL_RenderCopyEx failed to render entity box, Error message:"  << SDL_GetError() << std::endl;
+        CC_CORE_ERROR("SDL_RenderCopyEx failed to render entity box, Error message: {}", SDL_GetError());
         throw std::runtime_error("SDL_RenderCopyEx failed to render entity box");
     }
 }

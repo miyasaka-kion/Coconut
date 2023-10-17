@@ -26,15 +26,17 @@ public:
 private:
     SDL_Texture* boxTexture;
     void loadTexture();
-    void loadBoxToWorld();
+
+    /// @param originPos original position of the box
+    /// @param originVelocity original velocity of the box 
+    /// @param originAngle original angle of the box
+    void loadBoxToWorld(b2Vec2 originPos, b2Vec2 originVelocity, float originAngle);
 
 public:
     SDL_Rect box_rect;
     b2Body*  body;
     b2PolygonShape dynamicBox;
 
-// parent info
-private: 
-    SDL_Renderer* m_renderer;
-    b2World* m_world;
+private:
+    // TODO: an Initial position of the box, when pressing r all entities should revert to its original position
 };

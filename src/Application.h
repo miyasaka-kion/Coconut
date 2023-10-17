@@ -9,6 +9,7 @@
 #include "Edge.h"
 #include "Entity.h"
 
+// should be a singleton
 class Application {
 public:
     // Initialize the sdl window and sdl renderer, 
@@ -35,6 +36,7 @@ private:
     SDL_Window* window;
     SDL_Renderer* renderer;
     SDL_Event event;
-    bool closeGame;
     std::vector<std::unique_ptr<Entity>> entityList;
+
+    bool closeGame;
 };

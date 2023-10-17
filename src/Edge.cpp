@@ -3,20 +3,10 @@
 
 #include "Edge.h"
 #include "Constants.h"
+#include "Entity.h"
 #include "MetricConverter.h"
 
-Edge::Edge(b2World* world, SDL_Renderer* renderer) : m_world(world), m_renderer(renderer) {
-    // some constants
-    // start ground point
-    b2Vec2 startpoint;
-    startpoint.x = -3.0f;
-    startpoint.y = -2.0;
-
-    // end ground point
-    b2Vec2 endpoint;
-    endpoint.x = 3.0;
-    endpoint.y = -2.0;
-    // constants end
+Edge::Edge(b2World* world, SDL_Renderer* renderer, b2Vec2 startpoint, b2Vec2 endpoint) : Entity(world, renderer) {
 
     // LineGround
     b2BodyDef myGroundDef;
