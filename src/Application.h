@@ -11,6 +11,9 @@
 
 class Application {
 public:
+    // Initialize the sdl window and sdl renderer, 
+    // Initialize the world of box2d 
+    // Load(TODO) and add all entities to the game.
     Application();
     ~Application();
     
@@ -20,16 +23,14 @@ private:
     void init_sdl_window();
     void init_sdl_renderer();
 
+    void loadEntities();
     void pollEvents();
     void refresh();
+    void removeInactive();
 
 public: 
     std::unique_ptr<b2World> world;
 
-    // should be an Entity list here, I use one Box instead
-    std::unique_ptr<Box> box;
-    std::unique_ptr<Edge> edge;
-    
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;

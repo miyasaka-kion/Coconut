@@ -92,7 +92,6 @@ void Box::updateBoxPixelCoordinate() {
 void Box::render() {
     updateBoxPixelCoordinate();
     // std::cout << "Box position: " << box_rect.x << " " << box_rect.y << std::endl;
-
     // Returns 0 on success or a negative error code on failure; call SDL_GetError() for more
     if(SDL_RenderCopyEx(m_renderer, boxTexture, NULL, &box_rect, getAngleDegree(), NULL, SDL_FLIP_NONE)){
         std::cout << "SDL_RenderCopyEx failed to render entity box, Error message:"  << SDL_GetError() << std::endl;

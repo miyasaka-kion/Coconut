@@ -19,10 +19,6 @@ public:
     void updateBoxPixelCoordinate();
     void render() override;
 
-    b2Vec2 getPosMeter();
-    float getPosMeterX();
-    float getPosMeterY();
-
     int getPosPixX();
     int getPosPixY();
     float getAngleDegree();

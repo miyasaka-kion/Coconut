@@ -9,10 +9,8 @@
 #include "Box.h"
 #include "Constants.h"
 #include "Edge.h"
+#include "Entity.h"
 #include "MetricConverter.h"
-#include "Utils.h"
-
-
 
 Application::Application() {
     init_sdl_window();
@@ -20,11 +18,7 @@ Application::Application() {
 
     world = std::make_unique<b2World>(b2Vec2(0.0f, -10.0f));
 
-    // this should be a loop to init all entities
-    box  = std::make_unique<Box> (world.get(), renderer);
-    edge = std::make_unique<Edge> (world.get(), renderer);
-    
-    
+    loadEntities();
     closeGame = false;
 }
 
@@ -51,10 +45,9 @@ void Application::run() {
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0);
 
-        box->render();
-        edge->render();
-        // refresh();
-        
+        refresh();
+        // removeInactive(); this is currently unneeded!
+
         SDL_SetRenderDrawColor(renderer, 32, 70, 49, 0);
         SDL_RenderPresent(renderer);
 
@@ -77,7 +70,7 @@ void Application::init_sdl_window() {
     window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 
     if(window == NULL) {
-        std::cout<< "SDL window failed to initialize! " << std::endl;
+        std::cout << "SDL window failed to initialize! " << std::endl;
         throw std::runtime_error("SDL_CreateWindow generate a NULL window");
     }
     std::cout << "SDL window successfully initialized." << std::endl;
@@ -92,13 +85,12 @@ void Application::pollEvents() {
 
         else if(event.key.keysym.sym == SDLK_ESCAPE) {
             closeGame = true;
-            std::cout << "SDL_QUIT Triggered." << std::endl; 
+            std::cout << "SDL_QUIT Triggered." << std::endl;
             std::cout << "ESC pressed!" << std::endl;
         }
-            
+
         else if(event.key.keysym.sym == SDLK_r) {
-            box->body->SetTransform(b2Vec2(x_box, y_box), angle_box);
-            box->body->SetLinearVelocity(vel);
+            loadEntities();
             std::cout << "r key pressed" << std::endl;
         }
     }
@@ -108,4 +100,26 @@ void Application::refresh() {
     for(const auto& entity : entityList) {
         entity->render();
     }
+}
+
+void Application::loadEntities() {
+    auto box  = std::make_unique<Box>(world.get(), renderer);
+    auto edge = std::make_unique<Edge>(world.get(), renderer);
+
+    entityList.push_back(std::move(box));
+    entityList.push_back(std::move(edge));
+}
+
+
+void Application::removeInactive() {
+    entityList.erase(
+        std::remove_if(
+            std::begin(entityList),
+            std::end(entityList),
+            [](const std::unique_ptr<Entity>& entity) {
+                return !entity->isActive;
+            }
+        ),
+        entityList.end()
+    );
 }
