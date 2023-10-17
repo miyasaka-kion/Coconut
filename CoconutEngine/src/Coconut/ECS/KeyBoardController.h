@@ -6,6 +6,7 @@
 #include "Coconut/ECS/TransformComponent.h"
 #include "Coconut/Game.h"
 #include "Coconut/Log.h"
+#include <SDL_keycode.h>
 
 namespace Coconut {
 class KeyboardController : public Coconut::Component {
@@ -32,6 +33,10 @@ public:
                 break;
             case SDLK_d:
                 transform->velocity.setX(1);
+                break;
+            case SDLK_ESCAPE:
+                CC_INFO("key ESC pressed!");
+                // should close the window
                 break;
             default:
                 break;

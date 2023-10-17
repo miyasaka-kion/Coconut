@@ -44,7 +44,7 @@ public:
 
     virtual void init() {}
     virtual void update() {}
-    virtual void draw() {}
+    virtual void render() {}
 
     virtual ~Component() {}
 };
@@ -65,7 +65,7 @@ public:
     }
     void draw() {
         for(auto& c : m_components)
-            c->draw();
+            c->render();
     }
 
     bool isActive() const {

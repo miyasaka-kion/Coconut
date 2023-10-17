@@ -26,6 +26,7 @@ Coconut::Map::~Map() {
     SDL_DestroyTexture(m_sky);
     SDL_DestroyTexture(m_water);
     SDL_DestroyTexture(m_grass);
+    CC_CORE_INFO("Map resource cleaned");
 }
 
 void Coconut::Map::loadMap() {

@@ -41,26 +41,21 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
     // SDL Successfully initialized
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         CC_CORE_INFO("SDL Successfully initialized!");
-
         // window
         m_window = SDL_CreateWindow(title.c_str(), x, y, width, height, flag);
-
         if(m_window) {
             CC_CORE_INFO("Window created!");
         }
         else {
             CC_CORE_ERROR("Window failed to create.");
         }
-
         // renderer
         renderer = SDL_CreateRenderer(m_window, -1, 0);
 
         if(renderer) {
             SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
-
             CC_CORE_INFO("Renderer created!");
         }
-
         m_isRunning = true;
     }
     // SDL failed to initialize
