@@ -6,8 +6,10 @@
 #include <SDL_render.h>
 #include <box2d/box2d.h>
 
+#include "Entity.h"
+
 // Box is and Entity, should be inherit an Entity class here...
-class Box {
+class Box : public Entity {
 public:
     Box() = default;
     Box(b2World* world, SDL_Renderer* renderer);
@@ -15,7 +17,7 @@ public:
     ~Box();
 
     void updateBoxPixelCoordinate();
-    void render();
+    void render() override;
 
     b2Vec2 getPosMeter();
     float getPosMeterX();

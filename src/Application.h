@@ -3,9 +3,11 @@
 #include <algorithm>
 #include <box2d/box2d.h>
 #include <memory>
+#include <vector>
 
 #include "Box.h"
 #include "Edge.h"
+#include "Entity.h"
 
 class Application {
 public:
@@ -17,9 +19,10 @@ public:
 private:
     void init_sdl_window();
     void init_sdl_renderer();
+
     void pollEvents();
-    void createBar(float ground_x, float ground_y, b2Vec2 point1, b2Vec2 point2);
-    
+    void refresh();
+
 public: 
     std::unique_ptr<b2World> world;
 
@@ -32,4 +35,5 @@ private:
     SDL_Renderer* renderer;
     SDL_Event event;
     bool closeGame;
+    std::vector<std::unique_ptr<Entity>> entityList;
 };

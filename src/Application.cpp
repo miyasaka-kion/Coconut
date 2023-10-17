@@ -19,11 +19,12 @@ Application::Application() {
     init_sdl_renderer();
 
     world = std::make_unique<b2World>(b2Vec2(0.0f, -10.0f));
-    // this->world = new b2World(b2Vec2(0.0f, -10.0f));  // new b2World(b2Vec2(0.0f, 9.81f)); // we should avoid using new
 
     // this should be a loop to init all entities
     box  = std::make_unique<Box> (world.get(), renderer);
     edge = std::make_unique<Edge> (world.get(), renderer);
+    
+    
     closeGame = false;
 }
 
@@ -42,21 +43,6 @@ void Application::init_sdl_renderer() {
     std::cout << "SDL renderer initialized!" << std::endl;
 }
 
-void Application::createBar(float ground_x, float ground_y, b2Vec2 point1, b2Vec2 point2) {
-    b2BodyDef BarDef;
-    BarDef.type = b2_staticBody;
-    BarDef.position.Set(ground_x, ground_y);
-    BarDef.angle    = 0;
-    b2Body* BarBody = world->CreateBody(&BarDef);
-
-    b2EdgeShape BarShape;
-    BarShape.SetTwoSided(point1, point2);
-
-    b2FixtureDef BarFixtureDef;
-    BarFixtureDef.shape = &BarShape;
-    BarBody->CreateFixture(&BarFixtureDef);
-}
-
 void Application::run() {
     // game main loop here
     while(closeGame != true) {
@@ -67,6 +53,7 @@ void Application::run() {
 
         box->render();
         edge->render();
+        // refresh();
         
         SDL_SetRenderDrawColor(renderer, 32, 70, 49, 0);
         SDL_RenderPresent(renderer);
@@ -114,5 +101,11 @@ void Application::pollEvents() {
             box->body->SetLinearVelocity(vel);
             std::cout << "r key pressed" << std::endl;
         }
+    }
+}
+
+void Application::refresh() {
+    for(const auto& entity : entityList) {
+        entity->render();
     }
 }
