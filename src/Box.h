@@ -17,24 +17,25 @@ public:
     ~Box();
 
     void updateBoxPixelCoordinate();
+    void init(b2Vec2 originalPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);  // override?
     void render() override;
 
-    int getPosPixX();
-    int getPosPixY();
+    int   getPosPixX();
+    int   getPosPixY();
     float getAngleDegree();
-    
+
 private:
     SDL_Texture* boxTexture;
-    void loadTexture();
+    void         loadTexture();
 
     /// @param originPos original position of the box
-    /// @param originVelocity original velocity of the box 
+    /// @param originVelocity original velocity of the box
     /// @param originAngle original angle of the box
-    void loadBoxToWorld(b2Vec2 originPos, b2Vec2 originVelocity, float originAngle);
+    void loadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);
 
 public:
-    SDL_Rect box_rect;
-    b2Body*  body;
+    SDL_Rect       box_rect;
+    b2Body*        body;
     b2PolygonShape dynamicBox;
 
 private:

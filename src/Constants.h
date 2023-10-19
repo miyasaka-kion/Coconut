@@ -13,20 +13,23 @@ constexpr int SCREEN_HEIGHT_IN_METER = HEIGHT / MET2PIX;
 constexpr float RAD2DEG = 180 / M_PI;
 
 // some default values
-constexpr float originalAngle = M_PI / 5;
+constexpr float c_originalAngle = M_PI / 5;
 
 // cartesian origin box
-constexpr float xOriginPosition = -0.0f;
-constexpr float yOriginPosition = -0.0f;
+constexpr float c_xOriginPosition = -0.0f;
+constexpr float c_yOriginPosition = -0.0f;
+const b2Vec2 c_OriginPos {c_xOriginPosition, c_yOriginPosition};
 
 // size of box
-constexpr float OriginWidth = 0.3f;
-constexpr float OriginHeight = 0.3f;
+constexpr float c_OriginalBoxWidth = 0.3f;
+constexpr float c_OriginalBoxHeight = 0.3f;
 
-constexpr float ground_x = -0.0f;
-constexpr float ground_y = -0.0f;
+
+constexpr float c_GroundX = -0.0f;
+constexpr float c_GroundY = -0.0f;
 
 // extern b2Vec2 vel;
 // this should be removed in the future
 // b2Vec2 vel{ 1.0f, -0.1f };
-const b2Vec2 vel{ 0.0f, -0.1f }; 
+const b2Vec2 c_OriginalVelocity{ 0.0f, -0.1f }; 
+const b2Vec2 C_OriginPos {0.0f, 0.0f};

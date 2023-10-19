@@ -10,9 +10,10 @@
 class Edge : public Entity {
 public:
     Edge() = default;
-    Edge(b2World* world, SDL_Renderer* renderer, b2Vec2 startpoint, b2Vec2 endpoint);
-    
+    Edge(b2World* world, SDL_Renderer* renderer) ;
     ~Edge();
+
+    void init(b2Vec2 startpoint, b2Vec2 endpoint) ; //override;
 
 public:
     b2EdgeShape edgeShape;

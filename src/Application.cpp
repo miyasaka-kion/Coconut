@@ -11,12 +11,13 @@
 #include "Edge.h"
 #include "Entity.h"
 #include "MetricConverter.h"
+#include "Log.h"
 
 Application::Application() {
     init_sdl_window();
     init_sdl_renderer();
 
-    world = std::make_unique<b2World>(b2Vec2(0.0f, -10.0f));
+    world = std::make_unique< b2World >(b2Vec2(0.0f, -10.0f));
 
     loadEntities();
     closeGame = false;
@@ -31,10 +32,10 @@ Application::~Application() {
 void Application::init_sdl_renderer() {
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if(renderer == NULL) {
-        std::cout << "SDL renderer initialization failed!" << std::endl;
+        CC_CORE_ERROR("SDL renderer initialization failed!");
         throw std::runtime_error("SDL_Renderer initialized a NULL renderer");
     }
-    std::cout << "SDL renderer initialized!" << std::endl;
+    CC_CORE_INFO("SDL renderer initialized!");
 }
 
 void Application::run() {
@@ -64,34 +65,34 @@ void Application::init_sdl_window() {
     auto Width  = DM.w;
     auto Height = DM.h;
 
-    std::cout << "Width of the Screen: " << Width << std::endl;
-    std::cout << "Height of the Screen: " << Height << std::endl;
+    CC_CORE_INFO("Width of the Screen: {}", Width);
+    CC_CORE_INFO("Height of the Screen: {}");
 
     window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 
     if(window == NULL) {
-        std::cout << "SDL window failed to initialize! " << std::endl;
+        CC_CORE_ERROR( "SDL window failed to initialize! ");
         throw std::runtime_error("SDL_CreateWindow generate a NULL window");
     }
-    std::cout << "SDL window successfully initialized." << std::endl;
+    CC_CORE_INFO("SDL window successfully initialized." );
 }
 
 void Application::pollEvents() {
     while(SDL_PollEvent(&event)) {
         if(event.type == SDL_QUIT) {
             closeGame = true;
-            std::cout << "SDL_QUIT Triggered." << std::endl;
+            CC_CORE_INFO("SDL_QUIT Triggered.");
         }
 
         else if(event.key.keysym.sym == SDLK_ESCAPE) {
             closeGame = true;
-            std::cout << "SDL_QUIT Triggered." << std::endl;
-            std::cout << "ESC pressed!" << std::endl;
+            CC_CORE_INFO("ESC pressed!");
+            CC_CORE_INFO("SDL_QUIT Triggered.");
         }
 
         else if(event.key.keysym.sym == SDLK_r) {
             loadEntities();
-            std::cout << "r key pressed" << std::endl;
+            CC_CORE_INFO( "r key pressed");
         }
     }
 }
@@ -115,23 +116,17 @@ void Application::loadEntities() {
     endpoint.y = -2.0;
     // constants end
 
-    auto box  = std::make_unique<Box>(world.get(), renderer);
-    auto edge = std::make_unique<Edge>(world.get(), renderer, startpoint, endpoint);
+    auto box = std::make_unique< Box >(world.get(), renderer);
+
+    box->init(c_OriginPos, b2Vec2(c_OriginalBoxWidth, c_OriginalBoxHeight), c_OriginalVelocity, c_originalAngle);
+
+    auto edge = std::make_unique< Edge >(world.get(), renderer);
+    edge->init(startpoint, endpoint);
 
     entityList.push_back(std::move(box));
     entityList.push_back(std::move(edge));
 }
 
-
 void Application::removeInactive() {
-    entityList.erase(
-        std::remove_if(
-            std::begin(entityList),
-            std::end(entityList),
-            [](const std::unique_ptr<Entity>& entity) {
-                return !entity->isActive;
-            }
-        ),
-        entityList.end()
-    );
+    entityList.erase(std::remove_if(std::begin(entityList), std::end(entityList), [](const std::unique_ptr< Entity >& entity) { return !entity->isActive; }), entityList.end());
 }
