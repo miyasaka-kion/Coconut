@@ -22,3 +22,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE box2d::box2d)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2_image::SDL2_image)
 target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog_header_only)
+# SDL2::SDL2main may or may not be available. It is e.g. required by Windows GUI applications
+if(TARGET SDL2::SDL2main)
+    # It has an implicit dependency on SDL2 functions, so it MUST be added before SDL2::SDL2 (or SDL2::SDL2-static)
+    target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2main)
+endif()
