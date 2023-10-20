@@ -27,3 +27,6 @@ if(TARGET SDL2::SDL2main)
     # It has an implicit dependency on SDL2 functions, so it MUST be added before SDL2::SDL2 (or SDL2::SDL2-static)
     target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2main)
 endif()
+
+message("($(CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/source/assets" DESTINATION "${CMAKE_BINARY_DIR}")
