@@ -67,9 +67,11 @@ void Application::init_sdl_window() {
     auto Height = DM.h;
 
     CC_CORE_INFO("Width of the Screen: {}", Width);
-    CC_CORE_INFO("Height of the Screen: {}");
+    CC_CORE_INFO("Height of the Screen: {}", Height);
 
-    window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
+    CC_CORE_INFO("The rendering scale is {}", c_pixelPerMeter);
+
+    window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, c_screenWidthPix, c_screenHeightPix, SDL_WINDOW_SHOWN);
 
     if(window == NULL) {
         CC_CORE_ERROR( "SDL window failed to initialize! ");
