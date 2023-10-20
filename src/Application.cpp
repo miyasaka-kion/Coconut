@@ -49,10 +49,11 @@ void Application::run() {
         refresh();
         // removeInactive(); this is currently unneeded!
 
-        SDL_SetRenderDrawColor(renderer, 32, 70, 49, 0);
+        SDL_SetRenderDrawColor(renderer, 88, 88,88, 0);
         SDL_RenderPresent(renderer);
 
-        world->Step(1.0f / 60.0f, 6.0f, 2.0f);  // update
+        world->Step(1.0f / 60.0f, 10.0f, 2.0f);  // update
+        world->ClearForces();
     }
 }
 
