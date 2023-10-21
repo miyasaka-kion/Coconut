@@ -28,5 +28,8 @@ if(TARGET SDL2::SDL2main)
     target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2main)
 endif()
 
-message("($(CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+add_subdirectory("vendor/imgui")
+target_link_libraries(${PROJECT_NAME} PRIVATE imgui_sdl2_sdlrenderer2)
+
+# post build commands
 file(COPY "${CMAKE_SOURCE_DIR}/source/assets" DESTINATION "${CMAKE_BINARY_DIR}")

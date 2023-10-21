@@ -18,6 +18,8 @@ Scene::Scene() {
     init_sdl_window();
     init_sdl_renderer();
 
+    // init_imgui();
+
     world = std::make_unique< b2World >(b2Vec2(0.0f, -10.0f));
 
     loadEntities();
