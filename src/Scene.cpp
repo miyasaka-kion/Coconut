@@ -1,27 +1,33 @@
 #include "Scene.h"
 
+#include <SDL_render.h>
 #include <cstdio>
 #include <iostream>
-
-#include <SDL2/SDL.h>
 #include <memory>
 #include <stdexcept>
+
+#include "imgui.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_sdlrenderer2.h"
+
+#include <SDL2/SDL.h>
+#include <SDL_error.h>
+#include <SDL_hints.h>
 
 #include "Box.h"
 #include "Constants.h"
 #include "Edge.h"
 #include "Entity.h"
-#include "MetricConverter.h"
 #include "Log.h"
+#include "MetricConverter.h"
 
 Scene::Scene() {
     init_sdl_window();
     init_sdl_renderer();
 
-    // init_imgui();
+    init_imgui();
 
     world = std::make_unique< b2World >(b2Vec2(0.0f, -10.0f));
-
     loadEntities();
     closeGame = false;
 }
@@ -45,16 +51,54 @@ void Scene::init_sdl_renderer() {
 
 void Scene::run() {
     // game main loop here
+    ImGuiIO& io = ImGui::GetIO();
+    ( void )io;
     while(closeGame != true) {
         pollEvents();
 
+        // Start the Dear ImGui frame
+        ImGui_ImplSDLRenderer2_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
+
+        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+        {
+            bool show_demo_window    = true;
+            bool show_another_window = false;
+            clear_color;
+
+            static float f       = 0.0f;
+            static int   counter = 0;
+
+            ImGui::Begin("Control bar");  // Create a window called "Hello, world!" and append into it.
+
+            ImGui::Text("Adjust ...here!");           // Display some text (you can use a format strings too)
+            ImGui::Checkbox("Demo Window", &show_demo_window);  // Edit bools storing our window open/close state
+            ImGui::Checkbox("Another Window", &show_another_window);
+
+            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);               // Edit 1 float using a slider from 0.0f to 1.0f
+            ImGui::ColorEdit3("clear color", ( float* )&clear_color);  // Edit 3 floats representing a color
+
+            if(ImGui::Button("Button"))  // Buttons return true when clicked (most widgets return true when edited/activated)
+                counter++;
+            ImGui::SameLine();
+            ImGui::Text("counter = %d", counter);
+
+            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+            ImGui::End();
+        }
+
+        ImGui::Render();
+        SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
+
         SDL_RenderClear(renderer);
-        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 0);
+
+        // removeInactive(); this is currently unneeded!
+        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 
         refresh();
-        // removeInactive(); this is currently unneeded!
+        SDL_SetRenderDrawColor(renderer, ( Uint8 )(clear_color.x * 255), ( Uint8 )(clear_color.y * 255), ( Uint8 )(clear_color.z * 255), ( Uint8 )(clear_color.w * 255));
 
-        SDL_SetRenderDrawColor(renderer, 88, 88,88, 0);
         SDL_RenderPresent(renderer);
 
         world->Step(1.0f / 60.0f, 10.0f, 2.0f);  // update
@@ -64,7 +108,9 @@ void Scene::run() {
 
 void Scene::init_sdl_window() {
     // SDL_Init begin
-    SDL_Init(SDL_INIT_EVERYTHING);
+    if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+        CC_ERROR("SDL_Init error: {}", SDL_GetError());
+    }
 
     SDL_DisplayMode DM;
     SDL_GetCurrentDisplayMode(0, &DM);
@@ -79,14 +125,33 @@ void Scene::init_sdl_window() {
     window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, c_screenWidthPix, c_screenHeightPix, SDL_WINDOW_SHOWN);
 
     if(window == NULL) {
-        CC_CORE_ERROR( "SDL window failed to initialize! ");
+        CC_CORE_ERROR("SDL window failed to initialize! ");
         throw std::runtime_error("SDL_CreateWindow generate a NULL window");
     }
-    CC_CORE_INFO("SDL window successfully initialized." );
+    CC_CORE_INFO("SDL window successfully initialized.");
+}
+
+void Scene::init_imgui() {
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    ( void )io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
+
+    // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+    // ImGui::StyleColorsLight();
+
+    // Setup Platform/Renderer backends
+    ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+    ImGui_ImplSDLRenderer2_Init(renderer);
 }
 
 void Scene::pollEvents() {
     while(SDL_PollEvent(&event)) {
+        ImGui_ImplSDL2_ProcessEvent(&event);
         if(event.type == SDL_QUIT) {
             closeGame = true;
             CC_CORE_INFO("SDL_QUIT Triggered.");
@@ -100,7 +165,7 @@ void Scene::pollEvents() {
 
         else if(event.key.keysym.sym == SDLK_r) {
             loadEntities();
-            CC_CORE_INFO( "r key pressed");
+            CC_CORE_INFO("r key pressed");
         }
     }
 }
