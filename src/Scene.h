@@ -29,6 +29,8 @@ private:
     void init_imgui();
 
     void loadEntities();
+    void loadBox();
+    void loadEdge();
     void pollEvents();
     void refresh();
     void removeInactive();
@@ -36,16 +38,20 @@ private:
 public:
     std::unique_ptr< b2World > world;
 
+    // SDL members
 private:
     SDL_Window*   window;
     SDL_Renderer* renderer;
     SDL_Event     event;
-    ImVec4        clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-    
-    std::vector< std::unique_ptr< Entity > > entityList;
+    ;
 
+    // Entities
 private:
-    // ImGuiIO* m_io;
+    std::vector< std::unique_ptr< Entity > > entityList;
+    bool                                     closeGame;
+
+    // physics info
 private:
-    bool closeGame;
+    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    b2Vec2 gravity;
 };

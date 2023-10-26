@@ -27,7 +27,8 @@ Scene::Scene() {
 
     init_imgui();
 
-    world = std::make_unique< b2World >(b2Vec2(0.0f, -10.0f));
+    gravity = b2Vec2(0.0f, -10.0f);
+    world = std::make_unique< b2World >(gravity);
     loadEntities();
     closeGame = false;
 }
@@ -65,10 +66,8 @@ void Scene::run() {
         {
             bool show_demo_window    = true;
             bool show_another_window = false;
-            clear_color;
 
-            static float f       = 0.0f;
-            static int   counter = 0;
+            static int entity_counter = 0;
 
             ImGui::Begin("Control bar");  // Create a window called "Hello, world!" and append into it.
 
@@ -76,18 +75,35 @@ void Scene::run() {
             ImGui::Checkbox("Demo Window", &show_demo_window);  // Edit bools storing our window open/close state
             ImGui::Checkbox("Another Window", &show_another_window);
 
-            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);               // Edit 1 float using a slider from 0.0f to 1.0f
+            ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);               // Edit 1 float using a slider from 0.0f to 1.0f
             ImGui::ColorEdit3("clear color", ( float* )&clear_color);  // Edit 3 floats representing a color
 
-            if(ImGui::Button("Button"))  // Buttons return true when clicked (most widgets return true when edited/activated)
-                counter++;
-            ImGui::SameLine();
-            ImGui::Text("counter = %d", counter);
+            
 
+            if(ImGui::Button("load box")) {
+                loadBox();            
+            }
+            ImGui::SameLine();
+            if(ImGui::Button("load Edge")) {
+                loadEdge();
+            }
+            ImGui::Text("counter = %d", entity_counter);
+            if(ImGui::Button("clear Entities")) {
+                entityList.clear();
+            }
+    
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
             ImGui::End();
         }
+        
+        // update world info 
+        world->SetGravity(gravity);
 
+        // update world info end
+
+
+
+        // render all
         ImGui::Render();
         SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
 
@@ -164,7 +180,7 @@ void Scene::pollEvents() {
         }
 
         else if(event.key.keysym.sym == SDLK_r) {
-            loadEntities();
+            loadBox();
             CC_CORE_INFO("r key pressed");
         }
     }
@@ -176,7 +192,8 @@ void Scene::refresh() {
     }
 }
 
-void Scene::loadEntities() {
+
+void Scene::loadEdge() {
     // some constants
     // start ground point
     b2Vec2 startpoint;
@@ -189,15 +206,23 @@ void Scene::loadEntities() {
     endpoint.y = -2.0;
     // constants end
 
-    auto box = std::make_unique< Box >(world.get(), renderer);
-
-    box->init(c_OriginPos, b2Vec2(c_OriginalBoxWidth, c_OriginalBoxHeight), c_OriginalVelocity, c_originalAngle);
-
     auto edge = std::make_unique< Edge >(world.get(), renderer);
     edge->init(startpoint, endpoint);
 
-    entityList.push_back(std::move(box));
     entityList.push_back(std::move(edge));
+}
+
+void Scene::loadEntities() {
+    loadBox();
+    loadEdge();
+}
+
+void Scene::loadBox() {
+    auto box = std::make_unique< Box >(world.get(), renderer);
+
+    box->init(c_OriginPos, b2Vec2(c_OriginalBoxWidth, c_OriginalBoxHeight), c_OriginalVelocity, c_originalAngle);
+    
+    entityList.push_back(std::move(box));
 }
 
 void Scene::removeInactive() {
