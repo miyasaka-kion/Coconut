@@ -132,11 +132,11 @@ void Scene::init_sdl_window() {
     SDL_GetCurrentDisplayMode(0, &DM);
     auto Width  = DM.w;
     auto Height = DM.h;
-
+    
     CC_CORE_INFO("Width of the Screen: {}", Width);
     CC_CORE_INFO("Height of the Screen: {}", Height);
 
-    CC_CORE_INFO("The rendering scale is {}", c_pixelPerMeter);
+    CC_CORE_INFO("The rendering scale is {} pixels per meter. (px/1.0f)", c_pixelPerMeter);
 
     window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, c_screenWidthPix, c_screenHeightPix, SDL_WINDOW_SHOWN);
 

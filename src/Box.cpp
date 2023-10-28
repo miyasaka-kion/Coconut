@@ -28,7 +28,7 @@ void Box::init(b2Vec2 originalPos, b2Vec2 boxSize, b2Vec2 originalVel, float ori
 
     box_rect.w = MetricConverter::toPix(boxSize.x);
     box_rect.h = MetricConverter::toPix(boxSize.y);
-    CC_CORE_INFO("box size info: \n box.w = {}, box.h = {}", box_rect.w, box_rect.h);
+    CC_CORE_INFO("box size info: box.w = {}, box.h = {}", box_rect.w, box_rect.h);
 }
 
 void Box::loadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle) {
