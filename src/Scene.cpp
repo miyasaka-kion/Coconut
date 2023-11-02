@@ -27,7 +27,7 @@ Scene::Scene() {
 
     init_imgui();
 
-    gravity = b2Vec2(0.0f, -10.0f);
+    auto gravity = b2Vec2(0.0f, -10.0f);
     world = std::make_unique< b2World >(gravity);
     loadEntities();
     closeGame = false;
@@ -62,6 +62,7 @@ void Scene::run() {
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
 
+        auto gravity = world->GetGravity();
         // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
         {
             bool show_demo_window    = true;
@@ -132,7 +133,7 @@ void Scene::init_sdl_window() {
     SDL_GetCurrentDisplayMode(0, &DM);
     auto Width  = DM.w;
     auto Height = DM.h;
-    
+
     CC_CORE_INFO("Width of the Screen: {}", Width);
     CC_CORE_INFO("Height of the Screen: {}", Height);
 
@@ -155,7 +156,7 @@ void Scene::init_imgui() {
     ( void )io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
-
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable docking functionalities
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
     // ImGui::StyleColorsLight();
