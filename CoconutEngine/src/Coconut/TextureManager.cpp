@@ -11,44 +11,20 @@
 #endif
 
 std::filesystem::path Coconut::TextureManager::m_binPath = std::filesystem::current_path();
-
 std::filesystem::path Coconut::TextureManager::m_projectPath = m_binPath.parent_path();
-
 std::filesystem::path Coconut::TextureManager::m_assetPath = m_binPath / "assets";
-
-SDL_Texture* Coconut::TextureManager::LoadTexture_withFullPath(std::string fileFullPath) {
-
-    SDL_Surface* tmpSurface = IMG_Load(fileFullPath.c_str());
-    if(tmpSurface) {
-        // Ensure I loaded the correct image;
-        CC_CORE_INFO("Image loaded: " + fileFullPath + " successfully loaded.");
-    }
-    else {
-        CC_CORE_ERROR("Failed to load image: " + fileFullPath);
-    }
-
-    SDL_Texture* texture    = SDL_CreateTextureFromSurface(Coconut::Game::renderer, tmpSurface);
-    if(texture == NULL) {
-        CC_CORE_ERROR("SDL_CreateTextureFromSurface failed, Error: {}", SDL_GetError());
-    }
-
-
-    SDL_FreeSurface(tmpSurface);
-
-    return texture;
-}
 
 std::tuple<SDL_Texture*, int, int> Coconut::TextureManager::LoadTexture_tuple(const std::string& fileName) {
     // Load texture in the asset folder directly
 
-    std::filesystem::path fullPath     = m_assetPath / fileName;
-    std::string           fileFullPath = fullPath.string();
+    std::filesystem::path full_path     = m_assetPath / fileName;
+    std::string           full_path_str = full_path.string();
 
-    SDL_Surface* tmpSurface = IMG_Load(fileFullPath.c_str());
+    SDL_Surface* tmpSurface = IMG_Load(full_path_str.c_str());
 
     if(tmpSurface == nullptr) {
         CC_CORE_CRITICAL("tmpSurface is a nullptr! The specified file or path may not correct.");
-        CC_CORE_CRITICAL("ERROR loading {}", fileFullPath);
+        CC_CORE_CRITICAL("ERROR loading {}", full_path_str);
         throw std::runtime_error("IMG_Load returns a nullptr!");
     }
     int imgWidth, imgHeight;
@@ -61,11 +37,11 @@ std::tuple<SDL_Texture*, int, int> Coconut::TextureManager::LoadTexture_tuple(co
     }
 
     if(tmpSurface) {
-        CC_CORE_INFO("TextureManager: Image loaded: " + fileFullPath + " successfully loaded.");
+        CC_CORE_INFO("TextureManager: Image loaded: " + full_path_str + " successfully loaded.");
         CC_CORE_INFO("Image size = ({}, {}).", imgWidth, imgHeight);
     }
     else {
-        CC_CORE_ERROR("Failed to load image: " + fileFullPath);
+        CC_CORE_ERROR("Failed to load image: " + full_path_str);
     }
 
     SDL_FreeSurface(tmpSurface);

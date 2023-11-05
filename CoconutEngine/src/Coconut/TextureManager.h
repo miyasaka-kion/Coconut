@@ -21,9 +21,6 @@
 namespace Coconut {
 class TextureManager {
 public:
-    static SDL_Texture* LoadTexture_withFullPath(std::string fileName);
-    // This is a test function, will be remove in release.
-
     // @return texture, width, height
     static std::tuple<SDL_Texture*, int, int> LoadTexture_tuple(const std::string& fileName);
     static SDL_Texture*                       LoadTexture(const std::string& fileName);

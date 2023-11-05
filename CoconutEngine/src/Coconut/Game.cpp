@@ -5,6 +5,7 @@
 #include <SDL_error.h>
 #include <box2d/box2d.h>
 
+#include "Coconut/ECS/BodyComponent.h"
 #include "Coconut/ECS/Compoent.h"
 #include "Coconut/GameMap/Map.h"
 #include "Coconut/Log.h"
@@ -13,19 +14,18 @@
 
 std::unique_ptr<Coconut::Map> map;
 
-// static value initialize
+// static value init, these are not global vars
 SDL_Renderer* Coconut::Game::renderer = nullptr;
 SDL_Event     Coconut::Game::event;
 std::unique_ptr<b2World> Coconut::Game::m_world = nullptr;
 
-// global variables
+// global variables, should be refactored in the future.
 Coconut::Manager manager;
 auto& player = manager.addEntity();
 auto& dirt = manager.addEntity();
 
 Coconut::Game::Game() {
     m_gameCounter = 0;
-
     // This is set in gameInit();
     m_isRunning = false;
     // This is set in gameInit();
@@ -87,6 +87,7 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
     player.addComponent<Coconut::TransformComponent>();
     player.addComponent<Coconut::SpriteComponent>("bird.png");
     player.addComponent<Coconut::KeyboardController>();
+    player.addComponent<Coconut::BodyComponent>(m_world.get());
 
     dirt.addComponent<Coconut::TransformComponent>(b2Vec2{1.0f, 1.0f}, 0.0f);
     dirt.addComponent<Coconut::SpriteComponent>("dirt.jpg");
