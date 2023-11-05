@@ -2,9 +2,9 @@
 
 #include <tuple>
 
-#include <Coconut/Vector2D.h>
-namespace Coconut {
+#include <box2d/box2d.h>
 
+namespace Coconut {
 class Rect {
 public:
     int x, y;
@@ -12,18 +12,11 @@ public:
 
     Rect();
     Rect(int x, int y, int w, int h) : x(x), y(y), w(w), h(h) {}
-    Rect(std::tuple<int, int> pos_arr, std::tuple<int, int> size_arr);
+    Rect(std::tuple<int, int> pos_px, std::tuple<int, int> size_px);
+    Rect(b2Vec2 pos_meter, b2Vec2 size_meter);
+
     Rect operator=(const Rect& other) {
         return Rect(x, y, w, h);
     }
-
-    // Good bindings to get Rect info
-    std::tuple<int, int> getPosition();
-    std::tuple<int, int> getSize();
-
-    // When treating Rect as a circle:
-    Coconut::Vector2D getCentral();
-    float             getRadius();
-    std::tuple<Coconut::Vector2D, float> getCircleInfo();
 };
 }  // namespace Coconut

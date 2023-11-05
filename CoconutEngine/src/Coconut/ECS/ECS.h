@@ -50,6 +50,7 @@ public:
 };
 
 // Entity has many components
+// Entity defined by user should inherit the Entity class
 class Entity {
 private:
     bool                                    m_active = true;
@@ -68,11 +69,12 @@ public:
             c->render();
     }
 
-    bool isActive() const {
-        return m_active;
-    }
     void destroy() {
         m_active = false;
+    }
+
+    bool isActive() const {
+        return m_active;
     }
 
     template <typename T> bool hasComponent() const {

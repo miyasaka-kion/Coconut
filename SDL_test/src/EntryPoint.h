@@ -28,7 +28,7 @@
 #if defined CC_PLATFORM_WINDOWS || defined CC_PLATFORM_MACOS
 
 int main(int argc, char* argv[]) {
-	std::unique_ptr<Coconut::Application> gameApp = std::make_unique<Coconut::Application>();
+    auto gameApp = std::make_unique<Coconut::Application>();
 	gameApp->run();
 	return 0;
 }

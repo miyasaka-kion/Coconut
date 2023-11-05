@@ -11,10 +11,6 @@ namespace Constants {
     constexpr int DEST_RECT_WIDTH  = 64;
     constexpr int DEST_RECT_HEIGHT = 64;
 
-    // I think this should be automatically defered from the texture picture
-    constexpr int BIRD_HIGHT = 630;
-    constexpr int BIRD_WIDTH = 765;
-
     constexpr float defaultScale = 0.1f;
     constexpr float BIRD_SCALE   = defaultScale;
 

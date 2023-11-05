@@ -1,115 +1,54 @@
 #pragma once
 
+#include <tuple>
+
 #ifdef CC_PLATFORM_WINDOWS
 #include <SDL.h>
 #else
 #include <SDL2/SDL.h>
 #endif
 
+#include <box2d/box2d.h>
+
 #include "Coconut/ConstantSpec.h"
 #include "Coconut/ECS/ECS.h"
 #include "Coconut/Log.h"
-#include "Coconut/Vector2D.h"
+#include "Coconut/MetricConverter.h"
 
 namespace Coconut {
 
 class TransformComponent : public Coconut::Component {
 public:
-    Vector2D position;
-    Vector2D velocity;
+    b2Transform transform;
 
 public:
-    int speed = 3;
-
-    // size will be rendered on screen
-    int   width  = 32;
-    int   height = 32;
-    float scale  = Coconut::Constants::defaultScale;
+    float scale = Coconut::Constants::defaultScale;
 
 public:
-    TransformComponent() : position(Vector2D()) {}
-    TransformComponent(float x, float y) : position(Vector2D(x, y)){};
-
-    // @param position.x, position.y, speed, render_size.w, render_size.h, scale);
-    TransformComponent(float x, float y, int speed_p, float scale_p) {
-        position = Vector2D(x, y);
-        velocity = Vector2D();
-        speed    = speed_p;
-        scale    = scale_p;
+    TransformComponent() {
+        transform.SetIdentity();
     }
 
-    enum class RelativePosition_t {
-        same = 0,
-        // left up
-        lu,
-        // left down
-        ld,
-        // right up
-        ru,
-        // right down
-        rd
-    };
-
-    RelativePosition_t getRelativePosition(const TransformComponent& other) {
-        return static_cast<TransformComponent::RelativePosition_t>(this->position.getRelativePosition(other.position));
+    TransformComponent(b2Vec2 position, float angle) {
+        transform.Set(position, angle);
     }
 
-    float getPosX() {
-        return position.x;
+    b2Vec2 getPosition() {
+        return transform.p;
     }
 
-    float getPosY() {
-        return position.y;
-    }
-
-    int getHight() {
-        return height;
-    }
-
-    int getWidth() {
-        return width;
-    }
-
-    // Get the position of the entity
-    std::tuple<float, float> getCoordinate() {
-        return position.getCoordinate();
-    }
-
-    // Get the original size of the enity
-    // @return (hight, width)
-    std::tuple<int, int> getSize() {
-        return std::tie(height, width);
-    }
-
-    Coconut::Vector2D getSizeVector2D() {
-        return Vector2D(this->getSize());
-    }
-
-    Coconut::Vector2D getPositionVector2D() {
-        return position;
-    }
-
-    // ? casting warning ?s
-    // Get the scaled size of the entity
-    // @return (scaledWidth, scaledHeight)
-    std::tuple<float, float> getScaledSize() {
-        float scaledHeight = height * scale;
-        float scaledWidth  = width * scale;
-        return std::tie(scaledWidth, scaledHeight);
+    float getAngle() {
+        return transform.q.GetAngle();
     }
 
     void init() override {
-        velocity = Vector2D();
-
-        CC_CORE_INFO("TransformComponent initialized!");
+        CC_CORE_INFO("TransformComponent initialized! Positiion = ({}, {}), rotation = {}", getPosition().x, getPosition().y, getAngle());
     }
 
-    void update() override {
-        position += velocity * speed;
-    }
+    void update() override {}
 
-    void setPosition(float x, float y) {
-        position = Vector2D(x, y);
+    void set(b2Vec2 position, float angle) {
+        transform.Set(position, angle);
     }
 };
 

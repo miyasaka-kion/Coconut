@@ -30,7 +30,7 @@ public:
     static Coconut::ImageObject               LoadTextureImageObject(const std::string& fileName);
 
     static void DrawTexture(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest);
-
+    static void DrawTexture(SDL_Texture* texture, SDL_Rect src);
     static void showFileInfo();
 
 private:

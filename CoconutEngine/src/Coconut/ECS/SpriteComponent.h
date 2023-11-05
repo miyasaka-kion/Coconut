@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Coconut/ConstantSpec.h"
+#include "Coconut/ECS/BodyComponent.h"
 #include "Coconut/ECS/ECS.h"
 #include "Coconut/ECS/TransformComponent.h"
 #include "Coconut/Log.h"
@@ -12,6 +13,7 @@ namespace Coconut {
 class SpriteComponent : public Coconut::Component {
 private:
     Coconut::TransformComponent* m_transform;
+    Coconut::BodyComponent*      m_body;
     SDL_Texture*                 m_texture;
     SDL_Rect                     m_srcRect, m_destRect;
 
@@ -22,16 +24,6 @@ private:
 public:
     SpriteComponent() = default;
     SpriteComponent(std::string path) {
-        // Some weird things happed here
-        // emmm
-        //
-        // if (entity->hasComponent<TransformComponent>() == false) {
-        //	CC_CORE_INFO("Coconut Engine dectect that the entity has SpriteComponent, but do not have an TransformComponent.");
-        //	CC_CORE_INFO("Coconut add an TransformComponent for that entity.");
-        //	entity->addComponent<TransformComponent>();
-        //}
-        // m_transform = &entity->getComponent<Coconut::TransformComponent>();
-
         setTexture(path);
     }
 
@@ -40,31 +32,34 @@ public:
     }
 
     void setTexture(std::string path) {
-        // Attention: transform->width and transfrom->height is actually initialized here!!!
         std::tie(m_texture, width, height) = Coconut::TextureManager::LoadTexture_tuple(path);
+        CC_INFO("Texture set, path = {}", path.c_str());
     }
 
     void init() override {
         m_transform = &entity->getComponent<Coconut::TransformComponent>();
-        // this should be optimized!
-        m_transform->width  = width;
-        m_transform->height = height;
-        // <<<<
-        m_srcRect.x = m_srcRect.y = 0;
-        m_srcRect.w               = m_transform->width;
-        m_srcRect.h               = m_transform->height;
+        m_srcRect.x = 0;
+        m_srcRect.y = 0;
+        m_srcRect.w = width;
+        m_srcRect.h = height;
 
-        std::tie(m_destRect.w, m_destRect.h) = m_transform->getScaledSize();
+        // the render size here should be determined by some feature of the body component
+        // this is just a temporary code
+        m_destRect.w = width * m_transform->scale;
+        m_destRect.h = height * m_transform->scale;
         CC_CORE_INFO("SpriteComponent initialized!");
     }
 
     void update() override {
-        std::tie(m_destRect.w, m_destRect.h) = m_transform->getScaledSize();
-        std::tie(m_destRect.x, m_destRect.y) = m_transform->getCoordinate();
+        // the render size here should be determined by some feature of the body component
+        // this is just a temporary code
+        m_destRect.w = width * m_transform->scale;
+        m_destRect.h = height * m_transform->scale;
     }
 
     void render() override {
-        Coconut::TextureManager::DrawTexture(m_texture, m_srcRect, m_destRect);
+        // Coconut::TextureManager::DrawTexture(m_texture, m_srcRect, m_destRect);
+        Coconut::TextureManager::DrawTexture(m_texture, m_destRect);
     }
 };
 }  // namespace Coconut

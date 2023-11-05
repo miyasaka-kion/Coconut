@@ -32,6 +32,7 @@ target_include_directories(
     src
 )
 
+
 find_package(spdlog REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)

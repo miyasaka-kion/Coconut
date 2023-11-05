@@ -21,47 +21,47 @@ public:
     void update() override {
         if(Coconut::Game::event.type == SDL_KEYDOWN) {
             CC_CORE_INFO("key pressed!");
-            switch(Coconut::Game::event.key.keysym.sym) {
-            case SDLK_w:
-                transform->velocity.setY(-1);
-                break;
-            case SDLK_s:
-                transform->velocity.setY(1);
-                break;
-            case SDLK_a:
-                transform->velocity.setX(-1);
-                break;
-            case SDLK_d:
-                transform->velocity.setX(1);
-                break;
-            case SDLK_ESCAPE:
-                CC_INFO("key ESC pressed!");
-                // should close the window
-                break;
-            default:
-                break;
-            }
+            // switch(Coconut::Game::event.key.keysym.sym) {
+            // case SDLK_w:
+            //     transform->velocity.setY(-1);
+            //     break;
+            // case SDLK_s:
+            //     transform->velocity.setY(1);
+            //     break;
+            // case SDLK_a:
+            //     transform->velocity.setX(-1);
+            //     break;
+            // case SDLK_d:
+            //     transform->velocity.setX(1);
+            //     break;
+            // case SDLK_ESCAPE:
+            //     CC_INFO("key ESC pressed!");
+            //     // should close the window
+            //     break;
+            // default:
+            //     break;
+            // }
         }
 
         if(Coconut::Game::event.type == SDL_KEYUP) {
             CC_CORE_INFO("keys up!");
 
-            switch(Coconut::Game::event.key.keysym.sym) {
-            case SDLK_w:
-                transform->velocity.setY(0);
-                break;
-            case SDLK_s:
-                transform->velocity.setY(0);
-                break;
-            case SDLK_a:
-                transform->velocity.setX(0);
-                break;
-            case SDLK_d:
-                transform->velocity.setX(0);
-                break;
-            default:
-                break;
-            }
+            // switch(Coconut::Game::event.key.keysym.sym) {
+            // case SDLK_w:
+            //     transform->velocity.setY(0);
+            //     break;
+            // case SDLK_s:
+            //     transform->velocity.setY(0);
+            //     break;
+            // case SDLK_a:
+            //     transform->velocity.setX(0);
+            //     break;
+            // case SDLK_d:
+            //     transform->velocity.setX(0);
+            //     break;
+            // default:
+            //     break;
+            // }
         }
     }
 };

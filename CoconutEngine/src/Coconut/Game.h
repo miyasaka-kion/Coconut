@@ -1,7 +1,9 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
+#include <box2d/box2d.h>
 // This ignores all warnings raised inside External headers
 #ifdef CC_PLATFORM_WINDOWS
 #include <SDL.h>
@@ -30,6 +32,9 @@ public:
 
     static SDL_Renderer* renderer;
     static SDL_Event     event;
+
+private:
+    static std::unique_ptr<b2World> m_world;
 
 private:
     bool        m_isRunning;
