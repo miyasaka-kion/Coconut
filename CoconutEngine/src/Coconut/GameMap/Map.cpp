@@ -4,7 +4,7 @@
 Coconut::Map::Map() : m_rows(Coconut::Constants::MAP_WIDTH), m_columns(Coconut::Constants::MAP_HEIGHT) {
     m_map.resize(m_rows, std::vector<int>(m_columns, 0));
     CC_CORE_INFO("Begin to load map sprites:");
-    m_dirt  = Coconut::TextureManager::LoadTexture("dirt.jpg");
+    // m_dirt  = Coconut::TextureManager::LoadTexture("dirt.png");
     m_grass = Coconut::TextureManager::LoadTexture("grass.png");
     m_water = Coconut::TextureManager::LoadTexture("water.png");
     m_sky   = Coconut::TextureManager::LoadTexture("sky.png");

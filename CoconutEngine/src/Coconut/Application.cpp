@@ -7,11 +7,11 @@ Application::Application() {}
 Application::~Application() {}
 
 void Application::run() {
-    const int FPS        = 60;
-    const int frameDelay = 1000 / FPS;
+    // const int FPS        = 60;
+    // const int frameDelay = 1000 / FPS;
 
-    Uint32 frameStart;
-    int    frameTime;
+    // Uint32 frameStart;
+    // int    frameTime;
 
     // init logger
     Coconut::Log::init();
@@ -27,20 +27,20 @@ void Application::run() {
     
     
     while(game->running()) {
-        frameStart = SDL_GetTicks();
+        // frameStart = SDL_GetTicks();
 
         game->handleEvents();
         game->update();
         game->render();
 
-        frameTime = SDL_GetTicks() - frameStart;
-        if(frameTime < frameDelay) {
-            SDL_Delay(frameDelay - frameTime);
-        }
+        // frameTime = SDL_GetTicks() - frameStart;
+        // if(frameTime < frameDelay) {
+        //     SDL_Delay(frameDelay - frameTime);
+        // }
+        game->step(); 
     }
 
     game->clean();
-
-    CC_CORE_CRITICAL("Programme end, Hellow world!");
+    CC_CORE_CRITICAL("Programme end, Hello world!");
 }
 }  // namespace Coconut

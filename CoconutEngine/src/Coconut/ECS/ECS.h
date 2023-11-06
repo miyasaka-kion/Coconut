@@ -39,7 +39,7 @@ using ComponentArray_t  = std::array<Component*, maxComponents>;
 // Component
 class Component {
 public:
-    // points to the entity it belongs to
+    // The entity it belongs to
     Entity* entity;
 
     virtual void init() {}
@@ -78,7 +78,6 @@ public:
     }
 
     template <typename T> bool hasComponent() const {
-        // CC_CORE_INFO("getComponentTypeID<T>() = {}", getComponentTypeID<T>());
         return m_componentBitset[getComponentTypeID<T>()];
     }
 

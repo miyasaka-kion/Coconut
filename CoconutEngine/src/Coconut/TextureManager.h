@@ -31,9 +31,8 @@ public:
     static void showFileInfo();
 
 private:
-    static std::filesystem::path m_binPath;
-    static std::filesystem::path m_projectPath;
-    static std::filesystem::path m_assetPath;
+    static std::filesystem::path m_project_path;
+    static std::filesystem::path m_asset_path;
 };
 
 }  // namespace Coconut

@@ -22,7 +22,7 @@ std::unique_ptr<b2World> Coconut::Game::m_world = nullptr;
 // global variables, should be refactored in the future.
 Coconut::Manager manager;
 auto& player = manager.addEntity();
-auto& dirt = manager.addEntity();
+// auto& dirt = manager.addEntity();
 
 Coconut::Game::Game() {
     m_gameCounter = 0;
@@ -83,14 +83,15 @@ void Coconut::Game::gameInit(std::string title, int x, int y, int width, int hei
         m_world = std::make_unique< b2World >(gravity);
     }
         
-
-    player.addComponent<Coconut::TransformComponent>();
+    b2BodyDef bd;
+    bd.type = b2_dynamicBody;
+    player.addComponent<Coconut::BodyComponent>(m_world.get(), bd);
+    
     player.addComponent<Coconut::SpriteComponent>("bird.png");
     player.addComponent<Coconut::KeyboardController>();
-    player.addComponent<Coconut::BodyComponent>(m_world.get());
 
-    dirt.addComponent<Coconut::TransformComponent>(b2Vec2{1.0f, 1.0f}, 0.0f);
-    dirt.addComponent<Coconut::SpriteComponent>("dirt.jpg");
+    // dirt.addComponent<Coconut::TransformComponent>(b2Vec2{1.0f, 1.0f}, 0.0f);
+    // dirt.addComponent<Coconut::SpriteComponent>("dirt.jpg");
 }
 
 void Coconut::Game::handleEvents() {
@@ -118,6 +119,11 @@ void Coconut::Game::render() {
     manager.draw();
 
     SDL_RenderPresent(renderer);
+}
+
+void Coconut::Game::step() {
+    m_world->Step(1.0f / m_frame_rate, 10.0f, 2.0f);
+    m_world->ClearForces();
 }
 
 void Coconut::Game::clean() {

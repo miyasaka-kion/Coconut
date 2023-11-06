@@ -25,6 +25,7 @@ public:
     void update();
     void render();
     void clean();
+    void step();
 
     inline bool running() const {
         return m_isRunning;
@@ -35,6 +36,7 @@ public:
 
 private:
     static std::unique_ptr<b2World> m_world;
+    float m_frame_rate = 60.0f;
 
 private:
     bool        m_isRunning;

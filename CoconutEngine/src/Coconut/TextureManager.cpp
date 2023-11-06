@@ -1,6 +1,7 @@
 #include "Coconut/TextureManager.h"
 #include "Coconut/Log.h"
 #include <SDL_error.h>
+#include <algorithm>
 
 #ifdef CC_PLATFORM_WINDOWS
 #include <SDL.h>
@@ -10,18 +11,17 @@
 #include <SDL2/SDL_image.h>
 #endif
 
-std::filesystem::path Coconut::TextureManager::m_binPath = std::filesystem::current_path();
-std::filesystem::path Coconut::TextureManager::m_projectPath = m_binPath.parent_path();
-std::filesystem::path Coconut::TextureManager::m_assetPath = m_binPath / "assets";
+std::filesystem::path Coconut::TextureManager::m_project_path = std::filesystem::current_path();
+std::filesystem::path Coconut::TextureManager::m_asset_path = m_project_path / "build" / "assets";
 
 std::tuple<SDL_Texture*, int, int> Coconut::TextureManager::LoadTexture_tuple(const std::string& fileName) {
     // Load texture in the asset folder directly
 
-    std::filesystem::path full_path     = m_assetPath / fileName;
+    std::filesystem::path full_path     = m_asset_path / fileName;
     std::string           full_path_str = full_path.string();
-
+    
     SDL_Surface* tmpSurface = IMG_Load(full_path_str.c_str());
-
+    CC_CORE_INFO("Loading: {}", full_path_str.c_str());
     if(tmpSurface == nullptr) {
         CC_CORE_CRITICAL("tmpSurface is a nullptr! The specified file or path may not correct.");
         CC_CORE_CRITICAL("ERROR loading {}", full_path_str);
@@ -74,7 +74,6 @@ void Coconut::TextureManager::DrawTexture(SDL_Texture* texture, SDL_Rect dest_re
 }
 
 void Coconut::TextureManager::showFileInfo() {
-    CC_CORE_INFO("TextManager Initialization: Current executable directory is: " + m_binPath.string());
-    CC_CORE_INFO("TextManager Initialization: Current project directory is: " + m_projectPath.string());
-    CC_CORE_INFO("TextManager Initialization: Current asset directory is: " + m_assetPath.string());
+    CC_CORE_INFO("TextManager Initialization: Current executable directory is: " + m_project_path.string());
+    CC_CORE_INFO("TextManager Initialization: Current asset directory is: " + m_asset_path.string());
 }
