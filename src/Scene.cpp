@@ -19,6 +19,7 @@
 #include "Edge.h"
 #include "Entity.h"
 #include "Log.h"
+#include "Circle.h"
 #include "MetricConverter.h"
 
 Scene::Scene() {
@@ -28,7 +29,7 @@ Scene::Scene() {
     init_imgui();
 
     auto gravity = b2Vec2(0.0f, -10.0f);
-    world = std::make_unique< b2World >(gravity);
+    world        = std::make_unique< b2World >(gravity);
     loadEntities();
     closeGame = false;
 }
@@ -50,6 +51,42 @@ void Scene::init_sdl_renderer() {
     CC_CORE_INFO("Current SDL_Renderer: {}", info.name);
 }
 
+void Scene::showControlGUI(b2Vec2& gravity) {
+    bool show_demo_window    = true;
+    bool show_another_window = false;
+
+    static int entity_counter = 0;
+
+    ImGui::Begin("Control bar");  // Create a window called "Hello, world!" and append into it.
+
+    ImGui::Text("Adjust ...here!");                     // Display some text (you can use a format strings too)
+    ImGui::Checkbox("Demo Window", &show_demo_window);  // Edit bools storing our window open/close state
+    ImGui::Checkbox("Another Window", &show_another_window);
+    ImGui::Checkbox("box sleep", &m_boxSleep);
+
+    ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);  // Edit 1 float using a slider from 0.0f to 1.0f
+    ImGui::ColorEdit3("clear color", ( float* )&clear_color);   // Edit 3 floats representing a color
+
+    if(ImGui::Button("load box")) {
+        loadBox();
+    }
+    if(ImGui::Button("load circle")) {
+        loadCircle();
+    }
+    ImGui::SameLine();
+    if(ImGui::Button("load Edge")) {
+        loadEdge();
+    }
+    ImGui::Text("counter = %d", entity_counter);
+    if(ImGui::Button("clear Entities")) {
+        entityList.clear();
+    }
+
+    ImGuiIO& io = ImGui::GetIO();
+    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+    ImGui::End();
+}
+
 void Scene::run() {
     // game main loop here
     ImGuiIO& io = ImGui::GetIO();
@@ -63,46 +100,11 @@ void Scene::run() {
         ImGui::NewFrame();
 
         auto gravity = world->GetGravity();
-        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-        {
-            bool show_demo_window    = true;
-            bool show_another_window = false;
+        // Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+        showControlGUI(gravity);
 
-            static int entity_counter = 0;
-
-            ImGui::Begin("Control bar");  // Create a window called "Hello, world!" and append into it.
-
-            ImGui::Text("Adjust ...here!");           // Display some text (you can use a format strings too)
-            ImGui::Checkbox("Demo Window", &show_demo_window);  // Edit bools storing our window open/close state
-            ImGui::Checkbox("Another Window", &show_another_window);
-
-            ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);               // Edit 1 float using a slider from 0.0f to 1.0f
-            ImGui::ColorEdit3("clear color", ( float* )&clear_color);  // Edit 3 floats representing a color
-
-            
-
-            if(ImGui::Button("load box")) {
-                loadBox();            
-            }
-            ImGui::SameLine();
-            if(ImGui::Button("load Edge")) {
-                loadEdge();
-            }
-            ImGui::Text("counter = %d", entity_counter);
-            if(ImGui::Button("clear Entities")) {
-                entityList.clear();
-            }
-    
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-            ImGui::End();
-        }
-        
-        // update world info 
+        // update world info
         world->SetGravity(gravity);
-
-        // update world info end
-
-
 
         // render all
         ImGui::Render();
@@ -114,11 +116,12 @@ void Scene::run() {
         ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 
         refresh();
-        SDL_SetRenderDrawColor(renderer, ( Uint8 )(clear_color.x * 255), ( Uint8 )(clear_color.y * 255), ( Uint8 )(clear_color.z * 255), ( Uint8 )(clear_color.w * 255));
+        SDL_SetRenderDrawColor(renderer, ( Uint8 )(clear_color.x * 0xff), ( Uint8 )(clear_color.y * 0xff), ( Uint8 )(clear_color.z * 0xff), ( Uint8 )(clear_color.w * 0xff));
 
         SDL_RenderPresent(renderer);
 
-        world->Step(1.0f / 60.0f, 10.0f, 2.0f);  // update
+        // TODO: split the refresh rate and the rate I render graphic to screen.
+        world->Step(1.0f / 120.0f, 10.0f, 2.0f);  // update
         world->ClearForces();
     }
 }
@@ -156,7 +159,7 @@ void Scene::init_imgui() {
     ( void )io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable docking functionalities
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;      // Enable docking functionalities
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
     // ImGui::StyleColorsLight();
@@ -188,11 +191,10 @@ void Scene::pollEvents() {
 }
 
 void Scene::refresh() {
-    for(const auto& entity : entityList) {
+    for(auto& entity : entityList) {
         entity->render();
     }
 }
-
 
 void Scene::loadEdge() {
     // some constants
@@ -216,13 +218,24 @@ void Scene::loadEdge() {
 void Scene::loadEntities() {
     loadBox();
     loadEdge();
+    loadCircle();
 }
+
+void Scene::loadCircle() {
+    auto circle = std::make_unique< Circle >(world.get(), renderer);
+    float radius = 1.0f;
+
+    circle->init(c_OriginPos, radius, c_OriginalVelocity, c_originalAngle);
+
+    entityList.push_back(std::move(circle)); 
+}
+
 
 void Scene::loadBox() {
     auto box = std::make_unique< Box >(world.get(), renderer);
 
     box->init(c_OriginPos, b2Vec2(c_OriginalBoxWidth, c_OriginalBoxHeight), c_OriginalVelocity, c_originalAngle);
-    
+
     entityList.push_back(std::move(box));
 }
 

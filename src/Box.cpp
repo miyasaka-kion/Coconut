@@ -18,40 +18,44 @@ Box::Box(b2World* world, SDL_Renderer* renderer) : Entity(world, renderer) {
 }
 
 Box::~Box() {
-    spdlog::info("box destroyed, location at {}, {}", getPosPixX(), getPosPixX());
-    SDL_DestroyTexture(boxTexture);
+    CC_CORE_INFO("box destroyed, location at {}, {}", getPosPixX(), getPosPixX());
+    SDL_DestroyTexture(m_BoxTexture);
 }
 
 void Box::init(b2Vec2 originalPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle) {
-    loadBoxToWorld(originalPos, boxSize, originalVel, originalAngle);  // not finished
+    addToWorld(originalPos, boxSize, originalVel, originalAngle);  // not finished
     loadTexture();
 
-    box_rect.w = MetricConverter::toPix(boxSize.x);
-    box_rect.h = MetricConverter::toPix(boxSize.y);
-    CC_CORE_INFO("box size info: box.w = {}, box.h = {}", box_rect.w, box_rect.h);
+    m_BoxRect.w = MetricConverter::toPix(boxSize.x);
+    m_BoxRect.h = MetricConverter::toPix(boxSize.y);
+    CC_CORE_INFO("box size info: box.w = {}, box.h = {}", m_BoxRect.w, m_BoxRect.h);
 }
 
-void Box::loadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle) {
+void Box::addToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle) {
     CC_CORE_INFO("Calling loadBoxToWorld");
-    b2BodyDef boxBodyDef;
-    boxBodyDef.type     = b2_dynamicBody;
-    boxBodyDef.angle    = originalAngle;  // flips the whole thing -> 180 grad drehung
-    boxBodyDef.position = originPos;
+    b2BodyDef bd;
+    bd.type     = b2_dynamicBody;
+    bd.angle    = originalAngle;  // flips the whole thing -> 180 grad drehung
+    bd.position = originPos;
+    bd.position.Set(1.0f, 1.0f);
 
-    body = m_world->CreateBody(&boxBodyDef);
-    body->SetLinearVelocity(originalVel);
+    m_body = m_world->CreateBody(&bd);
+    m_body->SetLinearVelocity(originalVel);
 
     // b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox((boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
+    m_polygonShape.SetAsBox((boxSize.x / 2.0f) - m_polygonShape.m_radius, (boxSize.y / 2.0f) - m_polygonShape.m_radius);
 
-    CC_CORE_INFO("box info:  hx: {}, hy: {}", (boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
+    {
+        CC_CORE_INFO("box info:  hx: {}, hy: {}", (boxSize.x / 2.0f) - m_polygonShape.m_radius, (boxSize.y / 2.0f) - m_polygonShape.m_radius);
+        CC_CORE_INFO("box radius = {}", m_polygonShape.m_radius);
+    }
 
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape       = &dynamicBox;
-    fixtureDef.density     = 1;
-    fixtureDef.friction    = 0.1f;
-    fixtureDef.restitution = 0.5f;
-    body->CreateFixture(&fixtureDef);
+    b2FixtureDef fd;
+    fd.shape       = &m_polygonShape;
+    fd.density     = 1;
+    fd.friction    = 0.1f;
+    fd.restitution = 0.5f;
+    m_body->CreateFixture(&fd);
 }
 
 void Box::loadTexture() {
@@ -64,8 +68,8 @@ void Box::loadTexture() {
         // throw some error here and somehow return(TODO)
     }
 
-    boxTexture = SDL_CreateTextureFromSurface(m_renderer, tmp_sprites);
-    if(boxTexture == NULL) {
+    m_BoxTexture = SDL_CreateTextureFromSurface(m_renderer, tmp_sprites);
+    if(m_BoxTexture == NULL) {
         CC_CORE_ERROR("Create texture from surface failed! Error msg: {}", SDL_GetError());
         throw std::runtime_error("texture_box is NULL");
     }
@@ -74,26 +78,31 @@ void Box::loadTexture() {
 }
 
 int Box::getPosPixX() {
-    return MetricConverter::toPixX(body->GetPosition().x) - box_rect.w / 2.0f;
+    return MetricConverter::toPixX(m_body->GetPosition().x) - m_BoxRect.w / 2.0f;
 }
 
 int Box::getPosPixY() {
-    return MetricConverter::toPixY(body->GetPosition().y) - box_rect.h / 2.0f;
+    return MetricConverter::toPixY(m_body->GetPosition().y) - m_BoxRect.h / 2.0f;
 }
 
-void Box::updateBoxPixelCoordinate() {
-    box_rect.x = this->getPosPixX();
-    box_rect.y = this->getPosPixY();
+void Box::updateRect() {
+    m_BoxRect.x = this->getPosPixX();
+    m_BoxRect.y = this->getPosPixY();
 }
 
 void Box::render() {
-    updateBoxPixelCoordinate();
-    if(SDL_RenderCopyEx(m_renderer, boxTexture, NULL, &box_rect, getAngleDegree(), NULL, SDL_FLIP_NONE)) {
+    updateRect();
+    // body->ApplyTorque(0.05f, true);
+    // body->ApplyAngularImpulse(0.1f, true);
+
+    // CC_CORE_INFO("box pos {}, {}", getPosPixX(), getPosPixY());
+    
+    if(SDL_RenderCopyEx(m_renderer, m_BoxTexture, NULL, &m_BoxRect, getAngleDegree(), NULL, SDL_FLIP_NONE)) {
         CC_CORE_ERROR("SDL_RenderCopyEx failed to render entity box, Error message: {}", SDL_GetError());
         throw std::runtime_error("SDL_RenderCopyEx failed to render entity box");
     }
 }
 
 float Box::getAngleDegree() {
-    return MetricConverter::toDegree(body->GetAngle());
+    return MetricConverter::toDegree(m_body->GetAngle());
 }
