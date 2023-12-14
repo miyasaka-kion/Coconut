@@ -73,7 +73,7 @@ void Circle::addToWorld() {
 
     b2FixtureDef fd;
     fd.shape = &m_CircleShape;
-    // fd.density     = 1;
+    fd.density     = 1;
     // fd.friction    = 0.1f;
     // fd.restitution = 0.5f;
 
