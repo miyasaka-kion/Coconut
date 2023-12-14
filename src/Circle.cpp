@@ -15,13 +15,54 @@ Circle::~Circle() {
     SDL_DestroyTexture(m_CircleTexture);
 }
 
+// >>>>>>>> API begin >>>>>>>>>
+void Circle::init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle) {
+    m_radius = radius;
+    addToWorld();
+    loadTexture();
+
+    m_BoxRect.w = m_BoxRect.h = MetricConverter::toPix(radius * 2);
+}
+
+void Circle::render() {
+    updateRect();
+
+    // CC_CORE_INFO("circle pos {}, {}", getPosPixX(), getPosPixY());
+    CC_CORE_INFO("m_BoxRect, size = {}, {}", m_BoxRect.w, m_BoxRect.h);
+    CC_CORE_INFO("m_BoxRect, pos = {}, {}", m_BoxRect.x, m_BoxRect.y);
+
+    if(SDL_RenderCopyEx(m_renderer, m_CircleTexture, NULL, &m_BoxRect, getAngleDegree(), NULL, SDL_FLIP_NONE)) {
+        CC_CORE_ERROR("SDL_RenderCopyEx failed to render empty texture, {}", SDL_GetError());
+        throw std::runtime_error("SDL_RenderCopyEx failed to render entity box");
+    }
+}
+
+int Circle::getPosPixX() {
+    return MetricConverter::toPixX(m_body->GetPosition().x) - m_BoxRect.w / 2.0f;
+}
+
+int Circle::getPosPixY() {
+    return MetricConverter::toPixY(m_body->GetPosition().y) - m_BoxRect.h / 2.0f;
+}
+
+float Circle::getAngleDegree() {
+    return MetricConverter::toDegree(m_body->GetAngle());
+}
+
+// >>>>>>>> API end >>>>>>>>>
+
+void Circle::updateRect() {
+    m_BoxRect.x = this->getPosPixX();
+    m_BoxRect.y = this->getPosPixY();
+}
+
 void Circle::addToWorld() {
     CC_CORE_INFO("Calling loadCircleToWorld");
     b2BodyDef bd;
     bd.type = b2_dynamicBody;
     // bd.position.Set(0.0f, 0.0f);
     // almost use the default body def.
-    
+
     m_body = m_world->CreateBody(&bd);
 
     // m_CircleShape.m_p.Set(0.0f, 0.0f);
@@ -31,7 +72,7 @@ void Circle::addToWorld() {
     CC_CORE_INFO("m_CircleShape: radius = {}", m_CircleShape.m_radius);
 
     b2FixtureDef fd;
-    fd.shape       = &m_CircleShape;
+    fd.shape = &m_CircleShape;
     // fd.density     = 1;
     // fd.friction    = 0.1f;
     // fd.restitution = 0.5f;
@@ -56,43 +97,4 @@ void Circle::loadTexture() {
     }
     CC_CORE_INFO("loadTexture(): Circle texture loaded.");
     SDL_FreeSurface(tmp_sprites);
-}
-
-void Circle::init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle) {
-    m_radius = radius;
-    addToWorld();
-    loadTexture();
-    
-    m_BoxRect.w = m_BoxRect.h = MetricConverter::toPix(radius * 2);
-}
-
-void Circle::updateRect() {
-    m_BoxRect.x = this->getPosPixX();
-    m_BoxRect.y = this->getPosPixY();
-}
-
-int Circle::getPosPixX() {
-    return MetricConverter::toPixX(m_body->GetPosition().x) - m_BoxRect.w / 2.0f;
-}
-
-int Circle::getPosPixY() {
-    return MetricConverter::toPixY(m_body->GetPosition().y) - m_BoxRect.h / 2.0f;
-}
-
-float Circle::getAngleDegree() {
-    return MetricConverter::toDegree(m_body->GetAngle());
-}
-
-void Circle::render() {
-    updateRect();
-
-    // CC_CORE_INFO("circle pos {}, {}", getPosPixX(), getPosPixY());
-    CC_CORE_INFO("m_BoxRect, size = {}, {}", m_BoxRect.w, m_BoxRect.h);
-    CC_CORE_INFO("m_BoxRect, pos = {}, {}", m_BoxRect.x, m_BoxRect.y);
-    
-
-    if(SDL_RenderCopyEx(m_renderer, m_CircleTexture, NULL, &m_BoxRect, getAngleDegree(), NULL, SDL_FLIP_NONE)) {
-        CC_CORE_ERROR("SDL_RenderCopyEx failed to render empty texture, {}", SDL_GetError());
-        throw std::runtime_error("SDL_RenderCopyEx failed to render entity box");
-    }
 }
