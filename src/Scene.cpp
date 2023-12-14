@@ -29,7 +29,7 @@ Scene::Scene() {
     init_imgui();
 
     auto gravity = b2Vec2(0.0f, -10.0f);
-    world        = std::make_unique< b2World >(gravity);
+    m_world        = std::make_unique< b2World >(gravity);
     loadEntities();
     closeGame = false;
 }
@@ -51,7 +51,7 @@ void Scene::init_sdl_renderer() {
     CC_CORE_INFO("Current SDL_Renderer: {}", info.name);
 }
 
-void Scene::showControlGUI(b2Vec2& gravity) {
+void Scene::showControlGUI() {
     bool show_demo_window    = true;
     bool show_another_window = false;
 
@@ -63,8 +63,13 @@ void Scene::showControlGUI(b2Vec2& gravity) {
     ImGui::Checkbox("Demo Window", &show_demo_window);  // Edit bools storing our window open/close state
     ImGui::Checkbox("Another Window", &show_another_window);
     ImGui::Checkbox("box sleep", &m_boxSleep);
+    
+    b2Vec2 gravity = m_world->GetGravity();
+    ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);  
+    ImGui::SliderFloat("gravity.x", &gravity.x, -5.0f, 5.0f);
+    m_world->SetGravity(gravity);
 
-    ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);  // Edit 1 float using a slider from 0.0f to 1.0f
+
     ImGui::ColorEdit3("clear color", ( float* )&clear_color);   // Edit 3 floats representing a color
 
     if(ImGui::Button("load box")) {
@@ -99,12 +104,8 @@ void Scene::run() {
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
 
-        auto gravity = world->GetGravity();
         // Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-        showControlGUI(gravity);
-
-        // update world info
-        world->SetGravity(gravity);
+        showControlGUI();
 
         // render all
         ImGui::Render();
@@ -121,8 +122,8 @@ void Scene::run() {
         SDL_RenderPresent(renderer);
 
         // TODO: split the refresh rate and the rate I render graphic to screen.
-        world->Step(1.0f / 120.0f, 10.0f, 2.0f);  // update
-        world->ClearForces();
+        m_world->Step(1.0f / 120.0f, 10.0f, 2.0f);  // update
+        m_world->ClearForces();
     }
 }
 
@@ -209,7 +210,7 @@ void Scene::loadEdge() {
     endpoint.y = -2.0;
     // constants end
 
-    auto edge = std::make_unique< Edge >(world.get(), renderer);
+    auto edge = std::make_unique< Edge >(m_world.get(), renderer);
     edge->init(startpoint, endpoint);
 
     entityList.push_back(std::move(edge));
@@ -222,7 +223,7 @@ void Scene::loadEntities() {
 }
 
 void Scene::loadCircle() {
-    auto circle = std::make_unique< Circle >(world.get(), renderer);
+    auto circle = std::make_unique< Circle >(m_world.get(), renderer);
     float radius = 1.0f;
 
     circle->init(c_OriginPos, radius, c_OriginalVelocity, c_originalAngle);
@@ -232,7 +233,7 @@ void Scene::loadCircle() {
 
 
 void Scene::loadBox() {
-    auto box = std::make_unique< Box >(world.get(), renderer);
+    auto box = std::make_unique< Box >(m_world.get(), renderer);
 
     box->init(c_OriginPos, b2Vec2(c_OriginalBoxWidth, c_OriginalBoxHeight), c_OriginalVelocity, c_originalAngle);
 

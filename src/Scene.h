@@ -25,22 +25,25 @@ public:
 
     // <<<<<<<< API of Scene end <<<<<<<<<<<
 private:
+    // init
     void init_sdl_window();
     void init_sdl_renderer();
-
     void init_imgui();
 
+    //load
     void loadEntities();
     void loadBox();
     void loadCircle();
     void loadEdge();
+
+
     void pollEvents();
     void refresh();
     void removeInactive();
-    void showControlGUI(b2Vec2& gravity);
+    void showControlGUI();
 
 public:
-    std::unique_ptr< b2World > world;
+    std::unique_ptr< b2World > m_world;
 
     // SDL members
 private:
