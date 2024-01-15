@@ -1,6 +1,5 @@
 #include "Scene.h"
 
-#include <SDL_render.h>
 #include <cstdio>
 #include <iostream>
 #include <memory>
@@ -13,6 +12,7 @@
 #include <SDL2/SDL.h>
 #include <SDL_error.h>
 #include <SDL_hints.h>
+#include <SDL_render.h>
 
 #include "Box.h"
 #include "Constants.h"
@@ -217,6 +217,7 @@ void Scene::loadEdge() {
 }
 
 void Scene::loadEntities() {
+    // This is test code and should be modified in later version
     loadBox();
     loadEdge();
     loadCircle();

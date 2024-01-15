@@ -24,14 +24,22 @@ private:
     void addToWorld();
     void loadTexture();
 
+    // SDL info
 private:
     SDL_Texture* m_CarTexture;
+    SDL_Rect     m_BoxRect;
 
+    // physical features of a car
 public:
-    float          m_radius;
-    SDL_Rect       m_BoxRect;
-    b2Body*        m_body;
-    b2CircleShape  m_FrontWheel;
-    b2CircleShape  m_BackWheel;
-    b2PolygonShape m_CarFrame;
+    float m_radius;
+
+    // b2 info
+private:
+    b2Body* m_car;
+    b2Body* m_wheel1;
+    b2Body* m_wheel2;
+
+    float         m_speed;
+    b2WheelJoint* m_spring1;
+    b2WheelJoint* m_spring2;
 };
