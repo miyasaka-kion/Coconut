@@ -16,13 +16,16 @@ public:
     // Box(const Box&) = delete; // this is unsure
     ~Box();
 
-    void updateBoxPixelCoordinate();
-    void init(b2Vec2 originalPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);  // override?
-    void render() override;
 
-    int   getPosPixX();
-    int   getPosPixY();
-    float getAngleDegree();
+    void Init(b2Vec2 originalPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);  // override?
+    void Render() override;
+
+    // box2d API  
+    b2Body* GetBody();
+
+    int   GetPosPixX();
+    int   GetPosPixY();
+    float GetAngleDegree(); 
 
 private:
     SDL_Texture* boxTexture;
@@ -34,9 +37,9 @@ private:
     void loadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);
 
 public:
-    SDL_Rect       box_rect;
-    b2Body*        body;
-    b2PolygonShape dynamicBox;
+    SDL_Rect       m_box_rect;
+    b2Body*        m_body;
+    
 
 private:
     // TODO: an Initial position of the box, when pressing r all entities should revert to its original position
