@@ -13,7 +13,7 @@ Edge::~Edge() {
     m_world->DestroyBody(body); // seems this is not needed? should check the source code.
 }
 
-void Edge::init(b2Vec2 startpoint, b2Vec2 endpoint) {
+void Edge::Init(b2Vec2 startpoint, b2Vec2 endpoint) {
     // LineGround
     b2BodyDef myGroundDef;
     myGroundDef.type = b2_staticBody;
@@ -31,7 +31,7 @@ void Edge::init(b2Vec2 startpoint, b2Vec2 endpoint) {
     edgeShape.SetTwoSided(startpoint, endpoint);  // length -> coordinate vector from to vector
 }
 
-void Edge::render() {
+void Edge::Render() {
     SDL_SetRenderDrawColor(m_renderer, 255, 255, 0, 0);
     SDL_RenderDrawLine(m_renderer, 
     MetricConverter::toPixX(edgeShape.m_vertex1.x),
