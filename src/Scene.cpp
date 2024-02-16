@@ -13,6 +13,7 @@
 #include <SDL2/SDL.h>
 #include <SDL_error.h>
 #include <SDL_hints.h>
+#include <thread>
 
 #include "Box.h"
 #include "Constants.h"
@@ -22,11 +23,12 @@
 #include "MetricConverter.h"
 
 Scene::Scene() {
+    // prepare game context
     init_sdl_window();
     init_sdl_renderer();
-
     init_imgui();
 
+    // physics info initialize
     auto gravity = b2Vec2(0.0f, -10.0f);
     world = std::make_unique< b2World >(gravity);
     loadEntities();
@@ -34,6 +36,7 @@ Scene::Scene() {
 }
 
 Scene::~Scene() {
+    // clean up game context
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -52,8 +55,14 @@ void Scene::init_sdl_renderer() {
 
 void Scene::run() {
     // game main loop here
-    ImGuiIO& io = ImGui::GetIO();
-    ( void )io;
+    [[maybe_unused]] ImGuiIO& io = ImGui::GetIO();
+
+    bool calculating = true;
+    float progress = 0.0f;
+
+    bool show_demo_window    = true;
+    bool show_another_window = false;
+
     while(closeGame != true) {
         pollEvents();
 
@@ -63,11 +72,14 @@ void Scene::run() {
         ImGui::NewFrame();
 
         auto gravity = world->GetGravity();
+    
+        {
+            if(show_demo_window)
+                ImGui::ShowDemoWindow();
+        }
+
         // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
         {
-            bool show_demo_window    = true;
-            bool show_another_window = false;
-
             static int entity_counter = 0;
 
             ImGui::Begin("Control bar");  // Create a window called "Hello, world!" and append into it.
@@ -97,6 +109,7 @@ void Scene::run() {
             ImGui::End();
         }
         
+
         // update world info 
         world->SetGravity(gravity);
 

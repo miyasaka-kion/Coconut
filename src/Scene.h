@@ -1,9 +1,11 @@
 #pragma once
-#include <SDL2/SDL.h>
+
 #include <algorithm>
-#include <box2d/box2d.h>
 #include <memory>
 #include <vector>
+
+#include <box2d/box2d.h>
+#include <SDL2/SDL.h>
 
 #include "imgui.h"
 
