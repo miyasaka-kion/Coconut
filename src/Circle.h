@@ -5,11 +5,11 @@
 
 #include "Entity.h"
 
-class Car : public Entity {
+class Circle : public Entity {
 public:
-    Car() = delete;
-    Car(b2World* world, SDL_Renderer* renderer);
-    virtual ~Car();
+    Circle() = delete;
+    Circle(b2World* world, SDL_Renderer* renderer);
+    virtual ~Circle();
     // >>>>>>>> API begin >>>>>>>>>
 public:
     void init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle);
@@ -24,22 +24,12 @@ private:
     void addToWorld();
     void loadTexture();
 
-    // SDL info
 private:
-    SDL_Texture* m_CarTexture;
-    SDL_Rect     m_BoxRect;
+    SDL_Texture* m_CircleTexture;
 
-    // physical features of a car
 public:
-    float m_radius;
-
-    // b2 info
-private:
-    b2Body* m_car;
-    b2Body* m_wheel1;
-    b2Body* m_wheel2;
-
-    float         m_speed;
-    b2WheelJoint* m_spring1;
-    b2WheelJoint* m_spring2;
+    float         m_radius;
+    SDL_Rect      m_BoxRect;
+    b2Body*       m_body;
+    b2CircleShape m_CircleShape;
 };

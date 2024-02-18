@@ -18,6 +18,7 @@
 
 class Scene {
 public:
+    // >>>>>>>> API of Scene begin >>>>>>>>>>
     // Initialize the sdl window and sdl renderer,
     // Initialize the world of box2d
     // Load(TODO) and add all entities to the game.
@@ -26,6 +27,7 @@ public:
 
     void Run();
 
+    // <<<<<<<< API of Scene end <<<<<<<<<<<
 private:
     void Init_SDL_Window();
     void Init_SDL_Renderer();
@@ -41,6 +43,7 @@ private:
     void RemoveInactive();
 
 public:
+    std::unique_ptr< b2World > m_world;
     std::unique_ptr< b2World > m_world;
 
     // SDL members

@@ -1,6 +1,5 @@
 #include "Scene.h"
 
-#include <SDL_render.h>
 #include <cstdio>
 #include <iostream>
 #include <memory>
@@ -20,6 +19,7 @@
 #include "Edge.h"
 #include "Entity.h"
 #include "Log.h"
+#include "Circle.h"
 #include "MetricConverter.h"
 #include "Settings.h"
 #include "Camera.h"
@@ -184,7 +184,7 @@ void Scene::Init_imgui() {
     ( void )io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable docking functionalities
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;      // Enable docking functionalities
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
     // ImGui::StyleColorsLight();
