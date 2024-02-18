@@ -9,7 +9,7 @@ public:
     Entity() = default;
 
     virtual ~Entity() {}
-    virtual void render() = 0;
+    virtual void Render() = 0;
 
     // if the Entity is inActive, this entity should be removed from game
     bool isActive = 1;
