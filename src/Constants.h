@@ -3,14 +3,14 @@
 
 constexpr int c_pixelPerMeter = 100;  // 640 / 80 = 8
 
-constexpr int c_screenWidthPix  = 1000;
-constexpr int c_screenHeightPix = 700;
+// constexpr int c_screenWidthPix  = 1000;
+// constexpr int c_screenHeightPix = 700;
 
-constexpr float c_screenWidthMeter  = static_cast<float>(c_screenWidthPix) / c_pixelPerMeter;  // 4 | 3
-constexpr float c_screenHeightMeter = static_cast<float>(c_screenHeightPix) / c_pixelPerMeter;
+// constexpr float c_screenWidthMeter  = static_cast<float>(c_screenWidthPix) / c_pixelPerMeter;  // 4 | 3
+// constexpr float c_screenHeightMeter = static_cast<float>(c_screenHeightPix) / c_pixelPerMeter;
 
-constexpr float c_xBoundary = c_screenWidthMeter / 2.0f;
-constexpr float c_yBoundary = c_screenHeightMeter / 2.0f;
+// constexpr float c_xBoundary = c_screenWidthMeter / 2.0f;
+// constexpr float c_yBoundary = c_screenHeightMeter / 2.0f;
 
 // 1 rad × 180/π = 57,296°
 constexpr float c_degreePerRad = 180 / M_PI;
