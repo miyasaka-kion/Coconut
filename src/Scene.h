@@ -12,8 +12,8 @@
 #include "Box.h"
 #include "Edge.h"
 #include "Entity.h"
+#include "Camera.h"
 
-// should be a singleton
 class Scene {
 public:
     // Initialize the sdl window and sdl renderer,
@@ -54,5 +54,7 @@ private:
 
     // physics info
 private:
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);    
 };
+
+extern Camera g_camera;

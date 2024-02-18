@@ -21,6 +21,11 @@
 #include "Entity.h"
 #include "Log.h"
 #include "MetricConverter.h"
+#include "Settings.h"
+#include "Camera.h"
+
+Camera g_camera;
+static Settings s_settings;
 
 Scene::Scene() {
     // prepare game context
@@ -54,7 +59,7 @@ void Scene::init_sdl_renderer() {
 }
 
 void Scene::run() {
-    // game main loop here
+    // game main loop
     [[maybe_unused]] ImGuiIO& io = ImGui::GetIO();
 
     bool calculating = true;
@@ -115,8 +120,6 @@ void Scene::run() {
 
         // update world info end
 
-
-
         // render all
         ImGui::Render();
         SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
@@ -131,7 +134,8 @@ void Scene::run() {
 
         SDL_RenderPresent(renderer);
 
-        world->Step(1.0f / 60.0f, 10.0f, 2.0f);  // update
+        world->Step(1.0f / s_settings.m_hertz, s_settings.m_velocityIterations, s_settings.m_positionIterations);  // update
+
         world->ClearForces();
     }
 }
@@ -151,8 +155,11 @@ void Scene::init_sdl_window() {
     CC_CORE_INFO("Height of the Screen: {}", Height);
 
     CC_CORE_INFO("The rendering scale is {} pixels per meter. (px/1.0f)", c_pixelPerMeter);
+    
+    g_camera.m_width = s_settings.m_windowWidth;
+	g_camera.m_height = s_settings.m_windowHeight;
 
-    window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, c_screenWidthPix, c_screenHeightPix, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN);
 
     if(window == NULL) {
         CC_CORE_ERROR("SDL window failed to initialize! ");
@@ -202,10 +209,27 @@ void Scene::pollEvents() {
 
 void Scene::refresh() {
     for(const auto& entity : entityList) {
-        entity->render();
+        entity->Render();
     }
 }
 
+void Scene::removeInactive() {
+    entityList.erase(std::remove_if(std::begin(entityList), std::end(entityList), [](const std::unique_ptr< Entity >& entity) { return !entity->isActive; }), entityList.end());
+}
+
+// test part
+void Scene::loadEntities() {
+    loadBox();
+    loadEdge();
+}
+
+void Scene::loadBox() {
+    auto box = std::make_unique< Box >(world.get(), renderer);
+
+    box->Init(c_OriginPos, b2Vec2(c_OriginalBoxWidth, c_OriginalBoxHeight), c_OriginalVelocity, c_originalAngle);
+    
+    entityList.push_back(std::move(box));
+}
 
 void Scene::loadEdge() {
     // some constants
@@ -221,24 +245,8 @@ void Scene::loadEdge() {
     // constants end
 
     auto edge = std::make_unique< Edge >(world.get(), renderer);
-    edge->init(startpoint, endpoint);
+    edge->Init(startpoint, endpoint);
 
     entityList.push_back(std::move(edge));
 }
 
-void Scene::loadEntities() {
-    loadBox();
-    loadEdge();
-}
-
-void Scene::loadBox() {
-    auto box = std::make_unique< Box >(world.get(), renderer);
-
-    box->init(c_OriginPos, b2Vec2(c_OriginalBoxWidth, c_OriginalBoxHeight), c_OriginalVelocity, c_originalAngle);
-    
-    entityList.push_back(std::move(box));
-}
-
-void Scene::removeInactive() {
-    entityList.erase(std::remove_if(std::begin(entityList), std::end(entityList), [](const std::unique_ptr< Entity >& entity) { return !entity->isActive; }), entityList.end());
-}
