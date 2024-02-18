@@ -26,121 +26,129 @@
 
 Camera g_camera;
 static Settings s_settings;
+static ImguiSettings s_imguiSettings;
 
 Scene::Scene() {
     // prepare game context
-    init_sdl_window();
-    init_sdl_renderer();
-    init_imgui();
+    Init_SDL_Window();
+    Init_SDL_Renderer();
+    Init_imgui();
 
     // physics info initialize
     auto gravity = b2Vec2(0.0f, -10.0f);
-    world = std::make_unique< b2World >(gravity);
-    loadEntities();
+    m_world = std::make_unique< b2World >(gravity);
+    LoadEntities();
     closeGame = false;
 }
 
 Scene::~Scene() {
     // clean up game context
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(m_SDL_Renderer);
+    SDL_DestroyWindow(m_SDL_Window);
     SDL_Quit();
 }
 
-void Scene::init_sdl_renderer() {
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if(renderer == NULL) {
+void Scene::Init_SDL_Renderer() {
+    m_SDL_Renderer = SDL_CreateRenderer(m_SDL_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    if(m_SDL_Renderer == NULL) {
         CC_CORE_ERROR("SDL renderer initialization failed!");
         throw std::runtime_error("SDL_Renderer initialized a NULL renderer");
     }
     SDL_RendererInfo info;
-    SDL_GetRendererInfo(renderer, &info);
+    SDL_GetRendererInfo(m_SDL_Renderer, &info);
     CC_CORE_INFO("Current SDL_Renderer: {}", info.name);
 }
 
-void Scene::run() {
-    // game main loop
+void Scene::UpdateUI() {
     [[maybe_unused]] ImGuiIO& io = ImGui::GetIO();
-
-    bool calculating = true;
-    float progress = 0.0f;
-
-    bool show_demo_window    = true;
-    bool show_another_window = false;
-
-    while(closeGame != true) {
-        pollEvents();
-
         // Start the Dear ImGui frame
         ImGui_ImplSDLRenderer2_NewFrame();
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
 
-        auto gravity = world->GetGravity();
-    
-        {
-            if(show_demo_window)
-                ImGui::ShowDemoWindow();
+    ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
+    ImGui::SetNextWindowSize(ImVec2(float(g_camera.m_width), float(g_camera.m_height)));
+
+    {
+        if(s_imguiSettings.show_demo_window)
+            ImGui::ShowDemoWindow();
+    }
+
+    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+    {
+        static int entity_counter = 0;
+
+        ImGui::Begin("Control bar");  // Create a window called "Hello, world!" and append into it.
+
+        ImGui::Text("Adjust ...here!");                     // Display some text (you can use a format strings too)
+        ImGui::Checkbox("Demo Window", &s_imguiSettings.show_demo_window);  // Edit bools storing our window open/close state
+        ImGui::Checkbox("Another Window", &s_imguiSettings.show_another_window);
+
+        auto gravity = m_world->GetGravity();
+
+        ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);  // Edit 1 float using a slider from 0.0f to 1.0f
+        ImGui::ColorEdit3("clear color", ( float* )&m_clear_color);   // Edit 3 floats representing a color
+
+        if(ImGui::Button("load box")) {
+            LoadBox();
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("load Edge")) {
+            LoadEdge();
+        }
+        ImGui::Text("counter = %d", entity_counter);
+
+        if(ImGui::Button("clear Entities")) {
+            m_entityList.clear();
         }
 
-        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-        {
-            static int entity_counter = 0;
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+        ImGui::End();
+    }
+}
 
-            ImGui::Begin("Control bar");  // Create a window called "Hello, world!" and append into it.
+void Scene::Run() {
+    // game main loop
 
-            ImGui::Text("Adjust ...here!");           // Display some text (you can use a format strings too)
-            ImGui::Checkbox("Demo Window", &show_demo_window);  // Edit bools storing our window open/close state
-            ImGui::Checkbox("Another Window", &show_another_window);
+    bool  calculating = true;
+    float progress    = 0.0f;
 
-            ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);               // Edit 1 float using a slider from 0.0f to 1.0f
-            ImGui::ColorEdit3("clear color", ( float* )&clear_color);  // Edit 3 floats representing a color
+    while(closeGame != true) {
+        [[maybe_unused]] auto io = ImGui::GetIO();
+        PollEvents();
+        auto gravity = m_world->GetGravity();
 
-            
 
-            if(ImGui::Button("load box")) {
-                loadBox();            
-            }
-            ImGui::SameLine();
-            if(ImGui::Button("load Edge")) {
-                loadEdge();
-            }
-            ImGui::Text("counter = %d", entity_counter);
-            if(ImGui::Button("clear Entities")) {
-                entityList.clear();
-            }
-    
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-            ImGui::End();
-        }
         
 
-        // update world info 
-        world->SetGravity(gravity);
+        UpdateUI();
+
+        // update world info
+        m_world->SetGravity(gravity);
 
         // update world info end
 
         // render all
         ImGui::Render();
-        SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
+        SDL_RenderSetScale(m_SDL_Renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
 
-        SDL_RenderClear(renderer);
+        SDL_RenderClear(m_SDL_Renderer);
 
         // removeInactive(); this is currently unneeded!
         ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 
-        refresh();
-        SDL_SetRenderDrawColor(renderer, ( Uint8 )(clear_color.x * 255), ( Uint8 )(clear_color.y * 255), ( Uint8 )(clear_color.z * 255), ( Uint8 )(clear_color.w * 255));
+        Refresh();
+        SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));
 
-        SDL_RenderPresent(renderer);
+        SDL_RenderPresent(m_SDL_Renderer);
 
-        world->Step(1.0f / s_settings.m_hertz, s_settings.m_velocityIterations, s_settings.m_positionIterations);  // update
+        m_world->Step(1.0f / s_settings.m_hertz, s_settings.m_velocityIterations, s_settings.m_positionIterations);  // update
 
-        world->ClearForces();
+        m_world->ClearForces();
     }
 }
 
-void Scene::init_sdl_window() {
+void Scene::Init_SDL_Window() {
     // SDL_Init begin
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         CC_ERROR("SDL_Init error: {}", SDL_GetError());
@@ -159,16 +167,16 @@ void Scene::init_sdl_window() {
     g_camera.m_width = s_settings.m_windowWidth;
 	g_camera.m_height = s_settings.m_windowHeight;
 
-    window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN);
+    m_SDL_Window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN);
 
-    if(window == NULL) {
+    if(m_SDL_Window == NULL) {
         CC_CORE_ERROR("SDL window failed to initialize! ");
         throw std::runtime_error("SDL_CreateWindow generate a NULL window");
     }
     CC_CORE_INFO("SDL window successfully initialized.");
 }
 
-void Scene::init_imgui() {
+void Scene::Init_imgui() {
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -182,56 +190,80 @@ void Scene::init_imgui() {
     // ImGui::StyleColorsLight();
 
     // Setup Platform/Renderer backends
-    ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
-    ImGui_ImplSDLRenderer2_Init(renderer);
+    ImGui_ImplSDL2_InitForSDLRenderer(m_SDL_Window, m_SDL_Renderer);
+    ImGui_ImplSDLRenderer2_Init(m_SDL_Renderer);
 }
 
-void Scene::pollEvents() {
-    while(SDL_PollEvent(&event)) {
-        ImGui_ImplSDL2_ProcessEvent(&event);
-        if(event.type == SDL_QUIT) {
+void Scene::PollEvents() {
+    while(SDL_PollEvent(&m_SDL_Event)) {
+        ImGui_ImplSDL2_ProcessEvent(&m_SDL_Event);
+        switch(m_SDL_Event.type) {
+        case SDL_QUIT:
             closeGame = true;
             CC_CORE_INFO("SDL_QUIT Triggered.");
-        }
+            break;
+        case SDL_KEYDOWN:
+            switch(m_SDL_Event.key.keysym.sym) {
+            case SDLK_ESCAPE:
+                closeGame = true;
+                CC_CORE_INFO("ESC pressed!");
+                CC_CORE_INFO("SDL_QUIT Triggered.");
+                break;
+            case SDLK_r:
+                LoadBox();
+                CC_CORE_INFO("r key pressed");
+                break;
 
-        else if(event.key.keysym.sym == SDLK_ESCAPE) {
-            closeGame = true;
-            CC_CORE_INFO("ESC pressed!");
-            CC_CORE_INFO("SDL_QUIT Triggered.");
-        }
+            case SDLK_a:
+                g_camera.m_center.x -= 0.5f;
+                CC_CORE_INFO("a key pressed");
+                break;
 
-        else if(event.key.keysym.sym == SDLK_r) {
-            loadBox();
-            CC_CORE_INFO("r key pressed");
+            case SDLK_d:
+                g_camera.m_center.x += 0.5f;
+                CC_CORE_INFO("d key pressed");
+                break;
+
+            case SDLK_w:
+                g_camera.m_center.y += 0.5f;
+                CC_CORE_INFO("w key pressed");
+                break;
+
+            case SDLK_s:
+                g_camera.m_center.y -= 0.5f;
+                CC_CORE_INFO("s key pressed");
+                break;
+            }
+            break;
         }
     }
 }
 
-void Scene::refresh() {
-    for(const auto& entity : entityList) {
+void Scene::Refresh() {
+    for(const auto& entity : m_entityList) {
         entity->Render();
     }
 }
 
-void Scene::removeInactive() {
-    entityList.erase(std::remove_if(std::begin(entityList), std::end(entityList), [](const std::unique_ptr< Entity >& entity) { return !entity->isActive; }), entityList.end());
+void Scene::RemoveInactive() {
+    m_entityList.erase(std::remove_if(std::begin(m_entityList), std::end(m_entityList), [](const std::unique_ptr< Entity >& entity) { return !entity->isActive; }), m_entityList.end());
 }
 
 // test part
-void Scene::loadEntities() {
-    loadBox();
-    loadEdge();
+void Scene::LoadEntities() {
+    LoadBox();
+    LoadEdge();
 }
 
-void Scene::loadBox() {
-    auto box = std::make_unique< Box >(world.get(), renderer);
+void Scene::LoadBox() {
+    auto box = std::make_unique< Box >(m_world.get(), m_SDL_Renderer);
 
     box->Init(c_OriginPos, b2Vec2(c_OriginalBoxWidth, c_OriginalBoxHeight), c_OriginalVelocity, c_originalAngle);
     
-    entityList.push_back(std::move(box));
+    m_entityList.push_back(std::move(box));
 }
 
-void Scene::loadEdge() {
+void Scene::LoadEdge() {
     // some constants
     // start ground point
     b2Vec2 startpoint;
@@ -244,9 +276,9 @@ void Scene::loadEdge() {
     endpoint.y = -2.0;
     // constants end
 
-    auto edge = std::make_unique< Edge >(world.get(), renderer);
+    auto edge = std::make_unique< Edge >(m_world.get(), m_SDL_Renderer);
     edge->Init(startpoint, endpoint);
 
-    entityList.push_back(std::move(edge));
+    m_entityList.push_back(std::move(edge));
 }
 

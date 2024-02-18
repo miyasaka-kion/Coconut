@@ -9,7 +9,7 @@
 int main(int argc, char* argv[]) {
     Coconut::Log::init();
     std::unique_ptr<Scene> scene = std::make_unique<Scene>();
-    scene->run();
+    scene->Run();
 
     return 0;
 }

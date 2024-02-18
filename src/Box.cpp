@@ -9,7 +9,6 @@
 #include <SDL_render.h>
 #include <box2d/box2d.h>
 
-// #include "Constants.h"
 #include "Log.h"
 #include "MetricConverter.h"
 

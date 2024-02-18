@@ -14,6 +14,8 @@
 #include "Entity.h"
 #include "Camera.h"
 
+
+
 class Scene {
 public:
     // Initialize the sdl window and sdl renderer,
@@ -22,39 +24,45 @@ public:
     Scene();
     ~Scene();
 
-    void run();
+    void Run();
 
 private:
-    void init_sdl_window();
-    void init_sdl_renderer();
+    void Init_SDL_Window();
+    void Init_SDL_Renderer();
 
-    void init_imgui();
+    void Init_imgui();
 
-    void loadEntities();
-    void loadBox();
-    void loadEdge();
-    void pollEvents();
-    void refresh();
-    void removeInactive();
+    void LoadEntities();
+    void LoadBox();
+    void LoadEdge();
+    void PollEvents();
+    void UpdateUI();
+    void Refresh();
+    void RemoveInactive();
 
 public:
-    std::unique_ptr< b2World > world;
+    std::unique_ptr< b2World > m_world;
 
     // SDL members
 private:
-    SDL_Window*   window;
-    SDL_Renderer* renderer;
-    SDL_Event     event;
+    SDL_Window*   m_SDL_Window;
+    SDL_Renderer* m_SDL_Renderer;
+    SDL_Event     m_SDL_Event;
     ;
 
     // Entities
 private:
-    std::vector< std::unique_ptr< Entity > > entityList;
+    std::vector< std::unique_ptr< Entity > > m_entityList;
     bool                                     closeGame;
 
     // physics info
 private:
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);    
+    ImVec4 m_clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);    
 };
 
 extern Camera g_camera;
+
+struct ImguiSettings {
+    bool show_demo_window    = true;
+    bool show_another_window = false;
+};
