@@ -37,7 +37,7 @@ private:
     void LoadEdge();
     void PollEvents();
     void UpdateUI();
-    void Refresh();
+    void RenderEntities();
     void RemoveInactive();
 
 public:

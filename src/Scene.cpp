@@ -137,7 +137,7 @@ void Scene::Run() {
         // removeInactive(); this is currently unneeded!
         ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 
-        Refresh();
+        RenderEntities();
         SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));
 
         SDL_RenderPresent(m_SDL_Renderer);
@@ -239,7 +239,7 @@ void Scene::PollEvents() {
     }
 }
 
-void Scene::Refresh() {
+void Scene::RenderEntities() {
     for(const auto& entity : m_entityList) {
         entity->Render();
     }
