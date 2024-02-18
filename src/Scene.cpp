@@ -19,7 +19,6 @@
 #include "Edge.h"
 #include "Entity.h"
 #include "Log.h"
-#include "Circle.h"
 #include "MetricConverter.h"
 #include "Settings.h"
 #include "Camera.h"

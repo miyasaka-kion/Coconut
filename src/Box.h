@@ -27,6 +27,8 @@ public:
     int   GetPosPixY();
     float GetAngleDegree(); 
 
+    void loadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);
+
 private:
     SDL_Texture* m_BoxTexture;
     void         loadTexture();

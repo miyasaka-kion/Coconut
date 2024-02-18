@@ -12,8 +12,8 @@ public:
     virtual ~Car();
     // >>>>>>>> API begin >>>>>>>>>
 public:
-    void init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle);
-    void render() override;
+    void Init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle);
+    void Render() override;
 
     int   getPosPixX();
     int   getPosPixY();

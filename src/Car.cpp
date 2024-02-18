@@ -16,7 +16,7 @@ Car::~Car() {
 }
 
 // >>>>>>>> API begin >>>>>>>>>
-void Car::init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle) {
+void Car::Init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle) {
     m_radius = radius;
     addToWorld();
     loadTexture();
@@ -24,7 +24,7 @@ void Car::init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float origin
     m_BoxRect.w = m_BoxRect.h = MetricConverter::toPix(radius * 2);
 }
 
-void Car::render() {
+void Car::Render() {
     updateRect();
 
     // CC_CORE_INFO("Car pos {}, {}", getPosPixX(), getPosPixY());

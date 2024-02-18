@@ -44,8 +44,7 @@ private:
 
 public:
     std::unique_ptr< b2World > m_world;
-    std::unique_ptr< b2World > m_world;
-
+    
     // SDL members
 private:
     SDL_Window*   m_SDL_Window;
