@@ -5,6 +5,7 @@
 #include <memory>
 #include <stdexcept>
 
+#include "Settings.h"
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
@@ -19,12 +20,11 @@
 #include "Edge.h"
 #include "Entity.h"
 #include "Log.h"
-#include "MetricConverter.h"
-#include "Settings.h"
 #include "Camera.h"
+#include "Settings.h"
 
-static Settings s_settings;
 extern Camera g_camera;
+Settings g_settings;
 static ImguiSettings s_imguiSettings;
 
 Scene::Scene() {
@@ -141,7 +141,7 @@ void Scene::Run() {
 
         SDL_RenderPresent(m_SDL_Renderer);
 
-        m_world->Step(1.0f / s_settings.m_hertz, s_settings.m_velocityIterations, s_settings.m_positionIterations);  // update
+        m_world->Step(1.0f / g_settings.m_hertz, g_settings.m_velocityIterations, g_settings.m_positionIterations);  // update
 
         m_world->ClearForces();
     }
@@ -163,8 +163,8 @@ void Scene::Init_SDL_Window() {
 
     CC_CORE_INFO("The rendering scale is {} pixels per meter. (px/1.0f)", c_pixelPerMeter);
     
-    g_camera.m_width = s_settings.m_windowWidth;
-	g_camera.m_height = s_settings.m_windowHeight;
+    g_camera.m_width = g_settings.m_windowWidth;
+	g_camera.m_height = g_settings.m_windowHeight;
 
     m_SDL_Window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN);
 

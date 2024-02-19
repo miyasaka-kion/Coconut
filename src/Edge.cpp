@@ -1,11 +1,14 @@
+#include "Edge.h"
+
+#include <tuple>
+
 #include <SDL_render.h>
 #include <box2d/box2d.h>
 
 #include "Camera.h"
-#include "Edge.h"
 #include "Constants.h"
 #include "Entity.h"
-#include "MetricConverter.h"
+
 
 
 Edge::Edge(b2World* world, SDL_Renderer* renderer) : Entity(world, renderer) {}
@@ -37,12 +40,6 @@ void Edge::Render() {
 
     auto p1 = g_camera.ConvertWorldToScreen(edgeShape.m_vertex1);
     auto p2 = g_camera.ConvertWorldToScreen(edgeShape.m_vertex2);
-
-    // SDL_RenderDrawLine(m_renderer, 
-    // MetricConverter::toPixX(edgeShape.m_vertex1.x),
-    // MetricConverter::toPixY(edgeShape.m_vertex1.y),
-    // MetricConverter::toPixX(edgeShape.m_vertex2.x), 
-    // MetricConverter::toPixY(edgeShape.m_vertex2.y));
     
     int x1, y1, x2, y2;
     std::tie(x1, y1) = std::make_tuple(static_cast<int>(p1.x), static_cast<int>(p1.y));

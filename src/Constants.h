@@ -30,7 +30,4 @@ constexpr float c_OriginalBoxHeight = 0.3f;
 constexpr float c_GroundX = -0.0f;
 constexpr float c_GroundY = -0.0f;
 
-// extern b2Vec2 vel;
-// this should be removed in the future
-// b2Vec2 vel{ 1.0f, -0.1f };
 const b2Vec2 c_OriginalVelocity{ 0.0f, -0.1f };

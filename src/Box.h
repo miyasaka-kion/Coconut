@@ -23,8 +23,6 @@ public:
     // box2d API  
     b2Body* GetBody();
 
-    int   GetPosPixX();
-    int   GetPosPixY();
     float GetAngleDegree(); 
 
     void LoadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);

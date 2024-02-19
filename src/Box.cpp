@@ -11,7 +11,7 @@
 
 #include "Camera.h"
 #include "Log.h"
-#include "MetricConverter.h"
+
 // #include "Camera.h"
 
 Box::Box(b2World* world, SDL_Renderer* renderer) : Entity(world, renderer) {
@@ -19,7 +19,9 @@ Box::Box(b2World* world, SDL_Renderer* renderer) : Entity(world, renderer) {
 }
 
 Box::~Box() {
-    CC_CORE_INFO("box destroyed, location at {}, {}", GetPosPixX(), GetPosPixX());
+    auto pw = m_body->GetPosition();
+    auto ps = g_camera.ConvertWorldToScreen(pw);
+    CC_CORE_INFO("box destroyed, location at {}, {}", ps.x, ps.y);
     SDL_DestroyTexture(m_BoxTexture);
 }
 
@@ -27,8 +29,8 @@ void Box::Init(b2Vec2 originalPos, b2Vec2 boxSize, b2Vec2 originalVel, float ori
     LoadBoxToWorld(originalPos, boxSize, originalVel, originalAngle);
     LoadTexture();
 
-    m_box_rect.w = MetricConverter::toPix(boxSize.x);
-    m_box_rect.h = MetricConverter::toPix(boxSize.y);
+    m_box_rect.w = g_camera.ConvertWorldToScreen(boxSize.x);
+    m_box_rect.h = g_camera.ConvertWorldToScreen(boxSize.y);
     CC_CORE_INFO("box size info: box.w = {}, box.h = {}", m_box_rect.w, m_box_rect.h);
 }
 
@@ -74,21 +76,11 @@ void Box::LoadTexture() {
     SDL_FreeSurface(tmp_sprites);
 }
 
-int Box::GetPosPixX() {
-    return MetricConverter::toPixX(m_body->GetPosition().x) - m_box_rect.w / 2.0f;
-}
-
-int Box::GetPosPixY() {
-    return MetricConverter::toPixY(m_body->GetPosition().y) - m_box_rect.h / 2.0f;
-}
-
 void Box::Render() { 
-    std::tie(m_box_rect.x, m_box_rect.y) = std::make_tuple(this->GetPosPixX(), this->GetPosPixY());
-
-    // auto pw = m_body->GetPosition();
-    // auto ps = g_camera.ConvertWorldToScreen(pw);
-    // m_box_rect.x = static_cast<int>(ps.x); 
-    // m_box_rect.y = static_cast<int>(ps.y);
+    auto pw = m_body->GetPosition();
+    auto ps = g_camera.ConvertWorldToScreen(pw);
+    m_box_rect.x = static_cast<int>(ps.x); 
+    m_box_rect.y = static_cast<int>(ps.y);
 
     if(SDL_RenderCopyEx(m_renderer, m_BoxTexture, NULL, &m_box_rect, GetAngleDegree(), NULL, SDL_FLIP_NONE)) {
         CC_CORE_ERROR("SDL_RenderCopyEx failed to render entity box, Error message: {}", SDL_GetError());
@@ -97,5 +89,5 @@ void Box::Render() {
 }
 
 float Box::GetAngleDegree() {
-    return MetricConverter::toDegree(m_body->GetAngle());
+    return m_body->GetAngle() * 180.0f / M_PI;
 }

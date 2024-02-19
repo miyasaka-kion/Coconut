@@ -63,5 +63,3 @@ struct Settings
 	bool m_pause;
 	bool m_singleStep;
 };
-
-extern Settings g_settings;

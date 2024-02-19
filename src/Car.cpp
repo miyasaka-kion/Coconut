@@ -3,18 +3,17 @@
 #include <SDL_image.h>
 #include <SDL_render.h>
 
+#include "Camera.h"
 #include "Log.h"
-#include "MetricConverter.h"
-
-
-
 
 Car::Car(b2World* world, SDL_Renderer* renderer) : Entity(world, renderer) {
     CC_CORE_INFO("Car entity created!");
 }
 
 Car::~Car() {
-    CC_CORE_INFO("Car destroyed, location at {}, {}", GetPosPixX(), GetPosPixX());
+    auto pw = m_car->GetPosition();
+    auto ps = g_camera.ConvertWorldToScreen(pw);
+    CC_CORE_INFO("Car destroyed, location at {}, {}", ps.x, ps.y);
     SDL_DestroyTexture(m_CarTexture);
 }
 
@@ -24,7 +23,8 @@ void Car::Init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float origin
     AddToWorld();
     LoadTexture();
 
-    m_BoxRect.w = m_BoxRect.h = MetricConverter::toPix(radius * 2);
+    m_BoxRect.w = m_BoxRect.h = g_camera.ConvertWorldToScreen(radius * 2);
+    ;
 }
 
 void Car::Render() {
@@ -40,23 +40,21 @@ void Car::Render() {
     }
 }
 
-int Car::GetPosPixX() {
-    return MetricConverter::toPixX(m_car->GetPosition().x) - m_BoxRect.w / 2.0f;
-}
-
-int Car::GetPosPixY() {
-    return MetricConverter::toPixY(m_car->GetPosition().y) - m_BoxRect.h / 2.0f;
-}
-
 float Car::GetAngleDegree() {
-    return MetricConverter::toDegree(m_car->GetAngle());
+    // return MetricConverter::toDegree(m_car->GetAngle());
+    return m_car->GetAngle() * 180.0f / M_PI;
 }
 
 // >>>>>>>> API end >>>>>>>>>
 
 void Car::UpdateRect() {
-    m_BoxRect.x = this->GetPosPixX();
-    m_BoxRect.y = this->GetPosPixY();
+    // m_BoxRect.x = this->GetPosPixX();
+    // m_BoxRect.y = this->GetPosPixY();
+    auto pw = m_car->GetPosition();
+    auto ps = g_camera.ConvertWorldToScreen(pw);
+
+    m_BoxRect.x = static_cast< int >(ps.x);
+    m_BoxRect.y = static_cast< int >(ps.y);
 }
 
 void Car::AddToWorld() {

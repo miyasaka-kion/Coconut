@@ -16,8 +16,8 @@ public:
     void Init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle);
     void Render() override;
 
-    int   GetPosPixX();
-    int   GetPosPixY();
+    // int   GetPosPixX();
+    // int   GetPosPixY();
     float GetAngleDegree();
     
 private:

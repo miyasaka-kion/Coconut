@@ -1,4 +1,5 @@
 #include "Camera.h"
+
 #include "Scene.h"
 
 Camera g_camera;
@@ -36,6 +37,16 @@ b2Vec2 Camera::ConvertScreenToWorld(const b2Vec2& ps)
 	pw.x = (1.0f - u) * lower.x + u * upper.x;
 	pw.y = (1.0f - v) * lower.y + v * upper.y;
 	return pw;
+}
+
+float Camera::ConvertScreenToWorld(int length) {
+    float PixelsPerMeter = static_cast< float >(g_settings.m_windowHeight) / (g_settings.m_defaultScreenHeightWorld * m_zoom);
+    return length / PixelsPerMeter;
+}
+
+int Camera::ConvertWorldToScreen(float length) {
+    float PixelsPerMeter = static_cast< float >(g_settings.m_windowHeight) / (g_settings.m_defaultScreenHeightWorld * m_zoom);
+    return length * PixelsPerMeter;
 }
 
 //

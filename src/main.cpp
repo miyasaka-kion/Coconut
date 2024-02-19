@@ -5,7 +5,6 @@
 #include "Log.h"
 #include "Settings.h"
 
-static Settings s_settings;
 
 int main(int argc, char* argv[]) {
     Coconut::Log::init();

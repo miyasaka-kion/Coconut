@@ -7,14 +7,13 @@
 #include <box2d/box2d.h>
 #include <SDL2/SDL.h>
 
+#include "Settings.h"
 #include "imgui.h"
 
 #include "Box.h"
 #include "Edge.h"
 #include "Entity.h"
 #include "Camera.h"
-
-
 
 class Scene {
 public:
@@ -62,7 +61,7 @@ private:
 };
 
 extern Camera g_camera;
-
+extern Settings g_settings;
 
 struct ImguiSettings {
     bool show_demo_window    = true;
