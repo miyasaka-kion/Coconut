@@ -1,6 +1,7 @@
 #include <SDL_render.h>
 #include <box2d/box2d.h>
 
+#include "Camera.h"
 #include "Edge.h"
 #include "Constants.h"
 #include "Entity.h"
@@ -33,11 +34,21 @@ void Edge::Init(b2Vec2 startpoint, b2Vec2 endpoint) {
 
 void Edge::Render() {
     SDL_SetRenderDrawColor(m_renderer, 255, 255, 0, 0);
-    SDL_RenderDrawLine(m_renderer, 
-    MetricConverter::toPixX(edgeShape.m_vertex1.x),
-    MetricConverter::toPixY(edgeShape.m_vertex1.y),
-    MetricConverter::toPixX(edgeShape.m_vertex2.x), 
-    MetricConverter::toPixY(edgeShape.m_vertex2.y));
+
+    auto p1 = g_camera.ConvertWorldToScreen(edgeShape.m_vertex1);
+    auto p2 = g_camera.ConvertWorldToScreen(edgeShape.m_vertex2);
+
+    // SDL_RenderDrawLine(m_renderer, 
+    // MetricConverter::toPixX(edgeShape.m_vertex1.x),
+    // MetricConverter::toPixY(edgeShape.m_vertex1.y),
+    // MetricConverter::toPixX(edgeShape.m_vertex2.x), 
+    // MetricConverter::toPixY(edgeShape.m_vertex2.y));
+    
+    int x1, y1, x2, y2;
+    std::tie(x1, y1) = std::make_tuple(static_cast<int>(p1.x), static_cast<int>(p1.y));
+    std::tie(x2, y2) = std::make_tuple(static_cast<int>(p2.x), static_cast<int>(p2.y));
+
+    SDL_RenderDrawLine(m_renderer, x1, y1, x2, y2);
 }
 
 

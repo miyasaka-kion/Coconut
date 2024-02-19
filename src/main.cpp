@@ -3,8 +3,9 @@
 
 #include "Scene.h"
 #include "Log.h"
+#include "Settings.h"
 
-#include <SDL.h>
+static Settings s_settings;
 
 int main(int argc, char* argv[]) {
     Coconut::Log::init();

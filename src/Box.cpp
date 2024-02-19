@@ -9,8 +9,10 @@
 #include <SDL_render.h>
 #include <box2d/box2d.h>
 
+#include "Camera.h"
 #include "Log.h"
 #include "MetricConverter.h"
+// #include "Camera.h"
 
 Box::Box(b2World* world, SDL_Renderer* renderer) : Entity(world, renderer) {
     CC_CORE_INFO("box entity created.");
@@ -22,15 +24,15 @@ Box::~Box() {
 }
 
 void Box::Init(b2Vec2 originalPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle) {
-    loadBoxToWorld(originalPos, boxSize, originalVel, originalAngle);
-    loadTexture();
+    LoadBoxToWorld(originalPos, boxSize, originalVel, originalAngle);
+    LoadTexture();
 
     m_box_rect.w = MetricConverter::toPix(boxSize.x);
     m_box_rect.h = MetricConverter::toPix(boxSize.y);
     CC_CORE_INFO("box size info: box.w = {}, box.h = {}", m_box_rect.w, m_box_rect.h);
 }
 
-void Box::loadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle) {
+void Box::LoadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle) {
     CC_CORE_INFO("Calling loadBoxToWorld");
     b2BodyDef boxBodyDef;
     boxBodyDef.type     = b2_dynamicBody;
@@ -53,7 +55,7 @@ void Box::loadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, f
     m_body->CreateFixture(&fixtureDef);
 }
 
-void Box::loadTexture() {
+void Box::LoadTexture() {
     IMG_Init(IMG_INIT_PNG);
     SDL_Surface* tmp_sprites;
     tmp_sprites = IMG_Load("assets/box.png");
@@ -82,6 +84,11 @@ int Box::GetPosPixY() {
 
 void Box::Render() { 
     std::tie(m_box_rect.x, m_box_rect.y) = std::make_tuple(this->GetPosPixX(), this->GetPosPixY());
+
+    // auto pw = m_body->GetPosition();
+    // auto ps = g_camera.ConvertWorldToScreen(pw);
+    // m_box_rect.x = static_cast<int>(ps.x); 
+    // m_box_rect.y = static_cast<int>(ps.y);
 
     if(SDL_RenderCopyEx(m_renderer, m_BoxTexture, NULL, &m_box_rect, GetAngleDegree(), NULL, SDL_FLIP_NONE)) {
         CC_CORE_ERROR("SDL_RenderCopyEx failed to render entity box, Error message: {}", SDL_GetError());

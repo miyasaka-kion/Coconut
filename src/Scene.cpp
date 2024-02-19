@@ -23,8 +23,8 @@
 #include "Settings.h"
 #include "Camera.h"
 
-Camera g_camera;
 static Settings s_settings;
+extern Camera g_camera;
 static ImguiSettings s_imguiSettings;
 
 Scene::Scene() {

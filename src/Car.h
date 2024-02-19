@@ -10,19 +10,20 @@ public:
     Car() = delete;
     Car(b2World* world, SDL_Renderer* renderer);
     virtual ~Car();
-    // >>>>>>>> API begin >>>>>>>>>
+
+
 public:
     void Init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle);
     void Render() override;
 
-    int   getPosPixX();
-    int   getPosPixY();
-    float getAngleDegree();
-    // >>>>>>>> API end >>>>>>>>>
+    int   GetPosPixX();
+    int   GetPosPixY();
+    float GetAngleDegree();
+    
 private:
-    void updateRect();
-    void addToWorld();
-    void loadTexture();
+    void UpdateRect();
+    void AddToWorld();
+    void LoadTexture();
 
     // SDL info
 private:

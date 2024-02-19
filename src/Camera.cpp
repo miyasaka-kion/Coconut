@@ -1,4 +1,7 @@
 #include "Camera.h"
+#include "Scene.h"
+
+Camera g_camera;
 
 Camera::Camera()
 {

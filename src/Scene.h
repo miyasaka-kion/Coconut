@@ -50,7 +50,6 @@ private:
     SDL_Window*   m_SDL_Window;
     SDL_Renderer* m_SDL_Renderer;
     SDL_Event     m_SDL_Event;
-    ;
 
     // Entities
 private:
@@ -63,6 +62,7 @@ private:
 };
 
 extern Camera g_camera;
+
 
 struct ImguiSettings {
     bool show_demo_window    = true;

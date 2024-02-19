@@ -6,57 +6,60 @@
 #include "Log.h"
 #include "MetricConverter.h"
 
+
+
+
 Car::Car(b2World* world, SDL_Renderer* renderer) : Entity(world, renderer) {
     CC_CORE_INFO("Car entity created!");
 }
 
 Car::~Car() {
-    CC_CORE_INFO("Car destroyed, location at {}, {}", getPosPixX(), getPosPixX());
+    CC_CORE_INFO("Car destroyed, location at {}, {}", GetPosPixX(), GetPosPixX());
     SDL_DestroyTexture(m_CarTexture);
 }
 
 // >>>>>>>> API begin >>>>>>>>>
 void Car::Init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle) {
     m_radius = radius;
-    addToWorld();
-    loadTexture();
+    AddToWorld();
+    LoadTexture();
 
     m_BoxRect.w = m_BoxRect.h = MetricConverter::toPix(radius * 2);
 }
 
 void Car::Render() {
-    updateRect();
+    UpdateRect();
 
     // CC_CORE_INFO("Car pos {}, {}", getPosPixX(), getPosPixY());
     CC_CORE_INFO("m_BoxRect, size = {}, {}", m_BoxRect.w, m_BoxRect.h);
     CC_CORE_INFO("m_BoxRect, pos = {}, {}", m_BoxRect.x, m_BoxRect.y);
 
-    if(SDL_RenderCopyEx(m_renderer, m_CarTexture, NULL, &m_BoxRect, getAngleDegree(), NULL, SDL_FLIP_NONE)) {
+    if(SDL_RenderCopyEx(m_renderer, m_CarTexture, NULL, &m_BoxRect, GetAngleDegree(), NULL, SDL_FLIP_NONE)) {
         CC_CORE_ERROR("SDL_RenderCopyEx failed to render empty texture, {}", SDL_GetError());
         throw std::runtime_error("SDL_RenderCopyEx failed to render entity box");
     }
 }
 
-int Car::getPosPixX() {
+int Car::GetPosPixX() {
     return MetricConverter::toPixX(m_car->GetPosition().x) - m_BoxRect.w / 2.0f;
 }
 
-int Car::getPosPixY() {
+int Car::GetPosPixY() {
     return MetricConverter::toPixY(m_car->GetPosition().y) - m_BoxRect.h / 2.0f;
 }
 
-float Car::getAngleDegree() {
+float Car::GetAngleDegree() {
     return MetricConverter::toDegree(m_car->GetAngle());
 }
 
 // >>>>>>>> API end >>>>>>>>>
 
-void Car::updateRect() {
-    m_BoxRect.x = this->getPosPixX();
-    m_BoxRect.y = this->getPosPixY();
+void Car::UpdateRect() {
+    m_BoxRect.x = this->GetPosPixX();
+    m_BoxRect.y = this->GetPosPixY();
 }
 
-void Car::addToWorld() {
+void Car::AddToWorld() {
     CC_CORE_INFO("Calling loadCarToWorld");
 
     b2PolygonShape chassis;
@@ -124,7 +127,7 @@ void Car::addToWorld() {
     m_spring2           = ( b2WheelJoint* )m_world->CreateJoint(&jd);
 }
 
-void Car::loadTexture() {
+void Car::LoadTexture() {
     IMG_Init(IMG_INIT_PNG);
     SDL_Surface* tmp_sprites;
     tmp_sprites = IMG_Load("assets/box.png");

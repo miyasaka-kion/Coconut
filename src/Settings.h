@@ -15,7 +15,7 @@ struct Settings
 		m_hertz = 60.0f;
 		m_velocityIterations = 8;
 		m_positionIterations = 3;
-
+        // m_screenHeightWorld = 50.0f;
         
 		m_drawShapes = true;
 		m_drawJoints = true;
@@ -44,6 +44,8 @@ struct Settings
 	float m_hertz;
 	int m_velocityIterations;
 	int m_positionIterations;
+    const float m_defaultScreenHeightWorld = 50.0f;
+
 	bool m_drawShapes;
 	bool m_drawJoints;
 	bool m_drawAABBs;
@@ -61,3 +63,5 @@ struct Settings
 	bool m_pause;
 	bool m_singleStep;
 };
+
+extern Settings g_settings;
