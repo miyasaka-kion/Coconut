@@ -38,4 +38,7 @@ public:
 
 private:
     // TODO: an Initial position of the box, when pressing r all entities should revert to its original position
+
+private:
+    b2Vec2 m_boxSize;
 };

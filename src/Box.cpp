@@ -28,20 +28,18 @@ Box::~Box() {
 void Box::Init(b2Vec2 originalPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle) {
     LoadBoxToWorld(originalPos, boxSize, originalVel, originalAngle);
     LoadTexture();
-
-    m_box_rect.w = g_camera.ConvertWorldToScreen(boxSize.x);
-    m_box_rect.h = g_camera.ConvertWorldToScreen(boxSize.y);
-    CC_CORE_INFO("box size info: box.w = {}, box.h = {}", m_box_rect.w, m_box_rect.h);
+    m_boxSize = boxSize;
+    CC_CORE_INFO("box size info: box.w = {}, box.h = {}", m_boxSize.x, m_boxSize.y);
 }
 
 void Box::LoadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle) {
-    CC_CORE_INFO("Calling loadBoxToWorld");
-    b2BodyDef boxBodyDef;
-    boxBodyDef.type     = b2_dynamicBody;
-    boxBodyDef.angle    = originalAngle;  // flips the whole thing -> 180 grad drehung
-    boxBodyDef.position = originPos;
+    CC_CORE_INFO("Calling LoadBoxToWorld");
+    b2BodyDef bd;
+    bd.type     = b2_dynamicBody;
+    bd.angle    = originalAngle;  // flips the whole thing -> 180 grad drehung
+    bd.position = originPos;
 
-    m_body = m_world->CreateBody(&boxBodyDef);
+    m_body = m_world->CreateBody(&bd);
     m_body->SetLinearVelocity(originalVel);
 
     b2PolygonShape dynamicBox;
@@ -77,11 +75,16 @@ void Box::LoadTexture() {
 }
 
 void Box::Render() { 
+    m_box_rect.h = g_camera.ConvertWorldToScreen(m_boxSize.x);
+    m_box_rect.w = g_camera.ConvertWorldToScreen(m_boxSize.y);
+    
     auto pw = m_body->GetPosition();
+    pw = pw + b2Vec2(- m_boxSize.x / 2.0f, m_boxSize.y / 2.0f);
     auto ps = g_camera.ConvertWorldToScreen(pw);
     m_box_rect.x = static_cast<int>(ps.x); 
     m_box_rect.y = static_cast<int>(ps.y);
-
+    
+    
     if(SDL_RenderCopyEx(m_renderer, m_BoxTexture, NULL, &m_box_rect, GetAngleDegree(), NULL, SDL_FLIP_NONE)) {
         CC_CORE_ERROR("SDL_RenderCopyEx failed to render entity box, Error message: {}", SDL_GetError());
         throw std::runtime_error("SDL_RenderCopyEx failed to render entity box");
