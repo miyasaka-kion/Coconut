@@ -12,7 +12,8 @@ struct Settings
 		m_testIndex = 0;
 		m_windowWidth = 1600;
 		m_windowHeight = 900;
-		m_hertz = 60.0f;
+		// m_hertz = 60.0f;
+        m_hertz = 120.0f;
 		m_velocityIterations = 8;
 		m_positionIterations = 3;
         // m_screenHeightWorld = 50.0f;
@@ -33,6 +34,7 @@ struct Settings
 		m_enableSleep = true;
 		m_pause = false;
 		m_singleStep = false;
+        m_drawSprites = true;
 	}
 
 	void Save();
@@ -44,8 +46,6 @@ struct Settings
 	float m_hertz;
 	int m_velocityIterations;
 	int m_positionIterations;
-    const float m_defaultScreenHeightWorld = 50.0f;
-
 	bool m_drawShapes;
 	bool m_drawJoints;
 	bool m_drawAABBs;
@@ -62,4 +62,7 @@ struct Settings
 	bool m_enableSleep;
 	bool m_pause;
 	bool m_singleStep;
+
+    const float m_defaultScreenHeightWorld = 50.0f;
+    bool m_drawSprites;
 };

@@ -1,5 +1,7 @@
 #include "Scene.h"
 
+#include <SDL2/SDL_rect.h>
+#include <SDL_render.h>
 #include <cstdio>
 #include <iostream>
 #include <memory>
@@ -13,7 +15,7 @@
 #include <SDL2/SDL.h>
 #include <SDL_error.h>
 #include <SDL_hints.h>
-#include <thread>
+#include <thread> 
 
 #include "Box.h"
 #include "Constants.h"
@@ -22,21 +24,20 @@
 #include "Log.h"
 #include "Camera.h"
 #include "Settings.h"
+#include "DebugDraw.h"
 
 extern Camera g_camera;
-Settings g_settings;
 static ImguiSettings s_imguiSettings;
+Settings g_settings;
+DebugDraw g_debugDraw;
 
 Scene::Scene() {
     // prepare game context
     Init_SDL_Window();
     Init_SDL_Renderer();
-    Init_imgui();
-
-    // physics info initialize
-    auto gravity = b2Vec2(0.0f, -10.0f);
-    m_world = std::make_unique< b2World >(gravity);
-    LoadEntities();
+    Init_Imgui();
+    Init_Box2D();
+    Init_DebugDraw();
     closeGame = false;
 }
 
@@ -48,7 +49,8 @@ Scene::~Scene() {
 }
 
 void Scene::Init_SDL_Renderer() {
-    m_SDL_Renderer = SDL_CreateRenderer(m_SDL_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    // m_SDL_Renderer = SDL_CreateRenderer(m_SDL_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    m_SDL_Renderer = SDL_CreateRenderer(m_SDL_Window, -1, SDL_RENDERER_ACCELERATED);
     if(m_SDL_Renderer == NULL) {
         CC_CORE_ERROR("SDL renderer initialization failed!");
         throw std::runtime_error("SDL_Renderer initialized a NULL renderer");
@@ -56,95 +58,6 @@ void Scene::Init_SDL_Renderer() {
     SDL_RendererInfo info;
     SDL_GetRendererInfo(m_SDL_Renderer, &info);
     CC_CORE_INFO("Current SDL_Renderer: {}", info.name);
-}
-
-void Scene::UpdateUI() {
-    [[maybe_unused]] ImGuiIO& io = ImGui::GetIO();
-        // Start the Dear ImGui frame
-        ImGui_ImplSDLRenderer2_NewFrame();
-        ImGui_ImplSDL2_NewFrame();
-        ImGui::NewFrame();
-
-    ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
-    ImGui::SetNextWindowSize(ImVec2(float(g_camera.m_width), float(g_camera.m_height)));
-
-    {
-        if(s_imguiSettings.show_demo_window)
-            ImGui::ShowDemoWindow();
-    }
-
-    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-    {
-        static int entity_counter = 0;
-
-        ImGui::Begin("Control bar");  // Create a window called "Hello, world!" and append into it.
-
-        ImGui::Text("Adjust ...here!");                     // Display some text (you can use a format strings too)
-        ImGui::Checkbox("Demo Window", &s_imguiSettings.show_demo_window);  // Edit bools storing our window open/close state
-        ImGui::Checkbox("Another Window", &s_imguiSettings.show_another_window);
-
-        auto gravity = m_world->GetGravity();
-
-        ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);  // Edit 1 float using a slider from 0.0f to 1.0f
-        ImGui::ColorEdit3("clear color", ( float* )&m_clear_color);   // Edit 3 floats representing a color
-
-        if(ImGui::Button("load box")) {
-            LoadBox();
-        }
-        ImGui::SameLine();
-        if(ImGui::Button("load Edge")) {
-            LoadEdge();
-        }
-        ImGui::Text("counter = %d", entity_counter);
-
-        if(ImGui::Button("clear Entities")) {
-            m_entityList.clear();
-        }
-
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-        ImGui::End();
-    }
-}
-
-void Scene::Run() {
-    // game main loop
-
-    bool  calculating = true;
-    float progress    = 0.0f;
-
-    while(closeGame != true) {
-        [[maybe_unused]] auto io = ImGui::GetIO();
-        PollEvents();
-        auto gravity = m_world->GetGravity();
-
-
-        
-
-        UpdateUI();
-
-        // update world info
-        m_world->SetGravity(gravity);
-
-        // update world info end
-
-        // render all
-        ImGui::Render();
-        SDL_RenderSetScale(m_SDL_Renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-
-        SDL_RenderClear(m_SDL_Renderer);
-
-        // removeInactive(); this is currently unneeded!
-        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
-
-        RenderEntities();
-        SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));
-
-        SDL_RenderPresent(m_SDL_Renderer);
-
-        m_world->Step(1.0f / g_settings.m_hertz, g_settings.m_velocityIterations, g_settings.m_positionIterations);  // update
-
-        m_world->ClearForces();
-    }
 }
 
 void Scene::Init_SDL_Window() {
@@ -175,7 +88,7 @@ void Scene::Init_SDL_Window() {
     CC_CORE_INFO("SDL window successfully initialized.");
 }
 
-void Scene::Init_imgui() {
+void Scene::Init_Imgui() {
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -191,6 +104,136 @@ void Scene::Init_imgui() {
     // Setup Platform/Renderer backends
     ImGui_ImplSDL2_InitForSDLRenderer(m_SDL_Window, m_SDL_Renderer);
     ImGui_ImplSDLRenderer2_Init(m_SDL_Renderer);
+}
+
+void Scene::Init_DebugDraw() {
+    g_debugDraw.Init(m_SDL_Renderer);
+    m_world->SetDebugDraw(&g_debugDraw);
+
+    uint32 flags = 0;
+	flags += g_settings.m_drawShapes * b2Draw::e_shapeBit;
+	flags += g_settings.m_drawJoints * b2Draw::e_jointBit;
+	flags += g_settings.m_drawAABBs * b2Draw::e_aabbBit;
+	flags += g_settings.m_drawCOMs * b2Draw::e_centerOfMassBit;
+	g_debugDraw.SetFlags(flags);
+}
+
+void Scene::Init_Box2D() {
+    // physics info initialize
+    auto gravity = b2Vec2(0.0f, -10.0f);
+    m_world = std::make_unique< b2World >(gravity);
+    LoadEntities();
+}
+void Scene::UpdateUI() {
+    [[maybe_unused]] ImGuiIO& io = ImGui::GetIO();
+        // Start the Dear ImGui frame
+        ImGui_ImplSDLRenderer2_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
+
+    ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
+    ImGui::SetNextWindowSize(ImVec2(float(g_camera.m_width), float(g_camera.m_height)));
+
+    {
+        if(s_imguiSettings.show_demo_window)
+            ImGui::ShowDemoWindow();
+    }
+
+    {
+        ImGui::Begin("Settings");
+        ImGui::SliderFloat("Zoom Level", &g_camera.m_zoom, 0.0f, 1.0f);
+        ImGui::Checkbox("Draw Sprites", &g_settings.m_drawSprites);
+        ImGui::Checkbox("Draw Shape", &g_settings.m_drawShapes);
+        ImGui::Checkbox("Draw Joint", &g_settings.m_drawJoints);
+        ImGui::Checkbox("Draw AABB", &g_settings.m_drawAABBs);
+        
+        ImGui::End();
+    }
+
+    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+    {
+        static int entity_counter = 0;
+
+        ImGui::Begin("Control bar");  // Create a window called "Hello, world!" and append into it.
+
+        ImGui::Text("Adjust ...here!");                     // Display some text (you can use a format strings too)
+        
+        ImGui::Checkbox("Demo Window", &s_imguiSettings.show_demo_window);  // Edit bools storing our window open/close state
+        ImGui::Checkbox("Another Window", &s_imguiSettings.show_another_window);
+
+        auto gravity = m_world->GetGravity();
+        ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);
+        m_world->SetGravity(gravity);
+
+        ImGui::ColorEdit3("clear color", ( float* )&m_clear_color);   // Edit 3 floats representing a color
+
+        if(ImGui::Button("load box")) {
+            LoadBox();
+        }
+        ImGui::SameLine();
+        if(ImGui::Button("load Edge")) {
+            LoadEdge();
+        }
+        ImGui::Text("counter = %d", entity_counter);
+
+        if(ImGui::Button("clear Entities")) {
+            m_entityList.clear();
+        }
+
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+        ImGui::End();
+    }
+}
+
+void Scene::Run() {
+    // game main loop
+
+    bool  calculating = true;
+    float progress    = 0.0f;
+
+    while(closeGame != true) {
+        [[maybe_unused]] auto io = ImGui::GetIO();
+        PollEvents();
+            
+
+        UpdateUI();
+
+        // render all
+        ImGui::Render();
+        SDL_RenderSetScale(m_SDL_Renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
+        SDL_RenderClear(m_SDL_Renderer);
+
+        // removeInactive(); this is currently unneeded!
+        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
+        
+
+        RenderEntities();
+        
+        {
+            // some SDL draw test 
+            auto pw = b2Vec2(0.0f, 0.0f);
+            auto ps = g_camera.ConvertWorldToScreen(pw);
+
+            SDL_Rect rect{static_cast<int>(ps.x), static_cast<int>(ps.y), 10, 10};
+            
+            ImVec4 m_clear_color =  ImVec4(0.0f, 1.0f, 01.0f, 1.00f);
+            SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));
+
+            // SDL_RenderDrawRect(m_SDL_Renderer, &rect);
+            SDL_RenderDrawPoint(m_SDL_Renderer, ps.x, ps.y);
+            
+        }
+
+        m_world->DebugDraw();
+          
+        SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));
+
+        SDL_RenderPresent(m_SDL_Renderer);
+        
+        m_world->Step(1.0f / g_settings.m_hertz, g_settings.m_velocityIterations, g_settings.m_positionIterations);  // update
+
+        m_world->ClearForces();
+    }
 }
 
 void Scene::PollEvents() {
@@ -239,8 +282,10 @@ void Scene::PollEvents() {
 }
 
 void Scene::RenderEntities() {
-    for(const auto& entity : m_entityList) {
-        entity->Render();
+    if(g_settings.m_drawSprites) {
+        for(const auto& entity : m_entityList) {
+            entity->Render();
+        }
     }
 }
 

@@ -20,9 +20,6 @@ public:
     void Init(b2Vec2 originalPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);  // override?
     void Render() override;
 
-    // box2d API  
-    b2Body* GetBody();
-
     float GetAngleDegree(); 
 
     void LoadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);

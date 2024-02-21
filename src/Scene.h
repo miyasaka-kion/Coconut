@@ -7,6 +7,7 @@
 #include <box2d/box2d.h>
 #include <SDL2/SDL.h>
 
+#include "DebugDraw.h"
 #include "Settings.h"
 #include "imgui.h"
 
@@ -30,8 +31,9 @@ public:
 private:
     void Init_SDL_Window();
     void Init_SDL_Renderer();
-
-    void Init_imgui();
+    void Init_Imgui();
+    void Init_DebugDraw();
+    void Init_Box2D();
 
     void LoadEntities();
     void LoadBox();
