@@ -132,7 +132,6 @@ void Car::LoadTexture() {
     if(!tmp_sprites) {
         CC_CORE_ERROR("loadTexture(): box.png failed to load! Error msg: {}", SDL_GetError());
         throw std::runtime_error("loadTexture():  tmp_sprites is NULL");
-        // throw some error here and somehow return(TODO)
     }
 
     m_CarTexture = SDL_CreateTextureFromSurface(m_renderer, tmp_sprites);

@@ -6,7 +6,6 @@
 
 #include "Entity.h"
 
-// this should be inherited from a parent like Entity or Shape... (TODO)
 class Edge : public Entity {
 public:
     Edge() = default;

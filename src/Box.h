@@ -31,10 +31,6 @@ private:
 public:
     SDL_Rect       m_box_rect;
     b2Body*        m_body;
-    
-
-private:
-    // TODO: an Initial position of the box, when pressing r all entities should revert to its original position
 
 private:
     b2Vec2 m_boxSize;
