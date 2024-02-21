@@ -62,7 +62,6 @@ void Box::LoadTexture() {
     if(!tmp_sprites) {
         CC_CORE_ERROR("loadTexture(): box.png failed to load! Error msg: {}", SDL_GetError());
         throw std::runtime_error("loadTexture():  tmp_sprites is NULL");
-        // throw some error here and somehow return(TODO)
     }
 
     m_BoxTexture = SDL_CreateTextureFromSurface(m_renderer, tmp_sprites);
@@ -92,5 +91,5 @@ void Box::Render() {
 }
 
 float Box::GetAngleDegree() {
-    return m_body->GetAngle() * 180.0f / M_PI;
+    return - m_body->GetAngle() * 180.0f / M_PI;
 }

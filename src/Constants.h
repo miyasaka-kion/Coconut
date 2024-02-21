@@ -24,8 +24,8 @@ constexpr float c_yOriginPosition = -0.0f;
 const b2Vec2    c_OriginPos{ c_xOriginPosition, c_yOriginPosition };
 
 // size of box
-constexpr float c_OriginalBoxWidth  = 0.3f;
-constexpr float c_OriginalBoxHeight = 0.3f;
+constexpr float c_OriginalBoxWidth  = 1.5f;
+constexpr float c_OriginalBoxHeight = 1.5f;
 
 constexpr float c_GroundX = -0.0f;
 constexpr float c_GroundY = -0.0f;

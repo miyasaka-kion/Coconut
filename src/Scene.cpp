@@ -37,8 +37,10 @@ Scene::Scene() {
     Init_SDL_Renderer();
     Init_Imgui();
     Init_Box2D();
-    Init_DebugDraw();
-    closeGame = false;
+    if(g_settings.m_showDebugDraw) {
+        Init_DebugDraw();
+    }
+    m_closeGame = false;
 }
 
 Scene::~Scene() {
@@ -142,11 +144,11 @@ void Scene::UpdateUI() {
     {
         ImGui::Begin("Settings");
         ImGui::SliderFloat("Zoom Level", &g_camera.m_zoom, 0.0f, 1.0f);
-        ImGui::Checkbox("Draw Sprites", &g_settings.m_drawSprites);
-        ImGui::Checkbox("Draw Shape", &g_settings.m_drawShapes);
-        ImGui::Checkbox("Draw Joint", &g_settings.m_drawJoints);
-        ImGui::Checkbox("Draw AABB", &g_settings.m_drawAABBs);
-        
+        ImGui::Checkbox("show DebugDraw", &g_settings.m_showDebugDraw);
+        ImGui::Checkbox("draw Sprites", &g_settings.m_drawSprites);
+        ImGui::Checkbox("draw Shape", &g_settings.m_drawShapes);
+        ImGui::Checkbox("draw Joint", &g_settings.m_drawJoints);
+        ImGui::Checkbox("draw AABB", &g_settings.m_drawAABBs);
         ImGui::End();
     }
 
@@ -191,7 +193,7 @@ void Scene::Run() {
     bool  calculating = true;
     float progress    = 0.0f;
 
-    while(closeGame != true) {
+    while(m_closeGame != true) {
         [[maybe_unused]] auto io = ImGui::GetIO();
         PollEvents();
             
@@ -224,7 +226,9 @@ void Scene::Run() {
             
         }
 
-        m_world->DebugDraw();
+        if(g_settings.m_showDebugDraw) {
+            m_world->DebugDraw();
+        }
           
         SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));
 
@@ -241,13 +245,13 @@ void Scene::PollEvents() {
         ImGui_ImplSDL2_ProcessEvent(&m_SDL_Event);
         switch(m_SDL_Event.type) {
         case SDL_QUIT:
-            closeGame = true;
+            m_closeGame = true;
             CC_CORE_INFO("SDL_QUIT Triggered.");
             break;
         case SDL_KEYDOWN:
             switch(m_SDL_Event.key.keysym.sym) {
             case SDLK_ESCAPE:
-                closeGame = true;
+                m_closeGame = true;
                 CC_CORE_INFO("ESC pressed!");
                 CC_CORE_INFO("SDL_QUIT Triggered.");
                 break;
@@ -311,13 +315,13 @@ void Scene::LoadEdge() {
     // some constants
     // start ground point
     b2Vec2 startpoint;
-    startpoint.x = -3.0f;
-    startpoint.y = -2.0;
+    startpoint.x = -30.0f;
+    startpoint.y = -20.0f;
 
     // end ground point
     b2Vec2 endpoint;
-    endpoint.x = 3.0;
-    endpoint.y = -2.0;
+    endpoint.x = 30.0f;
+    endpoint.y = -20.0f;
     // constants end
 
     auto edge = std::make_unique< Edge >(m_world.get(), m_SDL_Renderer);

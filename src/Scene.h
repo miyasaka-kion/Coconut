@@ -23,7 +23,7 @@ public:
     // Initialize the world of box2d
     // Load(TODO) and add all entities to the game.
     Scene();
-    ~Scene();
+    virtual ~Scene();
 
     void Run();
 
@@ -36,13 +36,14 @@ private:
     void Init_Box2D();
 
     void LoadEntities();
-    void LoadBox();
-    void LoadEdge();
     void PollEvents();
     void UpdateUI();
     void RenderEntities();
     void RemoveInactive();
 
+// temp functions: TODO
+    void LoadBox();
+    void LoadEdge();
 public:
     std::unique_ptr< b2World > m_world;
     
@@ -55,7 +56,7 @@ private:
     // Entities
 private:
     std::vector< std::unique_ptr< Entity > > m_entityList;
-    bool                                     closeGame;
+    bool                                     m_closeGame;
 
     // physics info
 private:

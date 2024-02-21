@@ -4,6 +4,7 @@
 #include <SDL_render.h>
 #include <box2d/b2_draw.h>
 
+
 class DebugDraw : public b2Draw {
 public:
     DebugDraw();
@@ -27,6 +28,10 @@ public:
     void DrawTransform(const b2Transform& xf) override;
 
     void DrawPoint(const b2Vec2& p, float size, const b2Color& color) override;
+
+private: 
+    void SetRenderColor(const b2Color& color);
+
 
 private:
     SDL_Renderer* m_SDL_Renderer;
