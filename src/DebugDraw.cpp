@@ -157,3 +157,48 @@ void DebugDraw::SetRenderColor(const b2Color& color) {
 
     SDL_SetRenderDrawColor(m_SDL_Renderer, sdl_color.r, sdl_color.g, sdl_color.b, sdl_color.a);
 }
+
+void DebugDraw::DrawString(int x, int y, const char* string, ...)
+{
+	// if (m_showUI == false)
+	// {
+	// 	return;
+	// }
+
+	va_list arg;
+	va_start(arg, string);
+	ImGui::Begin("Overlay", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar);
+	ImGui::SetCursorPos(ImVec2(float(x), float(y)));
+	ImGui::TextColoredV(ImColor(230, 153, 153, 255), string, arg);
+	ImGui::End();
+	va_end(arg);
+}
+
+void DebugDraw::DrawString(const b2Vec2& pw, const char* string, ...)
+{
+	b2Vec2 ps = g_camera.ConvertWorldToScreen(pw);
+
+	va_list arg;
+	va_start(arg, string);
+	ImGui::Begin("Overlay", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar);
+	ImGui::SetCursorPos(ImVec2(ps.x, ps.y));
+	ImGui::TextColoredV(ImColor(230, 153, 153, 255), string, arg);
+	ImGui::End();
+	va_end(arg);
+}
+
+// TODO: This seems to be not used
+void DebugDraw::DrawAABB(b2AABB* aabb, const b2Color& c)
+{
+	b2Vec2 p1 = aabb->lowerBound;
+	b2Vec2 p2 = b2Vec2(aabb->upperBound.x, aabb->lowerBound.y);
+	b2Vec2 p3 = aabb->upperBound;
+	b2Vec2 p4 = b2Vec2(aabb->lowerBound.x, aabb->upperBound.y);
+
+    SetRenderColor(c);
+
+    DrawSegment(p1, p2, c);
+    DrawSegment(p2, p3, c);
+    DrawSegment(p3, p4, c);
+    DrawSegment(p4, p1, c);
+}

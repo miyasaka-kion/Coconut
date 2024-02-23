@@ -4,17 +4,30 @@
 #include <memory>
 #include <vector>
 
-#include <box2d/box2d.h>
 #include <SDL2/SDL.h>
+#include <box2d/box2d.h>
 
 #include "DebugDraw.h"
 #include "Settings.h"
 #include "imgui.h"
 
 #include "Box.h"
+#include "Camera.h"
 #include "Edge.h"
 #include "Entity.h"
-#include "Camera.h"
+
+const int32 k_maxContactPoints = 2048;
+
+struct ContactPoint {
+    b2Fixture*   fixtureA;
+    b2Fixture*   fixtureB;
+    b2Vec2       normal;
+    b2Vec2       position;
+    b2PointState state;
+    float        normalImpulse;
+    float        tangentImpulse;
+    float        separation;
+};
 
 class Scene {
 public:
@@ -33,15 +46,17 @@ private:
     void LoadEntities();
     void PollEvents();
     void UpdateUI();
+    void Step();
     void RenderEntities();
     void RemoveInactive();
 
-// temp functions: TODO
+    // temp functions: TODO
     void LoadBox();
     void LoadEdge();
+
 public:
     std::unique_ptr< b2World > m_world;
-    
+
     // SDL members
 private:
     SDL_Window*   m_SDL_Window;
@@ -55,10 +70,20 @@ private:
 
     // physics info
 private:
-    ImVec4 m_clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);    
+    int           m_textLine;
+    int           m_textIncrement;
+    int           m_pointCount;
+    b2MouseJoint* m_mouseJoint;  // how to use this
+    b2Profile     m_maxProfile;
+    b2Profile     m_totalProfile;
+    int           m_stepCount;
+    ContactPoint m_points[k_maxContactPoints];
+
+private:
+    ImVec4 m_clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);// render bg color
 };
 
-extern Camera g_camera;
+extern Camera   g_camera;
 extern Settings g_settings;
 
 struct ImguiSettings {

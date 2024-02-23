@@ -1,9 +1,8 @@
 #pragma once
 
-#include "imgui.h"
 #include <SDL_render.h>
-#include <box2d/b2_draw.h>
-
+#include <box2d/box2d.h>
+#include "imgui.h"
 
 class DebugDraw : public b2Draw {
 public:
@@ -29,11 +28,16 @@ public:
 
     void DrawPoint(const b2Vec2& p, float size, const b2Color& color) override;
 
-private: 
-    void SetRenderColor(const b2Color& color);
+    void DrawString(int x, int y, const char* string, ...);
 
+    void DrawString(const b2Vec2& pw, const char* string, ...); // TODO : Something weird when rendering
+
+    void DrawAABB(b2AABB* aabb, const b2Color& color);
+
+private:
+    void SetRenderColor(const b2Color& color);
 
 private:
     SDL_Renderer* m_SDL_Renderer;
-    ImVec4 m_renderColor;
+    ImVec4        m_renderColor;
 };
