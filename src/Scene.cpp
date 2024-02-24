@@ -415,23 +415,6 @@ void Scene::Run() {
     }
 }
 
-void Scene::MouseDown(b2Vec2& pw) {
-
-}
-
-void Scene::RightMouseDown(b2Vec2& pw) {
-    m_mouseClickPointW = pw;
-    m_rightMouseDown   = true;
-}
-
-void Scene::MouseUp(b2Vec2& pw) {
-    
-}
-
-void Scene::RightMouseUp(b2Vec2& pw) {
-    m_rightMouseDown = false;
-}
-
 void Scene::PollEvents() {
     while(SDL_PollEvent(&m_SDL_Event)) {
         ImGui_ImplSDL2_ProcessEvent(&m_SDL_Event);

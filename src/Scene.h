@@ -55,17 +55,6 @@ private:
 private:
     MouseEvent m_mouse;
 
-    b2Vec2 m_mouseClickPointW;
-    // bool m_mouseDown;
-    bool m_rightMouseDown = false;
-    virtual void MouseDown(b2Vec2& pw);
-    virtual void MouseUp(b2Vec2& pw);
-    // // virtual void ShiftMouseDown();
-    // // virtual void ShiftMouseUp(); TODO
-
-    virtual void RightMouseDown(b2Vec2& pw);
-    virtual void RightMouseUp(b2Vec2& pw);
-
 private:
 // temp functions: TODO
     void LoadBox();
