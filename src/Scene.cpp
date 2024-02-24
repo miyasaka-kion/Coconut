@@ -1,6 +1,8 @@
 #include "Scene.h"
 
+#include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_rect.h>
 #include <SDL_keyboard.h>
 #include <SDL_render.h>
@@ -422,30 +424,7 @@ void Scene::PollEvents() {
         SDL_GetMouseState(&xs, &ys);
         auto ps = b2Vec2(xs, ys);
 
-        // // Use the mouse to move things around.
-        // if(m_SDL_Event.button.button == SDL_BUTTON_LEFT) {
-        //     b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
-        //     if(m_SDL_Event.type == SDL_MOUSEBUTTONDOWN) {
-        //         if(SDL_GetModState() & KMOD_SHIFT) {
-        //             // ShiftMouseDown(pw);
-        //         }
-        //         else {
-        //             MouseDown()
-        //         }
-        //     }
-        //     else if(m_SDL_Event.type == SDL_MOUSEBUTTONUP) {
-        //         // ...
-        //     }
-        // }
-        // else if(m_SDL_Event.button.button == SDL_BUTTON_RIGHT) {
-        //     if(m_SDL_Event.type == SDL_MOUSEBUTTONDOWN) {
-        //         s_clickPointWS   = g_camera.ConvertScreenToWorld(ps);
-        //         s_rightMouseDown = true;
-        //     }
-        //     else if(event.type == SDL_MOUSEBUTTONUP) {
-        //         s_rightMouseDown = false;
-        //     }
-        // }
+        b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
 
         // handle keyboard input???
         switch(m_SDL_Event.type) {
@@ -453,6 +432,47 @@ void Scene::PollEvents() {
             m_closeGame = true;
             CC_CORE_INFO("SDL_QUIT Triggered.");
             break;
+
+        case SDL_MOUSEBUTTONDOWN:
+            if(m_SDL_Event.button.button == SDL_BUTTON_LEFT) {
+                
+            }
+            else if(m_SDL_Event.button.button == SDL_BUTTON_RIGHT) {
+                int xs, ys;
+                SDL_GetMouseState(&xs, &ys);
+                auto pw = g_camera.ConvertScreenToWorld(b2Vec2(xs, ys));
+                m_mouseClickPointW = pw;
+                m_rightMouseDown = true;
+                m_oldCameraCenter = g_camera.m_center;
+
+                CC_CORE_INFO("Right mouse button pressed!");
+            }
+            break;  
+        
+        case SDL_MOUSEBUTTONUP:
+            if(m_SDL_Event.button.button == SDL_BUTTON_LEFT) {
+                
+            }
+            else if(m_SDL_Event.button.button == SDL_BUTTON_RIGHT) {
+                CC_CORE_INFO("Right mouse button released!");
+                assert(m_rightMouseDown == true); // ? will this being triggered?
+                m_rightMouseDown = false;
+            }
+            break;
+        
+        case SDL_MOUSEMOTION:
+            if(m_rightMouseDown) {
+                int xs, ys;
+                SDL_GetMouseState(&xs, &ys);
+                auto pw = g_camera.ConvertScreenToWorld(b2Vec2(xs, ys));
+		        b2Vec2 diff = pw - m_mouseClickPointW;
+		        g_camera.m_center.x -= diff.x;
+		        g_camera.m_center.y -= diff.y;
+		        m_mouseClickPointW = g_camera.ConvertScreenToWorld(ps);
+            }
+            break;
+
+    
         case SDL_KEYDOWN:
             switch(m_SDL_Event.key.keysym.sym) {
             case SDLK_ESCAPE:
