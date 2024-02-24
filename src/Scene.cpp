@@ -415,6 +415,24 @@ void Scene::Run() {
     }
 }
 
+void Scene::MouseDown(b2Vec2& pw) {
+
+}
+
+void Scene::RightMouseDown(b2Vec2& pw) {
+    m_mouseClickPointW = pw;
+    m_rightMouseDown   = true;
+    m_oldCameraCenter  = g_camera.m_center;
+}
+
+void Scene::MouseUp(b2Vec2& pw) {
+    
+}
+
+void Scene::RightMouseUp(b2Vec2& pw) {
+    
+}
+
 void Scene::PollEvents() {
     while(SDL_PollEvent(&m_SDL_Event)) {
         ImGui_ImplSDL2_ProcessEvent(&m_SDL_Event);
@@ -438,14 +456,12 @@ void Scene::PollEvents() {
                 
             }
             else if(m_SDL_Event.button.button == SDL_BUTTON_RIGHT) {
+                CC_CORE_INFO("Right mouse button pressed!");
+
                 int xs, ys;
                 SDL_GetMouseState(&xs, &ys);
                 auto pw = g_camera.ConvertScreenToWorld(b2Vec2(xs, ys));
-                m_mouseClickPointW = pw;
-                m_rightMouseDown = true;
-                m_oldCameraCenter = g_camera.m_center;
-
-                CC_CORE_INFO("Right mouse button pressed!");
+                RightMouseDown(pw);
             }
             break;  
         

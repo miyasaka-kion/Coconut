@@ -56,13 +56,13 @@ private:
     b2Vec2 m_oldCameraCenter;
     bool m_mouseDown;
     bool m_rightMouseDown;
-    // virtual void MouseDown(b2Vec2& pw);
-    // virtual void MouseUp(b2Vec2& pw);
+    virtual void MouseDown(b2Vec2& pw);
+    virtual void MouseUp(b2Vec2& pw);
     // // virtual void ShiftMouseDown();
     // // virtual void ShiftMouseUp(); TODO
 
-    // virtual void rightMouseDown(b2Vec2& pw);
-    // virtual void rightMouseUp(b2Vec2& pw);
+    virtual void RightMouseDown(b2Vec2& pw);
+    virtual void RightMouseUp(b2Vec2& pw);
 
 private:
 // temp functions: TODO
