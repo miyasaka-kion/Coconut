@@ -15,6 +15,7 @@
 #include "Camera.h"
 #include "Edge.h"
 #include "Entity.h"
+#include "MouseEvent.h"
 
 const int32 k_maxContactPoints = 2048;
 
@@ -52,10 +53,11 @@ private:
 
 // mouse
 private:
+    MouseEvent m_mouse;
+
     b2Vec2 m_mouseClickPointW;
-    b2Vec2 m_oldCameraCenter;
-    bool m_mouseDown;
-    bool m_rightMouseDown;
+    // bool m_mouseDown;
+    bool m_rightMouseDown = false;
     virtual void MouseDown(b2Vec2& pw);
     virtual void MouseUp(b2Vec2& pw);
     // // virtual void ShiftMouseDown();

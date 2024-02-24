@@ -422,7 +422,6 @@ void Scene::MouseDown(b2Vec2& pw) {
 void Scene::RightMouseDown(b2Vec2& pw) {
     m_mouseClickPointW = pw;
     m_rightMouseDown   = true;
-    m_oldCameraCenter  = g_camera.m_center;
 }
 
 void Scene::MouseUp(b2Vec2& pw) {
@@ -430,7 +429,7 @@ void Scene::MouseUp(b2Vec2& pw) {
 }
 
 void Scene::RightMouseUp(b2Vec2& pw) {
-    
+    m_rightMouseDown = false;
 }
 
 void Scene::PollEvents() {
@@ -453,39 +452,24 @@ void Scene::PollEvents() {
 
         case SDL_MOUSEBUTTONDOWN:
             if(m_SDL_Event.button.button == SDL_BUTTON_LEFT) {
-                
+                m_mouse.MouseDown(pw);   
             }
             else if(m_SDL_Event.button.button == SDL_BUTTON_RIGHT) {
-                CC_CORE_INFO("Right mouse button pressed!");
-
-                int xs, ys;
-                SDL_GetMouseState(&xs, &ys);
-                auto pw = g_camera.ConvertScreenToWorld(b2Vec2(xs, ys));
-                RightMouseDown(pw);
+                m_mouse.RightMouseDown(pw);
             }
             break;  
         
         case SDL_MOUSEBUTTONUP:
             if(m_SDL_Event.button.button == SDL_BUTTON_LEFT) {
-                
+                m_mouse.MouseUp(pw);
             }
             else if(m_SDL_Event.button.button == SDL_BUTTON_RIGHT) {
-                CC_CORE_INFO("Right mouse button released!");
-                assert(m_rightMouseDown == true); // ? will this being triggered?
-                m_rightMouseDown = false;
+                m_mouse.RightMouseUp(pw);
             }
             break;
         
         case SDL_MOUSEMOTION:
-            if(m_rightMouseDown) {
-                int xs, ys;
-                SDL_GetMouseState(&xs, &ys);
-                auto pw = g_camera.ConvertScreenToWorld(b2Vec2(xs, ys));
-		        b2Vec2 diff = pw - m_mouseClickPointW;
-		        g_camera.m_center.x -= diff.x;
-		        g_camera.m_center.y -= diff.y;
-		        m_mouseClickPointW = g_camera.ConvertScreenToWorld(ps);
-            }
+            m_mouse.MouseMotion(ps);
             break;
 
     
