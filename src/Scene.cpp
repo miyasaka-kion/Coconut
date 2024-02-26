@@ -134,15 +134,9 @@ void Scene::Init_Box2D() {
 }
 void Scene::UpdateUI() {
     [[maybe_unused]] ImGuiIO& io = ImGui::GetIO();
-    // Start the Dear ImGui frame
-    ImGui_ImplSDLRenderer2_NewFrame();
-    ImGui_ImplSDL2_NewFrame();
-    ImGui::NewFrame();
 
     auto pw = b2Vec2(0.0f, 0.0f);
     auto ps = g_camera.ConvertWorldToScreen(pw);
-
-    g_debugDraw.DrawString(5, 26, "***Paused*****");
 
     ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
     ImGui::SetNextWindowSize(ImVec2(float(g_camera.m_width), float(g_camera.m_height)));
@@ -370,21 +364,24 @@ void Scene::Run() {
 
     while(m_closeGame != true) {
         [[maybe_unused]] auto io = ImGui::GetIO();
+        // ImGui context begin
+        ImGui_ImplSDLRenderer2_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
+
         PollEvents();
 
         UpdateUI();
+        
+        g_debugDraw.DrawString(5, m_textLine + m_textIncrement,"FPS: %.2f", ImGui::GetIO().Framerate);
+        
 
-        // render all
-        ImGui::Render();
         SDL_RenderSetScale(m_SDL_Renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-
+        
+        // set the bg color and render the background
         SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255)); // bg color
-
         SDL_RenderClear(m_SDL_Renderer);
-
-        // removeInactive(); this is currently unneeded!
-        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
-
+    
         RenderEntities();
 
         {
@@ -405,12 +402,12 @@ void Scene::Run() {
             m_world->DebugDraw();
         }
 
-
-        SDL_RenderPresent(m_SDL_Renderer);
-
-        // m_world->Step(1.0f / g_settings.m_hertz, g_settings.m_velocityIterations, g_settings.m_positionIterations);  // update
         Step();
+        ImGui::Render();
+        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 
+        // ImGui context end
+        SDL_RenderPresent(m_SDL_Renderer);
         m_world->ClearForces();
     }
 }
