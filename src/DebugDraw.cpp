@@ -167,7 +167,7 @@ void DebugDraw::DrawString(int x, int y, const char* string, ...)
 
 	va_list arg;
 	va_start(arg, string);
-	ImGui::Begin("Overlay", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar);
+	ImGui::Begin("Overlay", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground);
 	ImGui::SetCursorPos(ImVec2(float(x), float(y)));
 	ImGui::TextColoredV(ImColor(230, 153, 153, 255), string, arg);
 	ImGui::End();

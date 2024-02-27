@@ -369,13 +369,16 @@ void Scene::Run() {
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
 
+        // debugDraw m_textLine reset
+        m_textLine = 26;
+
         PollEvents();
 
         UpdateUI();
         
-        g_debugDraw.DrawString(5, m_textLine + m_textIncrement,"FPS: %.2f", ImGui::GetIO().Framerate);
+        g_debugDraw.DrawString(5, m_textLine,"FPS: %.2f", ImGui::GetIO().Framerate);
+        m_textLine += m_textIncrement;
         
-
         SDL_RenderSetScale(m_SDL_Renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
         
         // set the bg color and render the background

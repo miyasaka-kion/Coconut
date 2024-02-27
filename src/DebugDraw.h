@@ -40,4 +40,6 @@ private:
 private:
     SDL_Renderer* m_SDL_Renderer;
     ImVec4        m_renderColor;
+
+    // int m_textLine;
 };
