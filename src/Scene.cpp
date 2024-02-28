@@ -20,14 +20,15 @@
 #include <SDL_hints.h>
 #include <thread>
 
-#include "Box.h"
+
 #include "Camera.h"
 #include "Constants.h"
 #include "DebugDraw.h"
-#include "Edge.h"
 #include "Entity.h"
 #include "Log.h"
 #include "Settings.h"
+#include "DebugObjects/Edge.h"
+#include "DebugObjects/Box.h"
 
 extern Camera        g_camera;
 static ImguiSettings s_imguiSettings;

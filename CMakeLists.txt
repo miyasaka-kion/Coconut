@@ -6,6 +6,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(box2dtest)
 
 aux_source_directory(src SRC_LIST)
+aux_source_directory(src/DebugObjects SRC_LIST)
 
 find_package(box2d REQUIRED)
 find_package(sdl2 REQUIRED)
@@ -16,7 +17,6 @@ message("box2d_FOUND = ${box2d_FOUND}")
 
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
-target_include_directories(${PROJECT_NAME} PRIVATE ${SRC_LIST})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE box2d::box2d)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2)
@@ -31,5 +31,7 @@ endif()
 add_subdirectory("vendor/imgui")
 target_link_libraries(${PROJECT_NAME} PRIVATE imgui_sdl2_sdlrenderer2)
 
+target_include_directories(${PROJECT_NAME} PUBLIC src)
+
 # post build commands
-file(COPY "${CMAKE_SOURCE_DIR}/source/assets" DESTINATION "${CMAKE_BINARY_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/assets" DESTINATION "${CMAKE_BINARY_DIR}")

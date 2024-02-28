@@ -3,8 +3,8 @@
 #include <SDL_image.h>
 #include <SDL_render.h>
 
-#include "Camera.h"
-#include "Log.h"
+#include "../Camera.h"
+#include "../Log.h"
 
 Car::Car(b2World* world, SDL_Renderer* renderer) : Entity(world, renderer) {
     CC_CORE_INFO("Car entity created!");

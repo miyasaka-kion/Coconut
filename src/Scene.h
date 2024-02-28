@@ -11,11 +11,12 @@
 #include "Settings.h"
 #include "imgui.h"
 
-#include "Box.h"
 #include "Camera.h"
-#include "Edge.h"
 #include "Entity.h"
 #include "MouseEvent.h"
+#include "DebugObjects/Box.h"
+#include "DebugObjects/Edge.h"
+
 
 const int32 k_maxContactPoints = 2048;
 
