@@ -86,7 +86,7 @@ private:
     ContactPoint m_points[k_maxContactPoints];
 
 private:
-    ImVec4 m_clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);// render bg color
+    ImVec4 m_clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);// render bg color
 };
 
 extern Camera   g_camera;

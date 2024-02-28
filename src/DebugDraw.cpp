@@ -142,8 +142,7 @@ void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& c
 }
 
 void DebugDraw::DrawTransform(const b2Transform& xf) {
-
-
+    
 }
 
 void DebugDraw::DrawPoint(const b2Vec2& p, float size, const b2Color& color) {

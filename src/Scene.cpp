@@ -138,9 +138,6 @@ void Scene::UpdateUI() {
     auto pw = b2Vec2(0.0f, 0.0f);
     auto ps = g_camera.ConvertWorldToScreen(pw);
 
-    ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
-    ImGui::SetNextWindowSize(ImVec2(float(g_camera.m_width), float(g_camera.m_height)));
-
     {
         // test demo windon
         if(s_imguiSettings.show_demo_window)
@@ -186,11 +183,7 @@ void Scene::UpdateUI() {
 
     {
         ImGui::Begin("Window Settings");  // Create a window called "Hello, world!" and append into it.
-        ImGui::SliderInt("Vel Iters", &g_settings.m_velocityIterations, 0, 50);
-        ImGui::SliderInt("Pos Iters", &g_settings.m_positionIterations, 0, 50);
-        ImGui::SliderFloat("Hertz", &g_settings.m_hertz, 5.0f, 120.0f, "%.0f hz");
         ImGui::Checkbox("Demo Window", &s_imguiSettings.show_demo_window);  // Edit bools storing our window open/close state
-
         ImGui::ColorEdit3("bg color", ( float* )&m_clear_color);  // Edit 3 floats representing a color
 
         if(ImGui::Button("load box")) {
@@ -200,7 +193,6 @@ void Scene::UpdateUI() {
         if(ImGui::Button("load Edge")) {
             LoadEdge();
         }
-
         if(ImGui::Button("clear Entities")) {
             m_entityList.clear();
         }
