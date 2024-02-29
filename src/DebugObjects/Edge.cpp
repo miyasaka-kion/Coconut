@@ -5,9 +5,9 @@
 #include <SDL_render.h>
 #include <box2d/box2d.h>
 
-#include "../Camera.h"
-#include "../Constants.h"
-#include "../Entity.h"
+#include "Camera.h"
+#include "Constants.h"
+#include "Entity.h"
 
 
 

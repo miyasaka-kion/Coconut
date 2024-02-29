@@ -15,9 +15,9 @@ struct Settings {
         m_positionIterations = 3;
         // m_screenHeightWorld = 50.0f;
 
-        m_drawShapes      = true;
-        m_drawJoints      = true;
-        m_drawAABBs       = false;
+        m_drawShapes = true;
+        m_drawJoints = true;
+        m_drawAABBs  = false;
 
         m_drawContactPoints   = false;
         m_drawContactNormals  = false;
@@ -33,7 +33,7 @@ struct Settings {
         m_pause               = false;
         m_singleStep          = false;
 
-        m_drawSprites = true;
+        m_drawSprites   = true;
         m_showDebugDraw = true;
     }
 
@@ -65,5 +65,5 @@ struct Settings {
 
     const float m_defaultScreenHeightWorld = 50.0f;
     bool        m_drawSprites;
-    bool m_showDebugDraw = true;
+    bool        m_showDebugDraw = true;
 };

@@ -12,11 +12,10 @@
 #include "imgui.h"
 
 #include "Camera.h"
-#include "Entity.h"
-#include "MouseEvent.h"
 #include "DebugObjects/Box.h"
 #include "DebugObjects/Edge.h"
-
+#include "Entity.h"
+#include "MouseEvent.h"
 
 const int32 k_maxContactPoints = 2048;
 
@@ -52,12 +51,12 @@ private:
     void RenderEntities();
     void RemoveInactive();
 
-// mouse
+    // mouse
 private:
     MouseEvent m_mouse;
 
 private:
-// temp functions: TODO
+    // temp functions: TODO
     void LoadBox();
     void LoadEdge();
 
@@ -80,14 +79,14 @@ private:
     int           m_textLine;
     int           m_textIncrement;
     int           m_pointCount;
-    b2MouseJoint* m_mouseJoint;  // how to use this? 
+    b2MouseJoint* m_mouseJoint;  // how to use this?
     b2Profile     m_maxProfile;
     b2Profile     m_totalProfile;
     int           m_stepCount;
-    ContactPoint m_points[k_maxContactPoints];
+    ContactPoint  m_points[k_maxContactPoints];
 
 private:
-    ImVec4 m_clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);// render bg color
+    ImVec4 m_clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);  // render bg color
 };
 
 extern Camera   g_camera;

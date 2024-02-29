@@ -11,7 +11,6 @@ public:
     Car(b2World* world, SDL_Renderer* renderer);
     virtual ~Car();
 
-
 public:
     void Init(b2Vec2 originalPos, float radius, b2Vec2 orginalVel, float originalAngle);
     void Render() override;
@@ -19,7 +18,7 @@ public:
     // int   GetPosPixX();
     // int   GetPosPixY();
     float GetAngleDegree();
-    
+
 private:
     void UpdateRect();
     void AddToWorld();

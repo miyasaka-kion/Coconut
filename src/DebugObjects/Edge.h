@@ -12,11 +12,11 @@ public:
     Edge(b2World* world, SDL_Renderer* renderer);
     ~Edge();
 
-    void Init(b2Vec2 startpoint, b2Vec2 endpoint) ; //override;
+    void Init(b2Vec2 startpoint, b2Vec2 endpoint);  // override;
 
 public:
     b2EdgeShape edgeShape;
-    b2Body* body;
-    
+    b2Body*     body;
+
     void Render() override;
 };

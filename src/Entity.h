@@ -13,9 +13,7 @@ public:
 
     // if the Entity is inActive, this entity should be removed from game
     bool isActive = 1;
-    // to determin whether the entity should be rendered
-    bool toBeRendered = true;
-    
+
 protected:
     Entity(b2World* world, SDL_Renderer* renderer) : m_world(world), m_renderer(renderer) {}
 

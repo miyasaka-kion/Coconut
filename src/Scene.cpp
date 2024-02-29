@@ -20,15 +20,17 @@
 #include <SDL_hints.h>
 #include <thread>
 
-
 #include "Camera.h"
-#include "Constants.h"
 #include "DebugDraw.h"
 #include "Entity.h"
 #include "Log.h"
 #include "Settings.h"
-#include "DebugObjects/Edge.h"
+
+// these will be removed in the future
+#include "Constants.h"
 #include "DebugObjects/Box.h"
+#include "DebugObjects/Edge.h"
+
 
 extern Camera        g_camera;
 static ImguiSettings s_imguiSettings;
@@ -183,9 +185,9 @@ void Scene::UpdateUI() {
     }
 
     {
-        ImGui::Begin("Window Settings");  // Create a window called "Hello, world!" and append into it.
+        ImGui::Begin("Window Settings");                                    // Create a window called "Hello, world!" and append into it.
         ImGui::Checkbox("Demo Window", &s_imguiSettings.show_demo_window);  // Edit bools storing our window open/close state
-        ImGui::ColorEdit3("bg color", ( float* )&m_clear_color);  // Edit 3 floats representing a color
+        ImGui::ColorEdit3("bg color", ( float* )&m_clear_color);            // Edit 3 floats representing a color
 
         if(ImGui::Button("load box")) {
             LoadBox();
@@ -368,16 +370,16 @@ void Scene::Run() {
         PollEvents();
 
         UpdateUI();
-        
-        g_debugDraw.DrawString(5, m_textLine,"FPS: %.2f", ImGui::GetIO().Framerate);
+
+        g_debugDraw.DrawString(5, m_textLine, "FPS: %.2f", ImGui::GetIO().Framerate);
         m_textLine += m_textIncrement;
-        
+
         SDL_RenderSetScale(m_SDL_Renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-        
+
         // set the bg color and render the background
-        SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255)); // bg color
+        SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));  // bg color
         SDL_RenderClear(m_SDL_Renderer);
-    
+
         RenderEntities();
 
         {
@@ -428,13 +430,13 @@ void Scene::PollEvents() {
 
         case SDL_MOUSEBUTTONDOWN:
             if(m_SDL_Event.button.button == SDL_BUTTON_LEFT) {
-                m_mouse.MouseDown(pw);   
+                m_mouse.MouseDown(pw);
             }
             else if(m_SDL_Event.button.button == SDL_BUTTON_RIGHT) {
                 m_mouse.RightMouseDown(pw);
             }
-            break;  
-        
+            break;
+
         case SDL_MOUSEBUTTONUP:
             if(m_SDL_Event.button.button == SDL_BUTTON_LEFT) {
                 m_mouse.MouseUp(pw);
@@ -443,12 +445,20 @@ void Scene::PollEvents() {
                 m_mouse.RightMouseUp(pw);
             }
             break;
-        
+
         case SDL_MOUSEMOTION:
             m_mouse.MouseMotion(ps);
             break;
 
-    
+        case SDL_MOUSEWHEEL:
+            if(m_SDL_Event.wheel.y > 0) {
+                m_mouse.MouseWheelUp(pw);
+            }
+            else {
+                m_mouse.MouseWheelDown(pw);
+            }
+            break;
+
         case SDL_KEYDOWN:
             switch(m_SDL_Event.key.keysym.sym) {
             case SDLK_ESCAPE:
@@ -457,6 +467,10 @@ void Scene::PollEvents() {
                 CC_CORE_INFO("SDL_QUIT Triggered.");
                 break;
 
+            case SDLK_BACKQUOTE:
+                CC_CORE_INFO("Calling game console!");
+
+                break;
             case SDLK_LEFT:
                 // Pan left
                 // if(SDL_GetModState() == KMOD_LCTRL) {
@@ -491,6 +505,7 @@ void Scene::PollEvents() {
                 // show some tabs;
                 break;
 
+                // control player move by default.
                 // case SDLK_a:
                 //     g_camera.m_center.x -= 0.5f;
                 //     CC_CORE_INFO("a key pressed");

@@ -16,4 +16,7 @@ public:
     virtual void RightMouseUp(b2Vec2& pw);
 
     virtual void MouseMotion(b2Vec2& pw);
+
+    virtual void MouseWheelUp(b2Vec2& pw);
+    virtual void MouseWheelDown(b2Vec2& pw);
 };

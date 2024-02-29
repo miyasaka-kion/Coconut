@@ -16,11 +16,10 @@ public:
     // Box(const Box&) = delete; // this is unsure
     ~Box();
 
-
     void Init(b2Vec2 originalPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);  // override?
     void Render() override;
 
-    float GetAngleDegree(); 
+    float GetAngleDegree();
 
     void LoadBoxToWorld(b2Vec2 originPos, b2Vec2 boxSize, b2Vec2 originalVel, float originalAngle);
 
@@ -29,8 +28,8 @@ private:
     void         LoadTexture();
 
 public:
-    SDL_Rect       m_box_rect;
-    b2Body*        m_body;
+    SDL_Rect m_box_rect;
+    b2Body*  m_body;
 
 private:
     b2Vec2 m_boxSize;
