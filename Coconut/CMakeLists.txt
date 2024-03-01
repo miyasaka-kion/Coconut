@@ -33,7 +33,5 @@ message("${CMAKE_SOURCE_DIR}/vendor/imgui}")
 add_subdirectory("${CMAKE_SOURCE_DIR}/vendor/imgui" build)
 target_link_libraries(${PROJECT_NAME} PUBLIC imgui_sdl2_sdlrenderer2)
 
-target_include_directories(${PROJECT_NAME} PUBLIC src)
+target_include_directories(${PROJECT_NAME} PRIVATE src)
 
-# post build commands
-file(COPY "${CMAKE_SOURCE_DIR}/assets" DESTINATION "${CMAKE_BINARY_DIR}")
