@@ -1,4 +1,3 @@
-#include <SDL_log.h>
 #include <memory>
 
 #include "Scene.h"
