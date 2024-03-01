@@ -60,8 +60,8 @@ void Box::LoadTexture() {
     SDL_Surface* tmp_sprites;
     tmp_sprites = IMG_Load("assets/box.png");
     if(!tmp_sprites) {
-        CC_CORE_ERROR("loadTexture(): box.png failed to load! Error msg: {}", SDL_GetError());
-        throw std::runtime_error("loadTexture():  tmp_sprites is NULL");
+        CC_CORE_ERROR("LoadTexture(): box.png failed to load! Error msg: {}", SDL_GetError());
+        throw std::runtime_error("LoadTexture():  tmp_sprites is NULL");
     }
 
     m_BoxTexture = SDL_CreateTextureFromSurface(m_renderer, tmp_sprites);
@@ -69,7 +69,7 @@ void Box::LoadTexture() {
         CC_CORE_ERROR("Create texture from surface failed! Error msg: {}", SDL_GetError());
         throw std::runtime_error("texture_box is NULL");
     }
-    CC_CORE_INFO("loadTexture(): Box texture loaded.");
+    CC_CORE_INFO("LoadTexture(): Box texture loaded.");
     SDL_FreeSurface(tmp_sprites);
 }
 
