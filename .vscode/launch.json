@@ -7,7 +7,7 @@
         {
             "name": "Launch Coconut",
             "type": "lldb",
-            "program": "${workspaceFolder}/build/box2dtest",
+            "program": "${workspaceFolder}/build/LevelEditor/LevelEditor",
             "request": "launch",
             "environment": [{ "name": "config", "value": "Debug" }],
             "cwd": "${workspaceFolder}"

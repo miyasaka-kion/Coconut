@@ -1,36 +1,40 @@
 #include "Scene.h"
 
-#include <SDL2/SDL_events.h>
-#include <SDL2/SDL_keycode.h>
-#include <SDL2/SDL_mouse.h>
-#include <SDL2/SDL_rect.h>
-#include <SDL_keyboard.h>
-#include <SDL_render.h>
+
 #include <cstdio>
 #include <iostream>
 #include <memory>
 #include <stdexcept>
+#include <thread>
+
 
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
 
 #include <SDL2/SDL.h>
-#include <SDL_error.h>
-#include <SDL_hints.h>
-#include <thread>
+#include <SDL2/SDL_error.h>
+#include <SDL2/SDL_hints.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_mouse.h>
+#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_keyboard.h>
+#include <SDL2/SDL_render.h>
+
 
 #include "Camera.h"
 #include "DebugDraw.h"
-#include "Entity.h"
 #include "Log.h"
 #include "Settings.h"
 
+#include "ECS/Entity.h"
+#include "ECS/Sprite.h"
+#include "ECS/Body.h"
+
+
 // these will be removed in the future
 #include "Constants.h"
-#include "DebugObjects/Box.h"
-#include "DebugObjects/Edge.h"
-
 
 extern Camera        g_camera;
 static ImguiSettings s_imguiSettings;
@@ -44,6 +48,10 @@ Scene::Scene() {
     Init_Imgui();
     Init_Box2D();
     Init_DebugDraw();  // TODO: This should not init in release version
+    // m_entityManager = std::make_unique<EntityManager>(m_world.get());
+    m_entityManager = std::make_unique<EntityManager>();
+
+    LoadEntities();
     m_closeGame = false;
 }
 
@@ -133,14 +141,15 @@ void Scene::Init_Box2D() {
     m_textIncrement = 18;
     m_mouseJoint    = NULL;
     m_pointCount    = 0;
-    LoadEntities();
 }
+
 void Scene::UpdateUI() {
     [[maybe_unused]] ImGuiIO& io = ImGui::GetIO();
 
     auto pw = b2Vec2(0.0f, 0.0f);
     auto ps = g_camera.ConvertWorldToScreen(pw);
-
+        g_debugDraw.DrawString(5, m_textLine, "FPS: %.2f", ImGui::GetIO().Framerate);
+        m_textLine += m_textIncrement;
     {
         // test demo windon
         if(s_imguiSettings.show_demo_window)
@@ -189,15 +198,8 @@ void Scene::UpdateUI() {
         ImGui::Checkbox("Demo Window", &s_imguiSettings.show_demo_window);  // Edit bools storing our window open/close state
         ImGui::ColorEdit3("bg color", ( float* )&m_clear_color);            // Edit 3 floats representing a color
 
-        if(ImGui::Button("load box")) {
-            LoadBox();
-        }
-        ImGui::SameLine();
-        if(ImGui::Button("load Edge")) {
-            LoadEdge();
-        }
         if(ImGui::Button("clear Entities")) {
-            m_entityList.clear();
+            m_entityManager->ClearEntities();
         }
 
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
@@ -351,6 +353,16 @@ void Scene::Step() {
     }
 }
 
+// Adjust BG Color, Scene::m_clear_color
+void Scene::SetBackgroundColor() {
+    ImGuiIO& io = ImGui::GetIO();
+    SDL_RenderSetScale(m_SDL_Renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
+    // set the bg color and render the background
+    SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));  // bg color
+    SDL_RenderClear(m_SDL_Renderer);
+}
+
+
 void Scene::Run() {
     // game main loop
 
@@ -368,20 +380,13 @@ void Scene::Run() {
         m_textLine = 26;
 
         PollEvents();
-
         UpdateUI();
+        SetBackgroundColor();
 
-        g_debugDraw.DrawString(5, m_textLine, "FPS: %.2f", ImGui::GetIO().Framerate);
-        m_textLine += m_textIncrement;
-
-        SDL_RenderSetScale(m_SDL_Renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-
-        // set the bg color and render the background
-        SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));  // bg color
-        SDL_RenderClear(m_SDL_Renderer);
-
-        RenderEntities();
-
+        m_entityManager->Update();
+        
+        m_entityManager->Render();
+        m_entityManager->RemoveInactive();
         {
             // some SDL draw test
             auto pw = b2Vec2(0.0f, 0.0f);
@@ -487,7 +492,9 @@ void Scene::PollEvents() {
                 break;
 
             case SDLK_r:
-                LoadBox();  // TODO: remove this
+                // TODO: test code
+                m_entityManager->ClearEntities();
+                LoadEntities();
                 CC_CORE_INFO("key [r] pressed");
                 break;
 
@@ -531,47 +538,32 @@ void Scene::PollEvents() {
     }
 }
 
-void Scene::RenderEntities() {
-    if(g_settings.m_drawSprites) {
-        for(const auto& entity : m_entityList) {
-            entity->Render();
-        }
-    }
-}
-
-void Scene::RemoveInactive() {
-    m_entityList.erase(std::remove_if(std::begin(m_entityList), std::end(m_entityList), [](const std::unique_ptr< Entity >& entity) { return !entity->isActive; }), m_entityList.end());
-}
 
 // test part
 void Scene::LoadEntities() {
-    LoadBox();
-    LoadEdge();
-}
+    {
+        auto box = m_entityManager->AddEntity();
 
-void Scene::LoadBox() {
-    auto box = std::make_unique< Box >(m_world.get(), m_SDL_Renderer);
+        auto boxSize = b2Vec2(2.0f, 2.0f);
 
-    box->Init(c_OriginPos, b2Vec2(c_OriginalBoxWidth, c_OriginalBoxHeight), c_OriginalVelocity, c_originalAngle);
+        b2BodyDef bd;
+        bd.type   = b2_dynamicBody;
+        auto body = m_world->CreateBody(&bd);
+        body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 
-    m_entityList.push_back(std::move(box));
-}
+        b2PolygonShape dynamicBox;
+        dynamicBox.SetAsBox((boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
 
-void Scene::LoadEdge() {
-    // some constants
-    // start ground point
-    b2Vec2 startpoint;
-    startpoint.x = -30.0f;
-    startpoint.y = -20.0f;
+        CC_CORE_INFO("box info:  hx: {}, hy: {}", (boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
 
-    // end ground point
-    b2Vec2 endpoint;
-    endpoint.x = 30.0f;
-    endpoint.y = -20.0f;
-    // constants end
+        b2FixtureDef fd;
+        fd.shape       = &dynamicBox;
+        fd.density     = 1;
+        fd.friction    = 0.1f;
+        fd.restitution = 0.5f;
+        body->CreateFixture(&fd);
 
-    auto edge = std::make_unique< Edge >(m_world.get(), m_SDL_Renderer);
-    edge->Init(startpoint, endpoint);
-
-    m_entityList.push_back(std::move(edge));
+        box->AddComponent< Body >(body);
+        box->AddComponent< Sprite >(m_SDL_Renderer);
+    }
 }

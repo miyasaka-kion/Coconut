@@ -6,6 +6,9 @@
 #include <memory>
 #include <vector>
 
+
+#include <box2d/box2d.h>
+
 #include "Log.h"
 
 class Component;
@@ -36,27 +39,24 @@ using ComponentArray_t  = std::array< Component*, c_max_components >;
 
 class Component {
 public:
-    Entity* entity;
-
     virtual void Init() {}
     virtual void Update() {}
     virtual void Render() {}
 
     virtual ~Component() {}
+
+    Entity* m_entity;
 };
 
 // Entity has many components
 // Entity defined by user should inherit the Entity class
 // Note: The member functions cannot be called in the constructor of Component!
 class Entity {
-private:
-    bool                                        m_active = true;
-    std::vector< std::unique_ptr< Component > > m_components;
-
-    ComponentArray_t  m_componentArray;
-    ComponentBitset_t m_componentBitset;
-
 public:
+    // Entity() = delete;
+    // Entity(b2Body* body) : m_body(body) {} // TODO: make this private
+
+    // virtual ~Entity() {}
     void Update() {
         for(auto& c : m_components)
             c->Update();
@@ -79,20 +79,21 @@ public:
         return m_componentBitset[GetComponentTypeID< T >()];
     }
 
-    // TODO: Add Mechanism to make component can only be constructed in this way (?)
+    // TODO: Add Mechanism to make component can only be constructed in this way
     template < typename T, typename... TArgs >
     T& AddComponent(TArgs&&... mArgs) {
+
+        // TODO: Add restriction to T to make sure it is a subclass of Component
         std::unique_ptr< T > uPtr = std::make_unique< T >(std::forward< TArgs >(mArgs)...);
-        uPtr->entity              = this;
+        uPtr->m_entity              = this;
 
-        T* rawPtr = uPtr.get();
-
+        T* rawPtr = uPtr.get(); 
         m_components.emplace_back(std::move(uPtr));
 
         m_componentArray[GetComponentTypeID< T >()]  = rawPtr;
         m_componentBitset[GetComponentTypeID< T >()] = true;
 
-        rawPtr->init();
+        rawPtr->Init();
         return *rawPtr;
     }
 
@@ -101,10 +102,24 @@ public:
         auto ptr(m_componentArray[GetComponentTypeID< T >()]);
         return *static_cast< T* >(ptr);
     }
+
+private:
+    bool                                        m_active = true;
+    std::vector< std::unique_ptr< Component > > m_components;
+
+    ComponentArray_t  m_componentArray;
+    ComponentBitset_t m_componentBitset;
+
+    // b2Body* m_body;
 };
 
 class EntityManager {
-    // TODO: add a private constructor ?
+    // // TODO: add a private constructor ?
+    // public:
+    //     EntityManager() = delete;
+    //     EntityManager(b2World* world) {
+    //         m_world = world;
+    //     }
 
 public:
     void Update() {
@@ -112,23 +127,29 @@ public:
             e->Update();
     }
 
-    void RenderEntities() {
+    void Render() {
         for(auto& e : m_entities)
             e->RenderComponents();
     }
 
     void RemoveInactive() {
         m_entities.erase(std::remove_if(std::begin(m_entities), std::end(m_entities), [](const std::unique_ptr< Entity >& mEntity) { return !mEntity->IsActive(); }), std::end(m_entities));
+
+        // remember to clean up body in the subclass of Entity
     }
 
-    // may be some uncleared stuff here...
-    Entity& AddEntity() {
+    Entity* AddEntity() {
         auto    uPtr = std::make_unique< Entity >();
-        Entity& e    = *uPtr;
         m_entities.emplace_back(std::move(uPtr));
-        return e;
+        
+        return m_entities.back().get();
+    }
+
+    void ClearEntities() {
+        m_entities.clear();
     }
 
 private:
     std::vector< std::unique_ptr< Entity > > m_entities;
+    // b2World*                                 m_world;
 };

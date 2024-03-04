@@ -5,7 +5,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(Coconut)
 
 aux_source_directory("src" SRC_LIST)
-aux_source_directory("src/DebugObjects"  SRC_LIST)
+aux_source_directory("src/ECS"  SRC_LIST)
+
 message("SRC_LIST = ${SRC_LIST}")
 
 

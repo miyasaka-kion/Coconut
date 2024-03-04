@@ -12,9 +12,7 @@
 #include "imgui.h"
 
 #include "Camera.h"
-#include "DebugObjects/Box.h"
-#include "DebugObjects/Edge.h"
-#include "Entity.h"
+#include "ECS/Entity.h"
 #include "MouseEvent.h"
 
 const int32 k_maxContactPoints = 2048;
@@ -43,6 +41,9 @@ private:
     void Init_Imgui();
     void Init_DebugDraw();
     void Init_Box2D();
+    // void Init_EntityManager();
+
+    void SetBackgroundColor();
 
     void LoadEntities();
     void PollEvents();
@@ -55,10 +56,6 @@ private:
 private:
     MouseEvent m_mouse;
 
-private:
-    // temp functions: TODO
-    void LoadBox();
-    void LoadEdge();
 
 public:
     std::unique_ptr< b2World > m_world;
@@ -71,8 +68,8 @@ private:
 
     // Entities
 private:
-    std::vector< std::unique_ptr< Entity > > m_entityList;
     bool                                     m_closeGame;
+    std::unique_ptr<EntityManager> m_entityManager;
 
     // physics info
 private:
