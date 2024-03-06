@@ -8,6 +8,8 @@ aux_source_directory("src" SRC_LIST)
 aux_source_directory("src/ECS"  SRC_LIST)
 aux_source_directory("src/Entity" SRC_LIST)
 aux_source_directory("src/Render" SRC_LIST)
+aux_source_directory("src/Core" SRC_LIST)
+aux_source_directory("src/Event" SRC_LIST)
 
 message("SRC_LIST = ${SRC_LIST}")
 
@@ -32,13 +34,13 @@ if(TARGET SDL2::SDL2main)
     target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2main)
 endif()
 
-message("${CMAKE_SOURCE_DIR}/vendor/imgui}")
+message("imgui source dir: ${CMAKE_SOURCE_DIR}/vendor/imgui}")
 add_subdirectory("${CMAKE_SOURCE_DIR}/vendor/imgui" build)
 target_link_libraries(${PROJECT_NAME} PUBLIC imgui_sdl2_sdlrenderer2)
 
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/vendor/entt/include")
 
-message("${CMAKE_SOURCE_DIR}/vendor/entt/include")
+message("entt include dir: ${CMAKE_SOURCE_DIR}/vendor/entt/include")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE COCONUT_ASSET_PATH="${CMAKE_SOURCE_DIR}/assets")

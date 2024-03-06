@@ -7,8 +7,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL_render.h>
 
-#include "Camera.h"
-#include "Log.h"
+#include "Core/Log.h"
+#include "Core/Log.h"
 
 #ifndef COCONUT_ASSET_PATH
     // CC_CORE_ERROR("COCONUT_ASSET_PATH is not defined!");

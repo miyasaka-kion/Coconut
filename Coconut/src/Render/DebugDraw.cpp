@@ -1,11 +1,11 @@
-#include "DebugDraw.h"
+#include "Render/DebugDraw.h"
 
 #include <vector>
 
 #include <SDL.h>
 #include <SDL_render.h>
 
-#include "Camera.h"
+#include "Core/Camera.h"
 
 DebugDraw::DebugDraw() {
     // rgba range 0-1

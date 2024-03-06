@@ -5,8 +5,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
 
-#include "Log.h"
-#include "Camera.h"
+#include "Core/Log.h"
+#include "Core/Camera.h"
 
 
 /**

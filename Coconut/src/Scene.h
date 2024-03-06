@@ -8,12 +8,12 @@
 #include <box2d/box2d.h>
 #include <entt.hpp>
 
-#include "DebugDraw.h"
-#include "Settings.h"
+#include "Render/DebugDraw.h"
+#include "Core/Settings.h"
 #include "imgui.h"
 
-#include "Camera.h"
-#include "MouseEvent.h"
+#include "Core/Camera.h"
+#include "Event/MouseEvent.h"
 #include "Render/QuadWrite.h"
 
 const int32 k_maxContactPoints = 2048;

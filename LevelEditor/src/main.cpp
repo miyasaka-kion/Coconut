@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Log.h"
+#include "Core/Log.h"
 #include "Scene.h"
 
 int main(int argc, char* argv[]) {

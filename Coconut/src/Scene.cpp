@@ -22,10 +22,10 @@
 #include <SDL2/SDL_render.h>
 
 
-#include "Camera.h"
-#include "DebugDraw.h"
-#include "Log.h"
-#include "Settings.h"
+#include "Core/Log.h"
+#include "Render/DebugDraw.h"
+#include "Core/Camera.h"
+#include "Core/Settings.h"
 #include "Render/QuadWrite.h"
 // #include "ECS/Entity.h"
 
