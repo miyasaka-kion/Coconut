@@ -9,11 +9,10 @@ project(SDL_Game)
 # Define output directory names based on build configuration
 # set(OUTPUT_DIR_NAME "${CMAKE_BUILD_TYPE}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
 
+message("CMAKE_ASSET_DIR = ${CMAKE_SOURCE_DIR}/assets")
+message("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+
 add_subdirectory(Coconut)
 add_subdirectory(LevelEditor)
 # add_subdirectory(GameDemo)
 
-message("CMAKE_ASS_DIR = ${CMAKE_SOURCE_DIR}/assets")
-message("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
-
-# file(COPY "${CMAKE_SOURCE_DIR}/assets" DESTINATION "${CMAKE_BINARY_DIR}")

@@ -6,6 +6,8 @@ project(Coconut)
 
 aux_source_directory("src" SRC_LIST)
 aux_source_directory("src/ECS"  SRC_LIST)
+aux_source_directory("src/Entity" SRC_LIST)
+aux_source_directory("src/Render" SRC_LIST)
 
 message("SRC_LIST = ${SRC_LIST}")
 
@@ -14,8 +16,8 @@ find_package(box2d REQUIRED)
 find_package(sdl2 REQUIRED)
 find_package(sdl2_image REQUIRED)
 find_package(spdlog REQUIRED)
+# find_package(entt REQUIRED)
 
-message("box2d_FOUND = ${box2d_FOUND}")
 
 # add_executable(${PROJECT_NAME} ${SRC_LIST})
 add_library(${PROJECT_NAME} ${SRC_LIST})
@@ -35,4 +37,8 @@ add_subdirectory("${CMAKE_SOURCE_DIR}/vendor/imgui" build)
 target_link_libraries(${PROJECT_NAME} PUBLIC imgui_sdl2_sdlrenderer2)
 
 target_include_directories(${PROJECT_NAME} PRIVATE src)
+target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/vendor/entt/include")
 
+message("${CMAKE_SOURCE_DIR}/vendor/entt/include")
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE COCONUT_ASSET_PATH="${CMAKE_SOURCE_DIR}/assets")

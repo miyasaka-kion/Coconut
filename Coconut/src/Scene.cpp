@@ -7,7 +7,6 @@
 #include <stdexcept>
 #include <thread>
 
-
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
@@ -27,10 +26,11 @@
 #include "DebugDraw.h"
 #include "Log.h"
 #include "Settings.h"
+#include "Render/QuadWrite.h"
+// #include "ECS/Entity.h"
 
-#include "ECS/Entity.h"
-#include "ECS/Sprite.h"
-#include "ECS/Body.h"
+#include "ECS/SpriteComponent.h"
+#include "ECS/BodyComponent.h"
 
 
 // these will be removed in the future
@@ -49,7 +49,8 @@ Scene::Scene() {
     Init_Box2D();
     Init_DebugDraw();  // TODO: This should not init in release version
     // m_entityManager = std::make_unique<EntityManager>(m_world.get());
-    m_entityManager = std::make_unique<EntityManager>();
+
+    
 
     LoadEntities();
     m_closeGame = false;
@@ -57,20 +58,20 @@ Scene::Scene() {
 
 Scene::~Scene() {
     // clean up game context
-    SDL_DestroyRenderer(m_SDL_Renderer);
-    SDL_DestroyWindow(m_SDL_Window);
+    SDL_DestroyRenderer(m_sdl_renderer);
+    SDL_DestroyWindow(m_sdl_window);
     SDL_Quit();
 }
 
 void Scene::Init_SDL_Renderer() {
     // m_SDL_Renderer = SDL_CreateRenderer(m_SDL_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    m_SDL_Renderer = SDL_CreateRenderer(m_SDL_Window, -1, SDL_RENDERER_ACCELERATED);
-    if(m_SDL_Renderer == NULL) {
+    m_sdl_renderer = SDL_CreateRenderer(m_sdl_window, -1, SDL_RENDERER_ACCELERATED);
+    if(m_sdl_renderer == NULL) {
         CC_CORE_ERROR("SDL renderer initialization failed!");
         throw std::runtime_error("SDL_Renderer initialized a NULL renderer");
     }
     SDL_RendererInfo info;
-    SDL_GetRendererInfo(m_SDL_Renderer, &info);
+    SDL_GetRendererInfo(m_sdl_renderer, &info);
     CC_CORE_INFO("Current SDL_Renderer: {}", info.name);
 }
 
@@ -93,9 +94,9 @@ void Scene::Init_SDL_Window() {
     g_camera.m_width  = g_settings.m_windowWidth;
     g_camera.m_height = g_settings.m_windowHeight;
 
-    m_SDL_Window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN);
+    m_sdl_window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN);
 
-    if(m_SDL_Window == NULL) {
+    if(m_sdl_window == NULL) {
         CC_CORE_ERROR("SDL window failed to initialize! ");
         throw std::runtime_error("SDL_CreateWindow generate a NULL window");
     }
@@ -116,12 +117,12 @@ void Scene::Init_Imgui() {
     // ImGui::StyleColorsLight();
 
     // Setup Platform/Renderer backends
-    ImGui_ImplSDL2_InitForSDLRenderer(m_SDL_Window, m_SDL_Renderer);
-    ImGui_ImplSDLRenderer2_Init(m_SDL_Renderer);
+    ImGui_ImplSDL2_InitForSDLRenderer(m_sdl_window, m_sdl_renderer);
+    ImGui_ImplSDLRenderer2_Init(m_sdl_renderer);
 }
 
 void Scene::Init_DebugDraw() {
-    g_debugDraw.Init(m_SDL_Renderer);
+    g_debugDraw.Init(m_sdl_renderer);
     m_world->SetDebugDraw(&g_debugDraw);
 
     uint32 flags = 0;
@@ -199,7 +200,7 @@ void Scene::UpdateUI() {
         ImGui::ColorEdit3("bg color", ( float* )&m_clear_color);            // Edit 3 floats representing a color
 
         if(ImGui::Button("clear Entities")) {
-            m_entityManager->ClearEntities();
+            // m_entityManager->ClearEntities();
         }
 
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
@@ -356,21 +357,17 @@ void Scene::Step() {
 // Adjust BG Color, Scene::m_clear_color
 void Scene::SetBackgroundColor() {
     ImGuiIO& io = ImGui::GetIO();
-    SDL_RenderSetScale(m_SDL_Renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
+    SDL_RenderSetScale(m_sdl_renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
     // set the bg color and render the background
-    SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));  // bg color
-    SDL_RenderClear(m_SDL_Renderer);
+    SDL_SetRenderDrawColor(m_sdl_renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));  // bg color
+    SDL_RenderClear(m_sdl_renderer);
 }
 
 
 void Scene::Run() {
     // game main loop
-
-    bool  calculating = true;
-    float progress    = 0.0f;
-
     while(m_closeGame != true) {
-        [[maybe_unused]] auto io = ImGui::GetIO();
+        // [[maybe_unused]] auto io = ImGui::GetIO();
         // ImGui context begin
         ImGui_ImplSDLRenderer2_NewFrame();
         ImGui_ImplSDL2_NewFrame();
@@ -383,10 +380,11 @@ void Scene::Run() {
         UpdateUI();
         SetBackgroundColor();
 
-        m_entityManager->Update();
+        // add Logic here ...
         
-        m_entityManager->Render();
-        m_entityManager->RemoveInactive();
+        RenderEntities();
+
+
         {
             // some SDL draw test
             auto pw = b2Vec2(0.0f, 0.0f);
@@ -395,10 +393,10 @@ void Scene::Run() {
             SDL_Rect rect{ static_cast< int >(ps.x), static_cast< int >(ps.y), 10, 10 };
 
             ImVec4 m_clear_color = ImVec4(0.0f, 1.0f, 01.0f, 1.00f);
-            SDL_SetRenderDrawColor(m_SDL_Renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));
+            SDL_SetRenderDrawColor(m_sdl_renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));
 
             // SDL_RenderDrawRect(m_SDL_Renderer, &rect);
-            SDL_RenderDrawPoint(m_SDL_Renderer, ps.x, ps.y);
+            SDL_RenderDrawPoint(m_sdl_renderer, ps.x, ps.y);
         }
 
         if(g_settings.m_showDebugDraw) {
@@ -410,14 +408,14 @@ void Scene::Run() {
         ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 
         // ImGui context end
-        SDL_RenderPresent(m_SDL_Renderer);
+        SDL_RenderPresent(m_sdl_renderer);
         m_world->ClearForces();
     }
 }
 
 void Scene::PollEvents() {
-    while(SDL_PollEvent(&m_SDL_Event)) {
-        ImGui_ImplSDL2_ProcessEvent(&m_SDL_Event);
+    while(SDL_PollEvent(&m_sdl_event)) {
+        ImGui_ImplSDL2_ProcessEvent(&m_sdl_event);
 
         // handle mouse input
         int xs, ys;
@@ -427,26 +425,26 @@ void Scene::PollEvents() {
         b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
 
         // handle keyboard input???
-        switch(m_SDL_Event.type) {
+        switch(m_sdl_event.type) {
         case SDL_QUIT:
             m_closeGame = true;
             CC_CORE_INFO("SDL_QUIT Triggered.");
             break;
 
         case SDL_MOUSEBUTTONDOWN:
-            if(m_SDL_Event.button.button == SDL_BUTTON_LEFT) {
+            if(m_sdl_event.button.button == SDL_BUTTON_LEFT) {
                 m_mouse.MouseDown(pw);
             }
-            else if(m_SDL_Event.button.button == SDL_BUTTON_RIGHT) {
+            else if(m_sdl_event.button.button == SDL_BUTTON_RIGHT) {
                 m_mouse.RightMouseDown(pw);
             }
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(m_SDL_Event.button.button == SDL_BUTTON_LEFT) {
+            if(m_sdl_event.button.button == SDL_BUTTON_LEFT) {
                 m_mouse.MouseUp(pw);
             }
-            else if(m_SDL_Event.button.button == SDL_BUTTON_RIGHT) {
+            else if(m_sdl_event.button.button == SDL_BUTTON_RIGHT) {
                 m_mouse.RightMouseUp(pw);
             }
             break;
@@ -456,7 +454,7 @@ void Scene::PollEvents() {
             break;
 
         case SDL_MOUSEWHEEL:
-            if(m_SDL_Event.wheel.y > 0) {
+            if(m_sdl_event.wheel.y > 0) {
                 m_mouse.MouseWheelUp(pw);
             }
             else {
@@ -465,7 +463,7 @@ void Scene::PollEvents() {
             break;
 
         case SDL_KEYDOWN:
-            switch(m_SDL_Event.key.keysym.sym) {
+            switch(m_sdl_event.key.keysym.sym) {
             case SDLK_ESCAPE:
                 m_closeGame = true;
                 CC_CORE_INFO("ESC pressed!");
@@ -493,7 +491,6 @@ void Scene::PollEvents() {
 
             case SDLK_r:
                 // TODO: test code
-                m_entityManager->ClearEntities();
                 LoadEntities();
                 CC_CORE_INFO("key [r] pressed");
                 break;
@@ -538,13 +535,25 @@ void Scene::PollEvents() {
     }
 }
 
+void Scene::RenderEntities() {
+    auto view = Reg().view<BodyComponent, SpriteComponent>(); // TODO: temp sol, what if some entity dont have a b2Body ??
+    QuadWrite writer(m_sdl_renderer);
+    for(auto entity : view) {
+        auto [body, sprite] = view.get<BodyComponent, SpriteComponent>(entity);
+        auto box_size = b2Vec2(1.0f,1.0f );
+        writer.UpdateRenderInfo(sprite.GetTexture(), box_size, body.GetPosition(), body.GetAngle());
+        writer.Render();
+    }
+}
 
 // test part
 void Scene::LoadEntities() {
-    {
-        auto box = m_entityManager->AddEntity();
 
-        auto boxSize = b2Vec2(2.0f, 2.0f);
+
+    {
+        auto box_entity = m_reg.create();
+
+        auto boxSize = b2Vec2(1.0f, 1.0f);
 
         b2BodyDef bd;
         bd.type   = b2_dynamicBody;
@@ -563,7 +572,8 @@ void Scene::LoadEntities() {
         fd.restitution = 0.5f;
         body->CreateFixture(&fd);
 
-        box->AddComponent< Body >(body);
-        box->AddComponent< Sprite >(m_SDL_Renderer);
+        m_reg.emplace<BodyComponent> (box_entity, body);
+        m_reg.emplace<SpriteComponent>(box_entity, m_sdl_renderer, "box.png");
     }
+
 }
