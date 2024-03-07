@@ -13,6 +13,8 @@
 #include "ECS/BodyComponent.h"
 #include "ECS/SpriteComponent.h"
 #include "Event/MouseEvent.h"
+#include "util/sdl_delete.h"
+#include "util/sdl_check.h"
 
 extern Camera        g_camera;
 static ImguiSettings s_imguiSettings;
@@ -31,9 +33,6 @@ GameContext::GameContext() {
 }
 
 GameContext::~GameContext() {
-    // clean up game context
-    SDL_DestroyRenderer(m_sdl_renderer);
-    SDL_DestroyWindow(m_sdl_window);
     SDL_Quit();
 }
 
@@ -63,14 +62,14 @@ void GameContext::LoadEntities() {
         body->CreateFixture(&fd);
 
         m_reg.emplace< BodyComponent >(box_entity, body);
-        m_reg.emplace< SpriteComponent >(box_entity, m_sdl_renderer, "box.png");
+        m_reg.emplace< SpriteComponent >(box_entity, m_sdl_renderer.get(), "box.png");
     }
 }
 
 void GameContext::Init_SDL_Window() {
     // SDL_Init begin
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-        CC_ERROR("SDL_Init error: {}", SDL_GetError());
+        CC_CORE_ERROR("SDL_Init error: {}", SDL_GetError());
     }
 
     SDL_DisplayMode DM;
@@ -78,8 +77,8 @@ void GameContext::Init_SDL_Window() {
     auto Width  = DM.w;
     auto Height = DM.h;
 
-    CC_CORE_INFO("Width of the Screen: {}", Width);
-    CC_CORE_INFO("Height of the Screen: {}", Height);
+    CC_CORE_INFO("Width of current Screen: {}", Width);
+    CC_CORE_INFO("Height of current Screen: {}", Height);
 
     // CC_CORE_INFO("The rendering scale is {} pixels per meter. (px/1.0f)", c_pixelPerMeter);
     // TODO: Display pixel per meter in UI: statistics
@@ -87,24 +86,22 @@ void GameContext::Init_SDL_Window() {
     g_camera.m_width  = g_settings.m_windowWidth;
     g_camera.m_height = g_settings.m_windowHeight;
 
-    m_sdl_window = SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN);
+    m_sdl_window = SDL::Window(SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN));
 
-    if(m_sdl_window == NULL) {
+    if(m_sdl_window == nullptr) {
         CC_CORE_ERROR("SDL window failed to initialize! ");
         throw std::runtime_error("SDL_CreateWindow generate a NULL window");
     }
+
     CC_CORE_INFO("SDL window successfully initialized.");
 }
 
 void GameContext::Init_SDL_Renderer() {
     // m_SDL_Renderer = SDL_CreateRenderer(m_SDL_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    m_sdl_renderer = SDL_CreateRenderer(m_sdl_window, -1, SDL_RENDERER_ACCELERATED);
-    if(m_sdl_renderer == NULL) {
-        CC_CORE_ERROR("SDL renderer initialization failed!");
-        throw std::runtime_error("SDL_Renderer initialized a NULL renderer");
-    }
+    m_sdl_renderer = SDL::Renderer(SDL_CHECK(SDL_CreateRenderer(m_sdl_window.get(), -1, SDL_RENDERER_ACCELERATED)));
+
     SDL_RendererInfo info;
-    SDL_GetRendererInfo(m_sdl_renderer, &info);
+    SDL_GetRendererInfo(m_sdl_renderer.get(), &info);
     CC_CORE_INFO("Current SDL_Renderer: {}", info.name);
 }
 
@@ -122,8 +119,8 @@ void GameContext::Init_Imgui() {
     // ImGui::StyleColorsLight();
 
     // Setup Platform/Renderer backends
-    ImGui_ImplSDL2_InitForSDLRenderer(m_sdl_window, m_sdl_renderer);
-    ImGui_ImplSDLRenderer2_Init(m_sdl_renderer);
+    ImGui_ImplSDL2_InitForSDLRenderer(m_sdl_window.get(), m_sdl_renderer.get());
+    ImGui_ImplSDLRenderer2_Init(m_sdl_renderer.get());
 }
 
 void GameContext::Init_Box2D() {
@@ -138,7 +135,7 @@ void GameContext::Init_Box2D() {
 }
 
 void GameContext::Init_DebugDraw() {
-    g_debugDraw.Init(m_sdl_renderer);
+    g_debugDraw.Init(m_sdl_renderer.get());
     m_world->SetDebugDraw(&g_debugDraw);
 
     uint32 flags = 0;
@@ -368,10 +365,10 @@ void GameContext::Step() {
  */
 void GameContext::SetBackgroundColor() {
     ImGuiIO& io = ImGui::GetIO();
-    SDL_RenderSetScale(m_sdl_renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
+    SDL_RenderSetScale(m_sdl_renderer.get(), io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
     // set the bg color and render the background
-    SDL_SetRenderDrawColor(m_sdl_renderer, ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));  // bg color
-    SDL_RenderClear(m_sdl_renderer);
+    SDL_SetRenderDrawColor(m_sdl_renderer.get(), ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));  // bg color
+    SDL_RenderClear(m_sdl_renderer.get());
 }
 
 void GameContext::NewFrame() {
@@ -404,7 +401,7 @@ void GameContext::PollEvents() {
 
 void GameContext::RenderEntities() {
     auto      view = Reg().view< BodyComponent, SpriteComponent >();  // TODO: temp sol, what if some entity dont have a b2Body ??
-    QuadWrite writer(m_sdl_renderer);
+    QuadWrite writer(m_sdl_renderer.get());
     for(auto entity : view) {
         auto [body, sprite] = view.get< BodyComponent, SpriteComponent >(entity);
         auto box_size       = b2Vec2(1.0f, 1.0f);
@@ -420,7 +417,7 @@ void GameContext::PresetSubmitted() {
     ImGui::Render();
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
     // ImGui context end
-    SDL_RenderPresent(m_sdl_renderer);
+    SDL_RenderPresent(m_sdl_renderer.get());
 }
 
 /**

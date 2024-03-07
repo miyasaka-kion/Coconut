@@ -14,6 +14,7 @@
 #include "Render/DebugDraw.h"
 #include "imgui.h"
 
+#include "util/sdl_delete.h"
 #include "Core/Camera.h"
 #include "Event/KeyboardEvent.h"
 #include "Event/MouseEvent.h"
@@ -62,7 +63,7 @@ public:
     }
 
 public:
-    void SetBackgroundColor();
+    void SetBackgroundColor(); // this should be remove
     void ShowDebugDraw();
 
 private:
@@ -101,8 +102,8 @@ public:
 
     // SDL members
 private:
-    SDL_Window*   m_sdl_window;
-    SDL_Renderer* m_sdl_renderer;
+    SDL::Window  m_sdl_window;
+    SDL::Renderer m_sdl_renderer;
 
     // Entities
 private:

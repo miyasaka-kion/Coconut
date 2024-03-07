@@ -8,7 +8,7 @@
 #include <SDL_render.h>
 
 #include "Core/Log.h"
-#include "Core/Log.h"
+#include "util/sdl_delete.h"
 
 #ifndef COCONUT_ASSET_PATH
     // CC_CORE_ERROR("COCONUT_ASSET_PATH is not defined!");
@@ -27,20 +27,19 @@ void SpriteComponent::LoadTexture() {
     CC_CORE_INFO("LoadTexture(): Loading texture, texture name: {}", m_texture_name);
     IMG_Init(IMG_INIT_PNG);
 
-    SDL_Surface* tmp_sprites;
-    tmp_sprites = IMG_Load(m_texture_path.string().c_str());
+    SDL::Surface tmp_sprites {IMG_Load(m_texture_path.string().c_str())};
+
     if(!tmp_sprites) {
         CC_CORE_ERROR("LoadTexture(): box.png failed to load! Error msg: {}", SDL_GetError());
         throw std::runtime_error("LoadTexture():  tmp_sprites is NULL");
     }
 
-    m_texture = SDL_CreateTextureFromSurface(m_renderer, tmp_sprites);
+    m_texture = SDL::Texture(SDL_CreateTextureFromSurface(m_renderer, tmp_sprites.get()));
     if(m_texture == NULL) {
         CC_CORE_ERROR("Create texture from surface failed! Error msg: {}", SDL_GetError());
         throw std::runtime_error("texture_box is NULL");
     }
 
     CC_CORE_INFO("LoadTexture(): Box texture loaded.");
-    SDL_FreeSurface(tmp_sprites);
 }
 
