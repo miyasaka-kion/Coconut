@@ -1,6 +1,7 @@
 #include "Core/Log.h"
 
-#include "Scene.h"
+#include "Core/Camera.h"
+#include "Core/GameContext.h"
 
 Camera g_camera;
 
@@ -46,7 +47,6 @@ int Camera::ConvertWorldToScreen(float length) {
     return length * PixelsPerMeter;
 }
 
-//
 b2Vec2 Camera::ConvertWorldToScreen(const b2Vec2& pw) {
     float  w     = float(m_width);
     float  h     = float(m_height);
