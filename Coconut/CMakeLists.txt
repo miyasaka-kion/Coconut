@@ -6,7 +6,6 @@ project(Coconut)
 
 aux_source_directory("src" SRC_LIST)
 aux_source_directory("src/ECS"  SRC_LIST)
-aux_source_directory("src/Entity" SRC_LIST)
 aux_source_directory("src/Render" SRC_LIST)
 aux_source_directory("src/Core" SRC_LIST)
 aux_source_directory("src/Event" SRC_LIST)

@@ -10,17 +10,17 @@
 #include <box2d/box2d.h>
 #include <entt.hpp>
 
-#include "Render/DebugDraw.h"
 #include "Core/Settings.h"
+#include "Render/DebugDraw.h"
 #include "imgui.h"
 
 #include "Core/Camera.h"
-#include "Event/MouseEvent.h"
 #include "Event/KeyboardEvent.h"
+#include "Event/MouseEvent.h"
 #include "Render/QuadWrite.h"
 
 const int32 k_maxContactPoints = 2048;
-using InputCallback = std::function<void(SDL_Event& )>;
+using InputCallback            = std::function< void(SDL_Event&) >;
 
 struct ContactPoint {
     b2Fixture*   fixtureA;
@@ -38,13 +38,15 @@ public:
     GameContext();
     virtual ~GameContext();
 
-
 public:
     void LoadEntities();
+
+    void NewFrame();
     void PollEvents();
     void UpdateUI();
     void Step();
     void RenderEntities();
+    void PresetSubmitted();
     void RemoveInactive();
 
 public:
@@ -53,14 +55,6 @@ public:
     }
     [[nodiscard]] b2World* const GetWorld() const {
         return m_world.get();
-    }
-
-    void ResetTextline() {
-        m_textLine = 26;
-    }
-
-    void PresentSDLRender() {
-        SDL_RenderPresent(m_sdl_renderer);
     }
 
     void WindowShouldClose() {
@@ -78,30 +72,29 @@ private:
     void Init_DebugDraw();
     void Init_Box2D();
 
-
-
 private:
-    [[nodiscard]] entt::registry& Reg() { // TODO: the m_reg should be integrated into the "EntityManager" in the future;
+    [[nodiscard]] entt::registry& Reg() {  // TODO: the m_reg should be integrated into the "EntityManager" in the future;
         return m_reg;
     }
 
-// handle input
-public: 
+    // handle input
+public:
     void RegisterInputCallback(InputCallback func);
-    void DefaultInputCallback(SDL_Event& event); 
+    void DefaultInputCallback(SDL_Event& event);
+
 private:
     void CallHandleInput(SDL_Event& event);
-    
+
     // hmmm... this may be the simplest way?
     InputCallback func_InputCallback;
 
-// Another way to deal with this:
-// public: 
-//     void SetMouse(std::unique_ptr<MouseEvent>& mouseEvent);
-//     void SetKeyboard(std::unique_ptr<KeyboardEvent>& keyboardEvent);
-// private:
-//     std::unique_ptr< MouseEvent >    m_mouse;
-//     std::unique_ptr< KeyboardEvent > m_keyboard;
+    // Another way to deal with this:
+    // public:
+    //     void SetMouse(std::unique_ptr<MouseEvent>& mouseEvent);
+    //     void SetKeyboard(std::unique_ptr<KeyboardEvent>& keyboardEvent);
+    // private:
+    //     std::unique_ptr< MouseEvent >    m_mouse;
+    //     std::unique_ptr< KeyboardEvent > m_keyboard;
 
 public:
     std::unique_ptr< b2World > m_world;

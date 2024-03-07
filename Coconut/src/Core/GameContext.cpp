@@ -374,6 +374,17 @@ void GameContext::SetBackgroundColor() {
     SDL_RenderClear(m_sdl_renderer);
 }
 
+void GameContext::NewFrame() {
+    ImGui_ImplSDLRenderer2_NewFrame();
+    ImGui_ImplSDL2_NewFrame();
+    ImGui::NewFrame();
+    // debugDraw m_textLine reset
+    m_textLine = 26;
+}
+
+/**
+ * Polls events in the game context and handles mouse and keyboard input.
+ */
 void GameContext::PollEvents() {
     SDL_Event event;
     while(SDL_PollEvent(&event)) {
@@ -403,6 +414,16 @@ void GameContext::RenderEntities() {
 }
 
 /**
+ * Function called when a preset is submitted to SDL renderer.
+ */
+void GameContext::PresetSubmitted() {
+    ImGui::Render();
+    ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
+    // ImGui context end
+    SDL_RenderPresent(m_sdl_renderer);
+}
+
+/**
  * Registers an input callback function. If no input callback function is registered, the default input callback is used.
  *
  * @param func The input callback function to register
@@ -416,7 +437,7 @@ void GameContext::RegisterInputCallback(InputCallback func) {
 }
 
 /**
- * CallHandleInput is a method of the GameContext class that handles input events. 
+ * CallHandleInput is a method of the GameContext class that handles input events.
  *
  * @param event the SDL_Event to be handled
  *
