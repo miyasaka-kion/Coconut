@@ -10,11 +10,11 @@
 
 #include "Render/DebugDraw.h"
 
+#include "ECS/Components.h"
+#include "ECS/Entity.h"
 #include "Event/MouseEvent.h"
 #include "util/sdl_check.h"
 #include "util/sdl_delete.h"
-#include "ECS/Components.h"
-#include "ECS/Entity.h"
 
 extern Camera        g_camera;
 static ImguiSettings s_imguiSettings;
@@ -93,9 +93,9 @@ void GameContext::LoadEntities() {
 
     {
         Entity edge = CreateEntity();
-        
+
         b2BodyDef bd;
-        bd.type = b2_staticBody;
+        bd.type   = b2_staticBody;
         auto body = m_world->CreateBody(&bd);
 
         b2EdgeShape edgeShape;
@@ -435,7 +435,8 @@ void GameContext::PollEvents() {
         b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
 
         // handle mouse and keyboard input
-        CallHandleInput(event);
+        // CallHandleInput(event);
+        DefaultInputCallback(event);
     }
 }
 
@@ -501,124 +502,124 @@ void GameContext::CallHandleInput(SDL_Event& event) {
 // the default version of input callback
 void GameContext::DefaultInputCallback(SDL_Event& event) {
     static MouseEvent mouse;
-    while(SDL_PollEvent(&event)) {
-        ImGui_ImplSDL2_ProcessEvent(&event);
 
-        // handle mouse input
-        int xs, ys;
-        SDL_GetMouseState(&xs, &ys);
-        auto ps = b2Vec2(xs, ys);
+    ImGui_ImplSDL2_ProcessEvent(&event);
 
-        b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
+    // handle mouse input
+    int xs, ys;
+    SDL_GetMouseState(&xs, &ys);
+    auto ps = b2Vec2(xs, ys);
 
-        // handle keyboard input???
-        switch(event.type) {
-        case SDL_QUIT:
+    b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
+
+    // handle keyboard input???
+    switch(event.type) {
+    case SDL_QUIT:
+        m_closeGame = true;
+        CC_CORE_INFO("SDL_QUIT Triggered.");
+        break;
+
+    case SDL_MOUSEBUTTONDOWN:
+        if(event.button.button == SDL_BUTTON_LEFT) {
+            mouse.MouseDown(pw);
+        }
+        else if(event.button.button == SDL_BUTTON_RIGHT) {
+            mouse.RightMouseDown(pw);
+        }
+        break;
+
+    case SDL_MOUSEBUTTONUP:
+        if(event.button.button == SDL_BUTTON_LEFT) {
+            mouse.MouseUp(pw);
+        }
+        else if(event.button.button == SDL_BUTTON_RIGHT) {
+            mouse.RightMouseUp(pw);
+        }
+        break;
+
+    case SDL_MOUSEMOTION:
+        mouse.MouseMotion(ps);
+        break;
+
+    case SDL_MOUSEWHEEL:
+        if(event.wheel.y > 0) {
+            mouse.MouseWheelUp(pw);
+        }
+        else {
+            mouse.MouseWheelDown(pw);
+        }
+        break;
+
+    case SDL_KEYDOWN:
+        switch(event.key.keysym.sym) {
+        case SDLK_ESCAPE:
             m_closeGame = true;
+            CC_CORE_INFO("ESC pressed!");
             CC_CORE_INFO("SDL_QUIT Triggered.");
             break;
 
-        case SDL_MOUSEBUTTONDOWN:
-            if(event.button.button == SDL_BUTTON_LEFT) {
-                mouse.MouseDown(pw);
-            }
-            else if(event.button.button == SDL_BUTTON_RIGHT) {
-                mouse.RightMouseDown(pw);
-            }
+        case SDLK_BACKQUOTE:
+            CC_CORE_INFO("Calling game console!");
+
+            break;
+        case SDLK_LEFT:
+            // Pan left
+            // if(SDL_GetModState() == KMOD_LCTRL) {
+            //     b2Vec2 newOrigin(2.0f, 0.0f);
+            //     m_world->ShiftOrigin(newOrigin);
+            // } how to use SDL_GetModState
+            g_camera.m_center.x -= 0.5f;
+
             break;
 
-        case SDL_MOUSEBUTTONUP:
-            if(event.button.button == SDL_BUTTON_LEFT) {
-                mouse.MouseUp(pw);
-            }
-            else if(event.button.button == SDL_BUTTON_RIGHT) {
-                mouse.RightMouseUp(pw);
-            }
+        case SDLK_RIGHT:
+            // Pan right
+            g_camera.m_center.x += 0.5f;
             break;
 
-        case SDL_MOUSEMOTION:
-            mouse.MouseMotion(ps);
+        case SDLK_r:
+            // TODO: test code
+            CC_CORE_INFO("key [r] pressed");
+            LoadEntities();
+            CC_CORE_INFO("key [r] pressed");
             break;
 
-        case SDL_MOUSEWHEEL:
-            if(event.wheel.y > 0) {
-                mouse.MouseWheelUp(pw);
-            }
-            else {
-                mouse.MouseWheelDown(pw);
-            }
+        case SDLK_z:
+            // Zoom out
+            g_camera.m_zoom = b2Min(1.1f * g_camera.m_zoom, 20.0f);
             break;
 
-        case SDL_KEYDOWN:
-            switch(event.key.keysym.sym) {
-            case SDLK_ESCAPE:
-                m_closeGame = true;
-                CC_CORE_INFO("ESC pressed!");
-                CC_CORE_INFO("SDL_QUIT Triggered.");
-                break;
-
-            case SDLK_BACKQUOTE:
-                CC_CORE_INFO("Calling game console!");
-
-                break;
-            case SDLK_LEFT:
-                // Pan left
-                // if(SDL_GetModState() == KMOD_LCTRL) {
-                //     b2Vec2 newOrigin(2.0f, 0.0f);
-                //     m_world->ShiftOrigin(newOrigin);
-                // } how to use SDL_GetModState
-                g_camera.m_center.x -= 0.5f;
-
-                break;
-
-            case SDLK_RIGHT:
-                // Pan right
-                g_camera.m_center.x += 0.5f;
-                break;
-
-            case SDLK_r:
-                // TODO: test code
-                LoadEntities();
-                CC_CORE_INFO("key [r] pressed");
-                break;
-
-            case SDLK_z:
-                // Zoom out
-                g_camera.m_zoom = b2Min(1.1f * g_camera.m_zoom, 20.0f);
-                break;
-
-            case SDLK_x:
-                // Zoom in
-                g_camera.m_zoom = b2Max(0.9f * g_camera.m_zoom, 0.02f);
-                break;
-
-            case SDLK_TAB:
-                // show some tabs;
-                break;
-
-                // control player move by default.
-                // case SDLK_a:
-                //     g_camera.m_center.x -= 0.5f;
-                //     CC_CORE_INFO("a key pressed");
-                //     break;
-
-                // case SDLK_d:
-                //     g_camera.m_center.x += 0.5f;
-                //     CC_CORE_INFO("d key pressed");
-                //     break;
-
-                // case SDLK_w:
-                //     g_camera.m_center.y += 0.5f;
-                //     CC_CORE_INFO("w key pressed");
-                //     break;
-
-                // case SDLK_s:
-                //     g_camera.m_center.y -= 0.5f;
-                //     CC_CORE_INFO("s key pressed");
-                //     break;
-            }
+        case SDLK_x:
+            // Zoom in
+            g_camera.m_zoom = b2Max(0.9f * g_camera.m_zoom, 0.02f);
             break;
+
+        case SDLK_TAB:
+            // show some tabs;
+            break;
+
+            // control player move by default.
+            // case SDLK_a:
+            //     g_camera.m_center.x -= 0.5f;
+            //     CC_CORE_INFO("a key pressed");
+            //     break;
+
+            // case SDLK_d:
+            //     g_camera.m_center.x += 0.5f;
+            //     CC_CORE_INFO("d key pressed");
+            //     break;
+
+            // case SDLK_w:
+            //     g_camera.m_center.y += 0.5f;
+            //     CC_CORE_INFO("w key pressed");
+            //     break;
+
+            // case SDLK_s:
+            //     g_camera.m_center.y -= 0.5f;
+            //     CC_CORE_INFO("s key pressed");
+            //     break;
         }
+        break;
     }
 }
 
