@@ -54,7 +54,7 @@ struct Settings {
     bool  m_drawContactImpulse;
     bool  m_drawFrictionImpulse;
     bool  m_drawCOMs;
-    bool  m_drawStats;
+    bool  m_drawStats = true;
     bool  m_drawProfile;
     bool  m_enableWarmStarting;
     bool  m_enableContinuous;

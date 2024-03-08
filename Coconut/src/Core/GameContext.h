@@ -10,18 +10,18 @@
 #include <box2d/box2d.h>
 #include <entt.hpp>
 
-#include "Core/Settings.h"
 #include "Render/DebugDraw.h"
 #include "imgui.h"
 
 #include "util/sdl_delete.h"
 #include "Core/Camera.h"
+#include "Core/Settings.h"
 #include "Event/KeyboardEvent.h"
 #include "Event/MouseEvent.h"
 #include "Render/QuadWrite.h"
 
 const int32 k_maxContactPoints = 2048;
-using InputCallback            = std::function< void(SDL_Event&) >;
+
 
 struct ContactPoint {
     b2Fixture*   fixtureA;
@@ -33,6 +33,8 @@ struct ContactPoint {
     float        tangentImpulse;
     float        separation;
 };
+
+class Entity;
 
 class GameContext {
 public:
@@ -62,6 +64,11 @@ public:
         m_closeGame = true;
     }
 
+
+public: // Entity management
+    [[nodiscard]] Entity CreateEntity();
+    void DestroyEntity(Entity entity);
+    
 public:
     void SetBackgroundColor(); // this should be remove
     void ShowDebugDraw();
@@ -74,12 +81,9 @@ private:
     void Init_Box2D();
 
 private:
-    [[nodiscard]] entt::registry& Reg() {  // TODO: the m_reg should be integrated into the "EntityManager" in the future;
-        return m_reg;
-    }
-
     // handle input
 public:
+    using InputCallback = std::function< void(SDL_Event&) >;
     void RegisterInputCallback(InputCallback func);
     void DefaultInputCallback(SDL_Event& event);
 
@@ -108,7 +112,7 @@ private:
     // Entities
 private:
     bool           m_closeGame;
-    entt::registry m_reg;  // have a registry per scene
+    entt::registry m_reg;
 
     // physics info
 private:
@@ -123,6 +127,8 @@ private:
 
 private:
     ImVec4 m_clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);  // render bg color, this is tmp var, should be removed in the future;
+
+    friend class Entity;
 };
 
 extern Camera   g_camera;

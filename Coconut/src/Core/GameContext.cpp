@@ -10,11 +10,11 @@
 
 #include "Render/DebugDraw.h"
 
-#include "ECS/BodyComponent.h"
-#include "ECS/SpriteComponent.h"
 #include "Event/MouseEvent.h"
-#include "util/sdl_delete.h"
 #include "util/sdl_check.h"
+#include "util/sdl_delete.h"
+#include "ECS/Components.h"
+#include "ECS/Entity.h"
 
 extern Camera        g_camera;
 static ImguiSettings s_imguiSettings;
@@ -39,8 +39,34 @@ GameContext::~GameContext() {
 // test function
 void GameContext::LoadEntities() {
 
+    // {
+    //     auto box_entity = m_reg.create();
+
+    //     auto boxSize = b2Vec2(1.0f, 1.0f);
+
+    //     b2BodyDef bd;
+    //     bd.type   = b2_dynamicBody;
+    //     auto body = m_world->CreateBody(&bd);
+    //     body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
+    //     b2PolygonShape dynamicBox;
+    //     dynamicBox.SetAsBox((boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
+
+    //     CC_CORE_INFO("box info:  hx: {}, hy: {}", (boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
+
+    //     b2FixtureDef fd;
+    //     fd.shape       = &dynamicBox;
+    //     fd.density     = 1;
+    //     fd.friction    = 0.1f;
+    //     fd.restitution = 0.5f;
+    //     body->CreateFixture(&fd);
+
+    //     m_reg.emplace< BodyComponent >(box_entity, body);
+    //     m_reg.emplace< SpriteComponent >(box_entity, m_sdl_renderer.get(), "box.png");
+    // }
+
     {
-        auto box_entity = m_reg.create();
+        Entity box_entity = CreateEntity();
 
         auto boxSize = b2Vec2(1.0f, 1.0f);
 
@@ -61,8 +87,22 @@ void GameContext::LoadEntities() {
         fd.restitution = 0.5f;
         body->CreateFixture(&fd);
 
-        m_reg.emplace< BodyComponent >(box_entity, body);
-        m_reg.emplace< SpriteComponent >(box_entity, m_sdl_renderer.get(), "box.png");
+        box_entity.AddComponent< BodyComponent >(body);
+        box_entity.AddComponent< SpriteComponent >(m_sdl_renderer.get(), "box.png");
+    }
+
+    {
+        Entity edge = CreateEntity();
+        
+        b2BodyDef bd;
+        bd.type = b2_staticBody;
+        auto body = m_world->CreateBody(&bd);
+
+        b2EdgeShape edgeShape;
+        edgeShape.SetTwoSided(b2Vec2(-40.0f, -20.0f), b2Vec2(40.0f, -20.0f));
+        body->CreateFixture(&edgeShape, 0.0f);
+
+        edge.AddComponent< BodyComponent >(body);
     }
 }
 
@@ -400,13 +440,20 @@ void GameContext::PollEvents() {
 }
 
 void GameContext::RenderEntities() {
-    auto      view = Reg().view< BodyComponent, SpriteComponent >();  // TODO: temp sol, what if some entity dont have a b2Body ??
+    auto      view = m_reg.view< BodyComponent, SpriteComponent >();  // TODO: temp sol, what if some entity dont have a b2Body ??
     QuadWrite writer(m_sdl_renderer.get());
     for(auto entity : view) {
         auto [body, sprite] = view.get< BodyComponent, SpriteComponent >(entity);
         auto box_size       = b2Vec2(1.0f, 1.0f);
         writer.UpdateRenderInfo(sprite.GetTexture(), box_size, body.GetPosition(), body.GetAngle());
         writer.Render();
+    }
+}
+
+void GameContext::RemoveInactive() {
+    auto view = m_reg.view< BodyComponent >();
+    for(auto entity : view) {
+        // TODO
     }
 }
 
@@ -592,4 +639,12 @@ void GameContext::ShowDebugDraw() {
     if(g_settings.m_showDebugDraw) {
         m_world->DebugDraw();
     }
+}
+
+Entity GameContext::CreateEntity() {
+    return { this, m_reg.create() };
+}
+
+void GameContext::DestroyEntity(Entity entity) {
+    m_reg.destroy(entity);
 }
