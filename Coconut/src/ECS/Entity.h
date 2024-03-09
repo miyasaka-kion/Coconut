@@ -4,6 +4,7 @@
 
 #include "Core/Assert.h"
 #include "Core/GameContext.h"
+#include "ECS/SpriteComponent.h"
 
 class Entity {
 public:
@@ -67,4 +68,5 @@ public:
 private:
     GameContext* m_scene;
     entt::entity m_entity_handle;
+    friend class SpriteComponent;
 };

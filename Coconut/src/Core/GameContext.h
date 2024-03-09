@@ -42,10 +42,8 @@ public:
     virtual ~GameContext();
 
 public:
-    void LoadEntities();
-
     void NewFrame();
-    void PollEvents();
+    void PollAndHandleEvents();
     void UpdateUI();
     void Step();
     void RenderEntities();
@@ -64,14 +62,19 @@ public:
         m_closeGame = true;
     }
 
+    // should this return a const?
+    [[nodiscard]] SDL_Renderer* GetRenderer() const {
+        return m_sdl_renderer.get();
+    }
+
 
 public: // Entity management
     [[nodiscard]] Entity CreateEntity();
     void DestroyEntity(Entity entity);
     
-public:
     void SetBackgroundColor(); // this should be remove
     void ShowDebugDraw();
+    void ShowHealthAboveEntity();
 
 private:
     void Init_SDL_Window();
@@ -83,15 +86,16 @@ private:
 private:
     // handle input
 public:
-    using InputCallback = std::function< void(SDL_Event&) >;
-    void RegisterInputCallback(InputCallback func);
-    void DefaultInputCallback(SDL_Event& event);
+    using InputCallback = std::function< bool(SDL_Event&) >;
+    void RegisterCoreHandleEvent(InputCallback func);
+    void RegisterClientHandleEvent(InputCallback func); 
+    
+    void DefaultCoreHandleEvent(SDL_Event& event);
 
-private:
-    void CallHandleInput(SDL_Event& event);
 
     // hmmm... this may be the simplest way?
-    InputCallback func_InputCallback;
+    InputCallback f_CoreHandleEvent;
+    InputCallback f_ClientHandleEvent;
 
     // Another way to deal with this:
     // public:

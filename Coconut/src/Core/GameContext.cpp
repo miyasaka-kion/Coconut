@@ -28,7 +28,6 @@ GameContext::GameContext() {
     Init_Box2D();
     Init_DebugDraw();  // Notice: This should not init in release version
 
-    LoadEntities();  // this should not be here?
     m_closeGame = false;
 }
 
@@ -36,48 +35,6 @@ GameContext::~GameContext() {
     SDL_Quit();
 }
 
-// test function
-void GameContext::LoadEntities() {
-    {
-        Entity box_entity = CreateEntity();
-
-        auto boxSize = b2Vec2(1.0f, 1.0f);
-
-        b2BodyDef bd;
-        bd.type   = b2_dynamicBody;
-        auto body = m_world->CreateBody(&bd);
-        body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-
-        b2PolygonShape dynamicBox;
-        dynamicBox.SetAsBox((boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
-
-        CC_CORE_INFO("box info:  hx: {}, hy: {}", (boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
-
-        b2FixtureDef fd;
-        fd.shape       = &dynamicBox;
-        fd.density     = 1;
-        fd.friction    = 0.1f;
-        fd.restitution = 0.5f;
-        body->CreateFixture(&fd);
-
-        box_entity.AddComponent< BodyComponent >(body);
-        box_entity.AddComponent< SpriteComponent >(m_sdl_renderer.get(), "box.png");
-    }
-
-    {
-        Entity edge = CreateEntity();
-
-        b2BodyDef bd;
-        bd.type   = b2_staticBody;
-        auto body = m_world->CreateBody(&bd);
-
-        b2EdgeShape edgeShape;
-        edgeShape.SetTwoSided(b2Vec2(-40.0f, -20.0f), b2Vec2(40.0f, -20.0f));
-        body->CreateFixture(&edgeShape, 0.0f);
-
-        edge.AddComponent< BodyComponent >(body);
-    }
-}
 
 void GameContext::Init_SDL_Window() {
     // SDL_Init begin
@@ -436,13 +393,18 @@ void GameContext::NewFrame() {
 /**
  * Polls events in the game context and handles mouse and keyboard input.
  */
-void GameContext::PollEvents() {
+void GameContext::PollAndHandleEvents() {
     SDL_Event event;
     while(SDL_PollEvent(&event)) {
         ImGui_ImplSDL2_ProcessEvent(&event);
-        // handle mouse and keyboard input
-        CallHandleInput(event);
-        // DefaultInputCallback(event);
+
+        if(f_ClientHandleEvent == nullptr) {
+            CC_CORE_WARN("Client event handle callback is not set!");
+        }
+        if(!f_ClientHandleEvent(event)){
+            DefaultCoreHandleEvent(event);
+        }
+        
     }
 }
 
@@ -483,31 +445,18 @@ void GameContext::PresetSubmitted() {
  *
  * @throws ErrorType None
  */
-void GameContext::RegisterInputCallback(InputCallback func) {
-    func_InputCallback = func;
+void GameContext::RegisterCoreHandleEvent(InputCallback func) {
+    f_CoreHandleEvent = func;
 }
 
-/**
- * CallHandleInput is a method of the GameContext class that handles input events.
- *
- * @param event the SDL_Event to be handled
- *
- * @return void
- *
- * @throws None
- */
-void GameContext::CallHandleInput(SDL_Event& event) {
-    if(func_InputCallback) {
-        func_InputCallback(event);
-    }
-    else {
-        DefaultInputCallback(event);
-    }
+void GameContext::RegisterClientHandleEvent(InputCallback func) {
+    f_ClientHandleEvent = func;
 }
 
 // the default version of input callback
-void GameContext::DefaultInputCallback(SDL_Event& event) {
+void GameContext::DefaultCoreHandleEvent(SDL_Event& event) {
     static MouseEvent mouse;
+    bool not_handled = false;
 
     ImGui_ImplSDL2_ProcessEvent(&event);
 
@@ -561,7 +510,7 @@ void GameContext::DefaultInputCallback(SDL_Event& event) {
         case SDLK_ESCAPE:
             m_closeGame = true;
             CC_CORE_INFO("ESC pressed!");
-            CC_CORE_INFO("SDL_QUIT Triggered.");
+            CC_CORE_INFO("SDL_QUIT().");
             break;
 
         case SDLK_BACKQUOTE:
@@ -574,20 +523,13 @@ void GameContext::DefaultInputCallback(SDL_Event& event) {
             //     b2Vec2 newOrigin(2.0f, 0.0f);
             //     m_world->ShiftOrigin(newOrigin);
             // } how to use SDL_GetModState
-            g_camera.m_center.x -= 0.5f;
+            g_camera.m_center.x += 0.5f;
 
             break;
 
         case SDLK_RIGHT:
             // Pan right
-            g_camera.m_center.x += 0.5f;
-            break;
-
-        case SDLK_r:
-            // TODO: test code
-            CC_CORE_INFO("key [r] pressed");
-            LoadEntities();
-            CC_CORE_INFO("key [r] pressed");
+            g_camera.m_center.x -= 0.5f;
             break;
 
         case SDLK_z:
@@ -603,27 +545,9 @@ void GameContext::DefaultInputCallback(SDL_Event& event) {
         case SDLK_TAB:
             // show some tabs;
             break;
-
-            // control player move by default.
-            // case SDLK_a:
-            //     g_camera.m_center.x -= 0.5f;
-            //     CC_CORE_INFO("a key pressed");
-            //     break;
-
-            // case SDLK_d:
-            //     g_camera.m_center.x += 0.5f;
-            //     CC_CORE_INFO("d key pressed");
-            //     break;
-
-            // case SDLK_w:
-            //     g_camera.m_center.y += 0.5f;
-            //     CC_CORE_INFO("w key pressed");
-            //     break;
-
-            // case SDLK_s:
-            //     g_camera.m_center.y -= 0.5f;
-            //     CC_CORE_INFO("s key pressed");
-            //     break;
+        default:
+            not_handled = true;
+            break;
         }
         break;
     }
@@ -645,6 +569,17 @@ void GameContext::DefaultInputCallback(SDL_Event& event) {
 void GameContext::ShowDebugDraw() {
     if(g_settings.m_showDebugDraw) {
         m_world->DebugDraw();
+    }
+}
+
+void GameContext::ShowHealthAboveEntity() {
+    auto      view = m_reg.view< BodyComponent, HealthComponent >();  // TODO: temp sol, what if some entity dont have a b2Body ??
+    QuadWrite writer(m_sdl_renderer.get());
+    for(auto entity : view) {
+        auto [body, health] = view.get< BodyComponent, HealthComponent >(entity);
+        // TODO
+
+
     }
 }
 

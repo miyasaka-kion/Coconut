@@ -12,6 +12,7 @@
 #include <entt.hpp>
 
 #include "util/sdl_delete.h"
+#include "ECS/Entity.h"
 
 struct SpriteComponent {
     SpriteComponent() = delete;
@@ -26,6 +27,7 @@ struct SpriteComponent {
 
     std::string_view      m_texture_name;
     std::filesystem::path m_texture_path;
-
-    entt::entity m_entity;
+    
+    Entity* entity;
+    entt::entity m_entity_handle;
 };
