@@ -164,6 +164,7 @@ void DebugDraw::DrawString(int x, int y, const char* string, ...) {
     va_end(arg);
 }
 
+// I try to make this a template function but it seems not a good idea.
 void DebugDraw::DrawString(const b2Vec2& pw, const char* string, ...) {
     b2Vec2 ps = g_camera.ConvertWorldToScreen(pw);
 

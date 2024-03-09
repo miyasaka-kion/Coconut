@@ -38,33 +38,6 @@ GameContext::~GameContext() {
 
 // test function
 void GameContext::LoadEntities() {
-
-    // {
-    //     auto box_entity = m_reg.create();
-
-    //     auto boxSize = b2Vec2(1.0f, 1.0f);
-
-    //     b2BodyDef bd;
-    //     bd.type   = b2_dynamicBody;
-    //     auto body = m_world->CreateBody(&bd);
-    //     body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-
-    //     b2PolygonShape dynamicBox;
-    //     dynamicBox.SetAsBox((boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
-
-    //     CC_CORE_INFO("box info:  hx: {}, hy: {}", (boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
-
-    //     b2FixtureDef fd;
-    //     fd.shape       = &dynamicBox;
-    //     fd.density     = 1;
-    //     fd.friction    = 0.1f;
-    //     fd.restitution = 0.5f;
-    //     body->CreateFixture(&fd);
-
-    //     m_reg.emplace< BodyComponent >(box_entity, body);
-    //     m_reg.emplace< SpriteComponent >(box_entity, m_sdl_renderer.get(), "box.png");
-    // }
-
     {
         Entity box_entity = CreateEntity();
 
@@ -168,7 +141,7 @@ void GameContext::Init_Box2D() {
     auto gravity = b2Vec2(0.0f, -10.0f);
     m_world      = std::make_unique< b2World >(gravity);
 
-    m_textLine      = 30;
+    m_textLine      = 5;
     m_textIncrement = 18;
     m_mouseJoint    = NULL;
     m_pointCount    = 0;
@@ -194,7 +167,7 @@ void GameContext::UpdateUI() {
 
     auto pw = b2Vec2(0.0f, 0.0f);
     auto ps = g_camera.ConvertWorldToScreen(pw);
-    g_debugDraw.DrawString(5, m_textLine, "FPS: %.2f", ImGui::GetIO().Framerate);
+
     m_textLine += m_textIncrement;
     {
         // test demo windon
@@ -205,17 +178,38 @@ void GameContext::UpdateUI() {
     {
         // box2d settings
         ImGui::Begin("Box2D Settings");
-        ImGui::SliderFloat("Zoom Level", &g_camera.m_zoom, 0.0f, 1.0f);
+        ImGui::Text("Camera Settings");
+            ImGui::SliderFloat("Zoom Level", &g_camera.m_zoom, 0.0f, 1.0f);
+        if(ImGui::Button("Reset Camera")) {
+            g_camera.ResetView();
+        }
+
+        ImGui::Separator();
+
         ImGui::Checkbox("show DebugDraw", &g_settings.m_showDebugDraw);
         ImGui::Checkbox("draw Sprites", &g_settings.m_drawSprites);
 
+
+        ImGui::Text("Physics Settings");
         auto gravity = m_world->GetGravity();
         ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);
         m_world->SetGravity(gravity);
 
         ImGui::SliderInt("Vel Iters", &g_settings.m_velocityIterations, 0, 50);
         ImGui::SliderInt("Pos Iters", &g_settings.m_positionIterations, 0, 50);
-        ImGui::SliderFloat("Hertz", &g_settings.m_hertz, 5.0f, 120.0f, "%.0f hz");
+        // ImGui::SliderFloat("Hertz", &g_settings.m_hertz, 5.0f, 120.0f, "%.0f hz");
+
+        ImGui::Separator();
+        ImGui::Text("Display Hertz:");
+        if(ImGui::Button("30Hz"))
+            g_settings.m_hertz = 30.0f;
+        ImGui::SameLine();
+        if(ImGui::Button("60Hz"))
+            g_settings.m_hertz = 60.0f;
+        ImGui::SameLine();
+        if(ImGui::Button("120Hz"))
+            g_settings.m_hertz = 120.0f;
+        ImGui::SameLine();
 
         ImGui::Separator();
 
@@ -291,6 +285,26 @@ void GameContext::Step() {
     }
 
     if(g_settings.m_drawStats) {
+        // FPS 
+        g_debugDraw.DrawString(5, m_textLine, "FPS: %5.2f", 1.0f / timeStep);
+        m_textLine += m_textIncrement;
+        
+        // Camera
+        g_debugDraw.DrawString(5, m_textLine, "Camera Pos: (%4.2f,%4.2f,zoom: %4.2f)", g_camera.m_center.x, g_camera.m_center.y, g_camera.m_zoom);
+        m_textLine += m_textIncrement;
+
+        // Mouse
+                // handle mouse input
+        int xs, ys;
+        SDL_GetMouseState(&xs, &ys);
+        auto ps = b2Vec2(xs, ys);
+
+        b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
+
+        g_debugDraw.DrawString(5, m_textLine, "Mouse Pos: (%4.2f,%4.2f)", pw.x, pw.y);
+        m_textLine += m_textIncrement;  
+
+        // world info 
         int32 bodyCount    = m_world->GetBodyCount();
         int32 contactCount = m_world->GetContactCount();
         int32 jointCount   = m_world->GetJointCount();
@@ -426,17 +440,9 @@ void GameContext::PollEvents() {
     SDL_Event event;
     while(SDL_PollEvent(&event)) {
         ImGui_ImplSDL2_ProcessEvent(&event);
-
-        // handle mouse input
-        int xs, ys;
-        SDL_GetMouseState(&xs, &ys);
-        auto ps = b2Vec2(xs, ys);
-
-        b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
-
         // handle mouse and keyboard input
-        // CallHandleInput(event);
-        DefaultInputCallback(event);
+        CallHandleInput(event);
+        // DefaultInputCallback(event);
     }
 }
 

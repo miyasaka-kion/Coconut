@@ -1,6 +1,6 @@
-#include "Core/Log.h"
-
 #include "Core/Camera.h"
+
+#include "Core/Log.h"
 #include "Core/GameContext.h"
 
 Camera g_camera;

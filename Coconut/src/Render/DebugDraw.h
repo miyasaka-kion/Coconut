@@ -30,7 +30,7 @@ public:
 
     void DrawString(int x, int y, const char* string, ...);
 
-    void DrawString(const b2Vec2& pw, const char* string, ...); // TODO : Something weird when rendering
+    void DrawString(const b2Vec2& pw, const char* string, ...); 
 
     void DrawAABB(b2AABB* aabb, const b2Color& color);
 

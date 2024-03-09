@@ -14,6 +14,7 @@ public:
     float ConvertScreenToWorld(int length);
     int   ConvertWorldToScreen(float length);
 
+// private:
     b2Vec2 m_center;
     float  m_zoom;
     int32  m_width;
