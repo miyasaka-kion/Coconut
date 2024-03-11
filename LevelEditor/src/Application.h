@@ -4,7 +4,6 @@
 
 #include "Core/GameContext.h"
 
-// Seems that OO design is better? **************************
 class Application {
 public:
     Application();

@@ -4,6 +4,8 @@
 #include <SDL_render.h>
 #include <box2d/box2d.h>
 
+
+// Draw Rectangle Sprites
 class QuadWrite {
 public:
     QuadWrite() = delete;
