@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma once
-
 #include <algorithm>
 #include <memory>
 #include <vector>
@@ -13,15 +11,17 @@
 #include "Render/DebugDraw.h"
 #include "imgui.h"
 
-#include "util/sdl_delete.h"
 #include "Core/Camera.h"
 #include "Core/Settings.h"
+#include "Core/TextureManager.h"
+#include "Render/SpriteLoader.h"
 #include "Event/KeyboardEvent.h"
 #include "Event/MouseEvent.h"
 #include "Render/QuadWrite.h"
+#include "Util/sdl_delete.h"
+
 
 const int32 k_maxContactPoints = 2048;
-
 
 struct ContactPoint {
     b2Fixture*   fixtureA;
@@ -67,14 +67,23 @@ public:
         return m_sdl_renderer.get();
     }
 
+    // TODO: this should only be callable by SpriteLoader!
+    [[nodiscard]] const SDL_Texture* GetTexture(const std::string& name) const {
+        return m_textureManager.GetTexture(name);
+    }
 
-public: // Entity management
-    [[nodiscard]] Entity CreateEntity();
-    void DestroyEntity(Entity entity);
+    [[nodiscard]] const SpriteInfo& GetSpriteInfo(const std::string& name) const {
+        return m_spriteLoader.GetSpriteInfo(name);
+    }   
+
     
-    void SetBackgroundColor(); // this should be remove
+public:  // Entity management
+    [[nodiscard]] Entity CreateEntity();
+    void                 DestroyEntity(Entity entity);
+
+    void SetBackgroundColor();  // this should be remove
     void ShowDebugDraw();
-    void ShowHealthAboveEntity();
+    void ShowHealthBar();
 
 private:
     void Init_SDL_Window();
@@ -88,35 +97,29 @@ private:
 public:
     using InputCallback = std::function< bool(SDL_Event&) >;
     void RegisterCoreHandleEvent(InputCallback func);
-    void RegisterClientHandleEvent(InputCallback func); 
-    
-    void DefaultCoreHandleEvent(SDL_Event& event);
+    void RegisterClientHandleEvent(InputCallback func);
 
+    void DefaultCoreHandleEvent(SDL_Event& event);
 
     // hmmm... this may be the simplest way?
     InputCallback f_CoreHandleEvent;
     InputCallback f_ClientHandleEvent;
-
-    // Another way to deal with this:
-    // public:
-    //     void SetMouse(std::unique_ptr<MouseEvent>& mouseEvent);
-    //     void SetKeyboard(std::unique_ptr<KeyboardEvent>& keyboardEvent);
-    // private:
-    //     std::unique_ptr< MouseEvent >    m_mouse;
-    //     std::unique_ptr< KeyboardEvent > m_keyboard;
 
 public:
     std::unique_ptr< b2World > m_world;
 
     // SDL members
 private:
-    SDL::Window  m_sdl_window;
+    SDL::Window   m_sdl_window;
     SDL::Renderer m_sdl_renderer;
 
     // Entities
 private:
     bool           m_closeGame;
     entt::registry m_reg;
+
+    TextureManager m_textureManager;
+    SpriteLoader m_spriteLoader;
 
     // physics info
 private:

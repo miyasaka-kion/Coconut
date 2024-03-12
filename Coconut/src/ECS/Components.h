@@ -10,6 +10,13 @@ struct BodyComponent {
         m_body->GetWorld()->DestroyBody(m_body);
     }
     
+    // [[nodiscard]] const b2Body* GetBody() const {
+    //     return m_body;
+    // }
+
+    [[nodiscard]] b2Fixture* GetFixtureList() {
+        return m_body->GetFixtureList();
+    }
     
     [[nodiscard]] const b2Vec2& GetPosition() const {
         return m_body->GetPosition();

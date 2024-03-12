@@ -1,20 +1,21 @@
 #include "Core/GameContext.h"
 
-#include "Event/KeyboardEvent.h"
-#include "Event/MouseEvent.h"
+#include <SDL_Image.h>
+#include <box2d/box2d.h>
+
+#include "Core/Assert.h"
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
 
 #include "Core/Log.h"
-
-#include "Render/DebugDraw.h"
-
 #include "ECS/Components.h"
 #include "ECS/Entity.h"
+#include "Event/KeyboardEvent.h"
 #include "Event/MouseEvent.h"
-#include "util/sdl_check.h"
-#include "util/sdl_delete.h"
+#include "Render/DebugDraw.h"
+#include "Util/sdl_check.h"
+#include "Util/sdl_delete.h"
 
 extern Camera        g_camera;
 static ImguiSettings s_imguiSettings;
@@ -28,13 +29,15 @@ GameContext::GameContext() {
     Init_Box2D();
     Init_DebugDraw();  // Notice: This should not init in release version
 
+    m_textureManager.LoadAllTextures(std::string(COCONUT_ASSET_PATH), m_sdl_renderer.get());
+    m_spriteLoader.Load(COCONUT_ASSET_PATH, &m_textureManager);
     m_closeGame = false;
 }
 
 GameContext::~GameContext() {
+    IMG_Quit();
     SDL_Quit();
 }
-
 
 void GameContext::Init_SDL_Window() {
     // SDL_Init begin
@@ -136,7 +139,7 @@ void GameContext::UpdateUI() {
         // box2d settings
         ImGui::Begin("Box2D Settings");
         ImGui::Text("Camera Settings");
-            ImGui::SliderFloat("Zoom Level", &g_camera.m_zoom, 0.0f, 1.0f);
+        ImGui::SliderFloat("Zoom Level", &g_camera.m_zoom, 0.0f, 1.0f);
         if(ImGui::Button("Reset Camera")) {
             g_camera.ResetView();
         }
@@ -145,7 +148,6 @@ void GameContext::UpdateUI() {
 
         ImGui::Checkbox("show DebugDraw", &g_settings.m_showDebugDraw);
         ImGui::Checkbox("draw Sprites", &g_settings.m_drawSprites);
-
 
         ImGui::Text("Physics Settings");
         auto gravity = m_world->GetGravity();
@@ -242,16 +244,16 @@ void GameContext::Step() {
     }
 
     if(g_settings.m_drawStats) {
-        // FPS 
+        // FPS
         g_debugDraw.DrawString(5, m_textLine, "FPS: %5.2f", 1.0f / timeStep);
         m_textLine += m_textIncrement;
-        
+
         // Camera
         g_debugDraw.DrawString(5, m_textLine, "Camera Pos: (%4.2f,%4.2f,zoom: %4.2f)", g_camera.m_center.x, g_camera.m_center.y, g_camera.m_zoom);
         m_textLine += m_textIncrement;
 
         // Mouse
-                // handle mouse input
+        // handle mouse input
         int xs, ys;
         SDL_GetMouseState(&xs, &ys);
         auto ps = b2Vec2(xs, ys);
@@ -259,9 +261,9 @@ void GameContext::Step() {
         b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
 
         g_debugDraw.DrawString(5, m_textLine, "Mouse Pos: (%4.2f,%4.2f)", pw.x, pw.y);
-        m_textLine += m_textIncrement;  
+        m_textLine += m_textIncrement;
 
-        // world info 
+        // world info
         int32 bodyCount    = m_world->GetBodyCount();
         int32 contactCount = m_world->GetContactCount();
         int32 jointCount   = m_world->GetJointCount();
@@ -370,15 +372,16 @@ void GameContext::Step() {
     }
 }
 
-/**
- * Set the background color and render the background.
- *
- */
 void GameContext::SetBackgroundColor() {
-    ImGuiIO& io = ImGui::GetIO();
+    [[maybe_unused]] const auto& io = ImGui::GetIO();
     SDL_RenderSetScale(m_sdl_renderer.get(), io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-    // set the bg color and render the background
-    SDL_SetRenderDrawColor(m_sdl_renderer.get(), ( Uint8 )(m_clear_color.x * 255), ( Uint8 )(m_clear_color.y * 255), ( Uint8 )(m_clear_color.z * 255), ( Uint8 )(m_clear_color.w * 255));  // bg color
+    // clang-format off
+    SDL_SetRenderDrawColor(m_sdl_renderer.get(),
+                            static_cast<Uint8>(m_clear_color.x * 255.0f),
+                            static_cast<Uint8>(m_clear_color.y * 255.0f),
+                            static_cast<Uint8>(m_clear_color.z * 255.0f),
+                            static_cast<Uint8>(m_clear_color.w * 255.0f));
+    // clang-format on
     SDL_RenderClear(m_sdl_renderer.get());
 }
 
@@ -386,6 +389,7 @@ void GameContext::NewFrame() {
     ImGui_ImplSDLRenderer2_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
+
     // debugDraw m_textLine reset
     m_textLine = 26;
 }
@@ -401,20 +405,46 @@ void GameContext::PollAndHandleEvents() {
         if(f_ClientHandleEvent == nullptr) {
             CC_CORE_WARN("Client event handle callback is not set!");
         }
-        if(!f_ClientHandleEvent(event)){
+        if(!f_ClientHandleEvent(event)) {
             DefaultCoreHandleEvent(event);
         }
-        
     }
 }
 
 void GameContext::RenderEntities() {
-    auto      view = m_reg.view< BodyComponent, SpriteComponent >();  // TODO: temp sol, what if some entity dont have a b2Body ??
+    auto      view = m_reg.view< SpriteComponent >();  // TODO: temp sol
     QuadWrite writer(m_sdl_renderer.get());
     for(auto entity : view) {
-        auto [body, sprite] = view.get< BodyComponent, SpriteComponent >(entity);
-        auto box_size       = b2Vec2(1.0f, 1.0f);
-        writer.UpdateRenderInfo(sprite.GetTexture(), box_size, body.GetPosition(), body.GetAngle());
+        auto& sprite = view.get< SpriteComponent >(entity);
+        auto& info   = sprite.GetSpriteInfo();
+
+        auto f    = sprite.GetFixture();
+        auto body = f->GetBody();
+
+        // tmp code
+        b2Shape* shape  = f->GetShape();
+        b2Vec2   plocal = b2Vec2_zero;
+        switch(shape->GetType()) {
+            case b2Shape::e_circle: {
+                auto circle = static_cast< b2CircleShape* >(shape);
+                plocal      = circle->m_p;
+                break;
+            }
+
+            case b2Shape::e_polygon: {
+                auto polygon = static_cast< b2PolygonShape* >(shape);
+                plocal       = polygon->m_centroid;
+                break;
+            }
+
+            default:
+                CC_ASSERT(0, "currently unsupported shape type detected!");
+                break;
+        }
+
+        auto box_size = b2Vec2(1.0f, 1.0f); // emmm.. where to store this?
+
+        writer.UpdateRenderInfo(&info, box_size, plocal + body->GetPosition(), body->GetAngle());
         writer.Render();
     }
 }
@@ -456,7 +486,7 @@ void GameContext::RegisterClientHandleEvent(InputCallback func) {
 // the default version of input callback
 void GameContext::DefaultCoreHandleEvent(SDL_Event& event) {
     static MouseEvent mouse;
-    bool not_handled = false;
+    bool              not_handled = false;
 
     ImGui_ImplSDL2_ProcessEvent(&event);
 
@@ -553,16 +583,6 @@ void GameContext::DefaultCoreHandleEvent(SDL_Event& event) {
     }
 }
 
-// Another way to ....
-
-// void GameContext::SetMouseEvent(MouseEvent& event) {
-//     m_mouseEvent = event;
-// }
-
-// void GameContext::SetKeyboardEvent(KeyboardEvent& event) {
-//     m_keyboardEvent = event;
-// }
-
 /**
  * Show the debug draw if the g_settings.m_showDebugDraw is set to true.
  */
@@ -572,14 +592,22 @@ void GameContext::ShowDebugDraw() {
     }
 }
 
-void GameContext::ShowHealthAboveEntity() {
+// struct EntityInfo {
+//     float health;
+
+// };
+
+void GameContext::ShowHealthBar() {
     auto      view = m_reg.view< BodyComponent, HealthComponent >();  // TODO: temp sol, what if some entity dont have a b2Body ??
     QuadWrite writer(m_sdl_renderer.get());
     for(auto entity : view) {
         auto [body, health] = view.get< BodyComponent, HealthComponent >(entity);
         // TODO
-
-
+        // traverse all fixture of a given body
+        // for (b2Fixture* f = body.GetFixtureList(); f; f = f->GetNext())
+        //     auto data = f->GetUserData();
+        //     auto info = static_cast< EntityInfo >(data);
+        // }
     }
 }
 

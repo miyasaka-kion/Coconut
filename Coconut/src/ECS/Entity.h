@@ -68,5 +68,5 @@ public:
 private:
     GameContext* m_scene;
     entt::entity m_entity_handle;
-    friend class SpriteComponent;
+    friend class SpriteOnFixture;
 };

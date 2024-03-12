@@ -10,7 +10,6 @@ public:
 
     void Run();
 
-
     void LoadEntities();
 
     bool ClientHandleEvent(SDL_Event& event);
