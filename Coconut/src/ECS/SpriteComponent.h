@@ -21,8 +21,7 @@
 class SpriteComponent {
 public:
     SpriteComponent() = delete;
-    SpriteComponent(SDL_Renderer* renderer, std::string_view texture_name);
-    SpriteComponent(const SpriteInfo& sprite_info, b2Fixture* fixture) : m_sprite_infos{ sprite_info }, m_fixture{ fixture }, m_ind(0) {}
+    SpriteComponent(const SpriteInfo& sprite_info) : m_sprite_infos{ sprite_info }, m_ind(0) {}
 
     [[nodiscard]] const SDL_Texture* GetTexture() const {
         CC_ASSERT(!m_sprite_infos.empty(), "_INFO_: internal member: m_sprite_infos should not be empty");
@@ -37,10 +36,6 @@ public:
     [[nodiscard]] SpriteInfo& GetSpriteInfo() {
         CC_ASSERT(!m_sprite_infos.empty(), "_INFO_:internal member: m_sprite_infos should not be empty!");
         return m_sprite_infos[m_ind];
-    }
-
-    [[nodiscard]] b2Fixture* GetFixture() const {
-        return m_fixture;
     }
 
     void AddSpriteInfo(const SpriteInfo& info) {
@@ -60,7 +55,6 @@ protected:
 private:
     // SDL_Renderer* m_renderer; // is this necessary?
     std::vector< SpriteInfo > m_sprite_infos;
-    b2Fixture*                m_fixture;
     std::size_t               m_ind;
 
     std::string m_sprite_name;

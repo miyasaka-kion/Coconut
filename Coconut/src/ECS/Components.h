@@ -2,11 +2,11 @@
 
 #include "ECS/SpriteComponent.h"
 
-struct BodyComponent {
-    BodyComponent() = default;
-    BodyComponent(b2Body* body) : m_body(body) {}
+struct PhysicsComponent {
+    PhysicsComponent() = default;
+    PhysicsComponent(b2Body* body) : m_body(body) {}
 
-    ~BodyComponent() {
+    ~PhysicsComponent() {
         m_body->GetWorld()->DestroyBody(m_body);
     }
 

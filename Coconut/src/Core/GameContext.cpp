@@ -3,6 +3,7 @@
 #include <SDL_Image.h>
 #include <box2d/box2d.h>
 
+#include "ECS/SpriteComponent.h"
 #include "Util/imgui_include.h"
 
 #include "Core/Log.h"
@@ -368,45 +369,19 @@ void GameContext::RenderEntities() {
     if(g_settings.m_drawSprites == false) {
         return;
     }
-    auto      view = m_reg.view< SpriteComponent >();  // TODO: temp sol
+    auto      view = m_reg.view< PhysicsComponent, SpriteComponent >();  // TODO: temp sol
     QuadWrite writer(m_sdl_renderer.get());
-    for(auto entity : view) {
-        auto& sprite = view.get< SpriteComponent >(entity);
+    for(auto [entity, physics, sprite]: view.each()) {
         auto& info   = sprite.GetSpriteInfo();
-
-        auto f    = sprite.GetFixture();
-        auto body = f->GetBody();
-
-        // tmp code
-        b2Shape* shape  = f->GetShape();
-        b2Vec2   plocal = b2Vec2_zero;
-        switch(shape->GetType()) {
-            case b2Shape::e_circle: {
-                auto circle = static_cast< b2CircleShape* >(shape);
-                plocal      = circle->m_p;
-                break;
-            }
-
-            case b2Shape::e_polygon: {
-                auto polygon = static_cast< b2PolygonShape* >(shape);
-                plocal       = polygon->m_centroid;
-                break;
-            }
-
-            default:
-                CC_ASSERT(0, "currently unsupported shape type detected!");
-                break;
-        }
-
         auto box_size = b2Vec2(1.0f, 1.0f); // emmm.. where to store this?
 
-        writer.UpdateRenderInfo(&info, box_size, plocal + body->GetPosition(), body->GetAngle());
+        writer.UpdateRenderInfo(&info, box_size, physics.GetPosition(), physics.GetAngle());
         writer.Render();
     }
 }
 
 void GameContext::RemoveInactive() {
-    auto view = m_reg.view< BodyComponent >();
+    auto view = m_reg.view< PhysicsComponent >();
     for(auto entity : view) {
         // TODO
     }
@@ -554,10 +529,10 @@ void GameContext::ShowDebugDraw() {
 // };
 
 void GameContext::ShowHealthBar() {
-    auto      view = m_reg.view< BodyComponent, HealthComponent >();  // TODO: temp sol, what if some entity dont have a b2Body ??
+    auto      view = m_reg.view< PhysicsComponent, HealthComponent >();  // TODO: temp sol, what if some entity dont have a b2Body ??
     QuadWrite writer(m_sdl_renderer.get());
     for(auto entity : view) {
-        auto [body, health] = view.get< BodyComponent, HealthComponent >(entity);
+        auto [body, health] = view.get< PhysicsComponent, HealthComponent >(entity);
         // TODO
         // traverse all fixture of a given body
         // for (b2Fixture* f = body.GetFixtureList(); f; f = f->GetNext())

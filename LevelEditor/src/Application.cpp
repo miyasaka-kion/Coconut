@@ -1,5 +1,6 @@
 #include "Application.h"
 
+#include "Core/PhysicsInfo.h"
 #include "Core/TextureManager.h"
 #include "ECS/SpriteComponent.h"
 #include "Render/SpriteLoader.h"
@@ -42,11 +43,12 @@ void Application::LoadEntities() {
 
         auto f = body->CreateFixture(&fd);
 
-        auto box_entity_on_fixture = m_game->CreateEntity();
+        auto box = m_game->CreateEntity();
 
         const auto& info = m_game->GetSpriteInfo("TEST_BOX_0");
 
-          box_entity_on_fixture.AddComponent< SpriteComponent >(info, f);
+          box.AddComponent< SpriteComponent >(info);
+          box.AddComponent<PhysicsComponent>(body);
 
         for(int i = 0; i <= 29; i++) {
             auto body = m_game->m_world->CreateBody(&bd);
@@ -54,7 +56,8 @@ void Application::LoadEntities() {
             auto f                     = body->CreateFixture(&fd);
             auto box_entity_on_fixture = m_game->CreateEntity();
             const auto& info = m_game->GetSpriteInfo(name);
-              box_entity_on_fixture.AddComponent< SpriteComponent >(info, f);
+              box_entity_on_fixture.AddComponent< SpriteComponent >(info);
+              box_entity_on_fixture.AddComponent< PhysicsComponent >(body);
         }
 
         // box_fixture.AddComponent< BodyComponent >(body);
