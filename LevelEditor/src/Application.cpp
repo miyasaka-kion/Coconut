@@ -20,7 +20,7 @@ Application::Application() {
     m_game->RegisterClientHandleEvent([this](SDL_Event& event) -> bool { return ClientHandleEvent(event); });
     // Regester input callback here, if needed. If not registered the default input callback will be used.
 
-    m_game->AddUILayer< PlayerSettingsPanel >(m_playerSettings);
+    m_game->CreateGuiLayer< PlayerSettingsPanel >(m_playerSettings);
 }
 
 void Application::LoadEntities() {

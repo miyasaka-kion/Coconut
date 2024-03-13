@@ -11,7 +11,7 @@ protected:
 
 public:
     virtual void Update() {}
-    virtual void GUIRender() {}
+    virtual void GuiRender() {}
 
     GameContext* m_gameContext;
 
@@ -37,7 +37,7 @@ public:
     }
     void Render() {
         for(auto& layer : m_layers) {
-            layer->GUIRender();
+            layer->GuiRender();
         }
     }
 

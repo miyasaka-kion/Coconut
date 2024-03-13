@@ -8,7 +8,7 @@ class ExampleLayer : public Layer {
     public: 
     ExampleLayer(Settings& settings) : m_settings(settings) {}
 
-    void GUIRender() override {
+    void GuiRender() override {
         {
             // test demo windon
             if(m_settings.m_showDemoWindow)

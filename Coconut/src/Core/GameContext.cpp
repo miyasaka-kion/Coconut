@@ -31,13 +31,14 @@ GameContext::GameContext() : m_layerManager(this) {
     Init_Box2D();
     Init_DebugDraw();  // Notice: This should not init in release version
 
-    m_textureManager.LoadAllTextures(std::string(COCONUT_ASSET_PATH), m_sdl_renderer.get());
+    m_textureManager.Load(std::string(COCONUT_ASSET_PATH), m_sdl_renderer.get());
     m_spriteLoader.Load(COCONUT_ASSET_PATH, &m_textureManager);
     m_closeGame = false;
 
-    AddUILayer<PhysicsInfoLayer>(m_physicsInfo);
-    AddUILayer<ExampleLayer>(g_settings);
-    AddUILayer<WindowSettingsLayer>(g_settings);
+    CreateGuiLayer<PhysicsInfoLayer>(m_physicsInfo);
+    CreateGuiLayer<ExampleLayer>(g_settings);
+    CreateGuiLayer<WindowSettingsLayer>(g_settings);
+
 }
 
 GameContext::~GameContext() {

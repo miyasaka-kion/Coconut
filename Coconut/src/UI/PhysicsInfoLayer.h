@@ -13,7 +13,7 @@ class GameContext;
 class PhysicsInfoLayer : public Layer {
 public:
     PhysicsInfoLayer(PhysicsInfo& info) : m_physicsInfo(info) {}
-    void GUIRender() override;
+    void GuiRender() override;
 
 private:
     PhysicsInfo& m_physicsInfo;

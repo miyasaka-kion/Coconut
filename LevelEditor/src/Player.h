@@ -14,7 +14,7 @@ class PlayerSettingsPanel : public Layer {
 public:
     PlayerSettingsPanel(PlayerSettings& settings) : m_playerSettings(settings) {}
     
-    void GUIRender() override {
+    void GuiRender() override {
         ImGui::Begin("Player Settings");
 
         ImGui::SliderFloat("Max Speed", &m_playerSettings.maxSpeed, 0.0f, 100.0f);

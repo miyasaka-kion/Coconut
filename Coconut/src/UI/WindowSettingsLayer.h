@@ -11,7 +11,7 @@ public:
      void Update() override {
          
      }
-    void GUIRender() override {
+    void GuiRender() override {
         
         {
             auto& io = ImGui::GetIO();

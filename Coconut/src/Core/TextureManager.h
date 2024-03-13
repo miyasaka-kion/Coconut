@@ -11,7 +11,7 @@
 
 class TextureManager {
 public:
-    void LoadAllTextures(const std::string& path_to_dir, SDL_Renderer* renderer);
+    void Load(const std::string& path_to_dir, SDL_Renderer* renderer);
 
     [[nodiscard]]  SDL_Texture* GetTexture(const std::string& name) const {
         auto it = m_texture_map.find(name);

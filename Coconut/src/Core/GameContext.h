@@ -64,11 +64,6 @@ public:
         return m_sdl_renderer.get();
     }
 
-    // // TODO: this should only be callable by SpriteLoader!
-    // [[nodiscard]] const SDL_Texture* GetTexture(const std::string& name) const {
-    //     return m_textureManager.GetTexture(name);
-    // }
-
     [[nodiscard]] const SpriteInfo& GetSpriteInfo(const std::string& name) const {
         return m_spriteLoader.GetSpriteInfo(name);
     }
@@ -133,7 +128,7 @@ private:
     // UI 
 public:
     template < typename T, typename... Args >
-    void AddUILayer(Args&&... args) {
+    void CreateGuiLayer(Args&&... args) {
         m_layerManager.AddLayer<T>(std::forward<Args>(args)...);
     }
     

@@ -5,7 +5,7 @@
 
 #include "Util/sdl_check.h"
 
-void TextureManager::LoadAllTextures(const std::string& path_to_dir, SDL_Renderer* renderer) {
+void TextureManager::Load(const std::string& path_to_dir, SDL_Renderer* renderer) {
     for(const auto& entry : std::filesystem::directory_iterator(path_to_dir)) {
         if(entry.is_regular_file()) {  // Check if the entry is a regular file
             auto filename  = entry.path().filename().string();

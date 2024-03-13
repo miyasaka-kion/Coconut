@@ -6,8 +6,6 @@
 Camera g_camera;
 
 Camera::Camera() {
-    // m_width = 1280;
-    // m_height = 800;
     ResetView();
 }
 
