@@ -10,9 +10,9 @@ struct PhysicsComponent {
         m_body->GetWorld()->DestroyBody(m_body);
     }
 
-    // [[nodiscard]] const b2Body* GetBody() const {
-    //     return m_body;
-    // }
+    [[nodiscard]]  b2Body* GetBody() const {
+        return m_body;
+    }
 
     [[nodiscard]] b2Fixture* GetFixtureList() {
         return m_body->GetFixtureList();

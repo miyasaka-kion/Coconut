@@ -9,30 +9,30 @@
 class Entity {
 public:
     Entity() = delete;
-    Entity(GameContext* scene, entt::entity entity) : m_scene(scene), m_entity_handle(entity) {}
+    Entity(GameContext* context, entt::entity entity) : m_gameContext(context), m_entity_handle(entity) {}
     virtual ~Entity() = default;
 
     template < typename T >
     bool HasComponent() {
-        return m_scene->m_reg.all_of< T >(m_entity_handle);
+        return m_gameContext->m_reg.all_of< T >(m_entity_handle);
     }
 
     template < typename T, typename... Args >
     T& AddComponent(Args&&... args) {
         CC_ASSERT((!HasComponent< T >()), "Entity already has component!");
-        return m_scene->m_reg.emplace< T >(m_entity_handle, std::forward< Args >(args)...);
+        return m_gameContext->m_reg.emplace< T >(m_entity_handle, std::forward< Args >(args)...);
     }
 
     template < typename T >
     T& GetComponent() {
         CC_ASSERT(HasComponent< T >(), "Entity does not have component!");
-        return m_scene->m_reg.get< T >(m_entity_handle);
+        return m_gameContext->m_reg.get< T >(m_entity_handle);
     }
 
     template < typename T >
     void RemoveComponent() {
         CC_ASSERT(HasComponent< T >(), "Entity does not have component!");
-        m_scene->m_reg.remove< T >(m_entity_handle);
+        m_gameContext->m_reg.remove< T >(m_entity_handle);
     }
 
     /**
@@ -44,7 +44,7 @@ public:
      */
     template < typename... Args >
     bool AllOf() {
-        return m_scene->m_reg.all_of< Args... >(m_entity_handle);
+        return m_gameContext->m_reg.all_of< Args... >(m_entity_handle);
     }
 
     operator bool() const {
@@ -58,7 +58,7 @@ public:
     }
 
     bool operator==(const Entity& other) const {
-        return m_entity_handle == other.m_entity_handle && m_scene == other.m_scene;
+        return m_entity_handle == other.m_entity_handle && m_gameContext == other.m_gameContext;
     }
 
     bool operator!=(const Entity& other) const {
@@ -66,7 +66,6 @@ public:
     }
 
 private:
-    GameContext* m_scene;
+    GameContext* m_gameContext;
     entt::entity m_entity_handle;
-    friend class SpriteOnFixture;
 };
