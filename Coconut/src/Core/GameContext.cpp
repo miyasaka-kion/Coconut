@@ -3,12 +3,13 @@
 #include <SDL_Image.h>
 #include <box2d/box2d.h>
 
-#include "Core/Assert.h"
+
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
 
 #include "Core/Log.h"
+#include "Core/Assert.h"
 #include "ECS/Components.h"
 #include "ECS/Entity.h"
 #include "Event/KeyboardEvent.h"
@@ -103,8 +104,10 @@ void GameContext::Init_Box2D() {
 
     m_textLine      = 5;
     m_textIncrement = 18;
-    m_mouseJoint    = NULL;
-    m_pointCount    = 0;
+
+    // init physics info
+    m_physicsInfo.m_mouseJoint    = NULL;
+    m_physicsInfo.m_pointCount    = 0;
 }
 
 void GameContext::Init_DebugDraw() {
@@ -233,14 +236,14 @@ void GameContext::Step() {
     m_world->SetContinuousPhysics(g_settings.m_enableContinuous);
     m_world->SetSubStepping(g_settings.m_enableSubStepping);
 
-    m_pointCount = 0;
+    m_physicsInfo.m_pointCount = 0;
 
     m_world->Step(timeStep, g_settings.m_velocityIterations, g_settings.m_positionIterations);
 
-    m_world->DebugDraw();
+    // m_world->DebugDraw();
 
     if(timeStep > 0.0f) {
-        ++m_stepCount;
+        ++m_physicsInfo.m_stepCount;
     }
 
     if(g_settings.m_drawStats) {
@@ -281,23 +284,23 @@ void GameContext::Step() {
     // Track maximum profile times
     {
         const b2Profile& p         = m_world->GetProfile();
-        m_maxProfile.step          = b2Max(m_maxProfile.step, p.step);
-        m_maxProfile.collide       = b2Max(m_maxProfile.collide, p.collide);
-        m_maxProfile.solve         = b2Max(m_maxProfile.solve, p.solve);
-        m_maxProfile.solveInit     = b2Max(m_maxProfile.solveInit, p.solveInit);
-        m_maxProfile.solveVelocity = b2Max(m_maxProfile.solveVelocity, p.solveVelocity);
-        m_maxProfile.solvePosition = b2Max(m_maxProfile.solvePosition, p.solvePosition);
-        m_maxProfile.solveTOI      = b2Max(m_maxProfile.solveTOI, p.solveTOI);
-        m_maxProfile.broadphase    = b2Max(m_maxProfile.broadphase, p.broadphase);
+        m_physicsInfo.m_maxProfile.step          = b2Max(m_physicsInfo.m_maxProfile.step, p.step);
+        m_physicsInfo.m_maxProfile.collide       = b2Max(m_physicsInfo.m_maxProfile.collide, p.collide);
+        m_physicsInfo.m_maxProfile.solve         = b2Max(m_physicsInfo.m_maxProfile.solve, p.solve);
+        m_physicsInfo.m_maxProfile.solveInit     = b2Max(m_physicsInfo.m_maxProfile.solveInit, p.solveInit);
+        m_physicsInfo.m_maxProfile.solveVelocity = b2Max(m_physicsInfo.m_maxProfile.solveVelocity, p.solveVelocity);
+        m_physicsInfo.m_maxProfile.solvePosition = b2Max(m_physicsInfo.m_maxProfile.solvePosition, p.solvePosition);
+        m_physicsInfo.m_maxProfile.solveTOI      = b2Max(m_physicsInfo.m_maxProfile.solveTOI, p.solveTOI);
+        m_physicsInfo.m_maxProfile.broadphase    = b2Max(m_physicsInfo.m_maxProfile.broadphase, p.broadphase);
 
-        m_totalProfile.step += p.step;
-        m_totalProfile.collide += p.collide;
-        m_totalProfile.solve += p.solve;
-        m_totalProfile.solveInit += p.solveInit;
-        m_totalProfile.solveVelocity += p.solveVelocity;
-        m_totalProfile.solvePosition += p.solvePosition;
-        m_totalProfile.solveTOI += p.solveTOI;
-        m_totalProfile.broadphase += p.broadphase;
+        m_physicsInfo.m_totalProfile.step += p.step;
+        m_physicsInfo.m_totalProfile.collide += p.collide;
+        m_physicsInfo.m_totalProfile.solve += p.solve;
+        m_physicsInfo.m_totalProfile.solveInit += p.solveInit;
+        m_physicsInfo.m_totalProfile.solveVelocity += p.solveVelocity;
+        m_physicsInfo.m_totalProfile.solvePosition += p.solvePosition;
+        m_physicsInfo.m_totalProfile.solveTOI += p.solveTOI;
+        m_physicsInfo.m_totalProfile.broadphase += p.broadphase;
     }
 
     if(g_settings.m_drawProfile) {
@@ -305,33 +308,34 @@ void GameContext::Step() {
 
         b2Profile aveProfile;
         memset(&aveProfile, 0, sizeof(b2Profile));
-        if(m_stepCount > 0) {
-            float scale              = 1.0f / m_stepCount;
-            aveProfile.step          = scale * m_totalProfile.step;
-            aveProfile.collide       = scale * m_totalProfile.collide;
-            aveProfile.solve         = scale * m_totalProfile.solve;
-            aveProfile.solveInit     = scale * m_totalProfile.solveInit;
-            aveProfile.solveVelocity = scale * m_totalProfile.solveVelocity;
-            aveProfile.solvePosition = scale * m_totalProfile.solvePosition;
-            aveProfile.solveTOI      = scale * m_totalProfile.solveTOI;
-            aveProfile.broadphase    = scale * m_totalProfile.broadphase;
+        if(m_physicsInfo.m_stepCount > 0) {
+            float scale              = 1.0f / m_physicsInfo.m_stepCount;
+            aveProfile.step          = scale * m_physicsInfo.m_totalProfile.step;
+            aveProfile.collide       = scale * m_physicsInfo.m_totalProfile.collide;
+            aveProfile.solve         = scale * m_physicsInfo.m_totalProfile.solve;
+            aveProfile.solveInit     = scale * m_physicsInfo.m_totalProfile.solveInit;
+            aveProfile.solveVelocity = scale * m_physicsInfo.m_totalProfile.solveVelocity;
+            aveProfile.solvePosition = scale * m_physicsInfo.m_totalProfile.solvePosition;
+            aveProfile.solveTOI      = scale * m_physicsInfo.m_totalProfile.solveTOI;
+            aveProfile.broadphase    = scale * m_physicsInfo.m_totalProfile.broadphase;
+            
         }
 
-        g_debugDraw.DrawString(5, m_textLine, "step [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.step, aveProfile.step, m_maxProfile.step);
+        g_debugDraw.DrawString(5, m_textLine, "step [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.step, aveProfile.step, m_physicsInfo.m_maxProfile.step);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "collide [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.collide, aveProfile.collide, m_maxProfile.collide);
+        g_debugDraw.DrawString(5, m_textLine, "collide [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.collide, aveProfile.collide, m_physicsInfo.m_maxProfile.collide);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "solve [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solve, aveProfile.solve, m_maxProfile.solve);
+        g_debugDraw.DrawString(5, m_textLine, "solve [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solve, aveProfile.solve, m_physicsInfo.m_maxProfile.solve);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "solve init [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveInit, aveProfile.solveInit, m_maxProfile.solveInit);
+        g_debugDraw.DrawString(5, m_textLine, "solve init [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveInit, aveProfile.solveInit, m_physicsInfo.m_maxProfile.solveInit);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "solve velocity [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveVelocity, aveProfile.solveVelocity, m_maxProfile.solveVelocity);
+        g_debugDraw.DrawString(5, m_textLine, "solve velocity [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveVelocity, aveProfile.solveVelocity, m_physicsInfo.m_maxProfile.solveVelocity);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "solve position [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solvePosition, aveProfile.solvePosition, m_maxProfile.solvePosition);
+        g_debugDraw.DrawString(5, m_textLine, "solve position [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solvePosition, aveProfile.solvePosition, m_physicsInfo.m_maxProfile.solvePosition);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "solveTOI [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveTOI, aveProfile.solveTOI, m_maxProfile.solveTOI);
+        g_debugDraw.DrawString(5, m_textLine, "solveTOI [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveTOI, aveProfile.solveTOI, m_physicsInfo.m_maxProfile.solveTOI);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "broad-phase [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.broadphase, aveProfile.broadphase, m_maxProfile.broadphase);
+        g_debugDraw.DrawString(5, m_textLine, "broad-phase [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.broadphase, aveProfile.broadphase, m_physicsInfo.m_maxProfile.broadphase);
         m_textLine += m_textIncrement;
     }
 
@@ -339,8 +343,8 @@ void GameContext::Step() {
         const float k_impulseScale = 0.1f;
         const float k_axisScale    = 0.3f;
 
-        for(int32 i = 0; i < m_pointCount; ++i) {
-            ContactPoint* point = m_points + i;
+        for(int32 i = 0; i < m_physicsInfo.m_pointCount; ++i) {
+            ContactPoint* point = m_physicsInfo.m_points + i;
 
             if(point->state == b2_addState) {
                 // Add
@@ -412,6 +416,9 @@ void GameContext::PollAndHandleEvents() {
 }
 
 void GameContext::RenderEntities() {
+    if(g_settings.m_drawSprites == false) {
+        return;
+    }
     auto      view = m_reg.view< SpriteComponent >();  // TODO: temp sol
     QuadWrite writer(m_sdl_renderer.get());
     for(auto entity : view) {

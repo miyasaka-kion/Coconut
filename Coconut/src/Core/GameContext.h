@@ -12,27 +12,14 @@
 #include "imgui.h"
 
 #include "Core/Camera.h"
+#include "Core/PhysicsInfo.h"
 #include "Core/Settings.h"
 #include "Core/TextureManager.h"
-#include "Render/SpriteLoader.h"
 #include "Event/KeyboardEvent.h"
 #include "Event/MouseEvent.h"
 #include "Render/QuadWrite.h"
+#include "Render/SpriteLoader.h"
 #include "Util/sdl_delete.h"
-
-
-const int32 k_maxContactPoints = 2048;
-
-struct ContactPoint {
-    b2Fixture*   fixtureA;
-    b2Fixture*   fixtureB;
-    b2Vec2       normal;
-    b2Vec2       position;
-    b2PointState state;
-    float        normalImpulse;
-    float        tangentImpulse;
-    float        separation;
-};
 
 class Entity;
 
@@ -74,9 +61,8 @@ public:
 
     [[nodiscard]] const SpriteInfo& GetSpriteInfo(const std::string& name) const {
         return m_spriteLoader.GetSpriteInfo(name);
-    }   
+    }
 
-    
 public:  // Entity management
     [[nodiscard]] Entity CreateEntity();
     void                 DestroyEntity(Entity entity);
@@ -119,18 +105,14 @@ private:
     entt::registry m_reg;
 
     TextureManager m_textureManager;
-    SpriteLoader m_spriteLoader;
+    SpriteLoader   m_spriteLoader;
+
+    // debugdraw
+    int m_textLine;
+    int m_textIncrement;
 
     // physics info
-private:
-    int           m_textLine;
-    int           m_textIncrement;
-    int           m_pointCount;
-    b2MouseJoint* m_mouseJoint;  // TODO: how to use this?
-    b2Profile     m_maxProfile;
-    b2Profile     m_totalProfile;
-    int           m_stepCount;
-    ContactPoint  m_points[k_maxContactPoints];
+    PhysicsInfo m_physicsInfo;
 
 private:
     ImVec4 m_clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);  // render bg color, this is tmp var, should be removed in the future;
