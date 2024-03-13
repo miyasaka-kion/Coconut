@@ -23,7 +23,7 @@ static ImguiSettings s_imguiSettings;
 Settings             g_settings;
 DebugDraw            g_debugDraw;
 
-GameContext::GameContext() {
+GameContext::GameContext() : m_layerManager(this) {
     Init_SDL_Window();
     Init_SDL_Renderer();
     Init_Imgui();
@@ -35,7 +35,7 @@ GameContext::GameContext() {
     m_closeGame = false;
 
     // Init UI 
-    m_layerManager.AddLayer<PhysicsInfoLayer>(this, m_physicsInfo);
+    m_layerManager.AddLayer<PhysicsInfoLayer>(m_physicsInfo);
 }
 
 GameContext::~GameContext() {
@@ -134,6 +134,7 @@ void GameContext::UpdateUI() {
     auto pw = b2Vec2(0.0f, 0.0f);
     auto ps = g_camera.ConvertWorldToScreen(pw);
 
+    m_layerManager.Update();
     m_layerManager.Render();
 
     m_textLine += m_textIncrement;

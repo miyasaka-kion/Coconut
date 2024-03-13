@@ -1,23 +1,26 @@
 #include "Application.h"
 
-#include "Core/PhysicsInfo.h"
-#include "Core/TextureManager.h"
-#include "ECS/SpriteComponent.h"
-#include "Render/SpriteLoader.h"
-#include "imgui.h"
-#include "imgui_impl_sdl2.h"
-#include "imgui_impl_sdlrenderer2.h"
+#include <SDL2/SDL_keycode.h>
 
 #include "Core/GameContext.h"
 #include "Core/Log.h"
+#include "Core/PhysicsInfo.h"
+#include "Core/TextureManager.h"
 #include "ECS/Components.h"
 #include "ECS/Entity.h"
+#include "ECS/SpriteComponent.h"
+#include "Render/SpriteLoader.h"
+#include "Util/imgui_include.h"
+
+#include "Player.h"
 
 Application::Application() {
-    m_game     = std::make_unique< GameContext >();
-    m_renderer = m_game->GetRenderer();
+    m_game = std::make_unique< GameContext >();
+    // m_renderer = m_game->GetRenderer();
     m_game->RegisterClientHandleEvent([this](SDL_Event& event) -> bool { return ClientHandleEvent(event); });
     // Regester input callback here, if needed. If not registered the default input callback will be used.
+
+    m_game->AddUILayer< PlayerSettingsPanel >(m_playerSettings);
 }
 
 void Application::LoadEntities() {
@@ -47,21 +50,21 @@ void Application::LoadEntities() {
 
         const auto& info = m_game->GetSpriteInfo("TEST_BOX_0");
 
-          box.AddComponent< SpriteComponent >(info);
-          box.AddComponent<PhysicsComponent>(body);
+        box.AddComponent< SpriteComponent >(info);
+        box.AddComponent< PhysicsComponent >(body);
+        box.AddComponent< PlayerComponent >();
 
-        for(int i = 0; i <= 29; i++) {
-            auto body = m_game->m_world->CreateBody(&bd);
-            std::string name = "INGAME_BLOCKS_WOOD_1_" + std::to_string(i);
-            auto f                     = body->CreateFixture(&fd);
-            auto box_entity_on_fixture = m_game->CreateEntity();
-            const auto& info = m_game->GetSpriteInfo(name);
-              box_entity_on_fixture.AddComponent< SpriteComponent >(info);
-              box_entity_on_fixture.AddComponent< PhysicsComponent >(body);
-        }
+        // for(int i = 0; i <= 29; i++) {
+        //     auto        body                  = m_game->m_world->CreateBody(&bd);
+        //     std::string name                  = "INGAME_BLOCKS_WOOD_1_" + std::to_string(i);
+        //     auto        f                     = body->CreateFixture(&fd);
+        //     auto        box_entity_on_fixture = m_game->CreateEntity();
+        //     const auto& info                  = m_game->GetSpriteInfo(name);
+        //     box_entity_on_fixture.AddComponent< SpriteComponent >(info);
+        //     box_entity_on_fixture.AddComponent< PhysicsComponent >(body);
+        // }
 
         // box_fixture.AddComponent< BodyComponent >(body);
-      
     }
 
     {
@@ -73,7 +76,9 @@ void Application::LoadEntities() {
 
         b2EdgeShape edgeShape;
         edgeShape.SetTwoSided(b2Vec2(-40.0f, -20.0f), b2Vec2(40.0f, -20.0f));
-        body->CreateFixture(&edgeShape, 0.0f);
+        auto f = body->CreateFixture(&edgeShape, 0.0f);
+
+        f->SetFriction(1.0f);
     }
 }
 
@@ -114,29 +119,73 @@ void Application::Run() {
     }
 }
 
+bool Application::HandlePlayerInput(SDL_Keycode sym) {
+    switch(sym) {
+    case SDLK_r: {
+        LoadEntities();
+        break;
+    }
+    // control player move by default.
+    case SDLK_SPACE:
+        [[fallthrough]];
+
+    case SDLK_w: {
+        // player jump
+
+        break;
+    }
+
+    case SDLK_d: {
+
+        auto view = m_game->GetRegistry().view< PlayerComponent, PhysicsComponent >();
+        for(auto [entity, player, physics] : view.each()) {
+            auto body = physics.GetBody();
+            body->ApplyForceToCenter(b2Vec2(m_playerSettings.move_force, 0.0f), true);
+        }
+        break;
+    }
+
+    case SDLK_a: {
+        // player move left
+        auto view = m_game->GetRegistry().view< PlayerComponent, PhysicsComponent >();
+        for(auto [entity, player, physics] : view.each()) {
+            auto body = physics.GetBody();
+            body->ApplyForceToCenter(b2Vec2(-m_playerSettings.move_force, 0.0f), true);
+        }
+        break;
+    }
+
+    case SDLK_s: {
+        // player crouch
+
+        break;
+    }
+
+    case SDLK_f: {
+        // player shoot
+
+        break;
+    }
+
+    default: {
+        return false;
+    }
+    }  // switch
+    return true;
+}
+
 bool Application::ClientHandleEvent(SDL_Event& event) {
     switch(event.type) {
 
     case SDL_KEYDOWN: {
         auto sym = event.key.keysym.sym;
-        switch(sym) {
-        case SDLK_r:
-            LoadEntities();
-            return true;
-        // control player move by default.
-        case SDLK_a:
-            [[fallthrough]];
-        case SDLK_d:
-            [[fallthrough]];
-        case SDLK_w:
-            [[fallthrough]];
-        case SDLK_s:
-            g_camera.m_center.x += ((sym == SDLK_a) - (sym == SDLK_d)) * 0.5f;
-            g_camera.m_center.y -= ((sym == SDLK_w) - (sym == SDLK_s)) * 0.5f;
-            return true;
+        if(HandlePlayerInput(sym)) {
+            break;
         }
-    } break;
-    }  // switch
-
-    return false;
+    }
+    default: {
+        return false;
+    }
+    }
+    return true;
 }

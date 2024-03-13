@@ -1,21 +1,25 @@
-#pragma once 
+#pragma once
 
 #include <memory>
+#include <SDL2/SDL_keycode.h>
 
 #include "Core/GameContext.h"
+#include "Player.h"
 
 class Application {
 public:
     Application();
 
     void Run();
-
-    void LoadEntities();
-
+    
     bool ClientHandleEvent(SDL_Event& event);
+    bool HandlePlayerInput(SDL_Keycode sym);
 
 private:
-    std::unique_ptr<GameContext> m_game;
+    void LoadEntities();
 
-    SDL_Renderer* m_renderer;
+    std::unique_ptr< GameContext > m_game;
+    // const SDL_Renderer* m_renderer;
+
+    PlayerSettings m_playerSettings;
 };

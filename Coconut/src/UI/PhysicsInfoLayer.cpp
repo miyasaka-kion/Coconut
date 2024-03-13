@@ -1,6 +1,6 @@
 #include "UI/PhysicsInfoLayer.h"
 
-void PhysicsInfoLayer::Render() {
+void PhysicsInfoLayer::GUIRender() {
     {
         auto world = m_gameContext->GetWorld();
 

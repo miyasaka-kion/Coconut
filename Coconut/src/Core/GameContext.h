@@ -46,19 +46,28 @@ public:
         return m_world.get();
     }
 
+    // emm.. this should be change and remove in the future..
+    [[nodiscard]] const entt::registry& GetRegistry() const {
+        return m_reg;
+    }
+
+    // template< typename... Args >
+    // [[nodiscard]] const entt::view< entt::entity, Args... > GetView() const {
+    //     return m_reg.view< Args... >();
+    // }
+
     void WindowShouldClose() {
         m_closeGame = true;
     }
 
-    // should this return a const?
-    [[nodiscard]] SDL_Renderer* GetRenderer() const {
+    [[nodiscard]]   SDL_Renderer* GetRenderer() const {
         return m_sdl_renderer.get();
     }
 
-    // TODO: this should only be callable by SpriteLoader!
-    [[nodiscard]] const SDL_Texture* GetTexture(const std::string& name) const {
-        return m_textureManager.GetTexture(name);
-    }
+    // // TODO: this should only be callable by SpriteLoader!
+    // [[nodiscard]] const SDL_Texture* GetTexture(const std::string& name) const {
+    //     return m_textureManager.GetTexture(name);
+    // }
 
     [[nodiscard]] const SpriteInfo& GetSpriteInfo(const std::string& name) const {
         return m_spriteLoader.GetSpriteInfo(name);
@@ -90,6 +99,12 @@ public:
 
     // hmmm... this may be the simplest way?
     InputCallback f_CoreHandleEvent;
+
+    /**
+     * Client handle event callback function.
+     *
+     * This function is called in PollAndHandleEvents(). Return true if the event was handled, false if you want to let Core to handle the event.
+     */
     InputCallback f_ClientHandleEvent;
 
 public:
@@ -116,6 +131,13 @@ private:
     PhysicsInfo m_physicsInfo;
 
     // UI 
+public:
+    template < typename T, typename... Args >
+    void AddUILayer(Args&&... args) {
+        m_layerManager.AddLayer<T>(std::forward<Args>(args)...);
+    }
+    
+private:
     LayerManager m_layerManager;
 
 private:
