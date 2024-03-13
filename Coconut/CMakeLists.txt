@@ -9,7 +9,9 @@ aux_source_directory("src/ECS"  SRC_LIST)
 aux_source_directory("src/Render" SRC_LIST)
 aux_source_directory("src/Core" SRC_LIST)
 aux_source_directory("src/Event" SRC_LIST)
-aux_source_directory("src/util" SRC_LIST)
+aux_source_directory("src/Util" SRC_LIST)
+aux_source_directory("src/UI" SRC_LIST)
+
 message("SRC_LIST = ${SRC_LIST}")
 
 

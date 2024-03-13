@@ -1,11 +1,11 @@
 #pragma once
 
 #include <algorithm>
-#include <memory>
 #include <vector>
 
 #include <SDL2/SDL.h>
 #include <box2d/box2d.h>
+#include <memory>
 #include <entt.hpp>
 
 #include "Render/DebugDraw.h"
@@ -20,6 +20,7 @@
 #include "Render/QuadWrite.h"
 #include "Render/SpriteLoader.h"
 #include "Util/sdl_delete.h"
+#include "UI/Layer.h"
 
 class Entity;
 
@@ -114,10 +115,14 @@ private:
     // physics info
     PhysicsInfo m_physicsInfo;
 
+    // UI 
+    LayerManager m_layerManager;
+
 private:
     ImVec4 m_clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);  // render bg color, this is tmp var, should be removed in the future;
 
     friend class Entity;
+    friend class Layer;
 };
 
 extern Camera   g_camera;
