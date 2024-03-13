@@ -141,7 +141,6 @@ private:
     LayerManager m_layerManager;
 
 private:
-    ImVec4 m_clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);  // render bg color, this is tmp var, should be removed in the future;
 
     friend class Entity;
     friend class Layer;

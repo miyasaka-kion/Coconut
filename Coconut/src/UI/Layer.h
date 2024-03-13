@@ -45,3 +45,4 @@ private:
     std::vector< std::unique_ptr<Layer> > m_layers;
     GameContext* m_gameContext = nullptr;
 };
+

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "imgui.h"
+
 struct Settings {
     Settings() {
         Reset();
@@ -35,11 +37,15 @@ struct Settings {
 
         m_drawSprites   = true;
         m_showDebugDraw = true;
+
+        m_showDemoWindow = true;
+        m_clear_color    = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);
     }
 
     void Save();
     void Load();
 
+    // box2d settings
     int   m_testIndex;
     int   m_windowWidth;
     int   m_windowHeight;
@@ -63,7 +69,12 @@ struct Settings {
     bool  m_pause;
     bool  m_singleStep;
 
+    // render settings
     const float m_defaultScreenHeightWorld = 50.0f;
     bool        m_drawSprites;
-    bool        m_showDebugDraw = true;
+    bool        m_showDebugDraw;
+
+    // windows settings
+    bool   m_showDemoWindow;
+    ImVec4 m_clear_color;  // render bg color
 };

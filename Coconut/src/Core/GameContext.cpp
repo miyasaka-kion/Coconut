@@ -4,8 +4,8 @@
 #include <box2d/box2d.h>
 
 #include "ECS/SpriteComponent.h"
-#include "Util/imgui_include.h"
 
+#include "Util/imgui_include.h"
 #include "Core/Log.h"
 #include "Core/Assert.h"
 #include "ECS/Components.h"
@@ -17,9 +17,10 @@
 #include "Util/sdl_delete.h"
 #include "UI/Layer.h"
 #include "UI/PhysicsInfoLayer.h"
+#include "UI/ExampleLayer.h"
+#include "UI/WindowSettingsLayer.h"
 
 extern Camera        g_camera;
-static ImguiSettings s_imguiSettings;
 Settings             g_settings;
 DebugDraw            g_debugDraw;
 
@@ -34,8 +35,9 @@ GameContext::GameContext() : m_layerManager(this) {
     m_spriteLoader.Load(COCONUT_ASSET_PATH, &m_textureManager);
     m_closeGame = false;
 
-    // Init UI 
-    m_layerManager.AddLayer<PhysicsInfoLayer>(m_physicsInfo);
+    AddUILayer<PhysicsInfoLayer>(m_physicsInfo);
+    AddUILayer<ExampleLayer>(g_settings);
+    AddUILayer<WindowSettingsLayer>(g_settings);
 }
 
 GameContext::~GameContext() {
@@ -138,26 +140,8 @@ void GameContext::UpdateUI() {
     m_layerManager.Render();
 
     m_textLine += m_textIncrement;
-    {
-        // test demo windon
-        if(s_imguiSettings.show_demo_window)
-            ImGui::ShowDemoWindow();
-    }
 
 
-
-    {
-        ImGui::Begin("Window Settings");                                    // Create a window called "Hello, world!" and append into it.
-        ImGui::Checkbox("Demo Window", &s_imguiSettings.show_demo_window);  // Edit bools storing our window open/close state
-        ImGui::ColorEdit3("bg color", ( float* )&m_clear_color);            // Edit 3 floats representing a color
-
-        if(ImGui::Button("clear Entities")) {
-            // m_entityManager->ClearEntities();
-        }
-
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-        ImGui::End();
-    }
 }
 
 void GameContext::Step() {
@@ -332,10 +316,10 @@ void GameContext::SetBackgroundColor() {
     SDL_RenderSetScale(m_sdl_renderer.get(), io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
     // clang-format off
     SDL_SetRenderDrawColor(m_sdl_renderer.get(),
-                            static_cast<Uint8>(m_clear_color.x * 255.0f),
-                            static_cast<Uint8>(m_clear_color.y * 255.0f),
-                            static_cast<Uint8>(m_clear_color.z * 255.0f),
-                            static_cast<Uint8>(m_clear_color.w * 255.0f));
+                            static_cast<Uint8>( g_settings.m_clear_color.x * 255.0f),
+                            static_cast<Uint8>( g_settings.m_clear_color.y * 255.0f),
+                            static_cast<Uint8>( g_settings.m_clear_color.z * 255.0f),
+                            static_cast<Uint8>( g_settings.m_clear_color.w * 255.0f));
     // clang-format on
     SDL_RenderClear(m_sdl_renderer.get());
 }
