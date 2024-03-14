@@ -31,7 +31,7 @@ public:
 
 public:
     void NewFrame();
-    void PollAndHandleEvents();
+    void HandleEvent();
     void UpdateUI();
     void Step();
     void RenderEntities();

@@ -97,7 +97,7 @@ void Application::Run() {
         // ImGui context begin
         m_game->NewFrame();
 
-        m_game->PollAndHandleEvents();
+        m_game->HandleEvent();
 
         // ImGui context end
 

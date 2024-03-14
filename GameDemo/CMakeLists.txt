@@ -9,4 +9,4 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/Coconut/s
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Coconut)
 
-file(COPY "${CMAKE_SOURCE_DIR}/assets" DESTINATION "${CMAKE_BINARY_DIR}/Bird")
+# file(COPY "${CMAKE_SOURCE_DIR}/Coconut/assets" DESTINATION "${CMAKE_BINARY_DIR}/Bird")

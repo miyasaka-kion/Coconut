@@ -46,4 +46,4 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_SOURCE_DIR}/vendor/en
 
 message("entt include dir: ${CMAKE_SOURCE_DIR}/vendor/entt/include")
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE COCONUT_ASSET_PATH="${CMAKE_SOURCE_DIR}/assets")
+target_compile_definitions(${PROJECT_NAME} PRIVATE COCONUT_ASSET_PATH="${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/assets")

@@ -337,7 +337,7 @@ void GameContext::NewFrame() {
 /**
  * Polls events in the game context and handles mouse and keyboard input.
  */
-void GameContext::PollAndHandleEvents() {
+void GameContext::HandleEvent() {
     SDL_Event event;
     while(SDL_PollEvent(&event)) {
         ImGui_ImplSDL2_ProcessEvent(&event);
