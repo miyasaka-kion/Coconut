@@ -25,6 +25,7 @@ Settings             g_settings;
 DebugDraw            g_debugDraw;
 
 GameContext::GameContext() : m_layerManager(this) {
+    Coconut::Log::init();
     Init_SDL_Window();
     Init_SDL_Renderer();
     Init_Imgui();

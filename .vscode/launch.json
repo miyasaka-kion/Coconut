@@ -11,6 +11,15 @@
             "request": "launch",
             "environment": [{ "name": "config", "value": "Debug" }],
             "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "(ctest) Launch",
+            "type": "lldb",
+            "request": "launch",
+            // Resolved by CMake Tools:
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/build/Coconut/unitTest/unit_test",
+            "args": [ "${cmake.testArgs}"],
         }
     ]
 }

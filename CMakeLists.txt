@@ -12,6 +12,8 @@ project(SDL_Game)
 message("CMAKE_ASSET_DIR = ${CMAKE_SOURCE_DIR}/assets")
 message("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 
+include(CTest)
+
 add_subdirectory(Coconut)
 add_subdirectory(LevelEditor)
 # add_subdirectory(GameDemo)
