@@ -13,6 +13,7 @@
 #include "Util/imgui_include.h"
 
 #include "Player.h"
+#include "TheoJansen.h"
 
 Application::Application() {
     m_game = std::make_unique< GameContext >();
@@ -24,62 +25,7 @@ Application::Application() {
 }
 
 void Application::LoadEntities() {
-    {
-        // Entity box_entity = m_game->CreateEntity();
-        auto boxSize = b2Vec2(1.0f, 1.0f);  // TODO Store this ...
-
-        b2BodyDef bd;
-        bd.type   = b2_dynamicBody;
-        auto body = m_game->m_world->CreateBody(&bd);
-        body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-
-        b2PolygonShape dynamicBox;
-        dynamicBox.SetAsBox((boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
-
-        CC_CORE_INFO("box info:  hx: {}, hy: {}", (boxSize.x / 2.0f) - dynamicBox.m_radius, (boxSize.y / 2.0f) - dynamicBox.m_radius);
-
-        b2FixtureDef fd;
-        fd.shape       = &dynamicBox;
-        fd.density     = 1;
-        fd.friction    = 0.1f;
-        fd.restitution = 0.5f;
-
-        auto f = body->CreateFixture(&fd);
-
-        auto box = m_game->CreateEntity();
-
-        const auto& info = m_game->GetSpriteInfo("TEST_BOX_0");
-
-        box.AddComponent< SpriteComponent >(info);
-        box.AddComponent< PhysicsComponent >(body);
-        box.AddComponent< PlayerComponent >();
-
-        // for(int i = 0; i <= 29; i++) {
-        //     auto        body                  = m_game->m_world->CreateBody(&bd);
-        //     std::string name                  = "INGAME_BLOCKS_WOOD_1_" + std::to_string(i);
-        //     auto        f                     = body->CreateFixture(&fd);
-        //     auto        box_entity_on_fixture = m_game->CreateEntity();
-        //     const auto& info                  = m_game->GetSpriteInfo(name);
-        //     box_entity_on_fixture.AddComponent< SpriteComponent >(info);
-        //     box_entity_on_fixture.AddComponent< PhysicsComponent >(body);
-        // }
-
-        // box_fixture.AddComponent< BodyComponent >(body);
-    }
-
-    {
-        Entity edge = m_game->CreateEntity();
-
-        b2BodyDef bd;
-        bd.type   = b2_staticBody;
-        auto body = m_game->m_world->CreateBody(&bd);
-
-        b2EdgeShape edgeShape;
-        edgeShape.SetTwoSided(b2Vec2(-40.0f, -20.0f), b2Vec2(40.0f, -20.0f));
-        auto f = body->CreateFixture(&edgeShape, 0.0f);
-
-        f->SetFriction(1.0f);
-    }
+    TheoJansen theo(m_game.get());
 }
 
 /**

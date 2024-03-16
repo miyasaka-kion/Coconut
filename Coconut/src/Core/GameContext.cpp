@@ -39,7 +39,6 @@ GameContext::GameContext() : m_layerManager(this) {
     CreateGuiLayer<PhysicsInfoLayer>(m_physicsInfo);
     CreateGuiLayer<ExampleLayer>(g_settings);
     CreateGuiLayer<WindowSettingsLayer>(g_settings);
-
 }
 
 GameContext::~GameContext() {
@@ -67,7 +66,7 @@ void GameContext::Init_SDL_Window() {
     g_camera.m_width  = g_settings.m_windowWidth;
     g_camera.m_height = g_settings.m_windowHeight;
 
-    m_sdl_window = SDL::Window(SDL_CreateWindow("SDL with box2d Game Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN));
+    m_sdl_window = SDL::Window(SDL_CreateWindow("Coconut Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN));
 
     if(m_sdl_window == nullptr) {
         CC_CORE_ERROR("SDL window failed to initialize! ");
@@ -142,12 +141,11 @@ void GameContext::UpdateUI() {
     m_layerManager.Render();
 
     m_textLine += m_textIncrement;
-
-
 }
 
 void GameContext::Step() {
     float timeStep = g_settings.m_hertz > 0.0f ? 1.0f / g_settings.m_hertz : float(0.0f);
+    // float timeStep = 1 / 60.0f;
 
     if(g_settings.m_pause) {
         if(g_settings.m_singleStep) {
@@ -377,7 +375,7 @@ void GameContext::RemoveInactive() {
 /**
  * Function called when a preset is submitted to SDL renderer.
  */
-void GameContext::PresetSubmitted() {
+void GameContext::PresentSubmitted() {
     ImGui::Render();
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
     // ImGui context end

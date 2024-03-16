@@ -11,7 +11,6 @@ struct Settings {
         m_testIndex    = 0;
         m_windowWidth  = 1600;
         m_windowHeight = 900;
-        // m_hertz = 60.0f;
         m_hertz              = 120.0f;
         m_velocityIterations = 8;
         m_positionIterations = 3;
@@ -42,7 +41,7 @@ struct Settings {
         m_clear_color    = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);
     }
 
-    void Save();
+    void Save(); // TODO
     void Load();
 
     // box2d settings

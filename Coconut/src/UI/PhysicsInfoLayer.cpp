@@ -36,7 +36,15 @@ void PhysicsInfoLayer::GuiRender() {
         ImGui::SameLine();
         if(ImGui::Button("120Hz"))
             g_settings.m_hertz = 120.0f;
-        ImGui::SameLine();
+
+        ImVec2 button_sz = ImVec2(-1, 0);
+        if(ImGui::Button("Pause (P)", button_sz)) {
+            g_settings.m_pause = !g_settings.m_pause;
+        }
+
+        if(ImGui::Button("Single Step (O)", button_sz)) {
+            g_settings.m_singleStep = !g_settings.m_singleStep;
+        }
 
         ImGui::Separator();
 

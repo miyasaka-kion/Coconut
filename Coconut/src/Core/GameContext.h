@@ -35,7 +35,7 @@ public:
     void UpdateUI();
     void Step();
     void RenderEntities();
-    void PresetSubmitted();
+    void PresentSubmitted();
     void RemoveInactive();
 
 public:

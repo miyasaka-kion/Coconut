@@ -42,9 +42,12 @@ public:
         m_sprite_infos.push_back(info);
     }
 
-    virtual void UpdateRenderCandidate() {
-        m_ind = 0;
+    virtual void UpdateRenderCandidate([[maybe_unused]] std::size_t ind) {
+        CC_ASSERT(ind <= m_sprite_infos.size(), "_INFO_: index out of range!");
+        m_ind = ind;
     }
+
+
 
 protected:
     void SetState(std::size_t ind) {
