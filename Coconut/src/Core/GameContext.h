@@ -128,7 +128,7 @@ private:
     // UI 
 public:
     template < typename T, typename... Args >
-    void CreateGuiLayer(Args&&... args) {
+    void AddImGuiLayer(Args&&... args) {
         m_layerManager.AddLayer<T>(std::forward<Args>(args)...);
     }
     

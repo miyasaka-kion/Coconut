@@ -1,5 +1,6 @@
 #include "Core/GameContext.h"
 
+#include <SDL2/SDL_timer.h>
 #include <SDL_Image.h>
 #include <box2d/box2d.h>
 
@@ -36,9 +37,9 @@ GameContext::GameContext() : m_layerManager(this) {
     m_spriteLoader.Load(COCONUT_ASSET_PATH, &m_textureManager);
     m_closeGame = false;
 
-    CreateGuiLayer<PhysicsInfoLayer>(m_physicsInfo);
-    CreateGuiLayer<ExampleLayer>(g_settings);
-    CreateGuiLayer<WindowSettingsLayer>(g_settings);
+    AddImGuiLayer<PhysicsInfoLayer>(m_physicsInfo);
+    AddImGuiLayer<ExampleLayer>(g_settings);
+    AddImGuiLayer<WindowSettingsLayer>(g_settings);
 }
 
 GameContext::~GameContext() {
@@ -78,7 +79,8 @@ void GameContext::Init_SDL_Window() {
 
 void GameContext::Init_SDL_Renderer() {
     // m_SDL_Renderer = SDL_CreateRenderer(m_SDL_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    m_sdl_renderer = SDL::Renderer(SDL_CHECK(SDL_CreateRenderer(m_sdl_window.get(), -1, SDL_RENDERER_ACCELERATED)));
+    m_sdl_renderer = SDL::Renderer(SDL_CHECK(SDL_CreateRenderer(m_sdl_window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)));
+
 
     SDL_RendererInfo info;
     SDL_GetRendererInfo(m_sdl_renderer.get(), &info);
@@ -324,6 +326,9 @@ void GameContext::SetBackgroundColor() {
     SDL_RenderClear(m_sdl_renderer.get());
 }
 
+/**
+ * Function to start a new frame in the game context. This create ImGui context and refresh some settings in DebugDraw.
+ */
 void GameContext::NewFrame() {
     ImGui_ImplSDLRenderer2_NewFrame();
     ImGui_ImplSDL2_NewFrame();

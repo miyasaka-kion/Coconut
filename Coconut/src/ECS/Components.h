@@ -1,10 +1,13 @@
 #pragma once
 
+#include "Core/Assert.h"
 #include "ECS/SpriteComponent.h"
 
 struct PhysicsComponent {
     PhysicsComponent() = default;
-    PhysicsComponent(b2Body* body) : m_body(body) {}
+    PhysicsComponent(b2Body* body) : m_body(body) {
+        CC_ASSERT(body, "_INFO_: body must not be nullptr");
+    }
 
     ~PhysicsComponent() {
         m_body->GetWorld()->DestroyBody(m_body);

@@ -3,23 +3,21 @@
 #include <memory>
 #include <SDL2/SDL_keycode.h>
 
-#include "Core/GameContext.h"
-#include "Player.h"
+#include "Coconut.h"
+#include "TheoJansen.h"
 
-class Application {
+class Game {
 public:
-    Application();
+    Game();
 
     void Run();
     
-    bool ClientHandleEvent(SDL_Event& event);
     bool HandlePlayerInput(SDL_Keycode sym);
+    bool ClientHandleEvent(SDL_Event& event);
 
 private:
     void LoadEntities();
 
     std::unique_ptr< GameContext > m_game;
-    // const SDL_Renderer* m_renderer;
-
-    PlayerSettings m_playerSettings;
+    std::unique_ptr<TheoJansen> m_theo;
 };
