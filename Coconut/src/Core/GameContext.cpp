@@ -363,9 +363,9 @@ void GameContext::RenderEntities() {
     QuadWrite writer(m_sdl_renderer.get());
     for(auto [entity, physics, sprite]: view.each()) {
         auto& info   = sprite.GetSpriteInfo();
-        auto box_size = b2Vec2(1.0f, 1.0f); // emmm.. where to store this?
+        // auto box_size = b2Vec2(1.0f, 1.0f); // emmm.. where to store this?
 
-        writer.UpdateRenderInfo(&info, box_size, physics.GetPosition(), physics.GetAngle());
+        writer.UpdateRenderInfo(&info, sprite.GetBoxSize(), physics.GetPosition(), physics.GetAngle());
         writer.Render();
     }
 }

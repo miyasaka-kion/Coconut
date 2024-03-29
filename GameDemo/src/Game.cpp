@@ -57,11 +57,9 @@ void Game::Run() {
         {
             
         }
-
-        m_game->RenderEntities();
-
         m_game->ShowDebugDraw();
 
+        m_game->RenderEntities();
    
         m_game->Step();
 

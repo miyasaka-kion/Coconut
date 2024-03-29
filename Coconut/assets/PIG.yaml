@@ -1,0 +1,31 @@
+TextureImporter:
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MAIN_BODY
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 181
+        height: 180
+      alignment: 0
+    - serializedVersion: 2
+      name: LEG_UP
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 0
+        width: 109
+        height: 109
+      alignment: 0
+    - serializedVersion: 2
+      name: LEG_DOWN
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 0
+        width: 108
+        height: 173
+      alignment: 0

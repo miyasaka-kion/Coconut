@@ -1,6 +1,8 @@
 #include "TheoJansen.h"
 
 #include "ECS/Components.h"
+#include "ECS/SpriteComponent.h"
+#include "Render/SpriteLoader.h"
 #include "UI/Layer.h"
 #include "imgui.h"
 
@@ -36,7 +38,12 @@ void TheoJansen::AssembleTheo(b2World* world) {
         bd.type     = b2_dynamicBody;
         bd.position = pivot + m_offset;
         m_chassis   = world->CreateBody(&bd);
-        m_chassis->CreateFixture(&sd);
+        m_chassis->CreateFixture(&sd);        
+        auto chassis = m_gc->CreateEntity();
+        auto info = m_gc->GetSpriteInfo("MAIN_BODY");
+        chassis.AddComponent<SpriteComponent>(info, b2Vec2(10.0f, 10.0f));
+        chassis.AddComponent<PhysicsComponent>(m_chassis);
+        
     }
 
     {
@@ -178,8 +185,8 @@ bool TheoJansen::HandleKeyboard(SDL_Keycode key) {
     switch(key) {
         CC_INFO("Key pressed: {}", key);
     case SDLK_SPACE: {
-        // m_wheel->ApplyForce(b2Vec2(0.0f, m_JumpForce), b2Vec2_zero, true);
-        // break;
+        m_chassis->ApplyForce(b2Vec2(0.0f, m_JumpForce), b2Vec2_zero, true);
+        break;
     }
     case SDLK_a: {
         CC_INFO("Key [a] pressed");

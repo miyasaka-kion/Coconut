@@ -19,9 +19,6 @@ public:
     // }
 
     bool HandleKeyboard(SDL_Keycode key);
-    void Update() {
-        m_motorJoint->SetMotorSpeed(m_motorSpeed);
-    }
 private:
     void SetSpeed(const float speed) {
         m_motorJoint->SetMotorSpeed(speed);

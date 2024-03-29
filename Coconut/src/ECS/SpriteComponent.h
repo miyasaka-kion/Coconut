@@ -22,6 +22,7 @@ class SpriteComponent {
 public:
     SpriteComponent() = delete;
     SpriteComponent(const SpriteInfo& sprite_info) : m_sprite_infos{ sprite_info }, m_ind(0) {}
+    SpriteComponent(const SpriteInfo& sprite_info, const b2Vec2& box_size) : m_sprite_infos{ sprite_info }, m_ind(0), m_box_size{box_size} {}
 
     [[nodiscard]] const SDL_Texture* GetTexture() const {
         CC_ASSERT(!m_sprite_infos.empty(), "_INFO_: internal member: m_sprite_infos should not be empty");
@@ -47,7 +48,9 @@ public:
         m_ind = ind;
     }
 
-
+    void SetBoxSize(const b2Vec2& box_size) { m_box_size = box_size; }
+    
+    b2Vec2 GetBoxSize() { return m_box_size; }
 
 protected:
     void SetState(std::size_t ind) {
@@ -64,4 +67,5 @@ private:
     Entity*     entity;
     // entt::entity m_entity_handle;
     std::filesystem::path m_texture_path;
+    b2Vec2 m_box_size = b2Vec2(5.0f, 5.0f);
 };
