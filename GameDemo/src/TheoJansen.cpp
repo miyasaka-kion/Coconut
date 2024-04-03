@@ -190,6 +190,7 @@ bool TheoJansen::HandleKeyboard(SDL_Keycode key) {
     }
     case SDLK_a: {
         CC_INFO("Key [a] pressed");
+        
         if(m_motorSpeed > 0) {
             m_motorSpeed = -m_motorSpeed;
             m_motorJoint->SetMotorSpeed(m_motorSpeed);

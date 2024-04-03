@@ -119,6 +119,7 @@ private:
     SpriteLoader   m_spriteLoader;
 
     // debugdraw
+    DebugDraw m_debugDraw;
     int m_textLine;
     int m_textIncrement;
 
@@ -135,7 +136,6 @@ public:
 private:
     LayerManager m_layerManager;
 
-private:
 
     friend class Entity;
     friend class Layer;

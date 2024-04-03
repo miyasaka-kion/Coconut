@@ -16,5 +16,6 @@ include(CTest)
 
 add_subdirectory(Coconut)
 add_subdirectory(LevelEditor)
-add_subdirectory(GameDemo)
+# add_subdirectory(GameDemo)
+add_subdirectory(Car)
 

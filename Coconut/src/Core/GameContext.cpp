@@ -23,7 +23,7 @@
 
 extern Camera        g_camera;
 Settings             g_settings;
-DebugDraw            g_debugDraw;
+
 
 GameContext::GameContext() : m_layerManager(this) {
     Coconut::Log::init();
@@ -119,15 +119,15 @@ void GameContext::Init_Box2D() {
 }
 
 void GameContext::Init_DebugDraw() {
-    g_debugDraw.Init(m_sdl_renderer.get());
-    m_world->SetDebugDraw(&g_debugDraw);
+    m_debugDraw.Init(m_sdl_renderer.get());
+    m_world->SetDebugDraw(&m_debugDraw);
 
     uint32 flags = 0;
     flags += g_settings.m_drawShapes * b2Draw::e_shapeBit;
     flags += g_settings.m_drawJoints * b2Draw::e_jointBit;
     flags += g_settings.m_drawAABBs * b2Draw::e_aabbBit;
     flags += g_settings.m_drawCOMs * b2Draw::e_centerOfMassBit;
-    g_debugDraw.SetFlags(flags);
+    m_debugDraw.SetFlags(flags);
 }
 
 /**
@@ -157,7 +157,7 @@ void GameContext::Step() {
             timeStep = 0.0f;
         }
 
-        g_debugDraw.DrawString(5, m_textLine, "****PAUSED****");
+        m_debugDraw.DrawString(5, m_textLine, "****PAUSED****");
         m_textLine += m_textIncrement;
     }
 
@@ -166,7 +166,7 @@ void GameContext::Step() {
     flags += g_settings.m_drawJoints * b2Draw::e_jointBit;
     flags += g_settings.m_drawAABBs * b2Draw::e_aabbBit;
     flags += g_settings.m_drawCOMs * b2Draw::e_centerOfMassBit;
-    g_debugDraw.SetFlags(flags);
+    m_debugDraw.SetFlags(flags);
 
     m_world->SetAllowSleeping(g_settings.m_enableSleep);
     m_world->SetWarmStarting(g_settings.m_enableWarmStarting);
@@ -185,11 +185,11 @@ void GameContext::Step() {
 
     if(g_settings.m_drawStats) {
         // FPS
-        g_debugDraw.DrawString(5, m_textLine, "FPS: %5.2f", 1.0f / timeStep);
+        m_debugDraw.DrawString(5, m_textLine, "FPS: %5.2f", 1.0f / timeStep);
         m_textLine += m_textIncrement;
 
         // Camera
-        g_debugDraw.DrawString(5, m_textLine, "Camera Pos: (%4.2f,%4.2f,zoom: %4.2f)", g_camera.m_center.x, g_camera.m_center.y, g_camera.m_zoom);
+        m_debugDraw.DrawString(5, m_textLine, "Camera Pos: (%4.2f,%4.2f,zoom: %4.2f)", g_camera.m_center.x, g_camera.m_center.y, g_camera.m_zoom);
         m_textLine += m_textIncrement;
 
         // Mouse
@@ -200,21 +200,21 @@ void GameContext::Step() {
 
         b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
 
-        g_debugDraw.DrawString(5, m_textLine, "Mouse Pos: (%4.2f,%4.2f)", pw.x, pw.y);
+        m_debugDraw.DrawString(5, m_textLine, "Mouse Pos: (%4.2f,%4.2f)", pw.x, pw.y);
         m_textLine += m_textIncrement;
 
         // world info
         int32 bodyCount    = m_world->GetBodyCount();
         int32 contactCount = m_world->GetContactCount();
         int32 jointCount   = m_world->GetJointCount();
-        g_debugDraw.DrawString(5, m_textLine, "bodies/contacts/joints = %d/%d/%d", bodyCount, contactCount, jointCount);
+        m_debugDraw.DrawString(5, m_textLine, "bodies/contacts/joints = %d/%d/%d", bodyCount, contactCount, jointCount);
         m_textLine += m_textIncrement;
 
         int32 proxyCount = m_world->GetProxyCount();
         int32 height     = m_world->GetTreeHeight();
         int32 balance    = m_world->GetTreeBalance();
         float quality    = m_world->GetTreeQuality();
-        g_debugDraw.DrawString(5, m_textLine, "proxies/height/balance/quality = %d/%d/%d/%g", proxyCount, height, balance, quality);
+        m_debugDraw.DrawString(5, m_textLine, "proxies/height/balance/quality = %d/%d/%d/%g", proxyCount, height, balance, quality);
         m_textLine += m_textIncrement;
     }
 
@@ -258,21 +258,21 @@ void GameContext::Step() {
             
         }
 
-        g_debugDraw.DrawString(5, m_textLine, "step [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.step, aveProfile.step, m_physicsInfo.m_maxProfile.step);
+        m_debugDraw.DrawString(5, m_textLine, "step [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.step, aveProfile.step, m_physicsInfo.m_maxProfile.step);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "collide [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.collide, aveProfile.collide, m_physicsInfo.m_maxProfile.collide);
+        m_debugDraw.DrawString(5, m_textLine, "collide [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.collide, aveProfile.collide, m_physicsInfo.m_maxProfile.collide);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "solve [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solve, aveProfile.solve, m_physicsInfo.m_maxProfile.solve);
+        m_debugDraw.DrawString(5, m_textLine, "solve [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solve, aveProfile.solve, m_physicsInfo.m_maxProfile.solve);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "solve init [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveInit, aveProfile.solveInit, m_physicsInfo.m_maxProfile.solveInit);
+        m_debugDraw.DrawString(5, m_textLine, "solve init [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveInit, aveProfile.solveInit, m_physicsInfo.m_maxProfile.solveInit);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "solve velocity [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveVelocity, aveProfile.solveVelocity, m_physicsInfo.m_maxProfile.solveVelocity);
+        m_debugDraw.DrawString(5, m_textLine, "solve velocity [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveVelocity, aveProfile.solveVelocity, m_physicsInfo.m_maxProfile.solveVelocity);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "solve position [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solvePosition, aveProfile.solvePosition, m_physicsInfo.m_maxProfile.solvePosition);
+        m_debugDraw.DrawString(5, m_textLine, "solve position [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solvePosition, aveProfile.solvePosition, m_physicsInfo.m_maxProfile.solvePosition);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "solveTOI [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveTOI, aveProfile.solveTOI, m_physicsInfo.m_maxProfile.solveTOI);
+        m_debugDraw.DrawString(5, m_textLine, "solveTOI [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.solveTOI, aveProfile.solveTOI, m_physicsInfo.m_maxProfile.solveTOI);
         m_textLine += m_textIncrement;
-        g_debugDraw.DrawString(5, m_textLine, "broad-phase [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.broadphase, aveProfile.broadphase, m_physicsInfo.m_maxProfile.broadphase);
+        m_debugDraw.DrawString(5, m_textLine, "broad-phase [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.broadphase, aveProfile.broadphase, m_physicsInfo.m_maxProfile.broadphase);
         m_textLine += m_textIncrement;
     }
 
@@ -285,29 +285,29 @@ void GameContext::Step() {
 
             if(point->state == b2_addState) {
                 // Add
-                g_debugDraw.DrawPoint(point->position, 10.0f, b2Color(0.3f, 0.95f, 0.3f));
+                m_debugDraw.DrawPoint(point->position, 10.0f, b2Color(0.3f, 0.95f, 0.3f));
             }
             else if(point->state == b2_persistState) {
                 // Persist
-                g_debugDraw.DrawPoint(point->position, 5.0f, b2Color(0.3f, 0.3f, 0.95f));
+                m_debugDraw.DrawPoint(point->position, 5.0f, b2Color(0.3f, 0.3f, 0.95f));
             }
 
             if(g_settings.m_drawContactNormals == 1) {
                 b2Vec2 p1 = point->position;
                 b2Vec2 p2 = p1 + k_axisScale * point->normal;
-                g_debugDraw.DrawSegment(p1, p2, b2Color(0.9f, 0.9f, 0.9f));
+                m_debugDraw.DrawSegment(p1, p2, b2Color(0.9f, 0.9f, 0.9f));
             }
             else if(g_settings.m_drawContactImpulse == 1) {
                 b2Vec2 p1 = point->position;
                 b2Vec2 p2 = p1 + k_impulseScale * point->normalImpulse * point->normal;
-                g_debugDraw.DrawSegment(p1, p2, b2Color(0.9f, 0.9f, 0.3f));
+                m_debugDraw.DrawSegment(p1, p2, b2Color(0.9f, 0.9f, 0.3f));
             }
 
             if(g_settings.m_drawFrictionImpulse == 1) {
                 b2Vec2 tangent = b2Cross(point->normal, 1.0f);
                 b2Vec2 p1      = point->position;
                 b2Vec2 p2      = p1 + k_impulseScale * point->tangentImpulse * tangent;
-                g_debugDraw.DrawSegment(p1, p2, b2Color(0.9f, 0.9f, 0.3f));
+                m_debugDraw.DrawSegment(p1, p2, b2Color(0.9f, 0.9f, 0.3f));
             }
         }
     }
