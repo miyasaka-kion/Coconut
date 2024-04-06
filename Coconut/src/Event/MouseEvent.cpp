@@ -38,10 +38,10 @@ void MouseEvent::MouseMotion(b2Vec2& ps) {
 }
 
 void MouseEvent::MouseWheelDown(b2Vec2& pw) {
-    g_camera.m_zoom /= 1.1f;
+    g_camera.m_zoom *= 1.1f;
 }
 
 void MouseEvent::MouseWheelUp(b2Vec2& pw) {
 
-    g_camera.m_zoom *= 1.1f;
+    g_camera.m_zoom /= 1.1f;
 }
