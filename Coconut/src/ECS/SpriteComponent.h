@@ -23,13 +23,17 @@ class SpriteComponent {
 public:
     SpriteComponent() = delete;
     SpriteComponent(const SpriteInfo& sprite_info) : m_sprite_infos{ sprite_info }, m_ind(0) {
-        CC_CORE_WARN("The size of the render box is not set. Make sure it is set somewhere else.");
+        CC_CORE_WARN("The size of the render box is not set. This overload will be removed in future version.");
         // this is a temp solution.
         // this ctor may be removed in future version.
     }
-    SpriteComponent(const SpriteInfo& sprite_info, const b2Vec2& box_size) : m_sprite_infos{ sprite_info }, m_ind(0), m_box_size{box_size} {}
+    SpriteComponent(const SpriteInfo& sprite_info, const b2Vec2& box_size) : m_sprite_infos{ sprite_info }, m_ind(0), m_box_size{ box_size } {
+        CC_CORE_WARN("The offset of the render box is not set. This overload will be removed in future version.");
+        // this is a temp solution.
+        // this ctor may be removed in future version.
+    }
 
-    SpriteComponent(const SpriteInfo& sprite_info, const b2Vec2& box_size, const b2Vec2& offset) : m_sprite_infos{ sprite_info }, m_ind(0), m_box_size{box_size}, m_offset{offset}  {}
+    SpriteComponent(const SpriteInfo& sprite_info, const b2Vec2& box_size, const b2Vec2& local_offset) : m_sprite_infos{ sprite_info }, m_ind(0), m_box_size{box_size}, m_local_offset{local_offset}  {}
 
     [[nodiscard]] const SDL_Texture* GetTexture() const {
         CC_ASSERT(!m_sprite_infos.empty(), "_INFO_: internal member: m_sprite_infos should not be empty");
@@ -59,9 +63,12 @@ public:
     
     b2Vec2 GetBoxSize() const  { return m_box_size; }
 
-    void SetOffset(const b2Vec2& offset) { m_offset = offset; }
+    void SetOffset(const b2Vec2& offset) { m_local_offset = offset; }
 
-    b2Vec2 GetOffset() const { return m_offset; }
+    b2Vec2 GetLocalOffset() const { 
+        return m_local_offset; 
+    }
+
 
 protected:
     void SetState(std::size_t ind) {
@@ -75,11 +82,11 @@ private:
     std::size_t               m_ind;
 
     std::string m_sprite_name;
-    Entity*     entity;
-    // entt::entity m_entity_handle;
     std::filesystem::path m_texture_path;
+
+    // Entity entity; TODO
 
     // render info
     b2Vec2 m_box_size = b2Vec2(5.0f, 5.0f);
-    b2Vec2 m_offset = b2Vec2_zero;
+    b2Vec2 m_local_offset = b2Vec2_zero;
 };

@@ -19,7 +19,7 @@ void PhysicsInfoLayer::GuiRender() {
 
         ImGui::Text("Physics Settings");
         auto gravity = world->GetGravity();
-        ImGui::SliderFloat("gravity.y", &gravity.y, -10.0f, 0.0f);
+        ImGui::SliderFloat("gravity.y", &gravity.y, -20.0f, 0.0f);
         world->SetGravity(gravity);
 
         ImGui::SliderInt("Vel Iters", &g_settings.m_velocityIterations, 0, 50);

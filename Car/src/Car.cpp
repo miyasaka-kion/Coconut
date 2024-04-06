@@ -10,13 +10,13 @@
 #include "Coconut.h"
 
 Car::Car(GameContext* gc) : m_gc(gc) {
-
-    m_speed = 50.0f;
+    auto world = gc->GetWorld();
+    m_speed    = 50.0f;
 
     b2Body* ground = NULL;
     {
         b2BodyDef bd;
-        ground = gc->GetWorld()->CreateBody(&bd);
+        ground = world->CreateBody(&bd);
 
         b2EdgeShape shape;
 
@@ -73,7 +73,7 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         b2BodyDef bd;
         bd.position.Set(140.0f, 1.0f);
         bd.type      = b2_dynamicBody;
-        b2Body* body = gc->GetWorld()->CreateBody(&bd);
+        b2Body* body = world->CreateBody(&bd);
 
         b2PolygonShape box;
         box.SetAsBox(10.0f, 0.25f);
@@ -84,7 +84,7 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         jd.lowerAngle  = -8.0f * b2_pi / 180.0f;
         jd.upperAngle  = 8.0f * b2_pi / 180.0f;
         jd.enableLimit = true;
-        gc->GetWorld()->CreateJoint(&jd);
+        world->CreateJoint(&jd);
 
         body->ApplyAngularImpulse(100.0f, true);
     }
@@ -107,19 +107,19 @@ Car::Car(GameContext* gc) : m_gc(gc) {
             b2BodyDef bd;
             bd.type = b2_dynamicBody;
             bd.position.Set(161.0f + 2.0f * i, -0.125f);
-            b2Body* body = gc->GetWorld()->CreateBody(&bd);
+            b2Body* body = world->CreateBody(&bd);
             body->CreateFixture(&fd);
 
             b2Vec2 anchor(160.0f + 2.0f * i, -0.125f);
             jd.Initialize(prevBody, body, anchor);
-            gc->GetWorld()->CreateJoint(&jd);
+            world->CreateJoint(&jd);
 
             prevBody = body;
         }
 
         b2Vec2 anchor(160.0f + 2.0f * N, -0.125f);
         jd.Initialize(prevBody, ground, anchor);
-        gc->GetWorld()->CreateJoint(&jd);
+        world->CreateJoint(&jd);
     }
 
     // Boxes
@@ -132,23 +132,23 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         bd.type = b2_dynamicBody;
 
         bd.position.Set(230.0f, 0.5f);
-        body = gc->GetWorld()->CreateBody(&bd);
+        body = world->CreateBody(&bd);
         body->CreateFixture(&box, 0.5f);
 
         bd.position.Set(230.0f, 1.5f);
-        body = gc->GetWorld()->CreateBody(&bd);
+        body = world->CreateBody(&bd);
         body->CreateFixture(&box, 0.5f);
 
         bd.position.Set(230.0f, 2.5f);
-        body = gc->GetWorld()->CreateBody(&bd);
+        body = world->CreateBody(&bd);
         body->CreateFixture(&box, 0.5f);
 
         bd.position.Set(230.0f, 3.5f);
-        body = gc->GetWorld()->CreateBody(&bd);
+        body = world->CreateBody(&bd);
         body->CreateFixture(&box, 0.5f);
 
         bd.position.Set(230.0f, 4.5f);
-        body = gc->GetWorld()->CreateBody(&bd);
+        body = world->CreateBody(&bd);
         body->CreateFixture(&box, 0.5f);
     }
 
@@ -170,7 +170,7 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         b2BodyDef bd;
         bd.type = b2_dynamicBody;
         bd.position.Set(0.0f, 1.0f);
-        m_car = gc->GetWorld()->CreateBody(&bd);
+        m_car = world->CreateBody(&bd);
         m_car->CreateFixture(&chassis, 1.0f);
 
         b2FixtureDef fd;
@@ -179,11 +179,11 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         fd.friction = 0.9f;
 
         bd.position.Set(-1.0f, 0.35f);
-        m_wheel1 = gc->GetWorld()->CreateBody(&bd);
+        m_wheel1 = world->CreateBody(&bd);
         m_wheel1->CreateFixture(&fd);
 
         bd.position.Set(1.0f, 0.4f);
-        m_wheel2 = gc->GetWorld()->CreateBody(&bd);
+        m_wheel2 = world->CreateBody(&bd);
         m_wheel2->CreateFixture(&fd);
 
         b2WheelJointDef jd;
@@ -205,7 +205,7 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         jd.lowerTranslation = -0.25f;
         jd.upperTranslation = 0.25f;
         jd.enableLimit      = true;
-        m_spring1           = ( b2WheelJoint* )gc->GetWorld()->CreateJoint(&jd);
+        m_spring1           = ( b2WheelJoint* )world->CreateJoint(&jd);
 
         jd.Initialize(m_car, m_wheel2, m_wheel2->GetPosition(), axis);
         jd.motorSpeed       = 0.0f;
@@ -216,7 +216,7 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         jd.lowerTranslation = -0.25f;
         jd.upperTranslation = 0.25f;
         jd.enableLimit      = true;
-        m_spring2           = ( b2WheelJoint* )gc->GetWorld()->CreateJoint(&jd);
+        m_spring2           = ( b2WheelJoint* )world->CreateJoint(&jd);
     }
 
     GCRegister();
@@ -255,18 +255,18 @@ bool Car::HandleKeyboard(SDL_Keycode key) {
 
 void Car::GCRegister() {
     //  Entity e;
+
     auto e_chassis = m_gc->CreateEntity();
     e_chassis.AddComponent< PhysicsComponent >(m_car);
-    e_chassis.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_CHASSIS"), b2Vec2(3.1f, 1.4f), b2Vec2(0.0f, 0.2f));
+    e_chassis.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_CHASSIS"), b2Vec2(3.f, 1.4f), b2Vec2(-1.5f, 0.9f));
     e_chassis.AddComponent< TagComponent >("car chassis");
-    
-    auto e_wheel_front = m_gc->CreateEntity();  
+    m_gc->AddImGuiLayer< CarDebugLayer >(e_chassis);
+
+    auto e_wheel_front = m_gc->CreateEntity();
     e_wheel_front.AddComponent< PhysicsComponent >(m_wheel1);
-    e_wheel_front.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_WHEEL"), b2Vec2(0.8f, 0.8f));
+    e_wheel_front.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_WHEEL"), b2Vec2(0.8f, 0.8f), b2Vec2(-0.4f, 0.4f));
 
     auto e_wheel_back = m_gc->CreateEntity();
     e_wheel_back.AddComponent< PhysicsComponent >(m_wheel2);
-    e_wheel_back.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_WHEEL"), b2Vec2(0.8f, 0.8f));
-    
-    m_gc->AddImGuiLayer< CarDebugLayer >(e_chassis);
+    e_wheel_back.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_WHEEL"), b2Vec2(0.8f, 0.8f), b2Vec2(-0.4f, 0.4f));
 }

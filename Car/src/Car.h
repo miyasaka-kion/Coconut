@@ -56,7 +56,7 @@ public:
                 ImGui::SliderFloat("w", &box_size.y, 0.0f, 5.0f);
                 sprite.SetBoxSize(box_size);
 
-                b2Vec2 offset = sprite.GetOffset();
+                b2Vec2 offset = sprite.GetLocalOffset();
                 ImGui::SliderFloat("offset.x", &offset.x, -5.0f, 5.0f);
                 ImGui::SliderFloat("offset.y", &offset.y, -5.0f, 5.0f);
                 sprite.SetOffset(offset);

@@ -358,28 +358,12 @@ void GameContext::RenderEntities() {
     if(g_settings.m_drawSprites == false) {
         return;
     }
-
     auto      view = m_reg.view< PhysicsComponent, SpriteComponent >();  // TODO: temp sol
     QuadWrite writer(m_sdl_renderer.get());
     for(auto [entity, physics, sprite] : view.each()) {
-        auto& info = sprite.GetSpriteInfo();
-        writer.Render(&info, sprite.GetBoxSize(), physics.GetPosition() + sprite.GetOffset(), physics.GetAngle());
+        auto& info = sprite.GetSpriteInfo();    
+        writer.Render(&info, sprite.GetBoxSize(), physics.GetPosition(), sprite.GetLocalOffset(), physics.GetAngle());
     }
-
-    // auto      view = m_reg.view< SpriteComponent >();  // TODO: temp sol
-    // QuadWrite writer(m_sdl_renderer.get());
-    // for(auto [entity, sprite]: view.each()) {
-    //     auto& info   = sprite.GetSpriteInfo();
-
-    //     // try to get position info from PhysicsComponent
-    //     if(m_reg.all_of<PhysicsComponent>(entity)) {
-    //         auto physics = m_reg.get<PhysicsComponent>(entity);
-    //         writer.UpdateRenderInfo(&info, sprite.GetBoxSize(), physics.GetPosition(), physics.GetAngle());
-    //     }
-    //     else {
-    //         throw std::runtime_error("Cannot get the position of entity, entity handle:" + std::to_string(static_cast<unsigned int>(entity)));
-    //     }
-    //     writer.Render();
 }
 
 void GameContext::RemoveInactive() {
