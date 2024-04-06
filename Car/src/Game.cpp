@@ -16,21 +16,6 @@ Game::Game() {
 void Game::LoadEntities() {
     m_theo = std::make_unique<Car>(m_game.get());
 
-    // m_game->AddImGuiLayer
-    
-    // {
-    //     Entity edge = m_game->CreateEntity();
-
-    //     b2BodyDef bd;
-    //     bd.type   = b2_staticBody;
-    //     auto body = m_game->m_world->CreateBody(&bd);
-
-    //     b2EdgeShape edgeShape;
-    //     edgeShape.SetTwoSided(b2Vec2(-40.0f, 0.0f), b2Vec2(200.0f, 0.0f));
-    //     auto f = body->CreateFixture(&edgeShape, 0.0f);
-
-    //     f->SetFriction(1.0f);
-    // }
 }   
 
 /**

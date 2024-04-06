@@ -3,6 +3,7 @@
 #include <SDL2/SDL_keycode.h>
 
 #include "ECS/Components.h"
+#include "ECS/SpriteComponent.h"
 #include "Render/SpriteLoader.h"
 #include "UI/Layer.h"
 #include "imgui.h"
@@ -131,25 +132,14 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         b2BodyDef bd;
         bd.type = b2_dynamicBody;
 
-        bd.position.Set(230.0f, 0.5f);
-        body = world->CreateBody(&bd);
-        body->CreateFixture(&box, 0.5f);
-
-        bd.position.Set(230.0f, 1.5f);
-        body = world->CreateBody(&bd);
-        body->CreateFixture(&box, 0.5f);
-
-        bd.position.Set(230.0f, 2.5f);
-        body = world->CreateBody(&bd);
-        body->CreateFixture(&box, 0.5f);
-
-        bd.position.Set(230.0f, 3.5f);
-        body = world->CreateBody(&bd);
-        body->CreateFixture(&box, 0.5f);
-
-        bd.position.Set(230.0f, 4.5f);
-        body = world->CreateBody(&bd);
-        body->CreateFixture(&box, 0.5f);
+        for(int32 i = 0; i < 5; ++i) {
+            bd.position.Set(230.0f, 0.5f + static_cast< float >(i));
+            body = world->CreateBody(&bd);
+            body->CreateFixture(&box, 0.5f);
+            auto e = m_gc->CreateEntity();
+            e.AddComponent< PhysicsComponent >(body);
+            e.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("TEST_BOX_0"), b2Vec2(1.0f, 1.0f), b2Vec2(-0.5f, 0.5f));
+        }
     }
 
     // Car
@@ -217,9 +207,21 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         jd.upperTranslation = 0.25f;
         jd.enableLimit      = true;
         m_spring2           = ( b2WheelJoint* )world->CreateJoint(&jd);
-    }
 
-    GCRegister();
+        auto e_chassis = m_gc->CreateEntity();
+        e_chassis.AddComponent< PhysicsComponent >(m_car);
+        e_chassis.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_CHASSIS"), b2Vec2(3.f, 1.4f), b2Vec2(-1.5f, 0.9f));
+        e_chassis.AddComponent< TagComponent >("car chassis");
+        m_gc->AddImGuiLayer< CarDebugLayer >(e_chassis);
+
+        auto e_wheel_front = m_gc->CreateEntity();
+        e_wheel_front.AddComponent< PhysicsComponent >(m_wheel1);
+        e_wheel_front.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_WHEEL"), b2Vec2(0.8f, 0.8f), b2Vec2(-0.4f, 0.4f));
+
+        auto e_wheel_back = m_gc->CreateEntity();
+        e_wheel_back.AddComponent< PhysicsComponent >(m_wheel2);
+        e_wheel_back.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_WHEEL"), b2Vec2(0.8f, 0.8f), b2Vec2(-0.4f, 0.4f));
+    }
 }
 
 bool Car::HandleKeyboard(SDL_Keycode key) {
@@ -251,22 +253,4 @@ bool Car::HandleKeyboard(SDL_Keycode key) {
     }
     }
     return true;
-}
-
-void Car::GCRegister() {
-    //  Entity e;
-
-    auto e_chassis = m_gc->CreateEntity();
-    e_chassis.AddComponent< PhysicsComponent >(m_car);
-    e_chassis.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_CHASSIS"), b2Vec2(3.f, 1.4f), b2Vec2(-1.5f, 0.9f));
-    e_chassis.AddComponent< TagComponent >("car chassis");
-    m_gc->AddImGuiLayer< CarDebugLayer >(e_chassis);
-
-    auto e_wheel_front = m_gc->CreateEntity();
-    e_wheel_front.AddComponent< PhysicsComponent >(m_wheel1);
-    e_wheel_front.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_WHEEL"), b2Vec2(0.8f, 0.8f), b2Vec2(-0.4f, 0.4f));
-
-    auto e_wheel_back = m_gc->CreateEntity();
-    e_wheel_back.AddComponent< PhysicsComponent >(m_wheel2);
-    e_wheel_back.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_WHEEL"), b2Vec2(0.8f, 0.8f), b2Vec2(-0.4f, 0.4f));
 }

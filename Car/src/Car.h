@@ -17,9 +17,6 @@ public:
     bool HandleKeyboard(SDL_Keycode key);
 
 private:
-    void GCRegister();
-
-private:
     b2Body* m_car;
     b2Body* m_wheel1;
     b2Body* m_wheel2;
