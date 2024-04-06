@@ -218,6 +218,8 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         jd.enableLimit      = true;
         m_spring2           = ( b2WheelJoint* )gc->GetWorld()->CreateJoint(&jd);
     }
+
+    GCRegister();
 }
 
 bool Car::HandleKeyboard(SDL_Keycode key) {
@@ -249,4 +251,22 @@ bool Car::HandleKeyboard(SDL_Keycode key) {
     }
     }
     return true;
+}
+
+void Car::GCRegister() {
+    //  Entity e;
+    auto e_chassis = m_gc->CreateEntity();
+    e_chassis.AddComponent< PhysicsComponent >(m_car);
+    e_chassis.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_CHASSIS"), b2Vec2(3.1f, 1.4f), b2Vec2(0.0f, 0.2f));
+    e_chassis.AddComponent< TagComponent >("car chassis");
+    
+    auto e_wheel_front = m_gc->CreateEntity();  
+    e_wheel_front.AddComponent< PhysicsComponent >(m_wheel1);
+    e_wheel_front.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_WHEEL"), b2Vec2(0.8f, 0.8f));
+
+    auto e_wheel_back = m_gc->CreateEntity();
+    e_wheel_back.AddComponent< PhysicsComponent >(m_wheel2);
+    e_wheel_back.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_WHEEL"), b2Vec2(0.8f, 0.8f));
+    
+    m_gc->AddImGuiLayer< CarDebugLayer >(e_chassis);
 }

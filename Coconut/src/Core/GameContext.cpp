@@ -1,29 +1,30 @@
 #include "Core/GameContext.h"
 
+#include <stdexcept>
+
 #include <SDL2/SDL_timer.h>
 #include <SDL_Image.h>
 #include <box2d/box2d.h>
 
 #include "ECS/SpriteComponent.h"
 
-#include "Util/imgui_include.h"
-#include "Core/Log.h"
 #include "Core/Assert.h"
+#include "Core/Log.h"
 #include "ECS/Components.h"
 #include "ECS/Entity.h"
 #include "Event/KeyboardEvent.h"
 #include "Event/MouseEvent.h"
 #include "Render/DebugDraw.h"
-#include "Util/sdl_check.h"
-#include "Util/sdl_delete.h"
+#include "UI/ExampleLayer.h"
 #include "UI/Layer.h"
 #include "UI/PhysicsInfoLayer.h"
-#include "UI/ExampleLayer.h"
 #include "UI/WindowSettingsLayer.h"
+#include "Util/imgui_include.h"
+#include "Util/sdl_check.h"
+#include "Util/sdl_delete.h"
 
-extern Camera        g_camera;
-Settings             g_settings;
-
+extern Camera g_camera;
+Settings      g_settings;
 
 GameContext::GameContext() : m_layerManager(this) {
     Coconut::Log::init();
@@ -37,9 +38,9 @@ GameContext::GameContext() : m_layerManager(this) {
     m_spriteLoader.Load(COCONUT_ASSET_PATH, &m_textureManager);
     m_closeGame = false;
 
-    AddImGuiLayer<PhysicsInfoLayer>(m_physicsInfo);
-    AddImGuiLayer<ExampleLayer>(g_settings);
-    AddImGuiLayer<WindowSettingsLayer>(g_settings);
+    AddImGuiLayer< PhysicsInfoLayer >(m_physicsInfo);
+    AddImGuiLayer< ExampleLayer >(g_settings);
+    AddImGuiLayer< WindowSettingsLayer >(g_settings);
 }
 
 GameContext::~GameContext() {
@@ -81,7 +82,6 @@ void GameContext::Init_SDL_Renderer() {
     // m_SDL_Renderer = SDL_CreateRenderer(m_SDL_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     m_sdl_renderer = SDL::Renderer(SDL_CHECK(SDL_CreateRenderer(m_sdl_window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)));
 
-
     SDL_RendererInfo info;
     SDL_GetRendererInfo(m_sdl_renderer.get(), &info);
     CC_CORE_INFO("Current SDL_Renderer: {}", info.name);
@@ -114,8 +114,8 @@ void GameContext::Init_Box2D() {
     m_textIncrement = 18;
 
     // init physics info
-    m_physicsInfo.m_mouseJoint    = NULL;
-    m_physicsInfo.m_pointCount    = 0;
+    m_physicsInfo.m_mouseJoint = NULL;
+    m_physicsInfo.m_pointCount = 0;
 }
 
 void GameContext::Init_DebugDraw() {
@@ -220,7 +220,7 @@ void GameContext::Step() {
 
     // Track maximum profile times
     {
-        const b2Profile& p         = m_world->GetProfile();
+        const b2Profile& p                       = m_world->GetProfile();
         m_physicsInfo.m_maxProfile.step          = b2Max(m_physicsInfo.m_maxProfile.step, p.step);
         m_physicsInfo.m_maxProfile.collide       = b2Max(m_physicsInfo.m_maxProfile.collide, p.collide);
         m_physicsInfo.m_maxProfile.solve         = b2Max(m_physicsInfo.m_maxProfile.solve, p.solve);
@@ -255,7 +255,6 @@ void GameContext::Step() {
             aveProfile.solvePosition = scale * m_physicsInfo.m_totalProfile.solvePosition;
             aveProfile.solveTOI      = scale * m_physicsInfo.m_totalProfile.solveTOI;
             aveProfile.broadphase    = scale * m_physicsInfo.m_totalProfile.broadphase;
-            
         }
 
         m_debugDraw.DrawString(5, m_textLine, "step [ave] (max) = %5.2f [%6.2f] (%6.2f)", p.step, aveProfile.step, m_physicsInfo.m_maxProfile.step);
@@ -359,15 +358,28 @@ void GameContext::RenderEntities() {
     if(g_settings.m_drawSprites == false) {
         return;
     }
+
     auto      view = m_reg.view< PhysicsComponent, SpriteComponent >();  // TODO: temp sol
     QuadWrite writer(m_sdl_renderer.get());
-    for(auto [entity, physics, sprite]: view.each()) {
-        auto& info   = sprite.GetSpriteInfo();
-        // auto box_size = b2Vec2(1.0f, 1.0f); // emmm.. where to store this?
-
-        writer.UpdateRenderInfo(&info, sprite.GetBoxSize(), physics.GetPosition(), physics.GetAngle());
-        writer.Render();
+    for(auto [entity, physics, sprite] : view.each()) {
+        auto& info = sprite.GetSpriteInfo();
+        writer.Render(&info, sprite.GetBoxSize(), physics.GetPosition() + sprite.GetOffset(), physics.GetAngle());
     }
+
+    // auto      view = m_reg.view< SpriteComponent >();  // TODO: temp sol
+    // QuadWrite writer(m_sdl_renderer.get());
+    // for(auto [entity, sprite]: view.each()) {
+    //     auto& info   = sprite.GetSpriteInfo();
+
+    //     // try to get position info from PhysicsComponent
+    //     if(m_reg.all_of<PhysicsComponent>(entity)) {
+    //         auto physics = m_reg.get<PhysicsComponent>(entity);
+    //         writer.UpdateRenderInfo(&info, sprite.GetBoxSize(), physics.GetPosition(), physics.GetAngle());
+    //     }
+    //     else {
+    //         throw std::runtime_error("Cannot get the position of entity, entity handle:" + std::to_string(static_cast<unsigned int>(entity)));
+    //     }
+    //     writer.Render();
 }
 
 void GameContext::RemoveInactive() {

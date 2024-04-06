@@ -47,7 +47,7 @@ public:
     }
 
     // emm.. this should be change and remove in the future..
-    [[nodiscard]] const entt::registry& GetRegistry() const {
+    [[nodiscard]] entt::registry& GetRegistry() {
         return m_reg;
     }
 

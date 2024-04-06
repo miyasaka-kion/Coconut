@@ -12,6 +12,7 @@
 #include <entt.hpp>
 
 #include "Core/Assert.h"
+#include "Core/Log.h"
 #include "ECS/Entity.h"
 #include "Render/SpriteLoader.h"
 #include "Util/sdl_delete.h"
@@ -21,8 +22,14 @@
 class SpriteComponent {
 public:
     SpriteComponent() = delete;
-    SpriteComponent(const SpriteInfo& sprite_info) : m_sprite_infos{ sprite_info }, m_ind(0) {}
+    SpriteComponent(const SpriteInfo& sprite_info) : m_sprite_infos{ sprite_info }, m_ind(0) {
+        CC_CORE_WARN("The size of the render box is not set. Make sure it is set somewhere else.");
+        // this is a temp solution.
+        // this ctor may be removed in future version.
+    }
     SpriteComponent(const SpriteInfo& sprite_info, const b2Vec2& box_size) : m_sprite_infos{ sprite_info }, m_ind(0), m_box_size{box_size} {}
+
+    SpriteComponent(const SpriteInfo& sprite_info, const b2Vec2& box_size, const b2Vec2& offset) : m_sprite_infos{ sprite_info }, m_ind(0), m_box_size{box_size}, m_offset{offset}  {}
 
     [[nodiscard]] const SDL_Texture* GetTexture() const {
         CC_ASSERT(!m_sprite_infos.empty(), "_INFO_: internal member: m_sprite_infos should not be empty");
@@ -50,7 +57,11 @@ public:
 
     void SetBoxSize(const b2Vec2& box_size) { m_box_size = box_size; }
     
-    b2Vec2 GetBoxSize() { return m_box_size; }
+    b2Vec2 GetBoxSize() const  { return m_box_size; }
+
+    void SetOffset(const b2Vec2& offset) { m_offset = offset; }
+
+    b2Vec2 GetOffset() const { return m_offset; }
 
 protected:
     void SetState(std::size_t ind) {
@@ -67,5 +78,8 @@ private:
     Entity*     entity;
     // entt::entity m_entity_handle;
     std::filesystem::path m_texture_path;
+
+    // render info
     b2Vec2 m_box_size = b2Vec2(5.0f, 5.0f);
+    b2Vec2 m_offset = b2Vec2_zero;
 };

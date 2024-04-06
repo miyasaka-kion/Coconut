@@ -1,0 +1,22 @@
+TextureImporter:
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CAR_CHASSIS
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 667
+        height: 317
+      alignment: 0
+    - serializedVersion: 2
+      name: CAR_WHEEL
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 2
+        width: 259
+        height: 259
+      alignment: 0

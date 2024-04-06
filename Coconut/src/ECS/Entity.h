@@ -24,7 +24,7 @@ public:
     }
 
     template < typename T >
-    T& GetComponent() {
+    [[nodiscard]] decltype(auto) GetComponent() { //?? TODO!!!
         CC_ASSERT(HasComponent< T >(), "Entity does not have component!");
         return m_gameContext->m_reg.get< T >(m_entityHandle);
     }
@@ -63,6 +63,10 @@ public:
 
     bool operator!=(const Entity& other) const {
         return !(*this == other);
+    }
+
+    GameContext* GetContext() const {
+        return m_gameContext;
     }
 
 private:

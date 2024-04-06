@@ -10,20 +10,26 @@
 #include "Render/SpriteLoader.h"
 #include "Util/sdl_check.h"
 
-void QuadWrite::UpdateRenderInfo(SpriteInfo* info, const b2Vec2& box_size, const b2Vec2& pw, const float angle) {
-    this->info = info;
-    this->m_box_size = box_size;
-    this->m_pw       = pw;
-    this->angle      = angle;
-}
-
-void QuadWrite::Render() {
+/**
+ * Render function to display sprite at a specified position with a given angle.
+ *
+ * @param info Pointer to the SpriteInfo struct containing texture and rectangle information
+ * @param box_size Size of the box (world coordinates) enclosing the sprite
+ * @param pw World position of the point where the sprite begin to be rendered, and the sprite start to render on the upper left corner
+ * @param angle Angle at which the sprite should be rendered
+ *
+ * @return void
+ *
+ * @throws None
+ */
+void QuadWrite::Render(SpriteInfo* info, const b2Vec2& box_size, const b2Vec2& pw, const float angle) {
     SDL_Rect m_dst_rect;
-    m_dst_rect.h = g_camera.ConvertWorldToScreen(m_box_size.x);
-    m_dst_rect.w = g_camera.ConvertWorldToScreen(m_box_size.y);
+    m_dst_rect.h = g_camera.ConvertWorldToScreen(box_size.y);
+    m_dst_rect.w = g_camera.ConvertWorldToScreen(box_size.x);
 
-    m_pw         = m_pw + b2Vec2(-m_box_size.x / 2.0f, m_box_size.y / 2.0f);
-    auto ps      = g_camera.ConvertWorldToScreen(m_pw);
+    auto pw_offset         = pw + b2Vec2(-box_size.x / 2.0f, box_size.y / 2.0f);  // box offset
+
+    auto ps      = g_camera.ConvertWorldToScreen(pw_offset);
     m_dst_rect.x = static_cast< int >(ps.x);
     m_dst_rect.y = static_cast< int >(ps.y);
 

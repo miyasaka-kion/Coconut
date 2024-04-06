@@ -4,9 +4,10 @@
 #include <box2d/box2d.h>
 
 #include "Coconut.h"
+#include "ECS/Components.h"
+#include "ECS/Entity.h"
+#include "ECS/SpriteComponent.h"
 #include "imgui.h"
-
-class GameContext;
 
 // A TheJansen Loader
 class Car {
@@ -16,33 +17,59 @@ public:
     bool HandleKeyboard(SDL_Keycode key);
 
 private:
-	b2Body* m_car;
-	b2Body* m_wheel1;
-	b2Body* m_wheel2;
+    void GCRegister();
 
-	float m_speed;
-	b2WheelJoint* m_spring1;
-	b2WheelJoint* m_spring2;
+private:
+    b2Body* m_car;
+    b2Body* m_wheel1;
+    b2Body* m_wheel2;
+
+    float         m_speed;
+    b2WheelJoint* m_spring1;
+    b2WheelJoint* m_spring2;
 
     GameContext* m_gc;
 
-    friend class JansenDebugLayer;
+    friend class CarDebugLayer;
 };
 
-// class JansenDebugLayer : public Layer {
-// public:
-//     JansenDebugLayer(TheoJansen* theo) : m_theo(theo) {}
-//     void GuiRender() override {
-//         ImGui::Begin("Jansen Debug");
-//         ImGui::Text("Motor: [%.2f, %.2f]", m_theo->m_motorSpeed, m_theo->m_motorOn ? 1.0f : 0.0f);
-//         ImGui::Checkbox("Motor", &m_theo->m_motorOn);
-//         ImGui::DragFloat("Speed", &m_theo->m_motorSpeed, 0.1f, -1000.0f, 1000.0f);
-//         ImGui::DragFloat("Torque", &m_theo->m_torque, 0.1f, -1000.0f, 1000.0f);
-//         ImGui::DragFloat("JumpForce", &m_theo->m_JumpForce, 0.1f, 0.0f, 1000.0f);
-//         m_theo->SetSpeed(m_theo->m_motorSpeed);
-//         ImGui::End();
-//     }
+class CarDebugLayer : public Layer {
+public:
+    CarDebugLayer(Entity car) : m_car(car) {}
+    void GuiRender() override {
+        ImGui::Begin("Car Debug");
+        ImGui::SeparatorText("Sprite Positioning");
 
-// private:
-//     TheoJansen* m_theo;
-// };
+        auto& registry = m_car.GetContext()->GetRegistry();
+        auto  view     = registry.view< TagComponent, SpriteComponent, PhysicsComponent >();
+        // Iterating over the entities in the view and retrieving those with TagComponent having "car chassis" tag
+        for(auto [entity, tag, sprite, physics] : view.each()) {
+            if(tag.Tag == "car chassis") {
+                // auto sprite  = m_car.GetComponent< SpriteComponent >();
+                // auto physics = m_car.GetComponent< PhysicsComponent >();
+
+                auto body_pos = physics.GetBody()->GetPosition();
+                ImGui::Text("m_body position: %.2f %.2f", body_pos.x, body_pos.y);
+
+                b2Vec2 box_size = sprite.GetBoxSize();
+                ImGui::SliderFloat("h", &box_size.x, 0.0f, 5.0f);
+                ImGui::SliderFloat("w", &box_size.y, 0.0f, 5.0f);
+                sprite.SetBoxSize(box_size);
+
+                b2Vec2 offset = sprite.GetOffset();
+                ImGui::SliderFloat("offset.x", &offset.x, -5.0f, 5.0f);
+                ImGui::SliderFloat("offset.y", &offset.y, -5.0f, 5.0f);
+                sprite.SetOffset(offset);
+            }
+            else {
+                ImGui::Text("Car not found");
+            }
+        }
+
+        ImGui::SeparatorText("Car Movement");
+        ImGui::End();
+    }
+
+private:
+    Entity m_car;
+};

@@ -5,9 +5,9 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Coconut",
+            "name": "Launch Car",
             "type": "lldb",
-            "program": "${workspaceFolder}/build/LevelEditor/LevelEditor",
+            "program": "${workspaceFolder}/build/Car/Car",
             "request": "launch",
             "environment": [{ "name": "config", "value": "Debug" }],
             "cwd": "${workspaceFolder}"
