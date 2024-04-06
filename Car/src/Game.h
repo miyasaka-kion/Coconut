@@ -19,5 +19,5 @@ private:
     void LoadEntities();
 
     std::unique_ptr< GameContext > m_game;
-    std::unique_ptr< Car >         m_theo;
+    std::unique_ptr< Car >         m_car;
 };

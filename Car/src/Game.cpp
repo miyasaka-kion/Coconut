@@ -14,7 +14,7 @@ Game::Game() {
 }
 
 void Game::LoadEntities() {
-    m_theo = std::make_unique<Car>(m_game.get());
+    m_car = std::make_unique<Car>(m_game.get());
 
 }   
 
@@ -81,7 +81,7 @@ bool Game::ClientHandleEvent(SDL_Event& event) {
 
     case SDL_KEYDOWN: {
         auto sym = event.key.keysym.sym;
-        if(m_theo->HandleKeyboard(sym)) {
+        if(m_car->HandleKeyboard(sym)) {
             CC_INFO("Car handled input: {}", sym);
             break;
         }

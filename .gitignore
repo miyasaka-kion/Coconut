@@ -12,9 +12,9 @@ _deps
 
 .DS_Store
 .cache/
-imgui.ini
 build/
 backup-imgui/
 trash/
-
 easycode.ignore
+
+**/imgui.ini

@@ -15,7 +15,6 @@
 #include "Core/PhysicsInfo.h"
 #include "Core/Settings.h"
 #include "Core/TextureManager.h"
-#include "Event/KeyboardEvent.h"
 #include "Event/MouseEvent.h"
 #include "Render/QuadWrite.h"
 #include "Render/SpriteLoader.h"
