@@ -56,6 +56,7 @@ void Game::Run() {
 bool Game::HandlePlayerInput(SDL_Keycode sym) {
     switch(sym) {
     case SDLK_r: {
+        m_game->RemoveAllEntities();
         LoadEntities();
         break;
     }

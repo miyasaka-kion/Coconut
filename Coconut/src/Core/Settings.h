@@ -36,6 +36,7 @@ struct Settings {
 
         m_drawSprites   = true;
         m_showDebugDraw = true;
+        m_showDebugEntity = true;
 
         m_showDemoWindow = true;
         m_clear_color    = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);
@@ -72,6 +73,7 @@ struct Settings {
     const float m_defaultScreenHeightWorld = 50.0f;
     bool        m_drawSprites;
     bool        m_showDebugDraw;
+    bool m_showDebugEntity;
 
     // windows settings
     bool   m_showDemoWindow;

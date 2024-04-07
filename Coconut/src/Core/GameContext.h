@@ -37,6 +37,8 @@ public:
     void PresentSubmitted();
     void RemoveInactive();
 
+    void RemoveAllEntities();
+
 public:
     [[nodiscard]] const bool isClosed() const {
         return m_closeGame;

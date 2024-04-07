@@ -1,4 +1,6 @@
 #include "UI/PhysicsInfoLayer.h"
+#include "Core/GameContext.h"
+#include "imgui.h"
 
 void PhysicsInfoLayer::GuiRender() {
     {
@@ -16,6 +18,7 @@ void PhysicsInfoLayer::GuiRender() {
 
         ImGui::Checkbox("show DebugDraw", &g_settings.m_showDebugDraw);
         ImGui::Checkbox("draw Sprites", &g_settings.m_drawSprites);
+        ImGui::Checkbox("show Entity debug", &g_settings.m_showDebugEntity);
 
         ImGui::Text("Physics Settings");
         auto gravity = world->GetGravity();

@@ -1,9 +1,9 @@
 #include "Car.h"
 
 #include <SDL2/SDL_keycode.h>
+#include <memory>
 
 #include "ECS/Components.h"
-#include "ECS/SpriteComponent.h"
 #include "Render/SpriteLoader.h"
 #include "UI/Layer.h"
 #include "imgui.h"
@@ -212,7 +212,10 @@ Car::Car(GameContext* gc) : m_gc(gc) {
         e_chassis.AddComponent< PhysicsComponent >(m_car);
         e_chassis.AddComponent< SpriteComponent >(m_gc->GetSpriteInfo("CAR_CHASSIS"), b2Vec2(3.f, 1.4f), b2Vec2(-1.5f, 0.9f));
         e_chassis.AddComponent< TagComponent >("car chassis");
-        m_gc->AddImGuiLayer< CarDebugLayer >(e_chassis);
+        // m_gc->AddImGuiLayer< CarDebugLayer >(e_chassis);
+        // e_chassis.AddComponent<DebugLayerComponent>(std::make_unique< CarDebugLayer >(e_chassis));
+        // e_chassis.AddComponent<DebugLayerComponent<CarDebugLayer> >(e_chassis);
+        e_chassis.AddComponent<DebugLayerComponent>(std::make_unique< CarDebugLayer >(e_chassis));
 
         auto e_wheel_front = m_gc->CreateEntity();
         e_wheel_front.AddComponent< PhysicsComponent >(m_wheel1);

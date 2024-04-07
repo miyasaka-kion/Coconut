@@ -1,15 +1,19 @@
 #pragma once
 
 #include "Core/Assert.h"
+#include "Core/Log.h"
 #include "ECS/SpriteComponent.h"
+#include <memory>
 
 struct PhysicsComponent {
     PhysicsComponent() = default;
+
     PhysicsComponent(b2Body* body) : m_body(body) {
         CC_ASSERT(body, "_INFO_: body must not be nullptr");
     }
 
     ~PhysicsComponent() {
+        CC_CORE_INFO("PhysicsComponent: body destroyed");
         m_body->GetWorld()->DestroyBody(m_body);
     }
 
@@ -80,4 +84,28 @@ private:
 
 struct PlayerComponent {
     bool is_camera_following = false;
+};
+
+// template < typename LayerType, typename... Args >
+// struct DebugLayerComponent {
+//     static_assert(std::is_base_of< Layer, LayerType >::value, "LayerType must be a subclass of Layer");
+//     DebugLayerComponent(Args&&... args) : m_layer(std::make_unique< LayerType >(std::forward< Args >(args)...)) {}
+
+//     void GuiRender() {
+//         m_layer->GuiRender();
+//     }
+
+//     std::unique_ptr< LayerType > m_layer;
+// };
+
+struct DebugLayerComponent {
+    DebugLayerComponent(std::unique_ptr<Layer> layer)  {
+        m_layer = (std::move(layer));
+    }
+
+    void GuiRender() {
+        m_layer->GuiRender();
+    }
+
+    std::unique_ptr< Layer > m_layer;
 };

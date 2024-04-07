@@ -363,6 +363,14 @@ void GameContext::RenderEntities() {
         auto& info = sprite.GetSpriteInfo();    
         writer.Render(&info, sprite.GetBoxSize(), physics.GetPosition(), sprite.GetLocalOffset(), physics.GetAngle());
     }
+
+    if(g_settings.m_showDebugEntity) {
+        auto view = m_reg.view<DebugLayerComponent>();
+        for(auto [entity, debug] : view.each()) {
+            debug.GuiRender();
+        }   
+    }
+
 }
 
 void GameContext::RemoveInactive() {
@@ -370,6 +378,10 @@ void GameContext::RemoveInactive() {
     for(auto entity : view) {
         // TODO
     }
+}
+
+void GameContext::RemoveAllEntities() {
+    m_reg.clear();
 }
 
 /**
@@ -507,11 +519,6 @@ void GameContext::ShowDebugDraw() {
         m_world->DebugDraw();
     }
 }
-
-// struct EntityInfo {
-//     float health;
-
-// };
 
 void GameContext::ShowHealthBar() {
     auto      view = m_reg.view< PhysicsComponent, HealthComponent >();  // TODO: temp sol, what if some entity dont have a b2Body ??
