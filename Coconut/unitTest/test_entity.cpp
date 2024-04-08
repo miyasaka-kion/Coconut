@@ -21,7 +21,7 @@ TEST(EntityTest, AddAndRemoveComponent) {
     EXPECT_FALSE(e.HasComponent<PlayerComponent>());
 }
 
-TEST(EntityTest, GetComponentReturnRef) {
+TEST(EntityTest, IsGetComponentReturnRef) {
     GameContext gc;
     auto e = gc.CreateEntity();
     e.AddComponent<PlayerComponent>(/* sprite component arguments */);  

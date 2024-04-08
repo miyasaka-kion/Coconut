@@ -49,7 +49,7 @@ void Game::Run() {
 
         m_game->UpdateUI();
 
-        m_game->SetBackgroundColor();  // hmm.. this should be done in NewFrame?
+        m_game->SetBackground();  // hmm.. this should be done in NewFrame?
 
         // add Logic here ...
         {

@@ -8,9 +8,9 @@ struct Settings {
     }
 
     void Reset() {
-        m_testIndex    = 0;
-        m_windowWidth  = 1600;
-        m_windowHeight = 900;
+        m_testIndex          = 0;
+        m_windowWidth        = 1600;
+        m_windowHeight       = 900;
         m_hertz              = 120.0f;
         m_velocityIterations = 8;
         m_positionIterations = 3;
@@ -34,15 +34,16 @@ struct Settings {
         m_pause               = false;
         m_singleStep          = false;
 
-        m_drawSprites   = true;
-        m_showDebugDraw = true;
-        m_showDebugEntity = true;
+        m_drawSprites         = true;
+        m_showDebugDraw       = true;
+        m_showDebugEntity     = true;
+        m_showBackgroundImage = true;
 
         m_showDemoWindow = true;
         m_clear_color    = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);
     }
 
-    void Save(); // TODO
+    void Save();  // TODO
     void Load();
 
     // box2d settings
@@ -73,7 +74,8 @@ struct Settings {
     const float m_defaultScreenHeightWorld = 50.0f;
     bool        m_drawSprites;
     bool        m_showDebugDraw;
-    bool m_showDebugEntity;
+    bool        m_showDebugEntity;
+    bool        m_showBackgroundImage;
 
     // windows settings
     bool   m_showDemoWindow;

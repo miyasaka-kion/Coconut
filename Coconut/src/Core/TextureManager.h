@@ -16,7 +16,7 @@ public:
     [[nodiscard]]  SDL_Texture* GetTexture(const std::string& name) const {
         auto it = m_texture_map.find(name);
         if (it == m_texture_map.end()) {
-            CC_CORE_ERROR("TextureManager::GetTexture: no texture named [{}] in TextureManager!", name);
+            CC_CORE_ERROR("TextureManager::GetTexture: No texture named [{}] in TextureManager!", name);
             return nullptr;
         }
         return it->second.get();

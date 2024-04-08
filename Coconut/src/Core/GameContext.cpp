@@ -309,7 +309,7 @@ void GameContext::Step() {
     }
 }
 
-void GameContext::SetBackgroundColor() {
+void GameContext::SetBackground() {
     [[maybe_unused]] const auto& io = ImGui::GetIO();
     SDL_RenderSetScale(m_sdl_renderer.get(), io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
     // clang-format off
@@ -320,6 +320,10 @@ void GameContext::SetBackgroundColor() {
                             static_cast<Uint8>( g_settings.m_clear_color.w * 255.0f));
     // clang-format on
     SDL_RenderClear(m_sdl_renderer.get());
+
+    if(g_settings.m_showBackgroundImage) {
+        SDL_RenderCopy(m_sdl_renderer.get(), m_textureManager.GetTexture("BACKGROUND"), nullptr, nullptr);
+    }
 }
 
 /**

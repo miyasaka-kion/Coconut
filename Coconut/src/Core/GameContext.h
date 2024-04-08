@@ -73,7 +73,7 @@ public:  // Entity management
     [[nodiscard]] Entity CreateEntity();
     void                 DestroyEntity(Entity entity);
 
-    void SetBackgroundColor();  // this should be remove
+    void SetBackground();  // this should be remove
     void ShowDebugDraw();
     void ShowHealthBar();
 
