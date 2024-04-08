@@ -8,6 +8,7 @@
 
 #include "Core/Assert.h"
 #include "Core/Log.h"
+#include "Core/TextureManager.h"
 #include "ECS/Components.h"
 #include "ECS/Entity.h"
 #include "Event/MouseEvent.h"
@@ -38,6 +39,7 @@ GameContext::GameContext() : m_layerManager(this) {
     AddImGuiLayer< PhysicsInfoLayer >(m_physicsInfo);
     AddImGuiLayer< ExampleLayer >(g_settings);
     AddImGuiLayer< WindowSettingsLayer >(g_settings);
+    AddImGuiLayer< TextureManagerDebugLayer >(m_textureManager);
 }
 
 GameContext::~GameContext() {
@@ -322,7 +324,7 @@ void GameContext::SetBackground() {
     SDL_RenderClear(m_sdl_renderer.get());
 
     if(g_settings.m_showBackgroundImage) {
-        SDL_RenderCopy(m_sdl_renderer.get(), m_textureManager.GetTexture("BACKGROUND"), nullptr, nullptr);
+        // tileManager.SubmitRender(); 
     }
 }
 

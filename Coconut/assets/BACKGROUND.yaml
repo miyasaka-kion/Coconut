@@ -1,0 +1,22 @@
+TextureImporter:
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BACKGROUND_SKY
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 143     
+        width: 490
+        height: 309
+      alignment: 0
+    - serializedVersion: 2
+      name: BACKGROUND_GROUND
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 249
+        width: 346
+        height: 205
+      alignment: 0
