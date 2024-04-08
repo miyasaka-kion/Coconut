@@ -19,7 +19,7 @@ void TextureManager::Load(const std::string& path_to_dir, SDL_Renderer* renderer
                 SDL::Surface tmp_sprites{ SDL_CHECK(IMG_Load(entry.path().c_str())) };
 
                 auto texture        = SDL_CHECK(SDL_CreateTextureFromSurface(renderer, tmp_sprites.get()));
-                m_texture_map[stem] = SDL::Texture(texture);
+                m_textureMap[stem] = SDL::Texture(texture);
                 CC_CORE_INFO("LoadTexture(): Texture Loaded, texture name: {}", filename);
             }
         }

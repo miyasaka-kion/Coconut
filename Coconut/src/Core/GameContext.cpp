@@ -13,6 +13,7 @@
 #include "ECS/Entity.h"
 #include "Event/MouseEvent.h"
 #include "Render/DebugDraw.h"
+#include "Render/SpriteLoader.h"
 #include "UI/ExampleLayer.h"
 #include "UI/Layer.h"
 #include "UI/PhysicsInfoLayer.h"
@@ -40,6 +41,7 @@ GameContext::GameContext() : m_layerManager(this) {
     AddImGuiLayer< ExampleLayer >(g_settings);
     AddImGuiLayer< WindowSettingsLayer >(g_settings);
     AddImGuiLayer< TextureManagerDebugLayer >(m_textureManager);
+    AddImGuiLayer< SpriteLoaderDebugLayer >(m_spriteLoader);
 }
 
 GameContext::~GameContext() {
@@ -324,7 +326,7 @@ void GameContext::SetBackground() {
     SDL_RenderClear(m_sdl_renderer.get());
 
     if(g_settings.m_showBackgroundImage) {
-        // tileManager.SubmitRender(); 
+        // tileManager.SubmitRender();
     }
 }
 
@@ -364,17 +366,16 @@ void GameContext::RenderEntities() {
     auto      view = m_reg.view< PhysicsComponent, SpriteComponent >();  // TODO: temp sol
     QuadWrite writer(m_sdl_renderer.get());
     for(auto [entity, physics, sprite] : view.each()) {
-        auto& info = sprite.GetSpriteInfo();    
+        auto& info = sprite.GetSpriteInfo();
         writer.Render(&info, sprite.GetBoxSize(), physics.GetPosition(), sprite.GetLocalOffset(), physics.GetAngle());
     }
 
     if(g_settings.m_showDebugEntity) {
-        auto view = m_reg.view<DebugLayerComponent>();
+        auto view = m_reg.view< DebugLayerComponent >();
         for(auto [entity, debug] : view.each()) {
             debug.GuiRender();
-        }   
+        }
     }
-
 }
 
 void GameContext::RemoveInactive() {

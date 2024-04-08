@@ -3,7 +3,11 @@
 void SpriteLoader::Load(std::string path_to_dir, TextureManager* tm) {
 
     for(const auto& entry : std::filesystem::directory_iterator(path_to_dir)) {
-        if(entry.is_regular_file()) {  // Check if the entry is a regular file
+        if(entry.is_regular_file()) {  
+            // if the file is a hidden file, skip
+            if(entry.path().filename().string().at(0) == '.') {
+                continue;
+            }
             auto filename  = entry.path().filename().string();
             auto stem = entry.path().stem().string();
             auto extension = entry.path().extension().string();

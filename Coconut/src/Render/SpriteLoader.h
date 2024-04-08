@@ -12,6 +12,7 @@
 
 #include "Core/Log.h"
 #include "Core/TextureManager.h"
+#include "UI/Layer.h"
 #include "Util/sdl_delete.h"
 
 struct SpriteInfo {
@@ -28,7 +29,7 @@ public:
         }
         else {
             CC_CORE_WARN("SpriteLoader: Sprite name [{}] not found in m_sprite_map: ", name);
-            throw std::runtime_error("Sprite not found."); // TODO: should not throw 
+            throw std::runtime_error("Sprite not found.");  // TODO: should not throw
         }
     }
 
@@ -39,4 +40,22 @@ private:
 
 private:
     std::unordered_map< std::string, SpriteInfo > m_sprite_map;
+
+    friend class SpriteLoaderDebugLayer;
+};
+
+class SpriteLoaderDebugLayer : public Layer {
+public:
+    SpriteLoaderDebugLayer(const SpriteLoader& sprite_loader) : m_spriteLoader(sprite_loader) {}
+
+    void GuiRender() override {
+        ImGui::Begin("Sprite Loader");
+        for(const auto& [key, value] : m_spriteLoader.m_sprite_map) {
+            ImGui::Text("%s: %p", key.c_str(), value.texture);
+        }
+        ImGui::End();
+    }
+
+private:
+    const SpriteLoader& m_spriteLoader;
 };
