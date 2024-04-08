@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <gtest/gtest.h>
+#include <type_traits>
 
 #include "Core/GameContext.h"
 #include "ECS/Entity.h"
@@ -13,11 +14,18 @@ TEST(EntityTest, TrivialTest) {
 
 TEST(EntityTest, AddAndRemoveComponent) {
     GameContext gc;
-    auto entity = gc.CreateEntity();
-    entity.AddComponent<PlayerComponent>(/* sprite component arguments */);
-    EXPECT_TRUE(entity.HasComponent<PlayerComponent>());
-    entity.RemoveComponent<PlayerComponent>();
-    EXPECT_FALSE(entity.HasComponent<PlayerComponent>());
+    auto e = gc.CreateEntity();
+    e.AddComponent<PlayerComponent>(/* sprite component arguments */);
+    EXPECT_TRUE(e.HasComponent<PlayerComponent>());
+    e.RemoveComponent<PlayerComponent>();
+    EXPECT_FALSE(e.HasComponent<PlayerComponent>());
+}
+
+TEST(EntityTest, GetComponentReturnRef) {
+    GameContext gc;
+    auto e = gc.CreateEntity();
+    e.AddComponent<PlayerComponent>(/* sprite component arguments */);  
+    EXPECT_TRUE(std::is_reference<decltype(e.GetComponent<PlayerComponent>())>::value);
 }
 
 TEST(EntityTest, EntityCopyConstructor) {

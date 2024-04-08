@@ -8,7 +8,6 @@
 #include "Core/TextureManager.h"
 #include "ECS/Components.h"
 #include "ECS/Entity.h"
-#include "ECS/SpriteComponent.h"
 #include "Render/SpriteLoader.h"
 #include "Util/imgui_include.h"
 

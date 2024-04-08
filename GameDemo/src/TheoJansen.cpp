@@ -1,7 +1,6 @@
 #include "TheoJansen.h"
 
 #include "ECS/Components.h"
-#include "ECS/SpriteComponent.h"
 #include "Render/SpriteLoader.h"
 #include "UI/Layer.h"
 #include "imgui.h"

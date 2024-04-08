@@ -5,6 +5,7 @@
 #include "Coconut.h"
 
 #include "Car.h"
+#include "Core/Camera.h"
 
 
 
@@ -16,7 +17,20 @@ Game::Game() {
 void Game::LoadEntities() {
     m_car = std::make_unique<Car>(m_game.get());
 
-}   
+}
+
+void Game::FocusOnPlayer() {
+    if(m_focusOnPlayer) {
+        auto view = m_game->GetRegistry().view< PlayerComponent, PhysicsComponent >();
+        if(view.size_hint() != 1) {
+            CC_ERROR("Too many players to focus!");
+            return;
+        }
+        for(auto [entity, player, physics] : view.each()) {
+            g_camera.m_center = physics.GetPosition();
+        }
+    }
+}
 
 /**
  * The Run function runs the application and contains the main game loop.
@@ -39,8 +53,9 @@ void Game::Run() {
 
         // add Logic here ...
         {
-            
+            FocusOnPlayer();    
         }
+
         m_game->ShowDebugDraw();
 
         m_game->RenderEntities();
@@ -61,8 +76,10 @@ bool Game::HandlePlayerInput(SDL_Keycode sym) {
         break;
     }
     // control player move by default.
-    case SDLK_SPACE:
-        [[fallthrough]];
+    case SDLK_SPACE: {
+        m_focusOnPlayer = !m_focusOnPlayer;
+        break;
+    }
 
     case SDLK_w: {
         // player jump

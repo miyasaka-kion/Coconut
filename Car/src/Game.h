@@ -11,13 +11,16 @@ public:
     Game();
 
     void Run();
-
-    bool HandlePlayerInput(SDL_Keycode sym);
     bool ClientHandleEvent(SDL_Event& event);
+
 
 private:
     void LoadEntities();
+    bool HandlePlayerInput(SDL_Keycode sym);
+    void FocusOnPlayer();
 
     std::unique_ptr< GameContext > m_game;
     std::unique_ptr< Car >         m_car;
+
+    bool m_focusOnPlayer = false;
 };

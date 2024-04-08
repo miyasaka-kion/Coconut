@@ -6,7 +6,6 @@
 #include "Coconut.h"
 #include "ECS/Components.h"
 #include "ECS/Entity.h"
-#include "ECS/SpriteComponent.h"
 #include "imgui.h"
 
 // A TheJansen Loader
@@ -36,32 +35,25 @@ public:
     void GuiRender() override {
         ImGui::Begin("Car Debug");
         ImGui::SeparatorText("Sprite Positioning");
+        
+        int i = 19;
+        auto& ai = i;
 
-        auto& registry = m_car.GetContext()->GetRegistry();
-        auto  view     = registry.view< TagComponent, SpriteComponent, PhysicsComponent >();
-        // Iterating over the entities in the view and retrieving those with TagComponent having "car chassis" tag
-        for(auto [entity, tag, sprite, physics] : view.each()) {
-            if(tag.Tag == "car chassis") {
-                // auto sprite  = m_car.GetComponent< SpriteComponent >();
-                // auto physics = m_car.GetComponent< PhysicsComponent >();
+        auto& sprite  = m_car.GetComponent< SpriteComponent >();
+        auto& physics = m_car.GetComponent< PhysicsComponent >();
 
-                auto body_pos = physics.GetBody()->GetPosition();
-                ImGui::Text("m_body position: %.2f %.2f", body_pos.x, body_pos.y);
+        auto body_pos = physics.GetBody()->GetPosition();
+        ImGui::Text("m_body position: %.2f %.2f", body_pos.x, body_pos.y);
 
-                b2Vec2 box_size = sprite.GetBoxSize();
-                ImGui::SliderFloat("h", &box_size.x, 0.0f, 5.0f);
-                ImGui::SliderFloat("w", &box_size.y, 0.0f, 5.0f);
-                sprite.SetBoxSize(box_size);
+        b2Vec2 box_size = sprite.GetBoxSize();
+        ImGui::SliderFloat("h", &box_size.x, 0.0f, 5.0f);
+        ImGui::SliderFloat("w", &box_size.y, 0.0f, 5.0f);
+        sprite.SetBoxSize(box_size);
 
-                b2Vec2 offset = sprite.GetLocalOffset();
-                ImGui::SliderFloat("offset.x", &offset.x, -5.0f, 5.0f);
-                ImGui::SliderFloat("offset.y", &offset.y, -5.0f, 5.0f);
-                sprite.SetOffset(offset);
-            }
-            else {
-                ImGui::Text("Car not found");
-            }
-        }
+        b2Vec2 offset = sprite.GetLocalOffset();
+        ImGui::SliderFloat("offset.x", &offset.x, -5.0f, 5.0f);
+        ImGui::SliderFloat("offset.y", &offset.y, -5.0f, 5.0f);
+        sprite.SetOffset(offset);
 
         ImGui::SeparatorText("Car Movement");
         ImGui::End();

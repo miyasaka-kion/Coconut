@@ -4,7 +4,7 @@
 
 #include "Core/Assert.h"
 #include "Core/GameContext.h"
-#include "ECS/SpriteComponent.h"
+#include "ECS/Components.h"
 
 class Entity {
 public:
@@ -18,13 +18,13 @@ public:
     }
 
     template < typename T, typename... Args >
-    T& AddComponent(Args&&... args) {
+    [[maybe_unused]] decltype(auto) AddComponent(Args&&... args) {
         CC_ASSERT((!HasComponent< T >()), "Entity already has component!");
         return m_gameContext->m_reg.emplace< T >(m_entityHandle, std::forward< Args >(args)...);
     }
 
     template < typename T >
-    [[nodiscard]] decltype(auto) GetComponent() { //?? TODO!!!
+    [[nodiscard]] decltype(auto) GetComponent() {  //?? TODO!!!
         CC_ASSERT(HasComponent< T >(), "Entity does not have component!");
         return m_gameContext->m_reg.get< T >(m_entityHandle);
     }

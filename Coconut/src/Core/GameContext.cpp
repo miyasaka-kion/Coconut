@@ -6,8 +6,6 @@
 #include <SDL_Image.h>
 #include <box2d/box2d.h>
 
-#include "ECS/SpriteComponent.h"
-
 #include "Core/Assert.h"
 #include "Core/Log.h"
 #include "ECS/Components.h"
