@@ -15,7 +15,8 @@ public:
     virtual ~QuadWrite() = default;
 
     void Render(SpriteInfo* info, const b2Vec2& box_size, const b2Vec2& pw, const b2Vec2& offset, const float angle);
-
+    
+    void RenderNoBias(SpriteInfo*info, const b2Vec2& box_size, const b2Vec2& pw, const float angle);
 private:
     SDL_Renderer* m_renderer;
 };

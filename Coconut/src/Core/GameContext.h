@@ -65,7 +65,7 @@ public:
         return m_sdl_renderer.get();
     }
 
-    [[nodiscard]] const SpriteInfo& GetSpriteInfo(const std::string& name) const {
+    [[nodiscard]]  SpriteInfo& GetSpriteInfo(const std::string& name)  {
         return m_spriteLoader.GetSpriteInfo(name);
     }
 
@@ -90,28 +90,18 @@ public:
     using InputCallback = std::function< bool(SDL_Event&) >;
     void RegisterCoreHandleEvent(InputCallback func);
     void RegisterClientHandleEvent(InputCallback func);
-
     void DefaultCoreHandleEvent(SDL_Event& event);
 
-    // hmmm... this may be the simplest way?
     InputCallback f_CoreHandleEvent;
-
-    /**
-     * Client handle event callback function.
-     *
-     * This function is called in PollAndHandleEvents(). Return true if the event was handled, false if you want to let Core to handle the event.
-     */
     InputCallback f_ClientHandleEvent;
 
 public:
     std::unique_ptr< b2World > m_world;
 
-    // SDL members
 private:
     SDL::Window   m_sdl_window;
     SDL::Renderer m_sdl_renderer;
 
-    // Entities
 private:
     bool           m_closeGame;
     entt::registry m_reg;
@@ -119,15 +109,12 @@ private:
     TextureManager m_textureManager;
     SpriteLoader   m_spriteLoader;
 
-    // debugdraw
+private:
     DebugDraw m_debugDraw;
     int m_textLine;
     int m_textIncrement;
-
-    // physics info
     PhysicsInfo m_physicsInfo;
 
-    // UI 
 public:
     template < typename T, typename... Args >
     void AddImGuiLayer(Args&&... args) {
@@ -136,7 +123,6 @@ public:
     
 private:
     LayerManager m_layerManager;
-
 
     friend class Entity;
     friend class Layer;

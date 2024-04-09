@@ -102,7 +102,7 @@ struct PhysicsComponent {
     }
 
     ~PhysicsComponent() {
-        CC_CORE_INFO("PhysicsComponent: body destroyed");
+        CC_CORE_INFO("PhysicsComponent: body [{}] destroyed", static_cast<void*>(m_body));
         m_body->GetWorld()->DestroyBody(m_body);
     }
 

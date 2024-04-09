@@ -19,10 +19,6 @@ public:
             ImGui::Checkbox("Demo Window", &m_settings.m_showDemoWindow);  // Edit bools storing our window open/close state
             ImGui::ColorEdit3("bg color", ( float* )&m_settings.m_clear_color);            // Edit 3 floats representing a color
 
-            if(ImGui::Button("clear Entities")) {
-                // m_entityManager->ClearEntities();
-            }
-
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
             ImGui::End();
         }

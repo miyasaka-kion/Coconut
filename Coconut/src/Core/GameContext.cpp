@@ -72,7 +72,6 @@ void GameContext::Init_SDL_Window() {
     m_sdl_window = SDL::Window(SDL_CreateWindow("Coconut Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_camera.m_width, g_camera.m_height, SDL_WINDOW_SHOWN));
 
     if(m_sdl_window == nullptr) {
-        CC_CORE_ERROR("SDL window failed to initialize! ");
         throw std::runtime_error("SDL_CreateWindow generate a NULL window");
     }
 
@@ -80,7 +79,6 @@ void GameContext::Init_SDL_Window() {
 }
 
 void GameContext::Init_SDL_Renderer() {
-    // m_SDL_Renderer = SDL_CreateRenderer(m_SDL_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     m_sdl_renderer = SDL::Renderer(SDL_CHECK(SDL_CreateRenderer(m_sdl_window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)));
 
     SDL_RendererInfo info;
@@ -186,7 +184,7 @@ void GameContext::Step() {
 
     if(g_settings.m_drawStats) {
         // FPS
-        m_debugDraw.DrawString(5, m_textLine, "FPS: %5.2f", 1.0f / timeStep);
+        m_debugDraw.DrawString(5, m_textLine, "target FPS: %5.2f", 1.0f / timeStep);
         m_textLine += m_textIncrement;
 
         // Camera
@@ -324,10 +322,6 @@ void GameContext::SetBackground() {
                             static_cast<Uint8>( g_settings.m_clear_color.w * 255.0f));
     // clang-format on
     SDL_RenderClear(m_sdl_renderer.get());
-
-    if(g_settings.m_showBackgroundImage) {
-        // tileManager.SubmitRender();
-    }
 }
 
 /**

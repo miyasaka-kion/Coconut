@@ -37,7 +37,7 @@ struct Settings {
         m_drawSprites         = true;
         m_showDebugDraw       = true;
         m_showDebugEntity     = true;
-        m_showBackgroundImage = true;
+        m_showBackgroundTile = true;
 
         m_showDemoWindow = true;
         m_clear_color    = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);
@@ -75,7 +75,7 @@ struct Settings {
     bool        m_drawSprites;
     bool        m_showDebugDraw;
     bool        m_showDebugEntity;
-    bool        m_showBackgroundImage;
+    bool        m_showBackgroundTile;
 
     // windows settings
     bool   m_showDemoWindow;

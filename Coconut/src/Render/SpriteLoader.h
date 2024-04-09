@@ -22,7 +22,7 @@ struct SpriteInfo {
 
 class SpriteLoader {
 public:
-    [[nodiscard]] const SpriteInfo& GetSpriteInfo(const std::string& name) const {
+    [[nodiscard]]   SpriteInfo& GetSpriteInfo(const std::string& name)   {
         auto it = m_sprite_map.find(name);
         if(it != m_sprite_map.end()) {
             return it->second;

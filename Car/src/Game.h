@@ -5,6 +5,7 @@
 
 #include "Car.h"
 #include "Coconut.h"
+#include "Tile.h"
 
 class Game {
 public:
@@ -18,9 +19,13 @@ private:
     void LoadEntities();
     bool HandlePlayerInput(SDL_Keycode sym);
     void FocusOnPlayer();
+    void RenderTile();
 
-    std::unique_ptr< GameContext > m_game;
+private:
+    std::unique_ptr< GameContext > m_gc;
     std::unique_ptr< Car >         m_car;
 
     bool m_focusOnPlayer = false;
+
+
 };

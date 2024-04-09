@@ -6,22 +6,23 @@
 
 #include "Car.h"
 #include "Core/Camera.h"
+#include "Tile.h"
 
 
 
-Game::Game() {
-    m_game = std::make_unique< GameContext >();
-    m_game->RegisterClientHandleEvent([this](SDL_Event& event) -> bool { return ClientHandleEvent(event); });
+Game::Game(){
+    m_gc = std::make_unique< GameContext >();
+    m_gc->RegisterClientHandleEvent([this](SDL_Event& event) -> bool { return ClientHandleEvent(event); });
 }
 
 void Game::LoadEntities() {
-    m_car = std::make_unique<Car>(m_game.get());
+    m_car = std::make_unique<Car>(m_gc.get());
 
 }
 
 void Game::FocusOnPlayer() {
     if(m_focusOnPlayer) {
-        auto view = m_game->GetRegistry().view< PlayerComponent, PhysicsComponent >();
+        auto view = m_gc->GetRegistry().view< PlayerComponent, PhysicsComponent >();
         if(view.size_hint() != 1) {
             CC_ERROR("Too many players to focus!");
             return;
@@ -30,6 +31,12 @@ void Game::FocusOnPlayer() {
             g_camera.m_center = physics.GetPosition();
         }
     }
+}
+
+void Game::RenderTile() {
+    auto renderer = m_gc->GetRenderer();
+    EdgeTile tile{renderer, m_gc->GetSpriteInfo("BACKGROUND_GROUND"), b2Vec2(-20.0f, 0.0f), b2Vec2(160.0f, 0.0f), 20.0f};  
+    tile.Render();
 }
 
 /**
@@ -42,36 +49,38 @@ void Game::Run() {
     LoadEntities();
 
     // game main loop
-    while(m_game->isClosed() != true) {
-        m_game->NewFrame();
+    while(m_gc->isClosed() != true) {
+        m_gc->NewFrame();
 
-        m_game->HandleEvent();
+        m_gc->HandleEvent();
 
-        m_game->UpdateUI();
+        m_gc->UpdateUI();
 
-        m_game->SetBackground();  // hmm.. this should be done in NewFrame?
+        m_gc->SetBackground();  // hmm..  should this be done in NewFrame?
+
+        RenderTile();
 
         // add Logic here ...
         {
             FocusOnPlayer();    
         }
 
-        m_game->ShowDebugDraw();
+        m_gc->ShowDebugDraw();
 
-        m_game->RenderEntities();
+        m_gc->RenderEntities();
    
-        m_game->Step();
+        m_gc->Step();
 
-        m_game->PresentSubmitted();
+        m_gc->PresentSubmitted();
 
-        m_game->GetWorld()->ClearForces();  // clear forces after stepping
+        m_gc->GetWorld()->ClearForces();  // clear forces after stepping
     }
 }
 
 bool Game::HandlePlayerInput(SDL_Keycode sym) {
     switch(sym) {
     case SDLK_r: {
-        m_game->RemoveAllEntities();
+        m_gc->RemoveAllEntities();
         LoadEntities();
         break;
     }
