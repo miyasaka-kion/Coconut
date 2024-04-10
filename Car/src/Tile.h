@@ -19,6 +19,7 @@ private:
     SDL_Renderer* m_renderer;
     b2Vec2        m_start;
     b2Vec2        m_end;
+    float m_eps = 0.002f;
 
     b2Vec2      m_size;
     SpriteInfo  m_sprite_info;

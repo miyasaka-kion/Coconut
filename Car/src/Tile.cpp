@@ -10,10 +10,13 @@ EdgeTile::EdgeTile(SDL_Renderer* renderer,  SpriteInfo& sprite_info, b2Vec2 star
 
 void EdgeTile::Render() {
     QuadWrite   writer{ m_renderer };
-    const auto& dx    = m_size.x;
+    const auto& dx    = m_size.x - m_eps;
     const auto& cur_y = m_start.y;
     for(auto cur_x = m_start.x; cur_x <= m_end.x; cur_x += dx) {
-        
+        if(cur_x + dx >= m_end.x) {  
+             writer.Render(&m_sprite_info, b2Vec2(m_size.x, m_end.x - cur_x), b2Vec2(cur_x, cur_y), b2Vec2_zero, 0.0f); 
+             break;
+        }
         writer.Render(&m_sprite_info, m_size, b2Vec2(cur_x, cur_y), b2Vec2_zero, 0.0f);
     }
 }

@@ -199,7 +199,7 @@ void GameContext::Step() {
 
         b2Vec2 pw = g_camera.ConvertScreenToWorld(ps);
 
-        m_debugDraw.DrawString(5, m_textLine, "Mouse Pos: (%4.2f,%4.2f)", pw.x, pw.y);
+        m_debugDraw.DrawString(5, m_textLine, "mouse pos (world): (%4.2f,%4.2f)", pw.x, pw.y);
         m_textLine += m_textIncrement;
 
         // world info

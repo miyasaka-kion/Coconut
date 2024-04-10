@@ -8,16 +8,13 @@
 #include "Core/Camera.h"
 #include "Tile.h"
 
-
-
-Game::Game(){
+Game::Game() {
     m_gc = std::make_unique< GameContext >();
     m_gc->RegisterClientHandleEvent([this](SDL_Event& event) -> bool { return ClientHandleEvent(event); });
 }
 
 void Game::LoadEntities() {
-    m_car = std::make_unique<Car>(m_gc.get());
-
+    m_car = std::make_unique< Car >(m_gc.get());
 }
 
 void Game::FocusOnPlayer() {
@@ -35,8 +32,11 @@ void Game::FocusOnPlayer() {
 
 void Game::RenderTile() {
     auto renderer = m_gc->GetRenderer();
-    EdgeTile tile{renderer, m_gc->GetSpriteInfo("BACKGROUND_GROUND"), b2Vec2(-20.0f, 0.0f), b2Vec2(160.0f, 0.0f), 20.0f};  
-    tile.Render();
+
+    EdgeTile skyTile{ renderer, m_gc->GetSpriteInfo("BACKGROUND_SKY"), b2Vec2(-20.0f, 12.0f), b2Vec2(160.0f, 12.0f), 20.0f };
+    skyTile.Render();
+    EdgeTile groundTile{ renderer, m_gc->GetSpriteInfo("BACKGROUND_GROUND"), b2Vec2(-20.0f, 0.0f), b2Vec2(160.0f, 0.0f), 20.0f };
+    groundTile.Render();
 }
 
 /**
@@ -61,14 +61,12 @@ void Game::Run() {
         RenderTile();
 
         // add Logic here ...
-        {
-            FocusOnPlayer();    
-        }
+        { FocusOnPlayer(); }
 
         m_gc->ShowDebugDraw();
 
         m_gc->RenderEntities();
-   
+
         m_gc->Step();
 
         m_gc->PresentSubmitted();
