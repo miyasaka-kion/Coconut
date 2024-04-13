@@ -36,9 +36,6 @@ public:
         ImGui::Begin("Car Debug");
         ImGui::SeparatorText("Sprite Positioning");
         
-        int i = 19;
-        auto& ai = i;
-
         auto& sprite  = m_car.GetComponent< SpriteComponent >();
         auto& physics = m_car.GetComponent< PhysicsComponent >();
 

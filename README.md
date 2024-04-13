@@ -1,13 +1,13 @@
 ## 🥥 Coconut Engine
 
-This code shows some basic methods to convert vectors from the SDL2 coordinate system to box2d's and also the reverse direction.
+Coconut Engine is a 2D game engine currently under development.
 
 ### build (macOS)
 
-This engine is temporarily build for MacOS only.
+This engine is temporarily build for MacOS only. If you have not installed brew, install brew first. Then install the dependencies:
 
 ```bash
-brew install box2d sdl2
+brew install sdl spdlog box2d sdl_image yaml-cpp
 ```
 
 Inside the project dir, run:
@@ -16,6 +16,5 @@ Inside the project dir, run:
 mkdir build; cd build
 cmake ..; make -j
 ```
-
 
 
